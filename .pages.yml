@@ -1,0 +1,48 @@
+media:
+  input: static/uploads
+  output: /uploads
+
+content:
+  - name: news
+    label: News
+    type: collection
+    path: content/blog
+    filename: "{year}-{month}-{day}-{primary}.md"
+    format: yaml-frontmatter
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+
+      - name: date
+        label: Date
+        type: date
+        required: true
+
+      - name: draft
+        label: Draft
+        type: boolean
+        default: false
+
+      - name: summary
+        label: Summary
+        type: text
+
+      - name: image
+        label: Featured image
+        type: image
+        options:
+          path: news
+          extensions: [jpg, jpeg, png, webp]
+
+      - name: body
+        label: Body
+        type: rich-text

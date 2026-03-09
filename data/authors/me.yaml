@@ -1,0 +1,44 @@
+schema: "hugoblox/author/v1"
+slug: "me"
+is_owner: true
+
+name:
+  display: "Departamento de Neurociencia"
+  given: ""
+  family: ""
+  alternate: ""
+  pronunciation: ""
+  pronouns: ""
+
+status:
+  icon: "🧠"
+
+role: "Universidad de Chile"
+
+bio: "Investigación, docencia y colaboración interdisciplinaria en neurociencia."
+
+affiliations:
+  - name: "Universidad de Chile"
+    url: "https://medicina.uchile.cl/"
+
+links:
+  - icon: "at-symbol"
+    url: "mailto:paula.bersezio@uchile.cl"
+    label: "Contacto"
+
+interests:
+  - "Neurociencia clínica"
+  - "Neurociencia cognitiva"
+  - "Investigación interdisciplinaria"
+
+education: []
+
+experience: []
+
+skills: []
+
+languages: []
+
+awards: []
+
+postnominals: []
