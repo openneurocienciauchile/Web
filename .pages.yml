@@ -46,3 +46,6 @@ content:
       - name: body
         label: Body
         type: rich-text
+        options:
+          path: news
+          extensions: [jpg, jpeg, png, webp]
