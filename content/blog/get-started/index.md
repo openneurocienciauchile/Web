@@ -25,8 +25,8 @@ cover:
     name: "✨"
 
 authors:
-  - me
-  - Ted
+  - JS
+  - HB
 
 tags:
   - Academic
