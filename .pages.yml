@@ -3,53 +3,22 @@ media:
   output: /uploads
 
 content:
+   # Noticias #
   - name: news
     label: News
     type: collection
     path: content/blog
     filename: "{year}-{month}-{day}-{primary}.md"
     format: yaml-frontmatter
-    view:
-      fields: [title, date, draft]
-      primary: title
-      sort: [date, title]
-      default:
-        sort: date
-        order: desc
     fields:
-      - name: title
-        label: Title
-        type: string
-        required: true
+      - { name: title, label: Title, type: string }
+      - { name: date, label: Date, type: date }
+      - { name: draft, label: Draft, type: boolean, default: false }
+      - { name: summary, label: Summary, type: text }
+      - { name: image, label: Image, type: image }
+      - { name: body, label: Body, type: rich-text }
 
-      - name: date
-        label: Date
-        type: date
-        required: true
-
-      - name: draft
-        label: Draft
-        type: boolean
-        default: false
-
-      - name: summary
-        label: Summary
-        type: text
-
-      - name: image
-        label: Featured image
-        type: image
-        options:
-          path: news
-          extensions: [jpg, jpeg, png, webp]
-
-      - name: body
-        label: Body
-        type: rich-text
-        options:
-          path: news
-          extensions: [jpg, jpeg, png, webp]
-
+  # Académicos #
   - name: academicos
     label: Académicos
     type: collection
@@ -57,43 +26,65 @@ content:
     filename: "{primary}/_index.md"
     format: yaml-frontmatter
 
-    view:
-      fields: [title, role]
-      primary: title
+    fields:
+      - { name: title, label: Nombre, type: string }
+      - { name: role, label: Cargo, type: string }
+      - { name: degree, label: Grado, type: string }
+      - { name: email, label: Email, type: string }
+      - { name: topics, label: Áreas, type: list }
+      - { name: image, label: Foto, type: image }
+      - { name: body, label: Contenido, type: rich-text }
+
+  # Laboratorios #
+  - name: laboratorios
+    label: Laboratorios
+    type: collection
+    path: content/laboratorios
+    filename: "{primary}/_index.md"
 
     fields:
-      - name: title
-        label: Nombre
-        type: string
-        required: true
+      - { name: title, label: Nombre, type: string }
+      - { name: summary, label: Descripción, type: text }
+      - { name: image, label: Imagen, type: image }
+      - { name: body, label: Contenido, type: rich-text }
 
-      - name: role
-        label: Cargo
-        type: string
+  # Eventos #
+  - name: eventos
+    label: Eventos
+    type: collection
+    path: content/eventos
+    filename: "{year}-{month}-{day}-{primary}.md"
 
-      - name: degree
-        label: Grado
-        type: string
+    fields:
+      - { name: title, label: Título, type: string }
+      - { name: date, label: Fecha, type: date }
+      - { name: summary, label: Resumen, type: text }
+      - { name: image, label: Imagen, type: image }
+      - { name: body, label: Contenido, type: rich-text }
 
-      - name: email
-        label: Email
-        type: string
+  # Quienes somos #
+  - name: quienes
+    label: Quiénes somos
+    type: file
+    path: content/quienes/_index.md
+    fields:
+      - { name: title, label: Título, type: string }
+      - { name: body, label: Contenido, type: rich-text }
 
-      - name: summary
-        label: Resumen
-        type: text
+  # Formación #
+  - name: formacion
+    label: Formación
+    type: file
+    path: content/formacion/_index.md
+    fields:
+      - { name: title, label: Título, type: string }
+      - { name: body, label: Contenido, type: rich-text }
 
-      - name: topics
-        label: Áreas
-        type: list
-
-      - name: image
-        label: Foto
-        type: image
-        options:
-          path: academicos
-          extensions: [jpg, jpeg, png, webp]
-
-      - name: body
-        label: Contenido
-        type: rich-text
+  # Contacto #
+  - name: contacto
+    label: Contacto
+    type: file
+    path: content/contacto/_index.md
+    fields:
+      - { name: title, label: Título, type: string }
+      - { name: body, label: Contenido, type: rich-text }
