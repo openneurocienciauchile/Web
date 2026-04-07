@@ -49,3 +49,51 @@ content:
         options:
           path: news
           extensions: [jpg, jpeg, png, webp]
+
+  - name: academicos
+    label: Académicos
+    type: collection
+    path: content/academicos
+    filename: "{primary}/_index.md"
+    format: yaml-frontmatter
+
+    view:
+      fields: [title, role]
+      primary: title
+
+    fields:
+      - name: title
+        label: Nombre
+        type: string
+        required: true
+
+      - name: role
+        label: Cargo
+        type: string
+
+      - name: degree
+        label: Grado
+        type: string
+
+      - name: email
+        label: Email
+        type: string
+
+      - name: summary
+        label: Resumen
+        type: text
+
+      - name: topics
+        label: Áreas
+        type: list
+
+      - name: image
+        label: Foto
+        type: image
+        options:
+          path: academicos
+          extensions: [jpg, jpeg, png, webp]
+
+      - name: body
+        label: Contenido
+        type: rich-text
