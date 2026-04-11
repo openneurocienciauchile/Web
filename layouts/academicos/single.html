@@ -1,0 +1,201 @@
+{{ define "main" }}
+
+<div class="container mx-auto px-6 py-12">
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+    <!-- ##COLUMNA IZQUIERDA## -->
+    <div class="lg:col-span-1">
+
+      <div class="bg-gray-100 shadow rounded-lg p-6 sticky top-10">
+
+        <!-- Imagen -->
+        {{ with .Params.image.filename }}
+  <img src="{{ printf "/uploads/%s" . | relURL }}" 
+       class="w-full h-64 object-cover rounded mb-4">
+{{ else }}
+  <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-sm text-gray-500">
+    Sin imagen
+  </div>
+{{ end }}
+
+        <!-- Nombre -->
+        <h1 class="text-gray-900 text-2xl font-bold mb-2">
+          {{ .Title }}
+        </h1>
+
+        <!-- Cargo -->
+        {{ with .Params.role }}
+          <p class="text-gray-700">
+            {{ . }}
+          </p>
+        {{ end }}
+
+        <!-- Grado -->
+        {{ with .Params.degree }}
+          <p class="text-sm text-gray-500 mb-3">
+            {{ . }}
+          </p>
+        {{ end }}
+
+        <!-- Email -->
+        {{ with .Params.email }}
+          <p class="mb-3">
+            <a href="mailto:{{ . }}" class="text-blue-600 text-sm">
+              {{ . }}
+            </a>
+          </p>
+        {{ end }}
+
+        <!-- ORCID -->
+        {{ with .Params.orcid }}
+          <p class="mb-4">
+            <a href="{{ . }}" target="_blank" 
+               class="text-green-600 text-sm">
+              Ver perfil ORCID
+            </a>
+          </p>
+        {{ end }}
+
+        <!-- Áreas -->
+        {{ with .Params.topics }}
+          <div class="mt-4">
+            <h3 class="text-black text-sm font-semibold mb-2">
+              Áreas de investigación
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {{ range . }}
+                <span class="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
+                  {{ . }}
+                </span>
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+
+      </div>
+
+    </div>
+
+    <!-- ##COLUMNA DERECHA## -->
+    <div class="lg:col-span-2">
+
+      <!-- Contenido principal -->
+      <div class="prose max-w-none mb-10">
+        {{ .Content }}
+      </div>
+
+      <!-- Publicaciones -->
+      {{ with .Params.publicaciones }}
+<div class="mb-6 border border-gray-300 rounded-lg overflow-hidden">
+
+  <!-- Header -->
+  <button onclick="toggleSection('pubs')" 
+          class="w-full flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200 transition">
+
+    <span class="font-semibold text-lg">Publicaciones</span>
+    <span id="icon-pubs">▼</span>
+
+  </button>
+
+  <!-- Contenido -->
+  <div id="pubs" class="hidden p-4 bg-white">
+
+    {{ range . }}
+      <div class="mb-4">
+        <strong>{{ .titulo }}</strong><br>
+
+        {{ with .revista }}
+          <span class="text-sm text-gray-600">
+            {{ . }}
+          </span>
+        {{ end }}
+
+        {{ with .año }}
+          <span class="text-sm text-gray-500">
+            ({{ . }})
+          </span>
+        {{ end }}
+
+        {{ with .link }}
+          <br>
+          <a href="{{ . }}" target="_blank"
+             class="text-blue-600 text-sm">
+            Ver publicación
+          </a>
+        {{ end }}
+      </div>
+    {{ end }}
+
+  </div>
+
+</div>
+
+
+</div>
+{{ end }}
+
+      <!-- PROYECTOS -->
+      {{ with .Params.proyectos }}
+      <div class="mb-8 border-t pt-4">
+
+        <button onclick="toggleSection('proyectos')" 
+                class="w-full text-left text-lg font-semibold">
+          Proyectos
+        </button>
+
+        <div id="proyectos" class="hidden mt-4">
+
+          {{ range . }}
+            <div class="mb-4">
+              <strong>{{ .nombre }}</strong>
+
+              {{ with .año }}
+                <span class="text-sm text-gray-500">
+                  ({{ . }})
+                </span>
+              {{ end }}
+
+              {{ with .descripcion }}
+                <p class="text-sm text-gray-600">
+                  {{ . }}
+                </p>
+              {{ end }}
+            </div>
+          {{ end }}
+
+        </div>
+      </div>
+      {{ end }}
+
+      <!-- VIDEO (opcional) -->
+      {{ with .Params.video }}
+      <div class="mt-10 border-t pt-6">
+
+        <h2 class="text-xl font-semibold mb-4">
+          Entrevista
+        </h2>
+
+        <iframe class="w-full h-64 rounded"
+          src="{{ . }}"
+          allowfullscreen>
+        </iframe>
+
+      </div>
+      {{ end }}
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- SCRIPT PARA ACORDEONES -->
+<script>
+function toggleSection(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle("hidden");
+}
+</script>
+
+{{ end }}

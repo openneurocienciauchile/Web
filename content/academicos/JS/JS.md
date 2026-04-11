@@ -33,3 +33,15 @@ image:
 - Variability of an Ideal Insertion Vector for Cochlear Implantation Output capabilities of personal music players and assessment of preferred listening levels of healthy-hearing subjects.
  
 
+### Publicaciones:
+
+- Chaski, a novel Drosophila lactate/pyruvate transporter required in glia cells for survival under nutritional stress,SCIENTIFIC REPORTS 2018.
+- The transcription factor SoxD controls neuronal guidance in the Drosophila visual system,SCIENTIFIC REPORTS 2018.
+- p53 is required for brain growth but is dispensable for resistance to nutrient restriction during Drosophila larval development,PLOS ONE 2018.
+- Interactome Screening Identifies the ER Luminal Chaperone Hsp47 as a Regulator of the Unfolded Protein Response Transducer IRE1 alpha ,MOLECULAR CELL 2018.
+- Drosophila Atlastin in motor neurons is required for locomotion and presynaptic function,JOURNAL OF CELL SCIENCE 2017.
+- Presynaptic DLG regulates synaptic function through the localization of voltage-activated Ca2+ Channels,SCIENTIFIC REPORTS 2016.
+- Regulation of Drosophila Brain Wiring by Neuropil Interactions via a Slit-Robo-RPTP Signaling Complex,DEVELOPMENTAL CELL 2016.
+- Hindsight regulates photoreceptor axon targeting through transcriptional control of jitterbug/Filamin and multiple genes involved in axon guidance in Drosophila,DEVELOPMENTAL NEUROBIOLOGY 2015.
+- The Specification of Cortical Subcerebral Projection Neurons Depends on the Direct Repression of TBR1 by CTIP1/BCL11a,JOURNAL OF NEUROSCIENCE 2015.
+- How doth the little busy bee: unexpected metabolism, TRENDS IN NEUROSCIENCES 2015

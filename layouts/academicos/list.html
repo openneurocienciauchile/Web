@@ -1,0 +1,53 @@
+{{ define "main" }}
+
+<div class="container mx-auto px-6 py-12">
+
+  <!-- Título -->
+  <h1 class="text-3xl font-bold mb-10">
+    Académicos
+  </h1>
+
+  <!-- Grid de académicos -->
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+    {{ range .RegularPages }}
+
+      <a href="{{ .RelPermalink }}" class="group">
+
+        <div class="bg-gray-600 border border-gray-200 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+
+          <!-- Imagen -->
+        {{ with .Params.image.filename }}
+  <img src="{{ printf "/uploads/%s" . | relURL }}" 
+       class="w-full h-64 object-cover group-hover:scale-105 transition">
+{{ else }}
+  <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-sm text-gray-500">
+    Sin imagen
+  </div>
+{{ end }}
+
+          <!-- Nombre -->
+          <div class="p-4 text-center">
+            <h2 class="text-lg font-semibold">
+              {{ .Title }}
+            </h2>
+
+            <!-- Cargo (opcional) -->
+            {{ with .Params.role }}
+              <p class="text-sm text-gray-500">
+                {{ . }}
+              </p>
+            {{ end }}
+          </div>
+
+        </div>
+
+      </a>
+
+    {{ end }}
+
+  </div>
+
+</div>
+
+{{ end }}
