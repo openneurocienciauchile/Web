@@ -11,12 +11,8 @@
 
         <!-- Imagen -->
         {{ with .Params.image }}
-  <img src="{{ . | relURL }}" 
+  <img src="{{ printf "%s%s" site.BaseURL . }}" 
        class="w-full h-64 object-cover rounded mb-4">
-{{ else }}
-  <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-sm text-gray-500">
-    Sin imagen
-  </div>
 {{ end }}
 
         <!-- Nombre -->
