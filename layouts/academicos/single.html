@@ -11,13 +11,13 @@
 
         <!-- Imagen -->
         {{ with .Params.image.filename }}
-  <img src="{{ printf "/uploads/%s" . | relURL }}" 
-       class="w-full h-64 object-cover rounded mb-4">
-{{ else }}
-  <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-sm text-gray-500">
-    Sin imagen
-  </div>
-{{ end }}
+          <img src="{{ printf "/uploads/%s" . | relURL }}" 
+               class="w-full h-64 object-cover rounded mb-4">
+        {{ else }}
+          <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-sm text-gray-500">
+            Sin imagen
+          </div>
+        {{ end }}
 
         <!-- Nombre -->
         <h1 class="text-gray-900 text-2xl font-bold mb-2">
@@ -47,12 +47,12 @@
           </p>
         {{ end }}
 
-        <!-- ORCID -->
+        <!-- ORCID (MEJORADO) -->
         {{ with .Params.orcid }}
           <p class="mb-4">
             <a href="{{ . }}" target="_blank" 
-               class="text-green-600 text-sm">
-              Ver perfil ORCID
+               class="inline-block bg-green-100 text-green-700 text-xs px-3 py-1 rounded hover:bg-green-200 transition">
+              ORCID
             </a>
           </p>
         {{ end }}
@@ -80,71 +80,69 @@
     <!-- ##COLUMNA DERECHA## -->
     <div class="lg:col-span-2">
 
-      <!-- Contenido principal -->
+      <!-- Contenido -->
       <div class="prose max-w-none mb-10">
         {{ .Content }}
       </div>
 
-      <!-- Publicaciones -->
+      <!-- 🔵 PUBLICACIONES -->
       {{ with .Params.publicaciones }}
-<div class="mb-6 border border-gray-300 rounded-lg overflow-hidden">
+      <div class="mb-6 border border-gray-300 rounded-lg overflow-hidden">
 
-  <!-- Header -->
-  <button onclick="toggleSection('pubs')" 
-          class="w-full flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200 transition">
+        <button onclick="toggleSection('pubs')" 
+                class="w-full flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200">
 
-    <span class="font-semibold text-lg">Publicaciones</span>
-    <span id="icon-pubs">▼</span>
+          <span class="font-semibold text-lg">Publicaciones</span>
+          <span id="icon-pubs">▼</span>
 
-  </button>
-
-  <!-- Contenido -->
-  <div id="pubs" class="hidden p-4 bg-white">
-
-    {{ range . }}
-      <div class="mb-4">
-        <strong>{{ .titulo }}</strong><br>
-
-        {{ with .revista }}
-          <span class="text-sm text-gray-600">
-            {{ . }}
-          </span>
-        {{ end }}
-
-        {{ with .año }}
-          <span class="text-sm text-gray-500">
-            ({{ . }})
-          </span>
-        {{ end }}
-
-        {{ with .link }}
-          <br>
-          <a href="{{ . }}" target="_blank"
-             class="text-blue-600 text-sm">
-            Ver publicación
-          </a>
-        {{ end }}
-      </div>
-    {{ end }}
-
-  </div>
-
-</div>
-
-
-</div>
-{{ end }}
-
-      <!-- PROYECTOS -->
-      {{ with .Params.proyectos }}
-      <div class="mb-8 border-t pt-4">
-
-        <button onclick="toggleSection('proyectos')" 
-                class="w-full text-left text-lg font-semibold">
-          Proyectos
         </button>
 
-        <div id="proyectos" class="hidden mt-4">
+        <div id="pubs" class="hidden p-4 bg-white">
+
+          {{ range . }}
+            <div class="mb-4">
+              <strong>{{ .titulo }}</strong><br>
+
+              {{ with .revista }}
+                <span class="text-sm text-gray-600">
+                  {{ . }}
+                </span>
+              {{ end }}
+
+              {{ with .año }}
+                <span class="text-sm text-gray-500">
+                  ({{ . }})
+                </span>
+              {{ end }}
+
+              {{ with .link }}
+                <br>
+                <a href="{{ . }}" target="_blank"
+                   class="text-blue-600 text-sm">
+                  Ver publicación
+                </a>
+              {{ end }}
+            </div>
+          {{ end }}
+
+        </div>
+
+      </div>
+      {{ end }}
+
+      <!-- 🟢 PROYECTOS (ARREGLADO COMO ACORDEÓN REAL) -->
+      {{ with .Params.proyectos }}
+      <div class="mb-6 border border-gray-300 rounded-lg overflow-hidden">
+
+        <button onclick="toggleSection('proyectos')" 
+                class="w-full flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200">
+
+          <span class="font-semibold text-lg">Proyectos y financiamiento</span>
+          <span id="icon-proyectos">▼</span>
+
+        </button>
+
+        <div id="proyectos" class="hidden p-4 bg-white">
 
           {{ range . }}
             <div class="mb-4">
@@ -165,10 +163,11 @@
           {{ end }}
 
         </div>
+
       </div>
       {{ end }}
 
-      <!-- VIDEO (opcional) -->
+      <!-- VIDEO -->
       {{ with .Params.video }}
       <div class="mt-10 border-t pt-6">
 
@@ -190,11 +189,17 @@
 
 </div>
 
-<!-- SCRIPT PARA ACORDEONES -->
+<!-- SCRIPT -->
 <script>
 function toggleSection(id) {
   const el = document.getElementById(id);
+  const icon = document.getElementById("icon-" + id);
+
   el.classList.toggle("hidden");
+
+  if (icon) {
+    icon.textContent = el.classList.contains("hidden") ? "▼" : "▲";
+  }
 }
 </script>
 
