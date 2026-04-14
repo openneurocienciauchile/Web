@@ -17,13 +17,11 @@
         <div class="bg-gray-200 border border-gray-200 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
 
           <!-- Imagen -->
-        {{ with .Params.image.filename }}
-  <img src="{{ printf "/uploads/%s" . | relURL }}" 
-       class="w-full h-64 object-cover group-hover:scale-105 transition">
+        {{ with .Params.image }}
+  <img src="{{ . | relURL }}" 
+       class="w-full h-64 object-cover">
 {{ else }}
-  <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-sm text-gray-500">
-    Sin imagen
-  </div>
+  <div class="w-full h-64 bg-gray-200"></div>
 {{ end }}
 
           <!-- Nombre -->

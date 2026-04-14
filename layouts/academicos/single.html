@@ -10,14 +10,14 @@
       <div class="bg-gray-100 shadow rounded-lg p-6 sticky top-10">
 
         <!-- Imagen -->
-        {{ with .Params.image.filename }}
-          <img src="{{ printf "/uploads/%s" . | relURL }}" 
-               class="w-full h-64 object-cover rounded mb-4">
-        {{ else }}
-          <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-sm text-gray-500">
-            Sin imagen
-          </div>
-        {{ end }}
+        {{ with .Params.image }}
+  <img src="{{ . | relURL }}" 
+       class="w-full h-64 object-cover rounded mb-4">
+{{ else }}
+  <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-sm text-gray-500">
+    Sin imagen
+  </div>
+{{ end }}
 
         <!-- Nombre -->
         <h1 class="text-gray-900 text-2xl font-bold mb-2">
