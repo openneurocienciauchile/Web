@@ -31,8 +31,32 @@ content:
       - { name: role, label: Cargo, type: string }
       - { name: degree, label: Grado, type: string }
       - { name: email, label: Email, type: string }
+
+      # 🔽 NUEVO: ORCID
+      - { name: orcid, label: ORCID, type: string, description: "Ej: 0000-0002-1825-0097" }
+
       - { name: topics, label: Áreas, type: list }
       - { name: image, label: Foto, type: image }
+
+      # 🔽 NUEVO: PUBLICACIONES (CMS)
+      - name: publicaciones
+        label: Publicaciones
+        type: list
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - { name: revista, label: Revista, type: string }
+          - { name: año, label: Año, type: number }
+          - { name: link, label: Link, type: string }
+
+      # 🔽 NUEVO: PROYECTOS
+      - name: proyectos
+        label: Proyectos
+        type: list
+        fields:
+          - { name: nombre, label: Nombre, type: string }
+          - { name: descripcion, label: Descripción, type: text }
+          - { name: año, label: Año, type: number }
+
       - { name: body, label: Contenido, type: rich-text }
 
   # Laboratorios #
