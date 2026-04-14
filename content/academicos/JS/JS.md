@@ -34,4 +34,3 @@ proyectos:
 
 orcid: https://orcid.org/0000-0002-0257-146X
 ---
-orcid: https://orcid.org/0000-0002-0257-146X

@@ -4,7 +4,7 @@ type: academicos
 
 role: "Profesor Asistente"
 degree: "Doctor en Medicina, mención en Otología y Neuro-otología, Universidad de Heidelberg, Alemania, 2015"
-email: "jsierral@uchile.cl"
+email: "hbreinbauer@uchile.cl"
 
 summary: 
   "Profesor Asistente | Doctor en Medicina, Universidad de Heidelberg, 2015" 
@@ -15,4 +15,7 @@ topics:
 
 image:
   filename: "HB.jpg"
+  
+orcid: https://orcid.org/0000-0002-3278-065X
+
 ---
