@@ -18,7 +18,7 @@
 
           <!-- Imagen -->
           {{ with .Params.image }}
-            <img src="{{ . | absURL }}" 
+            <img src="{{ . | relURL }}" 
                  class="w-full h-64 object-cover">
           {{ else }}
             <div class="w-full h-64 bg-gray-200"></div>
