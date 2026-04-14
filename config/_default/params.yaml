@@ -6,7 +6,7 @@ hugoblox:
     tagline: Neurociencia Universidad de Chile Academicos Investigacion
     description: Sitio Oficial Departamento de Neurociencia Universidad de Chile
   theme:
-    mode: system
+    mode: light
     pack: default
     colors:
       primary: ""
@@ -25,7 +25,7 @@ hugoblox:
     sticky: true
     align: center
     search: true
-    theme_toggle: true
+    theme_toggle: false
   footer:
     style: minimal
     language_switcher: true
