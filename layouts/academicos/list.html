@@ -17,12 +17,12 @@
         <div class="bg-gray-200 border border-gray-200 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
 
           <!-- Imagen -->
-        {{ with .Params.image }}
-  <img src="{{ . | relURL }}" 
-       class="w-full h-64 object-cover">
-{{ else }}
-  <div class="w-full h-64 bg-gray-200"></div>
-{{ end }}
+          {{ with .Params.image }}
+            <img src="{{ . | absURL }}" 
+                 class="w-full h-64 object-cover">
+          {{ else }}
+            <div class="w-full h-64 bg-gray-200"></div>
+          {{ end }}
 
           <!-- Nombre -->
           <div class="p-4 text-center">
