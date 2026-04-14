@@ -85,51 +85,128 @@
         {{ .Content }}
       </div>
 
-      <!-- 🔵 PUBLICACIONES -->
-      {{ with .Params.publicaciones }}
-      <div class="mb-6 border border-gray-300 rounded-lg overflow-hidden">
+<!-- 🔵 PUBLICACIONES (CMS + ORCID) -->
+<div class="mb-6 border border-gray-300 rounded-lg overflow-hidden">
 
-        <button onclick="toggleSection('pubs')" 
-                class="w-full flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200">
+  <button onclick="toggleSection('pubs')" 
+          class="w-full flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200">
 
-          <span class="font-semibold text-lg">Publicaciones</span>
-          <span id="icon-pubs">▼</span>
+    <span class="font-semibold text-lg">Publicaciones</span>
+    <span id="icon-pubs">▼</span>
 
-        </button>
+  </button>
 
-        <div id="pubs" class="hidden p-4 bg-white">
+  <div id="pubs" class="hidden p-4 bg-white">
 
-          {{ range . }}
-            <div class="mb-4">
-              <strong>{{ .titulo }}</strong><br>
+    <!-- 🔹 PUBLICACIONES DESDE CMS -->
+    {{ with .Params.publicaciones }}
+      <h3 class="font-semibold mb-3">Seleccionadas</h3>
 
-              {{ with .revista }}
-                <span class="text-sm text-gray-600">
-                  {{ . }}
-                </span>
-              {{ end }}
+      {{ range . }}
+        <div class="mb-3">
+          <strong>{{ .titulo }}</strong><br>
 
-              {{ with .año }}
-                <span class="text-sm text-gray-500">
-                  ({{ . }})
-                </span>
-              {{ end }}
-
-              {{ with .link }}
-                <br>
-                <a href="{{ . }}" target="_blank"
-                   class="text-blue-600 text-sm">
-                  Ver publicación
-                </a>
-              {{ end }}
-            </div>
+          {{ with .revista }}
+            <span class="text-sm text-gray-600">
+              {{ . }}
+            </span>
           {{ end }}
 
-        </div>
+          {{ with .año }}
+            <span class="text-sm text-gray-500">
+              ({{ . }})
+            </span>
+          {{ end }}
 
-      </div>
+          {{ with .link }}
+            <br>
+            <a href="{{ . }}" target="_blank"
+               class="text-blue-600 text-sm">
+              Ver publicación
+            </a>
+          {{ end }}
+        </div>
       {{ end }}
 
+      <hr class="my-4">
+    {{ end }}
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const orcid = "{{ .Params.orcid }}".split("/").pop();
+  if (!orcid) return;
+
+  fetch(`https://pub.orcid.org/v3.0/${orcid}/works`, {
+    headers: { "Accept": "application/json" }
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    const container = document.getElementById("orcid-list");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    let works = data.group || [];
+
+    // 🔽 Extraer info útil
+    let parsed = works.map(work => {
+      const summary = work["work-summary"][0];
+
+      return {
+        title: summary.title?.title?.value || "Sin título",
+        year: parseInt(summary["publication-date"]?.year?.value) || 0
+      };
+    });
+
+    // 🔽 ORDENAR por año (más reciente primero)
+    parsed.sort((a, b) => b.year - a.year);
+
+    // 🔽 TOMAR SOLO 5
+    parsed.slice(0, 5).forEach(pub => {
+
+      const div = document.createElement("div");
+      div.className = "mb-2";
+
+      div.innerHTML = `
+        <p>${pub.title} ${pub.year ? "(" + pub.year + ")" : ""}</p>
+      `;
+
+      container.appendChild(div);
+    });
+
+    if (parsed.length === 0) {
+      container.innerHTML = "No hay publicaciones disponibles.";
+    }
+
+  })
+  .catch(err => {
+    console.error(err);
+  });
+
+});
+</script>
+
+    <!-- 🔹 PUBLICACIONES ORCID -->
+    {{ with .Params.orcid }}
+      <h3 class="font-semibold mb-3">Desde ORCID</h3>
+
+      <div id="orcid-list" class="text-sm text-gray-600">
+        Cargando publicaciones...
+      </div>
+
+      <div class="mt-3">
+        <a href="https://orcid.org/{{ . }}" target="_blank"
+           class="text-green-600 text-sm">
+          Ver todas en ORCID →
+        </a>
+      </div>
+    {{ end }}
+
+  </div>
+
+</div>
       <!-- 🟢 PROYECTOS (ARREGLADO COMO ACORDEÓN REAL) -->
       {{ with .Params.proyectos }}
       <div class="mb-6 border border-gray-300 rounded-lg overflow-hidden">

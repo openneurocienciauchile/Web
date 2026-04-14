@@ -31,4 +31,7 @@ proyectos:
   - nombre: "FONDECYT Iniciación 11200469"
     año: 2020
     descripcion: "Is the most common form of chronic dizziness defined by a dysfunction of spatial navigation on behavioral, structural and electrophysiological levels?"
+
+orcid: https://orcid.org/0000-0002-0257-146X
 ---
+orcid: https://orcid.org/0000-0002-0257-146X
