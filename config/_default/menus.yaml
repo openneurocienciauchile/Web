@@ -24,6 +24,7 @@ main:
     url: blog/
     weight: 50
 
+
   - name: Eventos
     url: eventos/
     weight: 60

@@ -1,131 +1,115 @@
 ---
-# Leave the homepage title empty to use the site title
 title: ''
 summary: ''
 date: 2022-10-24
 type: landing
 
 design:
-  # Default section spacing
   spacing: '6rem'
 
 sections:
-  - block: resume-biography-3
+
+  # ─────────────────────────────────────────────────────────────
+  # 1. HERO — Banner institucional
+  # ─────────────────────────────────────────────────────────────
+  - block: hero
     content:
-      # Choose a user profile to display (a folder name within `content/authors/`)
-      username: me
-      text: ''
-      # Show a call-to-action button under your biography? (optional)
-      button:
-        text: Download CV
-        url: uploads/resume.pdf
-      headings:
-        about: ''
-        education: ''
-        interests: ''
+      title: ''
+      text: |
+        <div style="display:inline-block; background:rgba(255,255,255,0.82); backdrop-filter:blur(4px); border-radius:12px; padding:2rem 3rem; text-align:center;">
+          <h1 style="color:#1a1a2e; font-size:clamp(2rem,5vw,3.5rem); font-weight:800; line-height:1.15; margin:0 0 0.5rem;">
+            Departamento de<br>Neurociencia
+          </h1>
+          <p style="color:#333; font-size:1.1rem; margin:0;">
+            Universidad de Chile · Facultad de Medicina
+          </p>
+          <div style="display:flex; gap:12px; justify-content:center; margin-top:1.5rem; flex-wrap:wrap;">
+            <a href="/Web/quienes-somos" style="background:#1565C0; color:#fff; padding:10px 24px; border-radius:7px; text-decoration:none; font-weight:600;">Conócenos</a>
+            <a href="/Web/blog" style="background:transparent; color:#1a1a2e; border:2px solid #1a1a2e; padding:10px 24px; border-radius:7px; text-decoration:none; font-weight:600;">Ver noticias</a>
+          </div>
+        </div>
+      cta:
+        label: ''
+        url: ''
     design:
-      # Use the new Gradient Mesh which automatically adapts to the selected theme colors
       background:
-        gradient_mesh:
-          enable: true
-
-      # Name heading sizing to accommodate long or short names
-      name:
-        size: md # Options: xs, sm, md, lg (default), xl
-
-      # Avatar customization
-      avatar:
-        size: medium # Options: small (150px), medium (200px, default), large (320px), xl (400px), xxl (500px)
-        shape: circle # Options: circle (default), square, rounded
-  - block: markdown
-    content:
-      title: '📚 My Research'
-      subtitle: ''
-      text: |-
-        Use this area to speak to your mission. I'm a research scientist in the Moonshot team at DeepMind. I blog about machine learning, deep learning, and moonshots.
-
-        I apply a range of qualitative and quantitative methods to comprehensively investigate the role of science and technology in the economy.
-
-        Please reach out to collaborate 😃
-    design:
-      columns: '1'
+        image:
+          filename: brain.jpg
+          filters:
+            brightness: 0.6        # un poco más claro que antes, el recuadro ya oscurece menos
+          parallax: false
+          position: center
+          size: cover
+        text_color_light: false    # ← cambia a false porque ahora el texto es oscuro
+      spacing:
+        padding: ['14px', '0', '14px', '0']
+  # ─────────────────────────────────────────────────────────────
+  # 2. ÚLTIMAS NOTICIAS (desde content/blog)
+  # ─────────────────────────────────────────────────────────────
   - block: collection
-    id: papers
+    id: noticias
     content:
-      title: Featured Publications
+      title: Últimas Noticias
+      subtitle: ''
+      text: ''
+      count: 4
       filters:
         folders:
-          - publications
-        featured_only: true
+          - blog
+        exclude_featured: false
+      order: desc
     design:
       view: article-grid
       columns: 2
+
+  # ─────────────────────────────────────────────────────────────
+  # 3. PRÓXIMO SEMINARIO (desde content/events)
+  # ─────────────────────────────────────────────────────────────
   - block: collection
+    id: seminario
     content:
-      title: Recent Publications
+      title: Próximo Seminario
+      subtitle: ''
       text: ''
-      filters:
-        folders:
-          - publications
-        exclude_featured: false
-    design:
-      view: citation
-  - block: collection
-    id: talks
-    content:
-      title: Recent & Upcoming Talks
+      count: 1
       filters:
         folders:
           - events
-    design:
-      view: card
-  - block: collection
-    id: news
-    content:
-      title: Recent News
-      subtitle: ''
-      text: ''
-      # Page type to display. E.g. post, talk, publication...
-      page_type: blog
-      # Choose how many pages you would like to display (0 = all pages)
-      count: 10
-      # Filter on criteria
-      filters:
-        author: ''
-        category: ''
-        tag: ''
-        exclude_featured: false
-        exclude_future: false
-        exclude_past: false
-        publication_type: ''
-      # Choose how many pages you would like to offset by
-      offset: 0
-      # Page order: descending (desc) or ascending (asc) date.
       order: desc
     design:
-      # Choose a layout view
       view: card
-      # Reduce spacing
-      spacing:
-        padding: [0, 0, 0, 0]
-  - block: cta-card
-    demo: true # Only display this section in the HugoBlox Kit demo site
+      columns: '1'
+
+  # ─────────────────────────────────────────────────────────────
+  # 4. REDES SOCIALES
+  # Actualiza las URLs con los perfiles reales del departamento.
+  # ─────────────────────────────────────────────────────────────
+  - block: markdown
+    id: redes
     content:
-      title: 👉 Build your own academic website like this
-      text: |-
-        This site is generated by HugoBlox Kit - the FREE, Hugo-based open source website builder trusted by 250,000+ academics like you.
-
-        <a class="github-button" href="https://github.com/HugoBlox/kit" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star HugoBlox/kit on GitHub">Star</a>
-
-        Easily build anything with blocks - no-code required!
-
-        From landing pages, second brains, and courses to academic resumés, conferences, and tech blogs.
-      button:
-        text: Get Started
-        url: https://hugoblox.com/templates/
+      title: Síguenos
+      subtitle: ''
+      text: |
+        <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:1.5rem 0;">
+          <a href="https://twitter.com/neurocienciauch" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#000;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+            Twitter / X
+          </a>
+          <a href="https://www.instagram.com/neurocienciauchile/" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+            Instagram
+          </a>
+          <a href="https://www.youtube.com/@neurocienciauchile" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#FF0000;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+            YouTube
+          </a>
+          <a href="https://www.linkedin.com/company/neurociencia-uchile/" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#0A66C2;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+            LinkedIn
+          </a>
+        </div>
     design:
-      card:
-        # Card background color (CSS class)
-        css_class: 'bg-primary-300 dark:bg-primary-700'
-        css_style: ''
+      columns: '1'
+      spacing:
+        padding: ['20px', '0', '40px', '0']
 ---
