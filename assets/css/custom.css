@@ -40,3 +40,20 @@ main > section {
   display: block;
 }
 
+/* Bloque redes — ancho completo sin márgenes */
+#redes {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#redes .container {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Elimina el espacio que HugoBlox agrega debajo del último bloque */
+.page-wrapper > section:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}

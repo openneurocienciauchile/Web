@@ -36,13 +36,14 @@ sections:
         image:
           filename: brain.jpg
           filters:
-            brightness: 0.6        # un poco más claro que antes, el recuadro ya oscurece menos
+            brightness: 0.6
           parallax: false
           position: center
           size: cover
-        text_color_light: false    # ← cambia a false porque ahora el texto es oscuro
+        text_color_light: false
       spacing:
-        padding: ['14px', '0', '14px', '0']
+        padding: ['20px', '0', '20px', '0']
+
   # ─────────────────────────────────────────────────────────────
   # 2. ÚLTIMAS NOTICIAS (desde content/blog)
   # ─────────────────────────────────────────────────────────────
@@ -81,35 +82,38 @@ sections:
       columns: '1'
 
   # ─────────────────────────────────────────────────────────────
-  # 4. REDES SOCIALES
-  # Actualiza las URLs con los perfiles reales del departamento.
+  # 4. REDES SOCIALES — cuadro ancho al final
   # ─────────────────────────────────────────────────────────────
   - block: markdown
     id: redes
     content:
-      title: Síguenos
+      title: ''
       subtitle: ''
       text: |
-        <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:1.5rem 0;">
+        <div style="width:100%; background:#1a1a2e; padding:3rem 2rem; text-align:center; margin:0;">
+          <h2 style="color:#fff; font-size:1.5rem; font-weight:700; margin-bottom:1.8rem; letter-spacing:0.03em;">Síguenos</h2>
+          <div style="display:flex; flex-wrap:nowrap; gap:14px; justify-content:center; align-items:center; max-width:900px; margin:0 auto;">
           <a href="https://twitter.com/neurocienciauch" target="_blank" rel="noopener"
-             style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#000;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+             style="display:inline-flex;align-items:center;justify-content:center;width:160px;padding:12px 0;background:#000;color:#fff;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;text-decoration:none;font-weight:600;font-size:0.95rem;">
             Twitter / X
           </a>
           <a href="https://www.instagram.com/neurocienciauchile/" target="_blank" rel="noopener"
-             style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+             style="display:inline-flex;align-items:center;justify-content:center;width:160px;padding:12px 0;background:linear-gradient(45deg,#f09433,#dc2743,#bc1888);color:#fff;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;text-decoration:none;font-weight:600;font-size:0.95rem;">
             Instagram
           </a>
           <a href="https://www.youtube.com/@neurocienciauchile" target="_blank" rel="noopener"
-             style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#FF0000;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+             style="display:inline-flex;align-items:center;justify-content:center;width:160px;padding:12px 0;background:#CC0000;color:#fff;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;text-decoration:none;font-weight:600;font-size:0.95rem;">
             YouTube
           </a>
           <a href="https://www.linkedin.com/company/neurociencia-uchile/" target="_blank" rel="noopener"
-             style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#0A66C2;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+             style="display:inline-flex;align-items:center;justify-content:center;width:160px;padding:12px 0;background:#0A66C2;color:#fff;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;text-decoration:none;font-weight:600;font-size:0.95rem;">
             LinkedIn
           </a>
         </div>
+        </div>
     design:
-      columns: '1'
+      background:
+        color: '#1a1a2e'
       spacing:
-        padding: ['20px', '0', '40px', '0']
+        padding: ['0', '0', '0', '0']
 ---
