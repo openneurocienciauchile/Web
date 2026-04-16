@@ -1,49 +1,53 @@
 {{ define "main" }}
 
-<div class="container mx-auto px-6 py-12">
+<section class="page-academicos w-full">
 
-  <!-- Título -->
-  <h1 class="text-3xl font-bold mb-10">
-    Académicos
-  </h1>
+  <div class="container mx-auto px-6 py-12">
 
-  <!-- Grid de académicos -->
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <!-- Título -->
+    <h1 class="text-3xl font-bold mb-10">
+      Académicos
+    </h1>
 
-    {{ range .RegularPages }}
+    <!-- Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
-      <a href="{{ .RelPermalink }}" class="group">
+      {{ range .RegularPages }}
 
-        <div class="bg-gray-200 border border-gray-200 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+        <a href="{{ .RelPermalink }}" class="group">
 
-          <!-- Imagen -->
-          {{ with .Params.image }}
+          <div class="bg-white/80 border border-gray-200 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+
+            <!-- Imagen -->
+            {{ with .Params.image }}
   <img src="{{ printf "%s%s" site.BaseURL . }}" 
        class="w-full h-64 object-cover rounded mb-4">
 {{ end }}
 
-          <!-- Nombre -->
-          <div class="p-4 text-center">
-            <h2 class="text-lg font-semibold">
-              {{ .Title }}
-            </h2>
+            <!-- Nombre -->
+            <div class="p-4 text-center">
+              <h2 class="text-lg font-semibold">
+                {{ .Title }}
+              </h2>
 
-            <!-- Cargo (opcional) -->
-            {{ with .Params.role }}
-              <p class="text-sm text-gray-500">
-                {{ . }}
-              </p>
-            {{ end }}
+              <!-- Cargo -->
+              {{ with .Params.role }}
+                <p class="text-sm text-gray-500">
+                  {{ . }}
+                </p>
+              {{ end }}
+            </div>
+
           </div>
 
-        </div>
+        </a>
 
-      </a>
+      {{ end }}
 
-    {{ end }}
+    </div>
 
   </div>
 
-</div>
+</section>
 
 {{ end }}

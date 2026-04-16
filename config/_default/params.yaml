@@ -1,8 +1,9 @@
 hugoblox:
   schema: "2.0"
   identity:
-    name: Departamento Neurociencia
-    type: organization
+    name: " "
+    logo:
+      filename: logo.png
     tagline: Neurociencia Universidad de Chile Academicos Investigacion
     description: Sitio Oficial Departamento de Neurociencia Universidad de Chile
   theme:

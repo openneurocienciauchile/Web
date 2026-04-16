@@ -1,0 +1,41 @@
+/* 🔥 FONDO REAL - en html y body */
+html,
+body {
+  background: linear-gradient(
+    to bottom right,
+    rgba(59,130,246,0.35),
+    rgba(255, 0, 0, 0),
+    rgba(99,102,241,0.35)
+  ) !important;
+  min-height: 100vh;
+  background-attachment: fixed !important;
+}
+
+/* 🔥 TRANSPARENCIA en todo lo demás */
+.page-wrapper,
+main,
+main > div,
+main > section,
+#wpadminbar,
+.wg-page,
+.page-body,
+[class*="page-"],
+[class*="layout-"] {
+  background: transparent !important;
+}
+
+/* 🔥 ELIMINAR ESPACIOS SUPERIORES */
+main,
+.page-wrapper,
+main > div,
+main > section {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* ── Logo en navbar ── */
+.navbar-brand img {
+  max-height: 48px;
+  width: 120px;
+  display: block;
+}
