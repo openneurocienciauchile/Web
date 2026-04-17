@@ -1,6 +1,6 @@
 ---
 title: "Laboratorio de Neurobiología Celular y Molecular"
-acronimo: "NeuroBioMol"
+acronimo: "JS lab"
 summary: "Investigamos cómo el metabolismo cerebral —especialmente el rol del lactato glial— impacta la función sináptica, usando Drosophila melanogaster como modelo in vivo. También desarrollamos marcadores moleculares para enfermedades neurodegenerativas y terapias basadas en microbiota."
 temas:
   - neurobiologia-molecular-celular

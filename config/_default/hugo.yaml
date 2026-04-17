@@ -58,6 +58,9 @@ taxonomies:
   publication_type: publication_types
   tema: temas  # Áreas de investigación (Labs, Académicos, Noticias, Eventos)
 markup:
+  goldmark:
+    renderer:
+      unsafe: true
   _merge: deep
   highlight:
     lineNos: false

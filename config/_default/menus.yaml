@@ -34,5 +34,5 @@ main:
     weight: 70
 
   - name: Contacto
-    url: contacto/
+    url: contactos/
     weight: 80
