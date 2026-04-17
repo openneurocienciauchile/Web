@@ -59,18 +59,61 @@ content:
 
       - { name: body, label: Contenido, type: rich-text }
 
+### Taxonomía de laboratorios ###
+
   # Laboratorios #
   - name: laboratorios
     label: Laboratorios
     type: collection
     path: content/laboratorios
     filename: "{primary}/_index.md"
+    format: yaml-frontmatter
 
     fields:
-      - { name: title, label: Nombre, type: string }
-      - { name: summary, label: Descripción, type: text }
-      - { name: image, label: Imagen, type: image }
-      - { name: body, label: Contenido, type: rich-text }
+      - { name: title,   label: "Nombre completo del laboratorio", type: string }
+      - { name: acronimo, label: "Acrónimo o nombre corto", type: string }
+      - { name: summary, label: "Descripción breve (2–3 líneas)", type: text }
+      - { name: image,   label: "Imagen del laboratorio", type: image }
+
+
+  # Temas #
+
+  - name: temas
+    label: "Temas / Áreas de investigación"
+    type: select
+    multiple: true
+
+    options:
+        - { value: "neurobiologia-molecular-celular",   label: "Neurobiología Molecular y Celular" }
+        - { value: "neurociencia-computacional-ia",     label: "Neurociencia Computacional e IA" }
+        - { value: "neuromodulacion-control-motor",     label: "Neuromodulación y Control Motor" }
+        - { value: "otoneurologia-audicion",            label: "Otoneurología y Audición" }
+        - { value: "envejecimiento-neurodegeneracion",  label: "Envejecimiento y Neurodegeneración" }
+        - { value: "neurociencia-desarrollo",           label: "Neurociencia del Desarrollo" }
+        - { value: "neuropsicologia-cognicion",         label: "Neuropsicología y Cognición" }
+        - { value: "neurologia-clinica-traslacional",   label: "Neurología Clínica y Traslacional" }
+
+  # ── Directores / Investigadores principales ──────────────────────────────
+  - name: directores
+    label: "Directores (IPs)"
+    type: list
+    fields:
+        - { name: name,  label: "Nombre completo", type: string }
+        - { name: email, label: "Correo electrónico", type: string }
+        - { name: url,   label: "URL perfil académico (ej: /academicos/nombre)", type: string }
+ 
+    # ── Vínculos ─────────────────────────────────────────────────────────────
+  - { name: sitio_web, label: "Sitio web propio del lab (URL completa)", type: string }
+ 
+    # ── Financiamiento ───────────────────────────────────────────────────────
+  - { name: fondecyt, label: "Proyecto FONDECYT vigente (texto libre)", type: string }
+ 
+    # ── Publicación ──────────────────────────────────────────────────────────
+  - { name: date,  label: "Fecha de creación/actualización", type: date }
+  - { name: draft, label: "Borrador (no publicar)", type: boolean, default: false }
+ 
+    # ── Contenido largo ──────────────────────────────────────────────────────
+  - { name: body, label: "Contenido detallado", type: rich-text }
 
   # Eventos #
   - name: eventos

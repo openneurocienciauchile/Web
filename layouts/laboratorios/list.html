@@ -1,0 +1,370 @@
+{{/*
+  layouts/laboratorios/list.html
+  ─────────────────────────────────────────────────────────────────────────────
+  Vista de listado de Laboratorios con filtro taxonómico por Tema.
+  Extiende el baseof.html de HugoBlox para heredar nav/footer.
+  ─────────────────────────────────────────────────────────────────────────────
+*/}}
+{{ define "main" }}
+
+{{/* ── Mapa de nombres legibles por slug ────────────────────────────────── */}}
+{{ $temaLabels := dict
+  "neurobiologia-molecular-celular"  "Neurobiología Molecular y Celular"
+  "neurociencia-computacional-ia"    "Neurociencia Computacional e IA"
+  "neuromodulacion-control-motor"    "Neuromodulación y Control Motor"
+  "otoneurologia-audicion"           "Otoneurología y Audición"
+  "envejecimiento-neurodegeneracion" "Envejecimiento y Neurodegeneración"
+  "neurociencia-desarrollo"          "Neurociencia del Desarrollo"
+  "neuropsicologia-cognicion"        "Neuropsicología y Cognición"
+  "neurologia-clinica-traslacional"  "Neurología Clínica y Traslacional"
+}}
+
+{{/* ── Colección de labs publicados ─────────────────────────────────────── */}}
+{{/* ── Colección de labs publicados ────────────────────────────────────────
+     IMPORTANTE: cada lab es una subcarpeta con _index.md (branch bundle),
+     por eso Hugo los trata como subsecciones → .Sections, no .Pages.
+──────────────────────────────────────────────────────────────────────────── */}}
+{{ $labs := where .Sections "Params.draft" false }}
+
+{{/* ── Recopilar todos los temas presentes en la colección ─────────────── */}}
+{{ $temasEnUso := slice }}
+{{ range $labs }}
+  {{ range .Params.temas }}
+    {{ if not (in $temasEnUso .) }}
+      {{ $temasEnUso = $temasEnUso | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<section class="labs-section">
+  <div class="labs-container">
+
+    {{/* ── Encabezado de sección ──────────────────────────────────────── */}}
+    <header class="labs-header">
+      <h1 class="labs-title">{{ .Title }}</h1>
+      {{ with .Summary }}
+        <p class="labs-subtitle">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    {{/* ── Filtros por Tema ────────────────────────────────────────────── */}}
+    {{ if gt (len $temasEnUso) 1 }}
+    <div class="labs-filters" role="navigation" aria-label="Filtrar por tema">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      {{ range $temasEnUso }}
+        {{ $label := index $temaLabels . }}
+        {{ if not $label }}{{ $label = . }}{{ end }}
+        <button class="filter-btn" data-filter="{{ . }}">{{ $label }}</button>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    {{/* ── Grid de laboratorios ───────────────────────────────────────── */}}
+    <div class="labs-grid" id="labs-grid">
+      {{ range $labs }}
+        {{ $temasStr := delimit .Params.temas " " }}
+        <article class="lab-card" data-temas="{{ $temasStr }}">
+
+          {{/* Imagen del lab */}}
+          {{ with .Params.image }}
+            {{ $imgFile := .filename }}
+            {{ if $imgFile }}
+            <div class="lab-card__image">
+              <img src="{{ $imgFile | relURL }}" alt="{{ $.Title }}" loading="lazy">
+            </div>
+            {{ end }}
+          {{ end }}
+
+          <div class="lab-card__body">
+
+            {{/* Acrónimo */}}
+            {{ with .Params.acronimo }}
+              <span class="lab-card__acronimo">{{ . }}</span>
+            {{ end }}
+
+            {{/* Título */}}
+            <h2 class="lab-card__title">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h2>
+
+            {{/* Directores */}}
+            {{ with .Params.directores }}
+            <div class="lab-card__directores">
+              {{ range . }}
+                <span class="lab-card__director">
+                  {{ if .url }}
+                    <a href="{{ .url }}">{{ .name }}</a>
+                  {{ else }}
+                    {{ .name }}
+                  {{ end }}
+                </span>
+              {{ end }}
+            </div>
+            {{ end }}
+
+            {{/* Descripción */}}
+            {{ with .Summary }}
+              <p class="lab-card__summary">{{ . }}</p>
+            {{ end }}
+
+            {{/* Tags de Temas */}}
+            {{ with .Params.temas }}
+            <div class="lab-card__temas">
+              {{ range . }}
+                {{ $label := index $temaLabels . }}
+                {{ if not $label }}{{ $label = . }}{{ end }}
+                <span class="tema-tag tema-tag--{{ . }}">{{ $label }}</span>
+              {{ end }}
+            </div>
+            {{ end }}
+
+            {{/* Sitio web externo */}}
+            {{ with .Params.sitio_web }}
+              <a class="lab-card__link" href="{{ . }}" target="_blank" rel="noopener">
+                Visitar sitio web →
+              </a>
+            {{ end }}
+
+          </div>{{/* /.lab-card__body */}}
+        </article>
+      {{ else }}
+        <p class="labs-empty">No hay laboratorios publicados aún.</p>
+      {{ end }}
+    </div>{{/* /#labs-grid */}}
+
+  </div>{{/* /.labs-container */}}
+</section>
+
+{{/* ── Estilos ─────────────────────────────────────────────────────────────── */}}
+<style>
+/* Variables que respetan el tema de HugoBlox */
+:root {
+  --labs-accent:   #003087; /* Azul UChile */
+  --labs-accent2:  #c0392b; /* Rojo UChile */
+  --labs-text:     var(--color-text-primary, #1a1a2e);
+  --labs-surface:  var(--color-background, #ffffff);
+  --labs-border:   var(--color-border, #e5e7eb);
+  --labs-radius:   8px;
+  --labs-gap:      1.5rem;
+}
+
+.labs-section {
+  padding: 3rem 0 5rem;
+}
+
+.labs-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Encabezado */
+.labs-header {
+  margin-bottom: 2.5rem;
+}
+.labs-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--labs-text);
+  margin-bottom: 0.5rem;
+}
+.labs-subtitle {
+  font-size: 1.05rem;
+  color: var(--color-text-secondary, #6b7280);
+  max-width: 640px;
+}
+
+/* Filtros */
+.labs-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.filter-btn {
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  border: 1.5px solid var(--labs-border);
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--labs-text);
+  transition: all 0.2s ease;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--labs-accent);
+  border-color: var(--labs-accent);
+  color: #fff;
+}
+
+/* Grid */
+.labs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--labs-gap);
+}
+
+/* Tarjeta de lab */
+.lab-card {
+  border: 1.5px solid var(--labs-border);
+  border-radius: var(--labs-radius);
+  background: var(--labs-surface);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.lab-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.lab-card.hidden {
+  display: none;
+}
+
+.lab-card__image img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.lab-card__body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.lab-card__acronimo {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--labs-accent);
+  background: rgba(0,48,135,0.07);
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+
+.lab-card__title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+}
+.lab-card__title a {
+  color: var(--labs-text);
+  text-decoration: none;
+}
+.lab-card__title a:hover {
+  color: var(--labs-accent);
+}
+
+.lab-card__directores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  font-size: 0.88rem;
+  color: var(--color-text-secondary, #6b7280);
+}
+.lab-card__director:not(:last-child)::after {
+  content: " · ";
+  margin-left: 0.15rem;
+}
+.lab-card__director a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lab-card__summary {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary, #6b7280);
+  margin: 0;
+  flex: 1;
+  /* Limitar a 3 líneas */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Tags de temas */
+.lab-card__temas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: auto;
+}
+.tema-tag {
+  font-size: 0.72rem;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 2px 8px;
+  background: var(--labs-border);
+  color: var(--labs-text);
+}
+/* Colores por tema (fase 2: afinar paleta) */
+.tema-tag--neurobiologia-molecular-celular   { background: #dbeafe; color: #1d4ed8; }
+.tema-tag--neurociencia-computacional-ia     { background: #ede9fe; color: #6d28d9; }
+.tema-tag--neuromodulacion-control-motor     { background: #dcfce7; color: #166534; }
+.tema-tag--otoneurologia-audicion            { background: #fef9c3; color: #854d0e; }
+.tema-tag--envejecimiento-neurodegeneracion  { background: #fee2e2; color: #991b1b; }
+.tema-tag--neurociencia-desarrollo           { background: #ffedd5; color: #9a3412; }
+.tema-tag--neuropsicologia-cognicion         { background: #f0fdf4; color: #14532d; }
+.tema-tag--neurologia-clinica-traslacional   { background: #f1f5f9; color: #334155; }
+
+.lab-card__link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--labs-accent);
+  text-decoration: none;
+  margin-top: 0.25rem;
+}
+.lab-card__link:hover { text-decoration: underline; }
+
+.labs-empty {
+  color: var(--color-text-secondary, #9ca3af);
+  font-style: italic;
+}
+</style>
+
+{{/* ── JavaScript de filtrado ─────────────────────────────────────────────── */}}
+<script>
+(function () {
+  const btns  = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.lab-card');
+
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const filter = this.dataset.filter;
+
+      // Actualizar botón activo
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+
+      // Mostrar/ocultar tarjetas
+      cards.forEach(function(card) {
+        if (filter === 'all') {
+          card.classList.remove('hidden');
+        } else {
+          const temas = (card.dataset.temas || '').split(' ');
+          if (temas.indexOf(filter) !== -1) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        }
+      });
+    });
+  });
+})();
+</script>
+
+{{ end }}
