@@ -5,7 +5,7 @@
 
 main:
   - name: Quiénes somos
-    url: quienes/
+    url: quienes-somos/
     weight: 10
 
   - name: Académicos
