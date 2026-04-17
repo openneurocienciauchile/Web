@@ -14,9 +14,7 @@ directores:
     url: "/academicos/paul-delano-hinkley"
 sitio_web: "http://www.labonce.cl"
 fondecyt: ""
-image:
-  filename: "labonce2024.png"
-  caption: "Equipo LAB ONCE 2024"
+image: ""
 date: 2024-05-01
 draft: false
 ---
