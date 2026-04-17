@@ -1,0 +1,159 @@
+{{ define "main" }}
+
+<div class="container mx-auto px-4 py-12 max-w-4xl">
+
+  {{/* Breadcrumb back to list */}}
+  <nav class="nuro-breadcrumb" aria-label="Volver">
+    <a href="{{ "/temas/" | relURL }}" class="nuro-back-link">← Todos los temas</a>
+  </nav>
+
+  <article class="nuro-tema-single">
+
+    <header class="nuro-tema-single-header">
+      <h1 class="nuro-tema-single-title">{{ .Title }}</h1>
+      {{ with .Params.summary }}
+      <p class="nuro-tema-single-summary">{{ . }}</p>
+      {{ end }}
+      {{ with .Params.tags }}
+      <ul class="nuro-tema-tags" aria-label="Etiquetas">
+        {{ range . }}
+        <li class="nuro-tag">{{ . }}</li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </header>
+
+    {{/* Main content from the markdown body */}}
+    <div class="nuro-tema-content prose">
+      {{ .Content }}
+    </div>
+
+    {{/* Related academics (if front matter includes academicos list) */}}
+    {{ with .Params.academicos }}
+    <section class="nuro-tema-related" aria-label="Académicos relacionados">
+      <h2 class="nuro-related-title">Académicos en este tema</h2>
+      <ul class="nuro-related-list">
+        {{ range . }}
+        <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+
+    {{/* Related labs (if front matter includes labs list) */}}
+    {{ with .Params.labs }}
+    <section class="nuro-tema-related" aria-label="Laboratorios relacionados">
+      <h2 class="nuro-related-title">Laboratorios en este tema</h2>
+      <ul class="nuro-related-list">
+        {{ range . }}
+        <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+
+  </article>
+
+</div>
+
+<style>
+.nuro-breadcrumb { margin-bottom: 2rem; }
+
+.nuro-back-link {
+  font-size: .85rem;
+  font-weight: 500;
+  color: #003478;
+  text-decoration: none;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  font-size: .75rem;
+}
+
+.nuro-back-link:hover { text-decoration: underline; }
+
+.nuro-tema-single-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+
+.nuro-tema-single-title {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0 0 1rem;
+  line-height: 1.2;
+}
+
+.nuro-tema-single-summary {
+  font-size: 1.05rem;
+  color: #555;
+  line-height: 1.7;
+  margin: 0 0 1rem;
+}
+
+.nuro-tema-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.nuro-tag {
+  font-size: .72rem;
+  background: rgba(0, 52, 120, .06);
+  color: #003478;
+  border: 1px solid rgba(0, 52, 120, .15);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.nuro-tema-content {
+  max-width: 68ch;
+  line-height: 1.8;
+  color: #333;
+}
+
+.nuro-tema-related {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0,0,0,.08);
+}
+
+.nuro-related-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: .8rem;
+  color: #888;
+}
+
+.nuro-related-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.nuro-related-list li {
+  font-size: .95rem;
+  color: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+  .nuro-back-link { color: #7ba8d8; }
+  .nuro-tema-single-header { border-color: rgba(255,255,255,.08); }
+  .nuro-tema-single-summary { color: #aaa; }
+  .nuro-tag { background: rgba(123,168,216,.1); border-color: rgba(123,168,216,.2); color: #7ba8d8; }
+  .nuro-tema-content { color: #ccc; }
+  .nuro-tema-related { border-color: rgba(255,255,255,.08); }
+  .nuro-related-list li { color: #bbb; }
+}
+</style>
+
+{{ end }}

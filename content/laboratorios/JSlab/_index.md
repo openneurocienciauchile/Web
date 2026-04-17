@@ -1,18 +1,14 @@
 ---
-title: "Laboratorio de Otoneurología Clínica y Neurociencia del Equilibrio"
-acronimo: "LAB ONCE"
-summary: "Investigamos los trastornos del sistema vestibular y auditivo, integrando neurociencia básica con práctica clínica en vértigo, equilibrio y audición."
+title: "Laboratorio de Neurobiología Celular y molecular"
+acronimo: "JS lab"
+summary: "Investigamos metabolismo cerebral,Asociado a esto realizamos experimentos conductuales en condiciones de nutrición alterada o en presencia de inhibidores de la expresión de genes determinados de manera célula especifica."
 temas:
-  - otoneurologia-audicion
-  - neurologia-clinica-traslacional
+  - neurobiologia-molecular-celular
 directores:
-  - name: "Hayo Breinbauer Krebs"
+  - name: "Jimena Sierralta"
     email: ""
-    url: "/Web/academicos/hb/hb/"
-  - name: "Paul Délano Hinkley"
-    email: ""
-    url: "/academicos/paul-delano-hinkley"
-sitio_web: "http://www.labonce.cl"
+    url: "/Web/academicos/js/js/"
+sitio_web: ""
 fondecyt: ""
 image: ""
 date: 2024-05-01

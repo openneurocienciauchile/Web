@@ -1,0 +1,252 @@
+{{ define "main" }}
+
+<div class="container mx-auto px-4 py-12 max-w-4xl">
+
+  {{/* Page header */}}
+  <header class="nuro-temas-header">
+    <h1 class="nuro-temas-title">
+      {{ .Title | default "Temas de investigación" }}
+    </h1>
+    {{ with .Params.subtitle }}
+    <p class="nuro-temas-subtitle">{{ . }}</p>
+    {{ end }}
+    {{ with .Content }}
+    <div class="nuro-temas-intro">{{ . }}</div>
+    {{ end }}
+  </header>
+
+  {{/* List of temas */}}
+  <ol class="nuro-temas-list" aria-label="Áreas temáticas de investigación">
+    {{ range $i, $page := .Pages }}
+    <li class="card nuro-tema-item">
+      <span class="nuro-tema-num" aria-hidden="true">
+        {{ printf "%02d" (add $i 1) }}
+      </span>
+      <div class="nuro-tema-body">
+        <h2 class="nuro-tema-title">
+          <a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
+        </h2>
+        {{ with $page.Params.summary }}
+        <p class="nuro-tema-desc">{{ . }}</p>
+        {{ else }}
+        <p class="nuro-tema-desc">{{ $page.Summary }}</p>
+        {{ end }}
+        <div class="nuro-tema-meta">
+          <a class="nuro-tema-link" href="{{ $page.RelPermalink }}">Ver más</a>
+          {{ with $page.Params.tags }}
+          <ul class="nuro-tema-tags" aria-label="Etiquetas">
+            {{ range . }}
+            <li class="nuro-tag">{{ . }}</li>
+            {{ end }}
+          </ul>
+          {{ end }}
+          {{ with $page.Params.num_academicos }}
+          <span class="nuro-tema-count">{{ . }} académico{{ if gt . 1 }}s{{ end }}</span>
+          {{ end }}
+        </div>
+      </div>
+    </li>
+    {{ end }}
+  </ol>
+
+</div>
+
+<style>
+/* ── Temas: header ─────────────────────────────────────── */
+.nuro-temas-header {
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.nuro-temas-title {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0 0 .5rem;
+  line-height: 1.2;
+}
+
+.nuro-temas-subtitle {
+  font-size: 1.05rem;
+  color: #555;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.nuro-temas-intro {
+  margin-top: .75rem;
+  font-size: .95rem;
+  color: #666;
+  line-height: 1.7;
+}
+
+/* ── Temas: list ───────────────────────────────────────── */
+.nuro-temas-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nuro-tema-item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0 2rem;
+  padding: 2rem 2rem 2rem 1.5rem;
+  background-color: #ffffff !important;
+  border-radius: 10px !important;
+  border-left: 4px solid #003478 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08) !important;
+  transition: box-shadow .2s ease, transform .15s ease;
+  isolation: isolate;
+}
+
+.nuro-tema-item::before {
+  content: none;
+}
+
+.nuro-tema-item:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,.12) !important;
+  transform: translateY(-2px);
+}
+
+.nuro-tema-item:hover .nuro-tema-title a {
+  color: #003478;
+}
+
+/* ── Número decorativo ─────────────────────────────────── */
+.nuro-tema-num {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1;
+  color: rgba(0,0,0,.15);
+  padding-top: 5px;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -1px;
+}
+
+/* ── Cuerpo del ítem ───────────────────────────────────── */
+.nuro-tema-body {}
+
+.nuro-tema-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0 0 .6rem;
+  line-height: 1.3;
+}
+
+.nuro-tema-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color .15s ease;
+}
+
+.nuro-tema-title a:hover {
+  color: #003478;
+}
+
+.nuro-tema-desc {
+  font-size: .9rem;
+  line-height: 1.75;
+  color: #555;
+  margin: 0 0 1rem;
+  max-width: 68ch;
+}
+
+/* ── Fila de meta (link + tags + count) ────────────────── */
+.nuro-tema-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.nuro-tema-link {
+  font-size: .8rem;
+  font-weight: 600;
+  color: #003478;
+  text-decoration: none;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap .15s ease;
+}
+
+.nuro-tema-link::after {
+  content: '→';
+  font-weight: 400;
+}
+
+.nuro-tema-link:hover {
+  gap: 8px;
+}
+
+.nuro-tema-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.nuro-tag {
+  font-size: .72rem;
+  background: #003478;
+  color: #ffffff;
+  border: 1px solid #003478;
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: background .15s ease, color .15s ease;
+}
+
+.nuro-tag:hover {
+  background: #eef2f9;
+  color: #003478;
+  border-color: #c5d3e8;
+}
+
+.nuro-tema-count {
+  font-size: .75rem;
+  color: #999;
+  margin-left: auto;
+}
+
+/* ── Dark mode ─────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  .nuro-temas-header { border-color: #2a2a3a; }
+  .nuro-temas-subtitle, .nuro-temas-intro { color: #aaa; }
+  .nuro-tema-item {
+    border-left-color: #0080ff !important;
+  }
+  .nuro-tema-item:hover {
+    border-left-color: #1e2d42 !important;
+  }
+  .nuro-tema-num { color: #444; }
+  .nuro-tema-desc { color: #444; }
+  .nuro-tema-title a { color: #1e2d42; }
+  .nuro-tema-title a:hover { color: #a8c6e8; }
+  .nuro-tema-link { color: #0080ff; }
+  .nuro-tag { background: #ffffff; border-color: #444; color: #7ba8d8; }
+  .nuro-tema-count { color: #666; }
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .nuro-tema-item {
+    grid-template-columns: 40px 1fr;
+    gap: 0 1rem;
+    padding: 1.5rem 1.25rem 1.5rem 1rem;
+  }
+  .nuro-tema-num { font-size: 1.4rem; }
+  .nuro-tema-title { font-size: 1.1rem; }
+  .nuro-tema-count { margin-left: 0; }
+}
+</style>
+
+{{ end }}
