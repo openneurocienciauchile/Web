@@ -60,24 +60,15 @@ content:
     format: yaml-frontmatter
     fields:
       # Identificación
-      - { name: title,    label: "Nombre completo del laboratorio",        type: string }
-      - { name: acronimo, label: "Acrónimo o nombre corto (ej: LAB ONCE)", type: string }
-      - { name: summary,  label: "Descripción breve (2-3 líneas)",         type: text }
-      - { name: image,    label: "Imagen del laboratorio",                 type: image }
+      - { name: title,    label: "Nombre completo del laboratorio", type: string }
+      - { name: acronimo, label: "Acrónimo o nombre corto", type: string }
+      - { name: summary,  label: "Descripción breve (2-3 líneas)", type: text }
+      - { name: image,    label: "Imagen del laboratorio", type: image }
       # Taxonomía
       - name: temas
         label: "Áreas de investigación"
-        type: select
-        multiple: true
-        options:
-          - "neurobiologia-molecular-celular"
-          - "neurociencia-computacional-ia"
-          - "neuromodulacion-control-motor"
-          - "otoneurologia-audicion"
-          - "envejecimiento-neurodegeneracion"
-          - "neurociencia-desarrollo"
-          - "neuropsicologia-cognicion"
-          - "neurologia-clinica-traslacional"
+        type: list
+        hint: "Escribe un área por línea. Valores posibles: neurobiologia-molecular-celular, neurociencia-computacional-ia, neuromodulacion-control-motor, otoneurologia-audicion, envejecimiento-neurodegeneracion, neurociencia-desarrollo, neuropsicologia-cognicion, neurologia-clinica-traslacional"
       # Directores
       - name: directores
         label: "Directores (IPs)"
