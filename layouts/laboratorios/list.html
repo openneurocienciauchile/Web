@@ -62,7 +62,7 @@
     {{/* ── Grid de laboratorios ───────────────────────────────────────── */}}
     <div class="labs-grid" id="labs-grid">
       {{ range $labs }}
-        {{ $temasStr := delimit .Params.temas " " }}
+        {{ $temasStr := "" }}{{ with .Params.temas }}{{ $temasStr = delimit . " " }}{{ end }}
         <article class="lab-card" data-temas="{{ $temasStr }}">
 
           {{/* Imagen del lab */}}
