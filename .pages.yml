@@ -61,8 +61,8 @@ content:
     fields:
       # Identificación
       - { name: title,    label: "Nombre completo del laboratorio",        type: string }
-      - { name: acronimo, label: "Acrónimo o nombre corto (ej: LAB ONCE)", type: string }
-      - { name: summary,  label: "Descripción breve (2-3 líneas)",         type: text }
+      - { name: acronimo, label: "Acrónimo o nombre corto", type: string }
+      - { name: summary,  label: "Descripción breve ",         type: text }
       - { name: image,    label: "Imagen del laboratorio",                 type: image }
       # Taxonomía
       - name: temas
