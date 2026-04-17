@@ -3,7 +3,8 @@ media:
   output: /uploads
 
 content:
-   # Noticias #
+
+  # Noticias #
   - name: news
     label: News
     type: collection
@@ -25,20 +26,14 @@ content:
     path: content/academicos
     filename: "{primary}/_index.md"
     format: yaml-frontmatter
-
     fields:
       - { name: title, label: Nombre, type: string }
       - { name: role, label: Cargo, type: string }
       - { name: degree, label: Grado, type: string }
       - { name: email, label: Email, type: string }
-
-      # 🔽 NUEVO: ORCID
       - { name: orcid, label: ORCID, type: string, description: "Ej: 0000-0002-1825-0097" }
-
       - { name: topics, label: Áreas, type: list }
       - { name: image, label: Foto, type: image }
-
-      # 🔽 NUEVO: PUBLICACIONES (CMS)
       - name: publicaciones
         label: Publicaciones
         type: list
@@ -47,8 +42,6 @@ content:
           - { name: revista, label: Revista, type: string }
           - { name: año, label: Año, type: number }
           - { name: link, label: Link, type: string }
-
-      # 🔽 NUEVO: PROYECTOS
       - name: proyectos
         label: Proyectos
         type: list
@@ -56,10 +49,7 @@ content:
           - { name: nombre, label: Nombre, type: string }
           - { name: descripcion, label: Descripción, type: text }
           - { name: año, label: Año, type: number }
-
       - { name: body, label: Contenido, type: rich-text }
-
-### Taxonomía de laboratorios ###
 
   # Laboratorios #
   - name: laboratorios
@@ -68,52 +58,42 @@ content:
     path: content/laboratorios
     filename: "{primary}/_index.md"
     format: yaml-frontmatter
-
     fields:
-      - { name: title,   label: "Nombre completo del laboratorio", type: string }
-      - { name: acronimo, label: "Acrónimo o nombre corto", type: string }
-      - { name: summary, label: "Descripción breve (2–3 líneas)", type: text }
-      - { name: image,   label: "Imagen del laboratorio", type: image }
-
-
-  # Temas #
-
-  - name: temas
-    label: "Temas / Áreas de investigación"
-    type: select
-    multiple: true
-
-    options:
-        - { value: "neurobiologia-molecular-celular",   label: "Neurobiología Molecular y Celular" }
-        - { value: "neurociencia-computacional-ia",     label: "Neurociencia Computacional e IA" }
-        - { value: "neuromodulacion-control-motor",     label: "Neuromodulación y Control Motor" }
-        - { value: "otoneurologia-audicion",            label: "Otoneurología y Audición" }
-        - { value: "envejecimiento-neurodegeneracion",  label: "Envejecimiento y Neurodegeneración" }
-        - { value: "neurociencia-desarrollo",           label: "Neurociencia del Desarrollo" }
-        - { value: "neuropsicologia-cognicion",         label: "Neuropsicología y Cognición" }
-        - { value: "neurologia-clinica-traslacional",   label: "Neurología Clínica y Traslacional" }
-
-  # ── Directores / Investigadores principales ──────────────────────────────
-  - name: directores
-    label: "Directores (IPs)"
-    type: list
-    fields:
-        - { name: name,  label: "Nombre completo", type: string }
-        - { name: email, label: "Correo electrónico", type: string }
-        - { name: url,   label: "URL perfil académico (ej: /academicos/nombre)", type: string }
- 
-    # ── Vínculos ─────────────────────────────────────────────────────────────
-  - { name: sitio_web, label: "Sitio web propio del lab (URL completa)", type: string }
- 
-    # ── Financiamiento ───────────────────────────────────────────────────────
-  - { name: fondecyt, label: "Proyecto FONDECYT vigente (texto libre)", type: string }
- 
-    # ── Publicación ──────────────────────────────────────────────────────────
-  - { name: date,  label: "Fecha de creación/actualización", type: date }
-  - { name: draft, label: "Borrador (no publicar)", type: boolean, default: false }
- 
-    # ── Contenido largo ──────────────────────────────────────────────────────
-  - { name: body, label: "Contenido detallado", type: rich-text }
+      # Identificación
+      - { name: title,    label: "Nombre completo del laboratorio",        type: string }
+      - { name: acronimo, label: "Acrónimo o nombre corto (ej: LAB ONCE)", type: string }
+      - { name: summary,  label: "Descripción breve (2-3 líneas)",         type: text }
+      - { name: image,    label: "Imagen del laboratorio",                 type: image }
+      # Taxonomía
+      - name: temas
+        label: "Áreas de investigación"
+        type: select
+        multiple: true
+        options:
+          - { value: "neurobiologia-molecular-celular",  label: "Neurobiología Molecular y Celular" }
+          - { value: "neurociencia-computacional-ia",    label: "Neurociencia Computacional e IA" }
+          - { value: "neuromodulacion-control-motor",    label: "Neuromodulación y Control Motor" }
+          - { value: "otoneurologia-audicion",           label: "Otoneurología y Audición" }
+          - { value: "envejecimiento-neurodegeneracion", label: "Envejecimiento y Neurodegeneración" }
+          - { value: "neurociencia-desarrollo",          label: "Neurociencia del Desarrollo" }
+          - { value: "neuropsicologia-cognicion",        label: "Neuropsicología y Cognición" }
+          - { value: "neurologia-clinica-traslacional",  label: "Neurología Clínica y Traslacional" }
+      # Directores
+      - name: directores
+        label: "Directores (IPs)"
+        type: list
+        fields:
+          - { name: name,  label: "Nombre completo",                    type: string }
+          - { name: email, label: "Correo electrónico",                  type: string }
+          - { name: url,   label: "URL perfil (ej: /academicos/nombre)", type: string }
+      # Vínculos y financiamiento
+      - { name: sitio_web, label: "Sitio web del lab (URL completa)", type: string }
+      - { name: fondecyt,  label: "Proyecto FONDECYT vigente",        type: string }
+      # Publicación
+      - { name: date,  label: "Fecha",    type: date }
+      - { name: draft, label: "Borrador", type: boolean, default: false }
+      # Contenido
+      - { name: body, label: "Contenido detallado", type: rich-text }
 
   # Eventos #
   - name: eventos
@@ -121,37 +101,40 @@ content:
     type: collection
     path: content/eventos
     filename: "{year}-{month}-{day}-{primary}.md"
-
+    format: yaml-frontmatter
     fields:
-      - { name: title, label: Título, type: string }
-      - { name: date, label: Fecha, type: date }
-      - { name: summary, label: Resumen, type: text }
-      - { name: image, label: Imagen, type: image }
-      - { name: body, label: Contenido, type: rich-text }
+      - { name: title,   label: Título,    type: string }
+      - { name: date,    label: Fecha,     type: date }
+      - { name: summary, label: Resumen,   type: text }
+      - { name: image,   label: Imagen,    type: image }
+      - { name: body,    label: Contenido, type: rich-text }
 
-  # Quienes somos #
+  # Quiénes somos #
   - name: quienes
     label: Quiénes somos
     type: file
     path: content/quienes/_index.md
+    format: yaml-frontmatter
     fields:
-      - { name: title, label: Título, type: string }
-      - { name: body, label: Contenido, type: rich-text }
+      - { name: title, label: Título,    type: string }
+      - { name: body,  label: Contenido, type: rich-text }
 
   # Formación #
   - name: formacion
     label: Formación
     type: file
     path: content/formacion/_index.md
+    format: yaml-frontmatter
     fields:
-      - { name: title, label: Título, type: string }
-      - { name: body, label: Contenido, type: rich-text }
+      - { name: title, label: Título,    type: string }
+      - { name: body,  label: Contenido, type: rich-text }
 
   # Contacto #
   - name: contacto
     label: Contacto
     type: file
     path: content/contacto/_index.md
+    format: yaml-frontmatter
     fields:
-      - { name: title, label: Título, type: string }
-      - { name: body, label: Contenido, type: rich-text }
+      - { name: title, label: Título,    type: string }
+      - { name: body,  label: Contenido, type: rich-text }
