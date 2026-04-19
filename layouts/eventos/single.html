@@ -1,0 +1,297 @@
+{{ define "main" }}
+
+{{/* ── Breadcrumb ── */}}
+<nav class="evs-breadcrumb" aria-label="Ruta de navegación">
+  <div class="evs-breadcrumb__inner">
+    <a href="{{ "/" | relURL }}">Inicio</a>
+    <span aria-hidden="true">›</span>
+    <a href="{{ "/eventos" | relURL }}">Eventos</a>
+    <span aria-hidden="true">›</span>
+    <span>{{ .Params.speaker | default .Title }}</span>
+  </div>
+</nav>
+
+{{/* ── Layout de dos columnas ── */}}
+<div class="evs-layout">
+
+  {{/* ══ COLUMNA IZQUIERDA — Afiche ══ */}}
+  <aside class="evs-afiche-col">
+
+    {{- if .Params.afiche -}}
+    <div class="evs-afiche-wrap">
+      <img src="{{ .Params.afiche | relURL }}"
+           alt="Afiche del evento"
+           class="evs-afiche-img" />
+    </div>
+    {{- end -}}
+
+    <span class="evs-badge evs-badge--{{ .Params.tipo | default "seminario" }}">
+      {{ if eq (.Params.tipo | default "seminario") "seminario" }}Seminario{{ else }}Evento{{ end }}
+    </span>
+
+    {{- if .Params.tags -}}
+    <div class="evs-tags">
+      {{- range .Params.tags -}}
+      <span class="evs-tag">{{ . }}</span>
+      {{- end -}}
+    </div>
+    {{- end -}}
+
+  </aside>
+
+  {{/* ══ COLUMNA DERECHA — Información ══ */}}
+  <article class="evs-info">
+
+    {{- if .Params.speaker -}}
+    <h1 class="evs-speaker">{{ .Params.speaker }}</h1>
+    {{- end -}}
+
+    {{- if .Params.institucion -}}
+    <p class="evs-institucion">{{ .Params.institucion }}</p>
+    {{- end -}}
+
+    {{/* Metadatos */}}
+    <dl class="evs-meta">
+      {{- if .Params.fecha_hora -}}
+      <div class="evs-meta__row">
+        <dt>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          Fecha y hora
+        </dt>
+        <dd>{{ .Params.fecha_hora }}</dd>
+      </div>
+      {{- end -}}
+
+      {{- if .Params.lugar -}}
+      <div class="evs-meta__row">
+        <dt>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Lugar
+        </dt>
+        <dd>{{ .Params.lugar }}</dd>
+      </div>
+      {{- end -}}
+    </dl>
+
+    {{/* Zoom */}}
+    {{- if .Params.zoom_link -}}
+    <div class="evs-zoom">
+      <div class="evs-zoom__header">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="6" width="13" height="12" rx="2" fill="#2D8CFF"/>
+          <path d="M15 10l6-3v10l-6-3V10z" fill="#2D8CFF"/>
+        </svg>
+        Conexión Zoom
+      </div>
+      <a href="{{ .Params.zoom_link }}"
+         class="evs-zoom__btn"
+         target="_blank" rel="noopener noreferrer">
+        Unirse por Zoom
+      </a>
+      {{- if or .Params.zoom_id .Params.zoom_pass -}}
+      <ul class="evs-zoom__datos">
+        {{- if .Params.zoom_id -}}<li><strong>ID:</strong> {{ .Params.zoom_id }}</li>{{- end -}}
+        {{- if .Params.zoom_pass -}}<li><strong>Contraseña:</strong> {{ .Params.zoom_pass }}</li>{{- end -}}
+      </ul>
+      {{- end -}}
+    </div>
+    {{- end -}}
+
+    {{/* Descripción */}}
+    {{- if .Content -}}
+    <section class="evs-desc">
+      <h2 class="evs-desc__titulo">Descripción</h2>
+      <div class="evs-desc__body">{{ .Content }}</div>
+    </section>
+    {{- end -}}
+
+    {{/* Navegación entre eventos */}}
+    <nav class="evs-nav" aria-label="Otros eventos">
+      {{ with .PrevInSection }}
+      <a href="{{ .Permalink }}" class="evs-nav__link">← Anterior</a>
+      {{ end }}
+      <a href="{{ "/eventos" | relURL }}" class="evs-nav__link evs-nav__link--all">
+        ← Todos los eventos
+      </a>
+      {{ with .NextInSection }}
+      <a href="{{ .Permalink }}" class="evs-nav__link">Siguiente →</a>
+      {{ end }}
+    </nav>
+
+  </article>
+</div>
+
+{{/* ══════════════ ESTILOS ══════════════ */}}
+<style>
+:root {
+  --evs-azul:      #003366;
+  --evs-azul-lt:   #e8eef6;
+  --evs-rojo:      #c0272d;
+  --evs-zoom:      #2D8CFF;
+  --evs-zoom-hov:  #1a6fd4;
+  --evs-texto:     #1a1a2e;
+  --evs-gris:      #6b7280;
+  --evs-borde:     #dde3ec;
+  --evs-radius:    8px;
+  --evs-tr:        .22s ease;
+}
+
+/* Breadcrumb */
+.evs-breadcrumb {
+  background: var(--evs-azul);
+  padding: .7rem 1.5rem;
+}
+.evs-breadcrumb__inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+  font-size: .8rem; color: rgba(255,255,255,.7);
+}
+.evs-breadcrumb a { color: rgba(255,255,255,.7); text-decoration: none; }
+.evs-breadcrumb a:hover { color: #fff; }
+.evs-breadcrumb span:last-child { color: #fff; }
+
+/* Layout */
+.evs-layout {
+  max-width: 1100px; margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .evs-layout { grid-template-columns: 1fr; gap: 1.75rem; padding: 1.5rem 1rem 3rem; }
+}
+
+/* Columna afiche */
+.evs-afiche-col { position: sticky; top: 80px; }
+@media (max-width: 760px) { .evs-afiche-col { position: static; } }
+
+.evs-afiche-wrap {
+  border-radius: var(--evs-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,30,80,.18);
+  margin-bottom: .85rem;
+  background: #e8eaf0;
+}
+.evs-afiche-img { width: 100%; display: block; object-fit: cover; }
+
+/* Badge */
+.evs-badge {
+  display: inline-block;
+  padding: .28rem .8rem;
+  border-radius: 999px;
+  font-size: .72rem; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase;
+  margin-bottom: .65rem;
+}
+.evs-badge--seminario { background: var(--evs-azul); color: #fff; }
+.evs-badge--evento    { background: var(--evs-rojo); color: #fff; }
+
+/* Tags */
+.evs-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+.evs-tag {
+  background: var(--evs-azul-lt);
+  color: var(--evs-azul);
+  padding: .18rem .6rem;
+  border-radius: 999px;
+  font-size: .72rem; font-weight: 500;
+}
+
+/* Columna info */
+.evs-speaker {
+  font-size: clamp(1.35rem, 3vw, 1.95rem);
+  font-weight: 700; color: var(--evs-texto);
+  line-height: 1.25; margin: 0 0 .3rem;
+}
+.evs-institucion { font-size: .95rem; color: var(--evs-gris); margin: 0 0 1.6rem; }
+
+/* Meta */
+.evs-meta {
+  display: flex; flex-direction: column; gap: .8rem;
+  margin: 0 0 1.75rem;
+  padding: 1.1rem 1.4rem;
+  background: var(--evs-azul-lt);
+  border-radius: var(--evs-radius);
+  border-left: 4px solid var(--evs-azul);
+}
+.evs-meta__row { display: flex; flex-direction: column; gap: .12rem; }
+.evs-meta dt {
+  display: flex; align-items: center; gap: .38rem;
+  font-size: .75rem; font-weight: 700;
+  color: var(--evs-azul); text-transform: uppercase; letter-spacing: .06em;
+}
+.evs-meta dd { margin: 0; font-size: .93rem; color: var(--evs-texto); padding-left: 1.5rem; }
+
+/* Zoom */
+.evs-zoom {
+  background: #fff;
+  border: 1.5px solid var(--evs-borde);
+  border-radius: var(--evs-radius);
+  padding: 1.1rem 1.4rem;
+  margin-bottom: 1.75rem;
+}
+.evs-zoom__header {
+  display: flex; align-items: center; gap: .45rem;
+  font-weight: 600; font-size: .88rem;
+  color: var(--evs-texto); margin-bottom: .9rem;
+}
+.evs-zoom__btn {
+  display: inline-flex; align-items: center;
+  background: var(--evs-zoom); color: #fff;
+  padding: .6rem 1.4rem;
+  border-radius: 6px; font-weight: 700; font-size: .92rem;
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(45,140,255,.28);
+  transition: background var(--evs-tr), transform var(--evs-tr);
+}
+.evs-zoom__btn:hover {
+  background: var(--evs-zoom-hov);
+  transform: translateY(-1px);
+  color: #fff; text-decoration: none;
+}
+.evs-zoom__datos {
+  list-style: none; padding: 0; margin: .75rem 0 0;
+  display: flex; flex-direction: column; gap: .2rem;
+  font-size: .82rem; color: var(--evs-gris);
+}
+
+/* Descripción */
+.evs-desc { border-top: 1px solid var(--evs-borde); padding-top: 1.5rem; margin-bottom: 2rem; }
+.evs-desc__titulo {
+  font-size: .82rem; font-weight: 700;
+  color: var(--evs-azul); text-transform: uppercase;
+  letter-spacing: .07em; margin: 0 0 .85rem;
+}
+.evs-desc__body { font-size: .95rem; line-height: 1.75; color: var(--evs-texto); }
+.evs-desc__body p { margin: 0 0 1em; }
+
+/* Navegación */
+.evs-nav {
+  display: flex; gap: .6rem; flex-wrap: wrap;
+  padding-top: 1.4rem; border-top: 1px solid var(--evs-borde);
+}
+.evs-nav__link {
+  font-size: .82rem; color: var(--evs-azul); text-decoration: none;
+  padding: .35rem .85rem;
+  border: 1.5px solid var(--evs-azul);
+  border-radius: 999px;
+  transition: background var(--evs-tr), color var(--evs-tr);
+}
+.evs-nav__link:hover { background: var(--evs-azul); color: #fff; text-decoration: none; }
+.evs-nav__link--all {
+  background: var(--evs-azul-lt); border-color: transparent; font-weight: 600;
+}
+</style>
+
+{{ end }}

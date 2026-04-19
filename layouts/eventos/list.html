@@ -1,0 +1,224 @@
+{{ define "main" }}
+
+{{/* ── Cabecera de sección ── */}}
+<header class="ev-header">
+  <div class="ev-header__inner">
+    <span class="ev-header__eyebrow">Departamento de Neurociencia · UChile</span>
+    <h1 class="ev-header__title">Eventos</h1>
+    <p class="ev-header__sub">Seminarios y actividades del departamento</p>
+
+    <div class="ev-filtros" role="group" aria-label="Filtrar eventos">
+      <button class="ev-filtro ev-filtro--active" data-filter="all">Todos</button>
+      <button class="ev-filtro" data-filter="seminario">Seminarios</button>
+      <button class="ev-filtro" data-filter="evento">Otros eventos</button>
+    </div>
+  </div>
+</header>
+
+{{/* ── Galería de afiches ── */}}
+<section class="ev-galeria">
+  <div class="ev-grid" id="evGrid">
+
+    {{- range .Pages.ByDate.Reverse -}}
+    <article class="ev-card" data-tipo="{{ .Params.tipo | default "seminario" }}">
+      <a href="{{ .Permalink }}" class="ev-card__link"
+         aria-label="Ver evento: {{ .Params.speaker | default .Title }}">
+        <div class="ev-card__img-wrap">
+          {{- if .Params.afiche -}}
+          <img
+            src="{{ .Params.afiche | relURL }}"
+            alt="Afiche del evento"
+            loading="lazy"
+            class="ev-card__img"
+          />
+          {{- else -}}
+          <div class="ev-card__img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+                 stroke="#aab" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+          {{- end -}}
+
+          <span class="ev-card__badge ev-card__badge--{{ .Params.tipo | default "seminario" }}">
+            {{ if eq (.Params.tipo | default "seminario") "seminario" }}Seminario{{ else }}Evento{{ end }}
+          </span>
+
+          <div class="ev-card__overlay" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <span>Ver detalle</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    {{- end -}}
+
+    {{- if not .Pages -}}
+    <div class="ev-vacio">
+      <p>No hay eventos publicados aún.</p>
+    </div>
+    {{- end -}}
+
+  </div>
+</section>
+
+{{/* ══════════════ ESTILOS ══════════════ */}}
+<style>
+:root {
+  --ev-azul:      #003366;
+  --ev-azul-lt:   #e8eef6;
+  --ev-rojo:      #c0272d;
+  --ev-gris-bg:   #f5f6f8;
+  --ev-radius:    6px;
+  --ev-transition: 0.26s cubic-bezier(.4,0,.2,1);
+}
+
+/* Cabecera */
+.ev-header {
+  background: var(--ev-azul);
+  color: #fff;
+  padding: 3.5rem 1.5rem 3rem;
+  text-align: center;
+}
+.ev-header__inner { max-width: 760px; margin: 0 auto; }
+.ev-header__eyebrow {
+  display: block;
+  font-size: .72rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  opacity: .6;
+  margin-bottom: .55rem;
+}
+.ev-header__title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin: 0 0 .35rem;
+  letter-spacing: -.02em;
+}
+.ev-header__sub { font-size: .95rem; opacity: .7; margin: 0 0 2rem; }
+
+/* Filtros */
+.ev-filtros { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; }
+.ev-filtro {
+  padding: .38rem 1.1rem;
+  border: 1.5px solid rgba(255,255,255,.4);
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  font-size: .84rem;
+  cursor: pointer;
+  transition: background var(--ev-transition), border-color var(--ev-transition), color var(--ev-transition);
+}
+.ev-filtro:hover, .ev-filtro--active {
+  background: #fff;
+  color: var(--ev-azul);
+  border-color: #fff;
+  font-weight: 600;
+}
+
+/* Galería */
+.ev-galeria { background: var(--ev-gris-bg); padding: 2.5rem 1.5rem 4rem; }
+.ev-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.4rem;
+}
+
+/* Tarjeta */
+.ev-card {
+  border-radius: var(--ev-radius);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  transition: transform var(--ev-transition), box-shadow var(--ev-transition);
+}
+.ev-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,.14);
+}
+.ev-card.hidden { display: none; }
+
+.ev-card__link { display: block; position: relative; text-decoration: none; }
+
+.ev-card__img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #e8eaf0;
+}
+.ev-card__img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform var(--ev-transition);
+}
+.ev-card:hover .ev-card__img { transform: scale(1.04); }
+
+.ev-card__img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Badge */
+.ev-card__badge {
+  position: absolute; top: .55rem; left: .55rem;
+  padding: .22rem .65rem;
+  border-radius: 999px;
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .05em; text-transform: uppercase;
+  backdrop-filter: blur(4px);
+}
+.ev-card__badge--seminario { background: rgba(0,51,102,.85); color: #fff; }
+.ev-card__badge--evento    { background: rgba(192,39,45,.85);  color: #fff; }
+
+/* Overlay */
+.ev-card__overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,25,60,.52);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .45rem;
+  opacity: 0; transition: opacity var(--ev-transition);
+  color: #fff; font-size: .82rem; font-weight: 600;
+}
+.ev-card:hover .ev-card__overlay { opacity: 1; }
+
+/* Vacío */
+.ev-vacio {
+  grid-column: 1 / -1;
+  text-align: center; padding: 4rem;
+  color: #999; font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+  .ev-grid { grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+}
+</style>
+
+{{/* ══════════════ JS FILTRO ══════════════ */}}
+<script>
+(function () {
+  var btns  = document.querySelectorAll('.ev-filtro');
+  var cards = document.querySelectorAll('.ev-card');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var f = btn.dataset.filter;
+      btns.forEach(function(b){ b.classList.remove('ev-filtro--active'); });
+      btn.classList.add('ev-filtro--active');
+      cards.forEach(function(card) {
+        var tipo = card.dataset.tipo || 'seminario';
+        card.classList.toggle('hidden', f !== 'all' && tipo !== f);
+      });
+    });
+  });
+})();
+</script>
+
+{{ end }}
