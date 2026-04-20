@@ -94,11 +94,29 @@ content:
     filename: "{year}-{month}-{day}-{primary}.md"
     format: yaml-frontmatter
     fields:
-      - { name: title,   label: Título,    type: string }
-      - { name: date,    label: Fecha,     type: date }
-      - { name: summary, label: Resumen,   type: text }
-      - { name: image,   label: Imagen,    type: image }
-      - { name: body,    label: Contenido, type: rich-text }
+      - { name: title,       label: "Título interno (para URL)",   type: string,  description: "Solo se usa para generar la URL. No aparece en la galería." }
+      - { name: date,        label: "Fecha del evento",            type: date }
+      - name: tipo
+        label: "Tipo de evento"
+        type: select
+        options:
+          - { label: Seminario,   value: seminario }
+          - { label: Otro evento, value: evento }
+        default: seminario
+      - { name: afiche,      label: "Afiche (imagen)",             type: image,   description: "Esta imagen es lo que se muestra en la galería." }
+      - { name: speaker,     label: "Nombre del expositor/a",      type: string }
+      - { name: institucion, label: "Institución del expositor/a", type: string }
+      - { name: fecha_hora,  label: "Fecha y hora (texto)",        type: string,  description: "Ej: Martes 24 de junio de 2025, 11:30 - 13:00 hrs" }
+      - { name: lugar,       label: "Lugar",                       type: string,  description: "Ej: Sala de Seminarios, Edificio BNI" }
+      - { name: zoom_link,   label: "Link Zoom",                   type: string,  description: "URL completa. Dejar vacío si no aplica." }
+      - { name: zoom_id,     label: "ID Zoom",                     type: string,  description: "Ej: 812 3456 7890 (opcional)" }
+      - { name: zoom_pass,   label: "Contraseña Zoom",             type: string,  description: "Opcional" }
+      - { name: summary,     label: "Resumen breve (SEO)",         type: text }
+      - { name: body,        label: "Descripción completa",        type: rich-text }
+      - name: tags
+        label: "Temas"
+        type: list
+        description: "Áreas temáticas: memoria, sueño, visión, etc." 
 
   # Quiénes somos #
   - name: quienes

@@ -81,9 +81,9 @@
 
 /* Cabecera */
 .ev-header {
-  background: var(--ev-azul);
-  color: #fff;
-  padding: 3.5rem 1.5rem 3rem;
+  background: transparent;
+  color: #1a1a2e;
+  padding: 2.5rem 1.5rem 2rem;
   text-align: center;
 }
 .ev-header__inner { max-width: 760px; margin: 0 auto; }
@@ -92,7 +92,7 @@
   font-size: .72rem;
   letter-spacing: .15em;
   text-transform: uppercase;
-  opacity: .6;
+  color: #6b7280;
   margin-bottom: .55rem;
 }
 .ev-header__title {
@@ -100,25 +100,26 @@
   font-weight: 700;
   margin: 0 0 .35rem;
   letter-spacing: -.02em;
+  color: #1a1a2e;
 }
-.ev-header__sub { font-size: .95rem; opacity: .7; margin: 0 0 2rem; }
+.ev-header__sub { font-size: .95rem; color: #6b7280; margin: 0 0 2rem; }
 
 /* Filtros */
 .ev-filtros { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; }
 .ev-filtro {
   padding: .38rem 1.1rem;
-  border: 1.5px solid rgba(255,255,255,.4);
+  border: 1.5px solid #003366;
   border-radius: 999px;
   background: transparent;
-  color: #fff;
+  color: #003366;
   font-size: .84rem;
   cursor: pointer;
   transition: background var(--ev-transition), border-color var(--ev-transition), color var(--ev-transition);
 }
 .ev-filtro:hover, .ev-filtro--active {
-  background: #fff;
-  color: var(--ev-azul);
-  border-color: #fff;
+  background: #003366;
+  color: #fff;
+  border-color: #003366;
   font-weight: 600;
 }
 
