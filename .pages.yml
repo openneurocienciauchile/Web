@@ -100,8 +100,8 @@ content:
         label: "Tipo de evento"
         type: select
         options:
-          - { label: Seminario,   value: seminario }
-          - { label: Otro evento, value: evento }
+          - seminario
+          - evento
         default: seminario
       - { name: afiche,      label: "Afiche (imagen)",             type: image,   description: "Esta imagen es lo que se muestra en la galería." }
       - { name: speaker,     label: "Nombre del expositor/a",      type: string }
