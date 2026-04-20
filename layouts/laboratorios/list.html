@@ -29,9 +29,11 @@
 {{/* ── Recopilar todos los temas presentes en la colección ─────────────── */}}
 {{ $temasEnUso := slice }}
 {{ range $labs }}
-  {{ range .Params.temas }}
-    {{ if not (in $temasEnUso .) }}
-      {{ $temasEnUso = $temasEnUso | append . }}
+  {{ if and .Params.temas (reflect.IsSlice .Params.temas) }}
+    {{ range .Params.temas }}
+      {{ if not (in $temasEnUso .) }}
+        {{ $temasEnUso = $temasEnUso | append . }}
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
@@ -62,7 +64,7 @@
     {{/* ── Grid de laboratorios ───────────────────────────────────────── */}}
     <div class="labs-grid" id="labs-grid">
       {{ range $labs }}
-        {{ $temasStr := "" }}{{ with .Params.temas }}{{ $temasStr = delimit . " " }}{{ end }}
+        {{ $temasStr := "" }}{{ if and .Params.temas (reflect.IsSlice .Params.temas) }}{{ $temasStr = delimit .Params.temas " " }}{{ end }}
         <article class="lab-card" data-temas="{{ $temasStr }}">
 
           {{/* Imagen del lab */}}
@@ -88,9 +90,9 @@
             </h2>
 
             {{/* Directores */}}
-            {{ with .Params.directores }}
+            {{ if and .Params.directores (reflect.IsSlice .Params.directores) }}
             <div class="lab-card__directores">
-              {{ range . }}
+              {{ range .Params.directores }}
                 <span class="lab-card__director">
                   {{ if .url }}
                     <a href="{{ .url }}">{{ .name }}</a>
@@ -108,9 +110,9 @@
             {{ end }}
 
             {{/* Tags de Temas */}}
-            {{ with .Params.temas }}
+            {{ if and .Params.temas (reflect.IsSlice .Params.temas) }}
             <div class="lab-card__temas">
-              {{ range . }}
+              {{ range .Params.temas }}
                 {{ $label := index $temaLabels . }}
                 {{ if not $label }}{{ $label = . }}{{ end }}
                 <span class="tema-tag tema-tag--{{ . }}">{{ $label }}</span>
