@@ -69,11 +69,16 @@
 
           {{/* Imagen del lab */}}
           {{ with .Params.image }}
-            {{ $imgFile := .filename }}
-            {{ if $imgFile }}
-            <div class="lab-card__image">
-              <img src="{{ $imgFile | relURL }}" alt="{{ $.Title }}" loading="lazy">
-            </div>
+            {{ if (reflect.IsMap .) }}
+              {{ with .filename }}
+              <div class="lab-card__image">
+                <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+              </div>
+              {{ end }}
+            {{ else if (ne . "") }}
+              <div class="lab-card__image">
+                <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+              </div>
             {{ end }}
           {{ end }}
 
