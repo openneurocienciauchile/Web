@@ -75,7 +75,7 @@ sections:
       count: 1
       filters:
         folders:
-          - events
+          - eventos
       order: desc
     design:
       view: card
