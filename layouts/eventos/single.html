@@ -19,7 +19,7 @@
 
     {{- if .Params.afiche -}}
     <div class="evs-afiche-wrap">
-      <img src="{{ .Params.afiche | relURL }}"
+      <img src="{{ .Params.afiche }}"
            alt="Afiche del evento"
            class="evs-afiche-img" />
     </div>
@@ -31,8 +31,12 @@
 
     {{- if .Params.tags -}}
     <div class="evs-tags">
-      {{- range .Params.tags -}}
-      <span class="evs-tag">{{ . }}</span>
+      {{- if reflect.IsSlice .Params.tags -}}
+        {{- range .Params.tags -}}
+        <span class="evs-tag">{{ . }}</span>
+        {{- end -}}
+      {{- else -}}
+        <span class="evs-tag">{{ .Params.tags }}</span>
       {{- end -}}
     </div>
     {{- end -}}
