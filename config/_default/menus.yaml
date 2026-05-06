@@ -1,7 +1,4 @@
 # Navigation Links
-#   To link a homepage widget, specify the URL as a hash `#` followed by the filename of the
-  #     desired widget in your `content/home/` folder.
-  #   The weight parameter defines the order that the links will appear in.
 
 main:
   - name: Quiénes somos
@@ -24,7 +21,6 @@ main:
     url: blog/
     weight: 50
 
-
   - name: Eventos
     url: eventos/
     weight: 60
@@ -36,3 +32,28 @@ main:
   - name: Contacto
     url: contactos/
     weight: 80
+
+  # ── Redes sociales ──
+  - name: Twitter
+    url: 'https://twitter.com/neurocienciauch'
+    icon_pack: fab
+    icon: x-twitter
+    weight: 90
+
+  - name: Instagram
+    url: 'https://www.instagram.com/neurocienciauchile/'
+    icon_pack: fab
+    icon: instagram
+    weight: 91
+
+  - name: YouTube
+    url: 'https://www.youtube.com/@neurocienciauchile'
+    icon_pack: fab
+    icon: youtube
+    weight: 92
+
+  - name: LinkedIn
+    url: 'https://www.linkedin.com/company/neurociencia-uchile/'
+    icon_pack: fab
+    icon: linkedin
+    weight: 93

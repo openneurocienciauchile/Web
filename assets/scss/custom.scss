@@ -1,0 +1,132 @@
+/* ================================================================
+   custom.scss — Departamento de Neurociencia, Universidad de Chile
+   Ubicación: assets/scss/custom.scss
+   ================================================================ */
+
+/* ── Fondo degradado general ── */
+html,
+body {
+  background: linear-gradient(
+    to bottom right,
+    rgba(59, 130, 246, 0.35),
+    rgba(255, 0, 0, 0),
+    rgba(99, 102, 241, 0.35)
+  ) !important;
+  min-height: 100vh;
+  background-attachment: fixed !important;
+}
+
+/* ── Transparencia en contenedores ── */
+.page-wrapper,
+main,
+main > div,
+main > section,
+.wg-page,
+.page-body,
+[class*="page-"],
+[class*="layout-"] {
+  background: transparent !important;
+}
+
+/* ── Eliminar espacios superiores ── */
+main,
+.page-wrapper,
+main > div,
+main > section {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* ── Logo en navbar — más grande ── */
+.navbar-brand img {
+  height: 56px !important;
+  width: auto !important;
+  display: block;
+}
+
+/* ── Íconos de redes en la navbar ── */
+.navbar-nav .nav-item a[href*="twitter"],
+.navbar-nav .nav-item a[href*="instagram"],
+.navbar-nav .nav-item a[href*="youtube"],
+.navbar-nav .nav-item a[href*="linkedin"] {
+  padding: 0 6px !important;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-nav .nav-item a[href*="twitter"]:hover,
+.navbar-nav .nav-item a[href*="instagram"]:hover,
+.navbar-nav .nav-item a[href*="youtube"]:hover,
+.navbar-nav .nav-item a[href*="linkedin"]:hover {
+  opacity: 1;
+}
+
+/* ── Bloque redes — ancho completo ── */
+section#redes {
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+section#redes .container {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* ── Elimina espacio debajo del último bloque ── */
+.home-section:last-of-type {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* ── Noticias: ocultar resumen, fecha y "Read more" ── */
+#noticias .p-8 > p,
+#noticias .pt-3 {
+  display: none !important;
+}
+
+/* ── Reducir padding para que quede más compacto ── */
+#noticias .p-8 {
+  padding: 0.8rem 1rem !important;
+}
+
+/* ── Título más pequeño ── */
+#noticias .text-xl {
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+}
+
+/* ── Logo y navbar ── */
+.logo-depto {
+  height: 60px;   /* ajusta entre 55px y 70px según te quede bien */
+  width: auto;
+}
+
+/* Aumenta la altura del navbar para que el logo no quede apretado */
+nav.navbar {
+  min-height: 75px !important;
+  align-items: center !important;
+}
+
+/* Centra verticalmente los ítems del menú con el logo */
+.navbar-brand,
+.nav-item {
+  display: flex !important;
+  align-items: center !important;
+}
+
+
+/* ── Altura del hero (brain.jpg) ── */
+
+/* Elimina el padding-top del wrapper externo */
+#section-hero .isolate {
+  padding-top: 0 !important;
+}
+
+/* Sobreescribe el py-32/48/56 que infla la altura */
+#section-hero .max-w-2xl {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
