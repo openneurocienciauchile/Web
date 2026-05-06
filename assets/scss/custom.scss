@@ -130,3 +130,27 @@ nav.navbar {
   padding-bottom: 2rem !important;
 }
 
+/* ── Iconos sociales en navbar ── */
+.social-icons-navbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 10px;
+
+  a {
+    display: flex;
+    align-items: center;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    img {
+      height: 22px;   /* ajusta el tamaño de los iconos aquí */
+      width: 22px;
+      object-fit: contain;
+    }
+  }
+}

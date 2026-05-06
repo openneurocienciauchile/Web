@@ -3,7 +3,7 @@ hugoblox:
   identity:
     name: " "
     logo:
-      filename: logo.png
+      filename: logo.svg
     tagline: Neurociencia Universidad de Chile Academicos Investigacion
     description: Sitio Oficial Departamento de Neurociencia Universidad de Chile
   theme:
@@ -25,8 +25,12 @@ hugoblox:
     style: navbar
     sticky: true
     align: center
-    search: true
+    search: false
     theme_toggle: false
+  footer:
+    enable: false
+    style: minimal
+    language_switcher: false
   copyright:
     notice: © {year} {name}
   content:
