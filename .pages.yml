@@ -125,8 +125,33 @@ content:
     path: content/quienes/_index.md
     format: yaml-frontmatter
     fields:
-      - { name: title, label: Título,    type: string }
-      - { name: body,  label: Contenido, type: rich-text }
+      - { name: title, label: Título de la página, type: string }
+      - name: sections
+        label: Secciones
+        type: list
+        fields:
+          - name: content
+            label: Contenido
+            type: object
+            fields:
+              - name: image
+                label: Imagen principal
+                type: image
+                description: "Foto del departamento. Se muestra en la columna izquierda. Tamaño recomendado: al menos 900 × 700 px."
+              - name: image_alt
+                label: Texto alternativo de la imagen (accesibilidad)
+                type: string
+              - { name: title,    label: Título del bloque, type: string }
+              - { name: subtitle, label: Subtítulo (ej: Facultad de Medicina · Universidad de Chile), type: string }
+              - name: text
+                label: Texto principal
+                type: rich-text
+                description: "Párrafos de presentación del departamento. No incluyas la lista de misiones aquí."
+              - { name: missions_title, label: Encabezado de la lista de misiones, type: string }
+              - name: missions
+                label: Misiones
+                type: list
+                description: "Una misión por línea."
 
   # Formación #
   - name: formacion
