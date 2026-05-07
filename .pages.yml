@@ -122,7 +122,7 @@ content:
   - name: quienes
     label: Quiénes somos
     type: file
-    path: content/quienes/_index.md
+    path: content/quienes-somos/_index.md
     format: yaml-frontmatter
     fields:
       - { name: title, label: Título de la página, type: string }
