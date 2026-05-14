@@ -9,14 +9,14 @@ content:
     label: Noticias
     type: collection
     path: content/blog
-    filename: "{year}-{month}-{day}-{primary}.md"
+    filename: "index.md"
     format: yaml-frontmatter
     fields:
       - { name: title,    label: "Título",               type: string }
       - { name: subtitle, label: "Subtítulo",             type: string,  description: "Frase breve que aparece bajo el título en la tarjeta" }
       - { name: date,     label: "Fecha",                 type: date }
       - { name: draft,    label: "Borrador",              type: boolean, default: false }
-      - { name: summary,  label: "Resumen (SEO/preview)", type: text,    description: "Solo para buscadores y vista previa en redes. No aparece en la tarjeta." }
+      - { name: summary,  label: "Resumen (SEO/preview)", type: text,    description: "Solo para buscadores. No aparece en la tarjeta." }
       - { name: image,    label: "Imagen de portada",     type: image }
       - { name: body,     label: "Contenido",             type: rich-text }
       

@@ -1,0 +1,44 @@
+{{/* ── Resolver imagen ── */}}
+{{ $imgSrc := "" }}
+{{ with .Params.image }}
+  {{ if reflect.IsMap . }}
+    {{ with $.Resources.GetMatch "featured.*" }}
+      {{ $imgSrc = .RelPermalink }}
+    {{ end }}
+  {{ else }}
+    {{ $imgSrc = . }}
+  {{ end }}
+{{ end }}
+
+{{/* ── Tarjeta ── */}}
+<a href="{{ .RelPermalink }}" class="group block">
+
+  <div class="bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition-shadow duration-200 overflow-hidden">
+
+    {{ if $imgSrc }}
+      <img
+        src="{{ $imgSrc | absURL }}"
+        alt="{{ .Title }}"
+        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+      >
+    {{ else }}
+      <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
+        <span class="text-4xl text-gray-300">📰</span>
+      </div>
+    {{ end }}
+
+    <div class="p-4">
+      <p class="text-xs text-gray-400 mb-2">
+        {{ .Date.Format "2 January 2006" }}
+      </p>
+      <h2 class="text-base font-semibold leading-snug mb-1 group-hover:text-blue-700 transition-colors duration-200">
+        {{ .Title }}
+      </h2>
+      {{ with .Params.subtitle }}
+        <p class="text-sm text-gray-500 leading-snug">{{ . }}</p>
+      {{ end }}
+    </div>
+
+  </div>
+
+</a>
