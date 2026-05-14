@@ -4,22 +4,23 @@ media:
 
 content:
 
-  # Noticias #
+# ── Noticias ────────────────────────────────────────────────────────────
   - name: news
-    label: News
+    label: Noticias
     type: collection
     path: content/blog
     filename: "{year}-{month}-{day}-{primary}.md"
     format: yaml-frontmatter
     fields:
-      - { name: title, label: Title, type: string }
-      - { name: date, label: Date, type: date }
-      - { name: draft, label: Draft, type: boolean, default: false }
-      - { name: summary, label: Summary, type: text }
-      - { name: image, label: Image, type: image }
-      - { name: body, label: Body, type: rich-text }
-
-  # Académicos #
+      - { name: title,    label: "Título",               type: string }
+      - { name: subtitle, label: "Subtítulo",             type: string,  description: "Frase breve que aparece bajo el título en la tarjeta" }
+      - { name: date,     label: "Fecha",                 type: date }
+      - { name: draft,    label: "Borrador",              type: boolean, default: false }
+      - { name: summary,  label: "Resumen (SEO/preview)", type: text,    description: "Solo para buscadores y vista previa en redes. No aparece en la tarjeta." }
+      - { name: image,    label: "Imagen de portada",     type: image }
+      - { name: body,     label: "Contenido",             type: rich-text }
+      
+  # ── Académicos ────────────────────────────────────────────────────────────
   - name: academicos
     label: Académicos
     type: collection
@@ -27,31 +28,35 @@ content:
     filename: "{primary}/_index.md"
     format: yaml-frontmatter
     fields:
-      - { name: title, label: Nombre, type: string }
-      - { name: role, label: Cargo, type: string }
-      - { name: degree, label: Grado, type: string }
-      - { name: email, label: Email, type: string }
-      - { name: orcid, label: ORCID, type: string, description: "Ej: 0000-0002-1825-0097" }
-      - { name: topics, label: Áreas, type: list }
+      - { name: title,  label: Nombre, type: string }
+      - { name: role,   label: Cargo,  type: string }
+      - { name: degree, label: Grado,  type: string }
+      - { name: email,  label: Email,  type: string }
+      - { name: orcid,  label: ORCID,  type: string, description: "Ej: 0000-0002-1825-0097" }
+      # ✅ CORREGIDO: antes se llamaba "topics", ahora "temas" para conectar con la taxonomía
+      - name: temas
+        label: Áreas de investigación
+        type: list
+        description: "Un tema por línea. Deben coincidir exactamente con los temas del apartado Temas (sin acentos, con guiones). Ej: neurodegeneracion, plasticidad-sinaptica"
       - { name: image, label: Foto, type: image }
       - name: publicaciones
         label: Publicaciones
         type: list
         fields:
-          - { name: titulo, label: Título, type: string }
+          - { name: titulo,  label: Título,  type: string }
           - { name: revista, label: Revista, type: string }
-          - { name: año, label: Año, type: number }
-          - { name: link, label: Link, type: string }
+          - { name: año,     label: Año,     type: number }
+          - { name: link,    label: Link,    type: string }
       - name: proyectos
         label: Proyectos
         type: list
         fields:
-          - { name: nombre, label: Nombre, type: string }
-          - { name: descripcion, label: Descripción, type: text }
-          - { name: año, label: Año, type: number }
+          - { name: nombre,      label: Nombre,       type: string }
+          - { name: descripcion, label: Descripción,  type: text }
+          - { name: año,         label: Año,          type: number }
       - { name: body, label: Contenido, type: rich-text }
 
-  # Laboratorios #
+  # ── Laboratorios ──────────────────────────────────────────────────────────
   - name: laboratorios
     label: Laboratorios
     type: collection
@@ -59,17 +64,16 @@ content:
     filename: "{primary}/_index.md"
     format: yaml-frontmatter
     fields:
-      # Identificación
       - { name: title,    label: "Nombre completo del laboratorio", type: string }
-      - { name: acronimo, label: "Acrónimo o nombre corto", type: string }
-      - { name: summary,  label: "Descripción breve (2-3 líneas)", type: text }
-      - { name: image,    label: "Imagen del laboratorio", type: image }
-      # Taxonomía
+      - { name: acronimo, label: "Acrónimo o nombre corto",         type: string }
+      - { name: summary,  label: "Descripción breve (2-3 líneas)",  type: text }
+      - { name: image,    label: "Imagen del laboratorio",          type: image }
+      # ✅ YA ESTABA CORRECTO: se llama "temas" ✓
       - name: temas
         label: "Áreas de investigación"
         type: list
-        hint: "Escribe un área por línea. Valores posibles: neurobiologia-molecular-celular, neurociencia-computacional-ia, neuromodulacion-control-motor, otoneurologia-audicion, envejecimiento-neurodegeneracion, neurociencia-desarrollo, neuropsicologia-cognicion, neurologia-clinica-traslacional"
-      # Directores
+        description: "Un tema por línea. Deben coincidir exactamente con los temas del apartado Temas (sin acentos, con guiones)."
+        hint: "Valores posibles: neurobiologia-molecular-celular, neurociencia-computacional-ia, neuromodulacion-control-motor, otoneurologia-audicion, envejecimiento-neurodegeneracion, neurociencia-desarrollo, neuropsicologia-cognicion, neurologia-clinica-traslacional"
       - name: directores
         label: "Directores (IPs)"
         type: list
@@ -77,16 +81,13 @@ content:
           - { name: name,  label: "Nombre completo",                    type: string }
           - { name: email, label: "Correo electrónico",                  type: string }
           - { name: url,   label: "URL perfil (ej: /academicos/nombre)", type: string }
-      # Vínculos y financiamiento
       - { name: sitio_web, label: "Sitio web del lab (URL completa)", type: string }
       - { name: fondecyt,  label: "Proyecto FONDECYT vigente",        type: string }
-      # Publicación
-      - { name: date,  label: "Fecha",    type: date }
-      - { name: draft, label: "Borrador", type: boolean, default: false }
-      # Contenido
-      - { name: body, label: "Contenido detallado", type: rich-text }
+      - { name: date,      label: "Fecha",                            type: date }
+      - { name: draft,     label: "Borrador",                         type: boolean, default: false }
+      - { name: body,      label: "Contenido detallado",              type: rich-text }
 
-  # Eventos #
+  # ── Eventos ───────────────────────────────────────────────────────────────
   - name: eventos
     label: Eventos
     type: collection
@@ -94,7 +95,7 @@ content:
     filename: "{year}-{month}-{day}-{primary}.md"
     format: yaml-frontmatter
     fields:
-      - { name: title,       label: "Título interno (para URL)",   type: string,  description: "Solo se usa para generar la URL. No aparece en la galería." }
+      - { name: title,       label: "Título interno (para URL)",   type: string }
       - { name: date,        label: "Fecha del evento",            type: date }
       - name: tipo
         label: "Tipo de evento"
@@ -103,22 +104,39 @@ content:
           - seminario
           - evento
         default: seminario
-      - { name: afiche,      label: "Afiche (imagen)",             type: image,   description: "Esta imagen es lo que se muestra en la galería." }
+      - { name: afiche,      label: "Afiche (imagen)",             type: image }
       - { name: speaker,     label: "Nombre del expositor/a",      type: string }
       - { name: institucion, label: "Institución del expositor/a", type: string }
       - { name: fecha_hora,  label: "Fecha y hora (texto)",        type: string,  description: "Ej: Martes 24 de junio de 2025, 11:30 - 13:00 hrs" }
-      - { name: lugar,       label: "Lugar",                       type: string,  description: "Ej: Sala de Seminarios, Edificio BNI" }
-      - { name: zoom_link,   label: "Link Zoom",                   type: string,  description: "URL completa. Dejar vacío si no aplica." }
-      - { name: zoom_id,     label: "ID Zoom",                     type: string,  description: "Ej: 812 3456 7890 (opcional)" }
-      - { name: zoom_pass,   label: "Contraseña Zoom",             type: string,  description: "Opcional" }
+      - { name: lugar,       label: "Lugar",                       type: string }
+      - { name: zoom_link,   label: "Link Zoom",                   type: string }
+      - { name: zoom_id,     label: "ID Zoom",                     type: string }
+      - { name: zoom_pass,   label: "Contraseña Zoom",             type: string }
       - { name: summary,     label: "Resumen breve (SEO)",         type: text }
-      - { name: body,        label: "Descripción completa",        type: rich-text }
-      - name: tags
+      # ✅ CORREGIDO: antes se llamaba "tags", ahora "temas"
+      - name: temas
         label: "Temas"
         type: list
-        description: "Áreas temáticas: memoria, sueño, visión, etc." 
+        description: "Un tema por línea. Deben coincidir exactamente con los temas del apartado Temas (sin acentos, con guiones). Ej: memoria, sueno, vision"
+      - { name: body, label: "Descripción completa", type: rich-text }
 
-  # Quiénes somos #
+  # ── Temas ─────────────────────────────────────────────────────────────────
+  # ✅ NUEVO: permite crear y editar páginas de temas desde Pages CMS
+  - name: temas
+    label: Temas
+    type: collection
+    path: content/temas
+    filename: "{primary}/_index.md"
+    format: yaml-frontmatter
+    fields:
+      - { name: title,   label: "Nombre del tema (se muestra en la página)", type: string }
+      - { name: summary, label: "Descripción breve (aparece en la lista de temas)", type: text }
+      - name: body
+        label: "Descripción larga (opcional)"
+        type: rich-text
+        description: "Si se completa, aparece al inicio de la página del tema antes de los contenidos relacionados."
+
+  # ── Quiénes somos ─────────────────────────────────────────────────────────
   - name: quienes
     label: Quiénes somos
     type: file
@@ -134,26 +152,18 @@ content:
             label: Contenido
             type: object
             fields:
-              - name: image
-                label: Imagen principal
-                type: image
-                description: "Foto del departamento. Se muestra en la columna izquierda. Tamaño recomendado: al menos 900 × 700 px."
-              - name: image_alt
-                label: Texto alternativo de la imagen (accesibilidad)
-                type: string
-              - { name: title,    label: Título del bloque, type: string }
-              - { name: subtitle, label: Subtítulo (ej: Facultad de Medicina · Universidad de Chile), type: string }
-              - name: text
-                label: Texto principal
-                type: rich-text
-                description: "Párrafos de presentación del departamento. No incluyas la lista de misiones aquí."
-              - { name: missions_title, label: Encabezado de la lista de misiones, type: string }
+              - { name: image,     label: "Imagen principal",                                                    type: image }
+              - { name: image_alt, label: "Texto alternativo de la imagen (accesibilidad)",                      type: string }
+              - { name: title,     label: "Título del bloque",                                                   type: string }
+              - { name: subtitle,  label: "Subtítulo (ej: Facultad de Medicina · Universidad de Chile)",         type: string }
+              - { name: text,      label: "Texto principal",                                                     type: rich-text }
+              - { name: missions_title, label: "Encabezado de la lista de misiones",                             type: string }
               - name: missions
                 label: Misiones
                 type: list
                 description: "Una misión por línea."
 
-  # Formación #
+  # ── Formación ─────────────────────────────────────────────────────────────
   - name: formacion
     label: Formación
     type: file
@@ -163,7 +173,7 @@ content:
       - { name: title, label: Título,    type: string }
       - { name: body,  label: Contenido, type: rich-text }
 
-  # Contacto #
+  # ── Contacto ──────────────────────────────────────────────────────────────
   - name: contacto
     label: Contacto
     type: file

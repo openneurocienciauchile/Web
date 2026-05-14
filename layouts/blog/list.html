@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+<section class="page-noticias w-full">
+
+  <div class="container mx-auto px-6 py-12">
+
+    <!-- Título -->
+    <h1 class="text-3xl font-bold mb-10">
+      Noticias
+    </h1>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      {{ range .RegularPages }}
+        {{ partial "news-card.html" . }}
+      {{ end }}
+
+    </div>
+
+  </div>
+
+</section>
+
+{{ end }}

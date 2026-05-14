@@ -1,0 +1,66 @@
+{{/*
+  Override: layouts/partials/views/article-grid.html
+  Llamado por el bloque "collection" del homepage con view: article-grid
+  El contexto (.) es directamente una página de Hugo.
+
+  Maneja dos formatos de imagen:
+    a) String plano (Pages CMS): image: /uploads/foto.jpg
+    b) Objeto HugoBlox:          image: {caption: "..."} + archivo featured.jpg en la carpeta
+*/}}
+
+{{/* ── Resolver imagen ── */}}
+{{ $imgSrc := "" }}
+{{ with .Params.image }}
+  {{ if reflect.IsMap . }}
+    {{ with $.Resources.GetMatch "featured.*" }}
+      {{ $imgSrc = .RelPermalink }}
+    {{ end }}
+  {{ else }}
+    {{ $imgSrc = . }}
+  {{ end }}
+{{ end }}
+
+{{/* ── Tarjeta ── */}}
+<a href="{{ .RelPermalink }}" class="group block h-full">
+
+  <div class="bg-white/80 border border-gray-200 rounded-lg shadow
+              hover:shadow-lg transition-shadow duration-200
+              overflow-hidden flex flex-col h-full">
+
+    {{/* Imagen */}}
+    {{ if $imgSrc }}
+      <div class="overflow-hidden">
+        <img
+          src="{{ $imgSrc | absURL }}"
+          alt="{{ .Title }}"
+          class="w-full h-48 object-cover
+                 group-hover:scale-105 transition-transform duration-300"
+        >
+      </div>
+    {{ else }}
+      <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
+        <span class="text-4xl text-gray-300">📰</span>
+      </div>
+    {{ end }}
+
+    {{/* Texto */}}
+    <div class="p-4 flex flex-col flex-1">
+
+      <p class="text-xs text-gray-400 mb-2">
+        {{ .Date.Format "2 January 2006" }}
+      </p>
+
+      <h2 class="text-base font-semibold leading-snug mb-1
+                 group-hover:text-blue-700 transition-colors duration-200">
+        {{ .Title }}
+      </h2>
+
+      {{ with .Params.subtitle }}
+        <p class="text-sm text-gray-500 leading-snug">{{ . }}</p>
+      {{ end }}
+
+    </div>
+
+  </div>
+
+</a>
