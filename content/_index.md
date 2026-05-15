@@ -45,41 +45,16 @@ sections:
         padding: ['60px', '0', '60px', '0']
 
   # ─────────────────────────────────────────────────────────────
-  # 2. ÚLTIMAS NOTICIAS — 2 columnas, solo imagen y título
+  # 2. ÚLTIMAS NOTICIAS — blox personalizado
   # ─────────────────────────────────────────────────────────────
-  - block: collection
+  - block: news-grid
     id: noticias
-    content:
-      title: Últimas Noticias
-      subtitle: ''
-      text: ''
-      count: 4
-      filters:
-        folders:
-          - blog
-        exclude_featured: false
-      order: desc
-    design:
-      view: article-grid
-      columns: '2'
 
   # ─────────────────────────────────────────────────────────────
-  # 3. PRÓXIMO SEMINARIO (desde content/eventos)
+  # 3. PRÓXIMO SEMINARIO — blox personalizado
   # ─────────────────────────────────────────────────────────────
-  - block: collection
+  - block: evento-card
     id: seminario
-    content:
-      title: Próximo Seminario
-      subtitle: ''
-      text: ''
-      count: 1
-      filters:
-        folders:
-          - eventos
-      order: desc
-    design:
-      view: card
-      columns: '1'
 
   # ─────────────────────────────────────────────────────────────
   # 4. REDES SOCIALES — cuadro ancho al final

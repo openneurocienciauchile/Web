@@ -1,66 +1,79 @@
-{{/*
-  Override: layouts/partials/views/article-grid.html
-  Llamado por el bloque "collection" del homepage con view: article-grid
-  El contexto (.) es directamente una página de Hugo.
+{{ $page := .page | default . }}
 
-  Maneja dos formatos de imagen:
-    a) String plano (Pages CMS): image: /uploads/foto.jpg
-    b) Objeto HugoBlox:          image: {caption: "..."} + archivo featured.jpg en la carpeta
-*/}}
-
-{{/* ── Resolver imagen ── */}}
 {{ $imgSrc := "" }}
-{{ with .Params.image }}
-  {{ if reflect.IsMap . }}
-    {{ with $.Resources.GetMatch "featured.*" }}
-      {{ $imgSrc = .RelPermalink }}
+{{ with $page.Params.afiche }}
+  {{ $imgSrc = . | strings.TrimPrefix "/" }}
+{{ end }}
+{{ if not $imgSrc }}
+  {{ with $page.Params.image }}
+    {{ if not (reflect.IsMap .) }}
+      {{ $imgSrc = . | strings.TrimPrefix "/" }}
     {{ end }}
-  {{ else }}
-    {{ $imgSrc = . }}
   {{ end }}
 {{ end }}
 
-{{/* ── Tarjeta ── */}}
-<a href="{{ .RelPermalink }}" class="group block h-full">
+{{ $tipo := $page.Params.tipo }}
 
-  <div class="bg-white/80 border border-gray-200 rounded-lg shadow
-              hover:shadow-lg transition-shadow duration-200
-              overflow-hidden flex flex-col h-full">
+<div onclick="window.location='{{ $page.RelPermalink }}'"
+     style="background:white !important; border:1px solid #e5e7eb !important;
+            border-radius:8px !important; cursor:pointer !important;
+            display:block !important; overflow:hidden !important;">
 
-    {{/* Imagen */}}
-    {{ if $imgSrc }}
-      <div class="overflow-hidden">
-        <img
-          src="{{ $imgSrc | absURL }}"
-          alt="{{ .Title }}"
-          class="w-full h-48 object-cover
-                 group-hover:scale-105 transition-transform duration-300"
-        >
-      </div>
-    {{ else }}
-      <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
-        <span class="text-4xl text-gray-300">📰</span>
-      </div>
-    {{ end }}
+  {{ if $imgSrc }}
+    <img src="{{ printf "%s%s" site.BaseURL $imgSrc }}"
+         alt="{{ $page.Title }}"
+         style="width:100% !important; height:200px !important;
+                object-fit:cover !important; display:block !important; margin:0 !important;">
+  {{ else }}
+    <p style="height:200px !important; margin:0 !important; background:#f3f4f6 !important;
+              display:block !important; text-align:center !important;
+              line-height:200px !important; font-size:2.5rem !important; color:#9ca3af !important;">
+      {{ if $tipo }}📅{{ else }}📰{{ end }}
+    </p>
+  {{ end }}
 
-    {{/* Texto */}}
-    <div class="p-4 flex flex-col flex-1">
-
-      <p class="text-xs text-gray-400 mb-2">
-        {{ .Date.Format "2 January 2006" }}
+  {{ if $tipo }}
+    {{ if eq $tipo "seminario" }}
+      <p style="display:block !important; font-size:0.72rem !important; font-weight:700 !important;
+                color:#fff !important; background:rgba(0,51,102,0.85) !important;
+                margin:0.5rem 0 0 0.5rem !important; padding:0.2rem 0.6rem !important;
+                border-radius:999px !important; width:fit-content !important;">
+        Seminario
       </p>
+    {{ else }}
+      <p style="display:block !important; font-size:0.72rem !important; font-weight:700 !important;
+                color:#fff !important; background:rgba(192,39,45,0.85) !important;
+                margin:0.5rem 0 0 0.5rem !important; padding:0.2rem 0.6rem !important;
+                border-radius:999px !important; width:fit-content !important;">
+        Evento
+      </p>
+    {{ end }}
+  {{ end }}
 
-      <h2 class="text-base font-semibold leading-snug mb-1
-                 group-hover:text-blue-700 transition-colors duration-200">
-        {{ .Title }}
-      </h2>
+  <h2 style="font-size:0.95rem !important; font-weight:600 !important; color:#111827 !important;
+             display:block !important; padding:0.5rem 1rem 0.25rem !important; margin:0 !important;
+             line-height:1.3 !important;">
+    {{ if $page.Params.speaker }}{{ $page.Params.speaker }}
+    {{ else }}{{ $page.Title }}{{ end }}
+  </h2>
 
-      {{ with .Params.subtitle }}
-        <p class="text-sm text-gray-500 leading-snug">{{ . }}</p>
-      {{ end }}
+  {{ if $page.Params.fecha_hora }}
+    <p style="font-size:0.72rem !important; color:#9ca3af !important;
+              display:block !important; padding:0 1rem 0.25rem !important; margin:0 !important;">
+      📅 {{ $page.Params.fecha_hora }}
+    </p>
+  {{ else }}
+    <p style="font-size:0.72rem !important; color:#9ca3af !important;
+              display:block !important; padding:0 1rem 0.25rem !important; margin:0 !important;">
+      {{ $page.Date.Format "2 January 2006" }}
+    </p>
+  {{ end }}
 
-    </div>
+  {{ with $page.Params.subtitle }}
+    <p style="font-size:0.82rem !important; color:#6b7280 !important;
+              display:block !important; padding:0 1rem 1rem !important; margin:0 !important;">
+      {{ . }}
+    </p>
+  {{ end }}
 
-  </div>
-
-</a>
+</div>
