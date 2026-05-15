@@ -1,12 +1,10 @@
 {{ define "main" }}
 
-{{/* ── Cabecera de sección ── */}}
 <header class="ev-header">
   <div class="ev-header__inner">
     <span class="ev-header__eyebrow">Departamento de Neurociencia · UChile</span>
     <h1 class="ev-header__title">Eventos</h1>
     <p class="ev-header__sub">Seminarios y actividades del departamento</p>
-
     <div class="ev-filtros" role="group" aria-label="Filtrar eventos">
       <button class="ev-filtro ev-filtro--active" data-filter="all">Todos</button>
       <button class="ev-filtro" data-filter="seminario">Seminarios</button>
@@ -15,18 +13,18 @@
   </div>
 </header>
 
-{{/* ── Galería de afiches ── */}}
 <section class="ev-galeria">
   <div class="ev-grid" id="evGrid">
 
-    {{- range .Pages.ByDate.Reverse -}}
+    {{/* Mismo patrón que funciona en blog: busca en todo el sitio filtrado por sección */}}
+    {{- range where .Site.RegularPages "Section" "eventos" -}}
     <article class="ev-card" data-tipo="{{ .Params.tipo | default "seminario" }}">
       <a href="{{ .Permalink }}" class="ev-card__link"
          aria-label="Ver evento: {{ .Params.speaker | default .Title }}">
         <div class="ev-card__img-wrap">
           {{- if .Params.afiche -}}
           <img
-            src="{{ .Params.afiche | relURL }}"
+            src="{{ printf "%s%s" site.BaseURL (.Params.afiche | strings.TrimPrefix "/") }}"
             alt="Afiche del evento"
             loading="lazy"
             class="ev-card__img"
@@ -59,163 +57,58 @@
     </article>
     {{- end -}}
 
-    {{- if not .Pages -}}
-    <div class="ev-vacio">
-      <p>No hay eventos publicados aún.</p>
-    </div>
+    {{- if not (where .Site.RegularPages "Section" "eventos") -}}
+    <div class="ev-vacio"><p>No hay eventos publicados aún.</p></div>
     {{- end -}}
 
   </div>
 </section>
 
-{{/* ══════════════ ESTILOS ══════════════ */}}
 <style>
 :root {
-  --ev-azul:      #003366;
-  --ev-azul-lt:   #e8eef6;
-  --ev-rojo:      #c0272d;
-  --ev-gris-bg:   #f5f6f8;
-  --ev-radius:    6px;
+  --ev-azul: #003366; --ev-rojo: #c0272d;
+  --ev-gris-bg: #f5f6f8; --ev-radius: 6px;
   --ev-transition: 0.26s cubic-bezier(.4,0,.2,1);
 }
-
-/* Cabecera */
-.ev-header {
-  background: transparent;
-  color: #1a1a2e;
-  padding: 2.5rem 1.5rem 2rem;
-  text-align: center;
-}
-.ev-header__inner { max-width: 760px; margin: 0 auto; }
-.ev-header__eyebrow {
-  display: block;
-  font-size: .72rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: #6b7280;
-  margin-bottom: .55rem;
-}
-.ev-header__title {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  margin: 0 0 .35rem;
-  letter-spacing: -.02em;
-  color: #1a1a2e;
-}
-.ev-header__sub { font-size: .95rem; color: #6b7280; margin: 0 0 2rem; }
-
-/* Filtros */
-.ev-filtros { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; }
-.ev-filtro {
-  padding: .38rem 1.1rem;
-  border: 1.5px solid #003366;
-  border-radius: 999px;
-  background: transparent;
-  color: #003366;
-  font-size: .84rem;
-  cursor: pointer;
-  transition: background var(--ev-transition), border-color var(--ev-transition), color var(--ev-transition);
-}
-.ev-filtro:hover, .ev-filtro--active {
-  background: #003366;
-  color: #fff;
-  border-color: #003366;
-  font-weight: 600;
-}
-
-/* Galería */
-.ev-galeria { background: var(--ev-gris-bg); padding: 2.5rem 1.5rem 4rem; }
-.ev-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 1.4rem;
-}
-
-/* Tarjeta */
-.ev-card {
-  border-radius: var(--ev-radius);
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,.08);
-  transition: transform var(--ev-transition), box-shadow var(--ev-transition);
-}
-.ev-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 28px rgba(0,0,0,.14);
-}
-.ev-card.hidden { display: none; }
-
-.ev-card__link { display: block; position: relative; text-decoration: none; }
-
-.ev-card__img-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  background: #e8eaf0;
-}
-.ev-card__img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-  transition: transform var(--ev-transition);
-}
-.ev-card:hover .ev-card__img { transform: scale(1.04); }
-
-.ev-card__img-placeholder {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-}
-
-/* Badge */
-.ev-card__badge {
-  position: absolute; top: .55rem; left: .55rem;
-  padding: .22rem .65rem;
-  border-radius: 999px;
-  font-size: .68rem; font-weight: 700;
-  letter-spacing: .05em; text-transform: uppercase;
-  backdrop-filter: blur(4px);
-}
-.ev-card__badge--seminario { background: rgba(0,51,102,.85); color: #fff; }
-.ev-card__badge--evento    { background: rgba(192,39,45,.85);  color: #fff; }
-
-/* Overlay */
-.ev-card__overlay {
-  position: absolute; inset: 0;
-  background: rgba(0,25,60,.52);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: .45rem;
-  opacity: 0; transition: opacity var(--ev-transition);
-  color: #fff; font-size: .82rem; font-weight: 600;
-}
-.ev-card:hover .ev-card__overlay { opacity: 1; }
-
-/* Vacío */
-.ev-vacio {
-  grid-column: 1 / -1;
-  text-align: center; padding: 4rem;
-  color: #999; font-size: 1rem;
-}
-
-@media (max-width: 480px) {
-  .ev-grid { grid-template-columns: repeat(2, 1fr); gap: .75rem; }
-}
+.ev-header { background:transparent; color:#1a1a2e; padding:2.5rem 1.5rem 2rem; text-align:center; }
+.ev-header__inner { max-width:760px; margin:0 auto; }
+.ev-header__eyebrow { display:block; font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:#6b7280; margin-bottom:.55rem; }
+.ev-header__title { font-size:clamp(2rem,5vw,3rem); font-weight:700; margin:0 0 .35rem; letter-spacing:-.02em; color:#1a1a2e; }
+.ev-header__sub { font-size:.95rem; color:#6b7280; margin:0 0 2rem; }
+.ev-filtros { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; }
+.ev-filtro { padding:.38rem 1.1rem; border:1.5px solid #003366; border-radius:999px; background:transparent; color:#003366; font-size:.84rem; cursor:pointer; transition:background var(--ev-transition),color var(--ev-transition); }
+.ev-filtro:hover, .ev-filtro--active { background:#003366; color:#fff; font-weight:600; }
+.ev-galeria { background:var(--ev-gris-bg); padding:2.5rem 1.5rem 4rem; }
+.ev-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:1.4rem; }
+.ev-card { border-radius:var(--ev-radius); overflow:hidden; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.08); transition:transform var(--ev-transition),box-shadow var(--ev-transition); }
+.ev-card:hover { transform:translateY(-4px); box-shadow:0 8px 28px rgba(0,0,0,.14); }
+.ev-card.hidden { display:none; }
+.ev-card__link { display:block; position:relative; text-decoration:none; }
+.ev-card__img-wrap { position:relative; width:100%; aspect-ratio:3/4; overflow:hidden; background:#e8eaf0; }
+.ev-card__img { width:100%; height:100%; object-fit:cover; display:block; transition:transform var(--ev-transition); }
+.ev-card:hover .ev-card__img { transform:scale(1.04); }
+.ev-card__img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+.ev-card__badge { position:absolute; top:.55rem; left:.55rem; padding:.22rem .65rem; border-radius:999px; font-size:.68rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; backdrop-filter:blur(4px); }
+.ev-card__badge--seminario { background:rgba(0,51,102,.85); color:#fff; }
+.ev-card__badge--evento { background:rgba(192,39,45,.85); color:#fff; }
+.ev-card__overlay { position:absolute; inset:0; background:rgba(0,25,60,.52); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.45rem; opacity:0; transition:opacity var(--ev-transition); color:#fff; font-size:.82rem; font-weight:600; }
+.ev-card:hover .ev-card__overlay { opacity:1; }
+.ev-vacio { grid-column:1/-1; text-align:center; padding:4rem; color:#999; }
+@media (max-width:480px) { .ev-grid { grid-template-columns:repeat(2,1fr); gap:.75rem; } }
 </style>
 
-{{/* ══════════════ JS FILTRO ══════════════ */}}
 <script>
-(function () {
-  var btns  = document.querySelectorAll('.ev-filtro');
-  var cards = document.querySelectorAll('.ev-card');
-  btns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var f = btn.dataset.filter;
-      btns.forEach(function(b){ b.classList.remove('ev-filtro--active'); });
+(function(){
+  var btns=document.querySelectorAll('.ev-filtro');
+  var cards=document.querySelectorAll('.ev-card');
+  btns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var f=btn.dataset.filter;
+      btns.forEach(function(b){b.classList.remove('ev-filtro--active');});
       btn.classList.add('ev-filtro--active');
-      cards.forEach(function(card) {
-        var tipo = card.dataset.tipo || 'seminario';
-        card.classList.toggle('hidden', f !== 'all' && tipo !== f);
+      cards.forEach(function(card){
+        var tipo=card.dataset.tipo||'seminario';
+        card.classList.toggle('hidden',f!=='all'&&tipo!==f);
       });
     });
   });

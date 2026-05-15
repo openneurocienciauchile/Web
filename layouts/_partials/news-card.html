@@ -2,41 +2,57 @@
 {{ $imgSrc := "" }}
 {{ with .Params.image }}
   {{ if reflect.IsMap . }}
+    {{/* Formato HugoBlox: busca featured.jpg en la carpeta del post */}}
     {{ with $.Resources.GetMatch "featured.*" }}
       {{ $imgSrc = .RelPermalink }}
     {{ end }}
   {{ else }}
+    {{/* Formato Pages CMS: /uploads/foto.jpg → relURL maneja el subpath /Web/ */}}
     {{ $imgSrc = . }}
   {{ end }}
 {{ end }}
 
-{{/* ── Tarjeta ── */}}
+{{/* ── Tarjeta — alto total fijo ── */}}
 <a href="{{ .RelPermalink }}" class="group block">
 
-  <div class="bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition-shadow duration-200 overflow-hidden">
+  <div style="background:white; border:1px solid #e5e7eb; border-radius:8px;
+              box-shadow:0 1px 3px rgba(0,0,0,0.1); overflow:hidden;
+              transition:box-shadow 0.2s; height:320px;
+              display:flex; flex-direction:column;">
 
-    {{ if $imgSrc }}
-      <img
-        src="{{ $imgSrc | absURL }}"
-        alt="{{ .Title }}"
-        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-      >
-    {{ else }}
-      <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
-        <span class="text-4xl text-gray-300">📰</span>
-      </div>
-    {{ end }}
+    {{/* Imagen — 200px fijos */}}
+    <div style="width:100%; height:200px; flex-shrink:0; overflow:hidden;
+                background:#f3f4f6; display:flex; align-items:center; justify-content:center;">
+      {{ if $imgSrc }}
+        <img
+          src="{{ $imgSrc | relURL }}"
+          alt="{{ .Title }}"
+          style="width:100%; height:100%; object-fit:cover; display:block;"
+        >
+      {{ else }}
+        <span style="font-size:2.5rem; color:#d1d5db;">📰</span>
+      {{ end }}
+    </div>
 
-    <div class="p-4">
-      <p class="text-xs text-gray-400 mb-2">
+    {{/* Texto — resto de la tarjeta */}}
+    <div style="padding:0.85rem 1rem; flex:1; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-start;">
+
+      <p style="font-size:0.72rem; color:#9ca3af; margin:0 0 0.3rem; white-space:nowrap;">
         {{ .Date.Format "2 January 2006" }}
       </p>
-      <h2 class="text-base font-semibold leading-snug mb-1 group-hover:text-blue-700 transition-colors duration-200">
+
+      <h2 style="font-size:0.95rem; font-weight:600; line-height:1.3; margin:0 0 0.25rem; color:#111827;
+                 display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
         {{ .Title }}
       </h2>
+
       {{ with .Params.subtitle }}
-        <p class="text-sm text-gray-500 leading-snug">{{ . }}</p>
+        <p style="font-size:0.82rem; color:#6b7280; margin:0; line-height:1.35;
+                  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
+          {{ . }}
+        </p>
       {{ end }}
+
     </div>
 
   </div>
