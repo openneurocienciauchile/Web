@@ -25,7 +25,7 @@ content:
     label: Académicos
     type: collection
     path: content/academicos
-    filename: "{primary}/_index.md"
+    filename: "{primary}/index.md"
     format: yaml-frontmatter
     fields:
       - { name: title,  label: Nombre, type: string }
