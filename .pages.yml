@@ -39,6 +39,11 @@ content:
         type: list
         description: "Un tema por línea. Deben coincidir exactamente con los temas del apartado Temas (sin acentos, con guiones). Ej: neurodegeneracion, plasticidad-sinaptica"
       - { name: image, label: Foto, type: image }
+      # ✅ NUEVO: Biografía corta editable desde CMS
+      - name: bio
+        label: "Biografía"
+        type: rich-text
+        description: "Presentación del académico/a. Aparece como bloque desplegable en su perfil."
       - name: publicaciones
         label: Publicaciones
         type: list

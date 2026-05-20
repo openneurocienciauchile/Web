@@ -81,6 +81,25 @@
         {{ .Content }}
       </div>
 
+      <!-- 🟣 BIOGRAFÍA -->
+      {{ with .Params.bio }}
+      <div class="mb-6 border border-gray-300 rounded-lg overflow-hidden">
+
+        <button onclick="toggleSection('bio')"
+                class="w-full flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200">
+          <span class="font-semibold text-lg">Biografía</span>
+          <span id="icon-bio">▼</span>
+        </button>
+
+        <div id="bio" class="hidden p-4 bg-white">
+          <div class="prose max-w-none text-gray-700">
+            {{ . | markdownify }}
+          </div>
+        </div>
+
+      </div>
+      {{ end }}
+
 <!-- 🔵 PUBLICACIONES (CMS + ORCID) -->
 <div class="mb-6 border border-gray-300 rounded-lg overflow-hidden">
 
