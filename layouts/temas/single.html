@@ -1,8 +1,34 @@
 {{ define "main" }}
 
+{{/*
+  ─────────────────────────────────────────────────────────────────────────────
+  layouts/temas/single.html
+  Página individual de un tema de investigación.
+
+  Cambio principal respecto a la versión anterior:
+  Los académicos y laboratorios vinculados se resuelven DINÁMICAMENTE en tiempo
+  de build buscando todas las páginas del sitio cuyo campo `.Params.temas`
+  incluya el slug de este tema. Así no hay que mantener listas a mano en el
+  front matter de cada tema: basta con asignar el tema en el perfil del
+  académico o del laboratorio.
+  ─────────────────────────────────────────────────────────────────────────────
+*/}}
+
+{{/* Slug del tema actual (coincide con el nombre de la carpeta en content/temas/) */}}
+{{ $slug := path.Base (strings.TrimSuffix "/" .RelPermalink) }}
+
+{{/* ── Académicos cuyo campo temas contiene este slug ── */}}
+{{ $academicos := where .Site.RegularPages "Params.temas" "intersect" (slice $slug) }}
+{{/* Filtramos solo las páginas de la sección "academicos" por si otros tipos también usan temas */}}
+{{ $academicos = where $academicos "Section" "academicos" }}
+
+{{/* ── Laboratorios cuyo campo temas contiene este slug ── */}}
+{{ $labs := where .Site.Pages "Params.temas" "intersect" (slice $slug) }}
+{{ $labs = where $labs "Section" "laboratorios" }}
+
 <div class="container mx-auto px-4 py-12 max-w-4xl">
 
-  {{/* Breadcrumb back to list */}}
+  {{/* Breadcrumb */}}
   <nav class="nuro-breadcrumb" aria-label="Volver">
     <a href="{{ "/temas/" | relURL }}" class="nuro-back-link">← Todos los temas</a>
   </nav>
@@ -23,30 +49,50 @@
       {{ end }}
     </header>
 
-    {{/* Main content from the markdown body */}}
+    {{/* Contenido Markdown del _index.md */}}
     <div class="nuro-tema-content prose">
       {{ .Content }}
     </div>
 
-    {{/* Related academics (if front matter includes academicos list) */}}
-    {{ with .Params.academicos }}
+    {{/* ── Académicos vinculados (calculado en build, no en front matter) ── */}}
+    {{ if $academicos }}
     <section class="nuro-tema-related" aria-label="Académicos relacionados">
       <h2 class="nuro-related-title">Académicos en este tema</h2>
       <ul class="nuro-related-list">
-        {{ range . }}
-        <li>{{ . }}</li>
+        {{ range $academicos }}
+        <li>
+          <a class="nuro-related-link" href="{{ .RelPermalink }}">
+            {{ with .Params.image }}
+            <img class="nuro-related-avatar"
+                 src="{{ . | relURL }}"
+                 alt="Foto de {{ $.Title }}"
+                 loading="lazy" />
+            {{ end }}
+            <span class="nuro-related-info">
+              <strong>{{ .Title }}</strong>
+              {{ with .Params.role }}<small>{{ . }}</small>{{ end }}
+            </span>
+          </a>
+        </li>
         {{ end }}
       </ul>
     </section>
     {{ end }}
 
-    {{/* Related labs (if front matter includes labs list) */}}
-    {{ with .Params.labs }}
+    {{/* ── Laboratorios vinculados (calculado en build) ── */}}
+    {{ if $labs }}
     <section class="nuro-tema-related" aria-label="Laboratorios relacionados">
       <h2 class="nuro-related-title">Laboratorios en este tema</h2>
       <ul class="nuro-related-list">
-        {{ range . }}
-        <li>{{ . }}</li>
+        {{ range $labs }}
+        <li>
+          <a class="nuro-related-link" href="{{ .RelPermalink }}">
+            <span class="nuro-related-info">
+              <strong>{{ .Title }}</strong>
+              {{ with .Params.acronimo }}<small>{{ . }}</small>{{ end }}
+            </span>
+          </a>
+        </li>
         {{ end }}
       </ul>
     </section>
@@ -60,15 +106,13 @@
 .nuro-breadcrumb { margin-bottom: 2rem; }
 
 .nuro-back-link {
-  font-size: .85rem;
+  font-size: .75rem;
   font-weight: 500;
   color: #003478;
   text-decoration: none;
   letter-spacing: .02em;
   text-transform: uppercase;
-  font-size: .75rem;
 }
-
 .nuro-back-link:hover { text-decoration: underline; }
 
 .nuro-tema-single-header {
@@ -76,14 +120,12 @@
   padding-bottom: 1.5rem;
   border-bottom: 1px solid rgba(0,0,0,.08);
 }
-
 .nuro-tema-single-title {
   font-size: 2rem;
   font-weight: 500;
   margin: 0 0 1rem;
   line-height: 1.2;
 }
-
 .nuro-tema-single-summary {
   font-size: 1.05rem;
   color: #555;
@@ -91,60 +133,54 @@
   margin: 0 0 1rem;
 }
 
-.nuro-tema-tags {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
+.nuro-tema-tags { list-style:none; margin:0; padding:0; display:flex; gap:6px; flex-wrap:wrap; }
 .nuro-tag {
   font-size: .72rem;
-  background: rgba(0, 52, 120, .06);
+  background: rgba(0,52,120,.06);
   color: #003478;
-  border: 1px solid rgba(0, 52, 120, .15);
+  border: 1px solid rgba(0,52,120,.15);
   padding: 2px 8px;
   border-radius: 4px;
 }
 
-.nuro-tema-content {
-  max-width: 68ch;
-  line-height: 1.8;
-  color: #333;
-}
+.nuro-tema-content { max-width: 68ch; line-height: 1.8; color: #333; }
 
+/* ── Related section ── */
 .nuro-tema-related {
   margin-top: 3rem;
   padding-top: 2rem;
   border-top: 1px solid rgba(0,0,0,.08);
 }
-
 .nuro-related-title {
-  font-size: 1rem;
+  font-size: .8rem;
   font-weight: 500;
   margin: 0 0 1rem;
   text-transform: uppercase;
   letter-spacing: .04em;
-  font-size: .8rem;
   color: #888;
 }
-
-.nuro-related-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.nuro-related-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.75rem; }
+.nuro-related-link {
   display: flex;
-  flex-direction: column;
-  gap: .5rem;
+  align-items: center;
+  gap: .75rem;
+  text-decoration: none;
+  color: inherit;
 }
-
-.nuro-related-list li {
-  font-size: .95rem;
-  color: #333;
+.nuro-related-link:hover strong { color: #003478; }
+.nuro-related-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,.1);
 }
+.nuro-related-info { display:flex; flex-direction:column; }
+.nuro-related-info strong { font-size: .95rem; }
+.nuro-related-info small  { font-size: .8rem; color: #777; }
 
+/* ── Dark mode ── */
 @media (prefers-color-scheme: dark) {
   .nuro-back-link { color: #7ba8d8; }
   .nuro-tema-single-header { border-color: rgba(255,255,255,.08); }
@@ -152,7 +188,8 @@
   .nuro-tag { background: rgba(123,168,216,.1); border-color: rgba(123,168,216,.2); color: #7ba8d8; }
   .nuro-tema-content { color: #ccc; }
   .nuro-tema-related { border-color: rgba(255,255,255,.08); }
-  .nuro-related-list li { color: #bbb; }
+  .nuro-related-info small { color: #888; }
+  .nuro-related-link:hover strong { color: #7ba8d8; }
 }
 </style>
 

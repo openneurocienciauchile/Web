@@ -2,6 +2,10 @@ media:
   input: static/uploads
   output: /uploads
 
+# ── Definición reutilizable de opciones de temas ──────────────────────────────
+# (Pages CMS no soporta anchors YAML nativos, así que repetimos el bloque
+#  en cada colección. Copia-pega si añades un nuevo tema.)
+
 content:
 
 # ── Noticias ────────────────────────────────────────────────────────────
@@ -19,7 +23,7 @@ content:
       - { name: summary,  label: "Resumen (SEO/preview)", type: text,    description: "Solo para buscadores. No aparece en la tarjeta." }
       - { name: image,    label: "Imagen de portada",     type: image }
       - { name: body,     label: "Contenido",             type: rich-text }
-      
+
   # ── Académicos ────────────────────────────────────────────────────────────
   - name: academicos
     label: Académicos
@@ -34,13 +38,23 @@ content:
       - { name: email,  label: Email,  type: string }
       - { name: orcid,       label: ORCID,                    type: string, description: "Ej: 0000-0002-1825-0097" }
       - { name: portafolio, label: "Portafolio académico UChile", type: string, description: "URL completa, ej: https://portafolio.uchile.cl/perfil/..." }
-      # ✅ CORREGIDO: antes se llamaba "topics", ahora "temas" para conectar con la taxonomía
+      # ✅ SELECT MÚLTIPLE: impide crear temas nuevos por error tipográfico
       - name: temas
-        label: Áreas de investigación
-        type: list
-        description: "Un tema por línea. Deben coincidir exactamente con los temas del apartado Temas (sin acentos, con guiones). Ej: neurodegeneracion, plasticidad-sinaptica"
+        label: "Áreas de investigación"
+        type: select
+        multiple: true
+        description: "Selecciona uno o más temas existentes. Los valores deben coincidir con las carpetas de content/temas/."
+        options:
+          - { label: "Neurobiología Molecular y Celular",    value: "neurobiologia-molecular-celular" }
+          - { label: "Neurociencia Computacional e IA",      value: "neurociencia-computacional-ia" }
+          - { label: "Neuromodulación y Control Motor",      value: "neuromodulacion-control-motor" }
+          - { label: "Otoneurología y Audición",             value: "otoneurologia-audicion" }
+          - { label: "Envejecimiento y Neurodegeneración",   value: "envejecimiento-neurodegeneracion" }
+          - { label: "Neurociencia del Desarrollo",          value: "neurociencia-desarrollo" }
+          - { label: "Neuropsicología y Cognición",          value: "neuropsicologia-cognicion" }
+          - { label: "Neurología Clínica y Traslacional",    value: "neurologia-clinica-traslacional" }
+          - { label: "Neurociencia Cognitiva y Comportamiento", value: "neurociencia-cognitiva-comportamiento" }
       - { name: image, label: Foto, type: image }
-      # ✅ NUEVO: Biografía corta editable desde CMS
       - name: bio
         label: "Biografía"
         type: rich-text
@@ -74,12 +88,22 @@ content:
       - { name: acronimo, label: "Acrónimo o nombre corto",         type: string }
       - { name: summary,  label: "Descripción breve (2-3 líneas)",  type: text }
       - { name: image,    label: "Imagen del laboratorio",          type: image }
-      # ✅ YA ESTABA CORRECTO: se llama "temas" ✓
+      # ✅ SELECT MÚLTIPLE: misma lógica que en académicos
       - name: temas
         label: "Áreas de investigación"
-        type: list
-        description: "Un tema por línea. Deben coincidir exactamente con los temas del apartado Temas (sin acentos, con guiones)."
-        hint: "Valores posibles: neurobiologia-molecular-celular, neurociencia-computacional-ia, neuromodulacion-control-motor, otoneurologia-audicion, envejecimiento-neurodegeneracion, neurociencia-desarrollo, neuropsicologia-cognicion, neurologia-clinica-traslacional"
+        type: select
+        multiple: true
+        description: "Selecciona uno o más temas existentes."
+        options:
+          - { label: "Neurobiología Molecular y Celular",    value: "neurobiologia-molecular-celular" }
+          - { label: "Neurociencia Computacional e IA",      value: "neurociencia-computacional-ia" }
+          - { label: "Neuromodulación y Control Motor",      value: "neuromodulacion-control-motor" }
+          - { label: "Otoneurología y Audición",             value: "otoneurologia-audicion" }
+          - { label: "Envejecimiento y Neurodegeneración",   value: "envejecimiento-neurodegeneracion" }
+          - { label: "Neurociencia del Desarrollo",          value: "neurociencia-desarrollo" }
+          - { label: "Neuropsicología y Cognición",          value: "neuropsicologia-cognicion" }
+          - { label: "Neurología Clínica y Traslacional",    value: "neurologia-clinica-traslacional" }
+          - { label: "Neurociencia Cognitiva y Comportamiento", value: "neurociencia-cognitiva-comportamiento" }
       - name: directores
         label: "Directores (IPs)"
         type: list
@@ -119,15 +143,25 @@ content:
       - { name: zoom_id,     label: "ID Zoom",                     type: string }
       - { name: zoom_pass,   label: "Contraseña Zoom",             type: string }
       - { name: summary,     label: "Resumen breve (SEO)",         type: text }
-      # ✅ CORREGIDO: antes se llamaba "tags", ahora "temas"
+      # ✅ SELECT MÚLTIPLE: misma lógica
       - name: temas
         label: "Temas"
-        type: list
-        description: "Un tema por línea. Deben coincidir exactamente con los temas del apartado Temas (sin acentos, con guiones). Ej: memoria, sueno, vision"
+        type: select
+        multiple: true
+        description: "Selecciona uno o más temas existentes."
+        options:
+          - { label: "Neurobiología Molecular y Celular",    value: "neurobiologia-molecular-celular" }
+          - { label: "Neurociencia Computacional e IA",      value: "neurociencia-computacional-ia" }
+          - { label: "Neuromodulación y Control Motor",      value: "neuromodulacion-control-motor" }
+          - { label: "Otoneurología y Audición",             value: "otoneurologia-audicion" }
+          - { label: "Envejecimiento y Neurodegeneración",   value: "envejecimiento-neurodegeneracion" }
+          - { label: "Neurociencia del Desarrollo",          value: "neurociencia-desarrollo" }
+          - { label: "Neuropsicología y Comportamiento",     value: "neurociencia-cognitiva-comportamiento" }
+          - { label: "Neurología Clínica y Traslacional",    value: "neurologia-clinica-traslacional" }
+          - { label: "Neuropsicología y Cognición",          value: "neuropsicologia-cognicion" }
       - { name: body, label: "Descripción completa", type: rich-text }
 
   # ── Temas ─────────────────────────────────────────────────────────────────
-  # ✅ NUEVO: permite crear y editar páginas de temas desde Pages CMS
   - name: temas
     label: Temas
     type: collection
@@ -137,6 +171,7 @@ content:
     fields:
       - { name: title,   label: "Nombre del tema (se muestra en la página)", type: string }
       - { name: summary, label: "Descripción breve (aparece en la lista de temas)", type: text }
+      - { name: weight,  label: "Orden (número menor = primero en la lista)", type: number }
       - name: body
         label: "Descripción larga (opcional)"
         type: rich-text
