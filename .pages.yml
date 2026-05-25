@@ -32,7 +32,8 @@ content:
       - { name: role,   label: Cargo,  type: string }
       - { name: degree, label: Grado,  type: string }
       - { name: email,  label: Email,  type: string }
-      - { name: orcid,  label: ORCID,  type: string, description: "Ej: 0000-0002-1825-0097" }
+      - { name: orcid,       label: ORCID,                    type: string, description: "Ej: 0000-0002-1825-0097" }
+      - { name: portafolio, label: "Portafolio académico UChile", type: string, description: "URL completa, ej: https://portafolio.uchile.cl/perfil/..." }
       # ✅ CORREGIDO: antes se llamaba "topics", ahora "temas" para conectar con la taxonomía
       - name: temas
         label: Áreas de investigación
