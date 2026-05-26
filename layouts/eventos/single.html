@@ -19,7 +19,7 @@
 
     {{- if .Params.afiche -}}
     <div class="evs-afiche-wrap">
-      <img src="{{ .Params.afiche }}"
+      <img src="{{ printf "%s%s" site.BaseURL (.Params.afiche | strings.TrimPrefix "/") }}"
            alt="Afiche del evento"
            class="evs-afiche-img" />
     </div>
