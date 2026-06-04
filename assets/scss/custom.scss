@@ -154,3 +154,192 @@ nav.navbar {
     }
   }
 }
+
+/* ================================================================
+   REDISEÑO HOME — Hero + Áreas de investigación
+   (Añadido por rediseño "científico moderno". Paleta de marca:
+    azul #1C4599 · cian #16C8E6 · gris #66656A)
+   ================================================================ */
+
+:root {
+  --neuro-blue: #1C4599;
+  --neuro-cyan: #16C8E6;
+  --neuro-ink:  #0A1230;
+  --neuro-mist: #F4F7FC;
+  --neuro-mist2:#EAF0FA;
+  --neuro-text: #0C1530;
+  --neuro-muted:#5C6781;
+  --neuro-line: rgba(10, 18, 48, .10);
+}
+
+/* ── Fondo del sitio limpio (reemplaza el degradado rojo/azul) ── */
+html, body {
+  background: #ffffff !important;
+  background-attachment: scroll !important;
+}
+
+/* ── Animación de aparición al hacer scroll ── */
+html.js .rv { opacity: 0; transform: translateY(22px); transition: .7s cubic-bezier(.2,.7,.2,1); }
+html.js .rv.in { opacity: 1; transform: none; }
+
+/* ─────────────── HERO ─────────────── */
+#hero-neuro {
+  position: relative;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+  background: var(--neuro-ink);
+}
+#hero-neuro .container,
+#hero-neuro .prose,
+#hero-neuro [class*="max-w"] {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin: 0 !important;
+}
+
+.hero-neuro-inner {
+  position: relative;
+  min-height: 86vh;
+  display: flex;
+  align-items: center;
+  padding: 150px 0 112px;
+  background-image:
+    linear-gradient(118deg, rgba(9,16,42,.95), rgba(22,52,130,.80) 46%, rgba(12,26,70,.50)),
+    url('/Web/uploads/frontis.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+.hero-neuro-inner::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(720px 380px at 84% 8%, rgba(22,200,230,.18), transparent 60%);
+  z-index: 1;
+}
+.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .5; z-index: 1; }
+.hero-seal {
+  position: absolute; right: -30px; top: 50%; transform: translateY(-50%);
+  height: 120%; width: auto; opacity: .10; z-index: 0; pointer-events: none;
+}
+.hero-neuro-content {
+  position: relative; z-index: 2;
+  max-width: 1180px; width: 100%;
+  margin: 0 auto; padding: 0 28px;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+.hero-neuro-content .eyebrow {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: .86rem; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--neuro-cyan); margin: 0;
+}
+.hero-neuro-content h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2.3rem, 5.2vw, 4rem); font-weight: 600;
+  line-height: 1.12; letter-spacing: -.02em;
+  margin: 16px 0 0; max-width: 16ch; color: #fff;
+  text-shadow: 0 2px 30px rgba(6,12,30,.45);
+}
+.hero-neuro-content h1 .glow {
+  background: linear-gradient(100deg, var(--neuro-cyan), #5C8DFF);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-neuro-content .lead {
+  margin: 20px 0 0; max-width: 56ch;
+  font-size: 1.1rem; font-weight: 300; color: rgba(255,255,255,.9);
+}
+.hero-cta { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
+.btn-neuro {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 26px; border-radius: 10px;
+  font-family: 'Sora', sans-serif; font-weight: 500; font-size: .96rem;
+  text-decoration: none; border: 1px solid transparent;
+  transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+}
+.btn-neuro svg { width: 18px; height: 18px; }
+.btn-neuro.btn-primary {
+  background: linear-gradient(135deg, var(--neuro-blue), var(--neuro-cyan));
+  color: #fff; box-shadow: 0 14px 34px -12px rgba(28,69,153,.8);
+}
+.btn-neuro.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 42px -12px rgba(22,200,230,.7); }
+.btn-neuro.btn-ghost { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.42); color: #fff; }
+.btn-neuro.btn-ghost:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); }
+
+/* ─────────────── ÁREAS DE INVESTIGACIÓN ─────────────── */
+#temas-home {
+  position: relative;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: var(--neuro-mist);
+}
+#temas-home .container,
+#temas-home .prose,
+#temas-home [class*="max-w"] {
+  max-width: 100% !important; width: 100% !important;
+  padding-left: 0 !important; padding-right: 0 !important; margin: 0 !important;
+}
+.temas-wrap {
+  max-width: 1180px; margin: 0 auto; padding: 92px 28px;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+.temas-wrap .shead {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px; margin-bottom: 44px; flex-wrap: wrap;
+}
+.temas-wrap .eyebrow {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: .86rem; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--neuro-blue); margin: 0;
+}
+.temas-wrap h2 {
+  font-family: 'Sora', sans-serif; font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -.02em;
+  margin: 8px 0 0; color: var(--neuro-text);
+}
+.temas-wrap .shead-sub { color: var(--neuro-muted); max-width: 52ch; margin: 8px 0 0; font-size: 1rem; }
+.link-more {
+  font-family: 'Sora', sans-serif; font-weight: 500; font-size: .92rem;
+  color: var(--neuro-blue); display: inline-flex; align-items: center; gap: 7px;
+  white-space: nowrap; text-decoration: none;
+}
+.link-more svg { width: 17px; height: 17px; transition: transform .2s ease; }
+.link-more:hover svg { transform: translateX(4px); }
+
+.temas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.tcard {
+  display: block; background: #fff; border: 1px solid var(--neuro-line);
+  border-radius: 14px; padding: 26px 24px; text-decoration: none;
+  position: relative; overflow: hidden;
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.tcard::before {
+  content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 100%;
+  background: linear-gradient(90deg, var(--neuro-blue), var(--neuro-cyan));
+  transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+}
+.tcard:hover { transform: translateY(-5px); box-shadow: 0 18px 50px -22px rgba(15,28,70,.35); border-color: transparent; }
+.tcard:hover::before { transform: scaleX(1); }
+.tico {
+  display: flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; border-radius: 12px;
+  background: var(--neuro-mist2); color: var(--neuro-blue); transition: .28s;
+}
+.tico svg { width: 24px; height: 24px; }
+.tcard:hover .tico { background: linear-gradient(135deg, var(--neuro-blue), var(--neuro-cyan)); color: #fff; }
+.th3 {
+  display: block; font-family: 'Sora', sans-serif; font-weight: 600;
+  font-size: 1.06rem; color: var(--neuro-text); margin: 18px 0 8px; line-height: 1.2;
+}
+.tp { display: block; font-size: .9rem; color: var(--neuro-muted); line-height: 1.55; }
+
+@media (max-width: 900px) {
+  .temas-grid { grid-template-columns: 1fr 1fr; }
+  .hero-seal { opacity: .06; }
+  .hero-neuro-inner { min-height: 72vh; }
+}
+@media (max-width: 600px) {
+  .temas-grid { grid-template-columns: 1fr; }
+  .hero-neuro-inner { padding: 120px 0 80px; min-height: 0; }
+}
