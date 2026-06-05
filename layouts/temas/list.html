@@ -9,33 +9,31 @@
     {{ with .Content }}<div class="nuro-temas-intro">{{ . }}</div>{{ end }}
   </header>
 
-  {{/* ── Nube de temas (animada). Tamaño = nº de académicos en el área ── */}}
-  <nav class="nuro-cloud" aria-label="Áreas temáticas de investigación">
-    {{ range $i, $page := .Pages }}
-      {{ $slug := path.Base (strings.TrimSuffix "/" $page.RelPermalink) }}
-      {{ $count := len (where (where site.RegularPages "Section" "academicos") "Params.temas" "intersect" (slice $slug)) }}
-      {{ $size := printf "%.2f" (add 1.30 (mul (float $count) 0.13)) }}
+  {{/* ── Nube de temas (TAXONOMÍA VIVA). Cualquier tema usado en cualquier ── */}}
+  {{/* ── ficha/noticia/lab aparece solo aquí. Tamaño = nº de páginas.      ── */}}
+  {{ $terms := site.Taxonomies.temas.ByCount }}
+  {{ if $terms }}
+  <nav class="nuro-cloud" aria-label="Temas de investigación">
+    {{ range $i, $t := $terms }}
+      {{ $size := printf "%.2f" (add 1.20 (mul (float $t.Count) 0.16)) }}
       {{ $cls := index (slice "nuro-cloud-a" "nuro-cloud-b" "nuro-cloud-c") (mod $i 3) }}
-      {{ $delay := printf "%.2f" (mul (float $i) 0.5) }}
+      {{ $delay := printf "%.2f" (mul (float $i) 0.35) }}
       {{ $dur := printf "%.2f" (add 6.5 (mul (float (mod $i 3)) 1.2)) }}
       {{ $vo := mul (sub (int (mod $i 5)) 2) 14 }}
-      <a class="nuro-cloud-item" href="{{ $page.RelPermalink }}"
-         title="{{ $count }} académico{{ if ne $count 1 }}s{{ end }}"
+      {{ $title := $t.Term }}
+      {{ $url := "" }}
+      {{ with $t.Page }}{{ $title = .Title }}{{ $url = .RelPermalink }}{{ end }}
+      <a class="nuro-cloud-item" href="{{ $url }}"
+         title="{{ $t.Count }} página{{ if ne $t.Count 1 }}s{{ end }}"
          style="animation-delay:{{ $delay }}s; animation-duration:{{ $dur }}s; margin-top:{{ $vo }}px;">
-        <span class="nuro-cloud-word {{ $cls }}" style="font-size:{{ $size }}rem;">{{ $page.Title }}</span>
+        <span class="nuro-cloud-word {{ $cls }}" style="font-size:{{ $size }}rem;">{{ $title }}</span>
       </a>
-      {{ with $page.Params.tags }}
-        {{ range $j, $t := . }}
-          {{ $td := printf "%.2f" (add (mul (float $i) 0.5) (mul (float (add $j 1)) 0.35)) }}
-          {{ $tdur := printf "%.2f" (add 7.0 (mul (float (mod (add $i $j) 3)) 1.1)) }}
-          {{ $tvo := mul (sub (int (mod (add $i $j) 4)) 2) 9 }}
-          <span class="nuro-cloud-item nuro-cloud-tag"
-                style="animation-delay:{{ $td }}s; animation-duration:{{ $tdur }}s; margin-top:{{ $tvo }}px;">{{ $t }}</span>
-        {{ end }}
-      {{ end }}
     {{ end }}
   </nav>
-  <p class="nuro-cloud-hint">El tamaño de cada área refleja cuántos académicos investigan en ella. Haz clic para explorarla.</p>
+  <p class="nuro-cloud-hint">El tamaño refleja cuántas páginas usan cada tema. Los temas se crean solos al etiquetar académicos, laboratorios, noticias o eventos.</p>
+  {{ else }}
+  <p class="nuro-cloud-hint">Aún no hay temas asignados. Etiqueta académicos o noticias y aparecerán aquí automáticamente.</p>
+  {{ end }}
 
 </div>
 
@@ -70,17 +68,11 @@
 .nuro-cloud-b{ color:#16C8E6; }
 .nuro-cloud-c{ color:#8FB6FF; }
 .nuro-cloud-item:hover .nuro-cloud-word{ transform:scale(1.12); color:#fff; text-shadow:0 6px 26px rgba(22,200,230,.55); }
-.nuro-cloud-tag{
-  font-family:'IBM Plex Sans',sans-serif; font-weight:400; font-size:.82rem;
-  color:rgba(255,255,255,.34); user-select:none;
-}
 .nuro-cloud-hint{ text-align:center; color:#8a93a8; font-size:.82rem; margin:1rem 0 0; }
 
 @keyframes nuro-float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
 
-@media (prefers-reduced-motion: reduce){
-  .nuro-cloud-item{ animation:none !important; }
-}
+@media (prefers-reduced-motion: reduce){ .nuro-cloud-item{ animation:none !important; } }
 @media (max-width:600px){
   .nuro-cloud{ padding:2.5rem 1rem; gap:.2rem 1.1rem; min-height:50vh; }
 }
