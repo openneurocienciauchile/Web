@@ -92,15 +92,27 @@
               Centros y afiliación
             </h3>
             <ul class="text-sm text-gray-700 space-y-1.5">
-              {{ range . }}
-                <li>
-                  {{ if .url }}
-                    <a href="{{ .url }}" class="text-blue-600 hover:underline">{{ .texto }}</a>
+              {{ if reflect.IsSlice . }}
+                {{/* Lista: puede ser de objetos {texto,url,rol} o de strings simples */}}
+                {{ range . }}
+                  {{ if reflect.IsMap . }}
+                    <li>
+                      {{ if .url }}
+                        <a href="{{ .url }}" class="text-blue-600 hover:underline">{{ .texto }}</a>
+                      {{ else }}
+                        {{ .texto }}
+                      {{ end }}
+                      {{ with .rol }}<span class="text-gray-500"> — {{ . }}</span>{{ end }}
+                    </li>
                   {{ else }}
-                    {{ .texto }}
+                    <li>{{ . }}</li>
                   {{ end }}
-                  {{ with .rol }}<span class="text-gray-500"> — {{ . }}</span>{{ end }}
-                </li>
+                {{ end }}
+              {{ else }}
+                {{/* Texto plano (ej. guardado por el CMS): una afiliación por línea */}}
+                {{ range (split (trim (printf "%v" .) "\n") "\n") }}
+                  {{ with (trim . " ") }}<li>{{ . }}</li>{{ end }}
+                {{ end }}
               {{ end }}
             </ul>
           </div>
