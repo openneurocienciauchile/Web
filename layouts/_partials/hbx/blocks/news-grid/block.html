@@ -2,15 +2,15 @@
 
 {{ $posts := where site.RegularPages "Section" "blog" }}
 
-<section id="noticias" style="padding:1.5rem 0 2rem;">
+<section id="noticias" style="padding:0.75rem 0 2rem;">
   <div class="container mx-auto px-6">
 
     <h2 style="font-size:1.45rem; font-weight:700; color:#1a1a2e; margin:0 0 1.25rem;">
       Últimas Noticias
     </h2>
 
-    <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1rem;">
-      {{ range first 4 $posts }}
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1.25rem;">
+      {{ range first 3 $posts }}
         {{ partial "news-card.html" . }}
       {{ end }}
     </div>

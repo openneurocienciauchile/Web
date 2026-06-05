@@ -42,6 +42,9 @@ sections:
   # ─────────────────────────────────────────────────────────────
   - block: news-grid
     id: noticias
+    design:
+      spacing:
+        padding: ['0', '0', '0', '0']
 
   # ─────────────────────────────────────────────────────────────
   # 4. PRÓXIMO SEMINARIO — blox personalizado (sin cambios)
