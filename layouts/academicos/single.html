@@ -85,6 +85,27 @@
           </div>
         {{ end }}
 
+        <!-- Centros y afiliación (con links a labs) -->
+        {{ with .Params.afiliacion }}
+          <div class="mt-4">
+            <h3 class="text-black text-sm font-semibold mb-2">
+              Centros y afiliación
+            </h3>
+            <ul class="text-sm text-gray-700 space-y-1.5">
+              {{ range . }}
+                <li>
+                  {{ if .url }}
+                    <a href="{{ .url }}" class="text-blue-600 hover:underline">{{ .texto }}</a>
+                  {{ else }}
+                    {{ .texto }}
+                  {{ end }}
+                  {{ with .rol }}<span class="text-gray-500"> — {{ . }}</span>{{ end }}
+                </li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ end }}
+
       </div>
 
     </div>
@@ -275,18 +296,27 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>
       {{ end }}
 
-      <!-- VIDEO -->
-      {{ with .Params.video }}
+      <!-- AUTOPRESENTACIÓN (YouTube, autoplay muteado + loop) -->
+      {{ with .Params.youtube }}
+      {{ $id := . }}
+      {{ $id = replaceRE `^https?://(www\.)?youtu\.be/` "" $id }}
+      {{ $id = replaceRE `^https?://(www\.)?youtube\.com/(watch\?v=|embed/|shorts/)` "" $id }}
+      {{ $id = replaceRE `[?&].*$` "" $id }}
       <div class="mt-10 border-t pt-6">
 
         <h2 class="text-xl font-semibold mb-4">
-          Entrevista
+          Autopresentación
         </h2>
 
-        <iframe class="w-full h-64 rounded"
-          src="{{ . }}"
-          allowfullscreen>
-        </iframe>
+        <div class="relative w-full overflow-hidden rounded" style="aspect-ratio:16/9;">
+          <iframe class="absolute inset-0 w-full h-full"
+            src="https://www.youtube.com/embed/{{ $id }}?autoplay=1&mute=1&loop=1&playlist={{ $id }}&playsinline=1&rel=0&modestbranding=1"
+            title="Autopresentación de {{ $.Title }}"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
 
       </div>
       {{ end }}
