@@ -31,6 +31,7 @@ sections:
               <a class="neuro-btn neuro-btn-ghost" href="/Web/temas/">Áreas de investigación</a>
             </div>
           </div>
+          <a class="neuro-hero-scroll" href="#noticias" aria-label="Ir a Noticias"><span>Noticias</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
         </div>
     design:
       spacing:
