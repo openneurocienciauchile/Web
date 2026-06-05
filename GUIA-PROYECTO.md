@@ -1,162 +1,143 @@
 # Guía de Proyecto — Sitio Web · Departamento de Neurociencia, U. de Chile
 
-> **Qué es este archivo.** Una guía viva del proyecto del sitio web, pensada para
-> dar contexto a Claude (u otra IA) y retomar el trabajo en cualquier momento sin
-> tener que reexplicar todo. Se actualiza a medida que el proyecto avanza.
+> **Qué es este archivo.** Guía viva del proyecto del sitio web, para dar contexto a
+> Claude (u otra IA) y retomar el trabajo sin reexplicar todo. Se mantiene al día.
 >
-> **Cómo usarlo.** Al empezar una sesión, cargar/compartir este archivo y pedir a
-> la IA que lo lea primero. Mantener al día las secciones de *Avances*, *Roadmap*
-> y *Registro de cambios*.
->
-> **Nota de privacidad.** Este repositorio es PÚBLICO. No incluir aquí secretos,
-> tokens, contraseñas ni datos personales sensibles. Solo documentación de proyecto.
+> **Privacidad.** El repositorio es PÚBLICO. No incluir secretos, tokens ni datos
+> personales sensibles — solo documentación del proyecto.
 
 Última actualización: 2026-06-04
 
 ---
 
-## 1. Resumen del proyecto
+## 1. Resumen
 
-- **Objetivo:** rediseñar y poner en valor el sitio web del Departamento de
-  Neurociencia de la Facultad de Medicina de la Universidad de Chile.
-- **Naturaleza:** sitio institucional multi-página, multi-editor, con CMS para que
-  personas sin perfil técnico puedan publicar (noticias, eventos, etc.).
-- **Dirección de diseño aprobada:** "científico moderno" — base oscura sofisticada,
-  frontis real de la Facultad, red neuronal animada, acentos vivos azul→cian,
-  secciones limpias.
+Rediseño y mejora del sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile).
+Sitio institucional, multi-página, multi-editor (con CMS). Identidad de diseño aprobada:
+"científico moderno" — fondo azul oscuro, frontis de la Facultad, red neuronal animada,
+acentos azul→cian, logo oficial blanco. La navbar es continua con el azul del hero.
 
 ## 2. Stack y dónde vive
 
-- **Generador:** Hugo (sitio estático) con el tema **Hugo Blox** (módulos de Go;
-  base `HugoBlox/kit/templates/academic-cv`).
-- **Repositorio:** `https://github.com/openneurocienciauchile/Web` (público).
-- **Sitio en vivo:** `https://openneurocienciauchile.github.io/Web/`
-  (GitHub Pages, servido bajo el path `/Web/`).
-- **Deploy:** vía GitHub Actions, **solo al hacer push/merge a `main`**
-  (workflows `deploy.yml` y `hugo.yml`). Las demás ramas NO publican.
-  Un PR hacia `main` dispara solo un build de validación (`build.yml`), sin desplegar.
+- **Hugo + Hugo Blox** (Hugo Blox Kit 0.11.0; **Tailwind CSS v4**). Módulos de Go.
+- **Repo:** github.com/openneurocienciauchile/Web (público).
+- **En vivo:** https://openneurocienciauchile.github.io/Web/ (GitHub Pages, bajo `/Web/`).
+- **Deploy:** GitHub Actions, **solo al hacer push/merge a `main`**. Otras ramas no publican;
+  un PR a `main` solo corre el build de validación.
+- **Build local:** requiere Node + `npm install` (instala el CLI de Tailwind) y luego
+  `npm run dev` (= `hugo server --disableFastRender`). El binario `tailwindcss` es
+  imprescindible; sin él, el build falla.
 
-## 3. Estructura relevante del repo
+## 3. Lecciones técnicas clave (¡importantes!)
 
-- `content/_index.md` — home (secciones tipo "blocks" de Hugo Blox).
-- `content/temas/<slug>/` — 9 áreas temáticas (contenido real).
-- `content/academicos/`, `content/laboratorios/`, `content/quienes-somos/`,
-  `content/eventos/`, `content/blog/` (noticias), `content/formacion/`, `content/contactos/`.
-- `assets/scss/custom.scss` — estilos personalizados del sitio.
-- `layouts/_partials/hooks/head-end/custom.html` — se inyecta al `<head>`
-  (fuentes, scripts globales, inyección de íconos sociales en la navbar).
-- `layouts/_partials/hbx/blocks/{news-grid,evento-card}/block.html` — bloques propios.
-- `layouts/_partials/blocks/quienes-somos.html` — partial propio.
-- `layouts/_partials/header.html` — área de marca/navbar (⚠ ver Problemas conocidos).
-- `static/uploads/` — imágenes servibles por URL (logos, frontis, fotos, etc.).
-- `.pages.yml` — configuración del CMS (Pages CMS) para edición no técnica.
+- **El tema NO carga `assets/scss/custom.scss`** (usa Tailwind v4, no el pipeline SCSS).
+  → Todo el CSS personalizado del rediseño va en un `<style>` dentro de
+  `layouts/_partials/hooks/head-end/custom.html` (que sí se inyecta). Clases con prefijo
+  `neuro-` para no chocar con Bootstrap/Tailwind (`.btn`, `.lead`, etc.).
+- **La navbar la dibuja el tema:** `<header id="site-header">` con `.navbar-brand` (logo,
+  desde `assets/media/logo.svg`) y `.nav-link` (menú). Se restiliza por CSS en el head-end.
+- **Los PNG "fondo-oscuro" del kit traen el negro HORNEADO** (no son transparentes).
+  Para usarlos sobre el azul hay que convertir la luminancia en canal alfa (negro→transparente).
+  Así se generó el `logo.svg` blanco transparente del navbar.
+- La IA del entorno de trabajo **no puede compilar Hugo** (proxy de módulos bloqueado):
+  el preview local (`npm run dev`) o el build del PR es el validador final. **Previsualizar
+  SIEMPRE antes de mergear a `main`.**
 
-## 4. Diagnóstico inicial (estado base del sitio)
+## 4. Estrategia Git
 
-Lo que funciona bien:
-- Infraestructura real: bloques propios, workflows de deploy, CMS configurado.
-- Arquitectura de contenido coherente: 9 áreas temáticas, secciones institucionales.
+- `main` — producción; **solo aquí se despliega**.
+- `Respaldo_Manual_20260603` — copia congelada del estado base. No tocar.
+- Ramas de trabajo: se crea **una rama nueva desde `main`** por cada tanda de cambios,
+  se aplica el parche (`git am`), se previsualiza, se sube y se mergea por PR.
+- La IA no hace push; entrega **parches `.patch`** numerados que se aplican con `git am`.
+- (Ramas viejas `Claude_HBK_Attempt_20260603` y `chore/upgrade-hugoblox-*` se pueden limpiar.)
 
-Lo que falta / conviene corregir (pendiente salvo que se marque hecho):
-- **Contenido demo del template aún publicado:** académico de prueba (`academicos/AP`),
-  `projects/` (pandas/pytorch/scikit), `publications/` demo, `courses/hugo-blox/`,
-  `slides/example/`, noticias/eventos de prueba, `laboratorios/Lab Prueba`.
-- **Idioma del sitio en inglés:** `hugo.yaml` con `defaultContentLanguage: en` y
-  `languages.yaml` solo `en` (en-us). El contenido es español → debería ser `es`.
-- **Identidad vacía:** `params.yaml` `identity.name: " "` → `og:title`/`og:site_name`
-  salen en blanco al compartir.
-- **Carpetas con espacios** en algunos bundles (URLs/feas, posibles problemas de build).
-- **`og:image` apunta a `.svg`** (no renderiza en WhatsApp/LinkedIn → mejor PNG/JPG).
-- **`README.md`** sigue siendo el de marketing del template.
+## 5. Identidad de marca
 
-## 5. Decisiones de diseño y marca
+- **Color:** azul #1C4599 · cian #16C8E6 · gris #66656A · tinta #0A1230.
+- **Tipografías:** Sora (títulos), IBM Plex Sans (cuerpo), Roboto Condensed (rótulos).
+- **Logo:** kit oficial en `logos_neurociencia_uchile` (horizontal claro/oscuro, escudo,
+  favicons, íconos app). En navbar/footer se usa el horizontal blanco (transparentado).
+- **Favicons:** del kit, en `static/uploads/` + `<link>` en el head.
 
-- **Paleta de marca:** azul **#1C4599** · cian (acento vivo) **#16C8E6** ·
-  gris **#66656A**. Tinta oscura de fondo ~#0A1230.
-- **Tipografías:** Sora (títulos), IBM Plex Sans (cuerpo), Roboto Condensed
-  (rótulos/etiquetas, en eco al logo). Cargadas vía el hook `head-end`.
-- **Kit de logos** (provisto por el equipo, carpeta `logos_neurociencia_uchile`):
-  - horizontal fondo-claro / fondo-oscuro (+HD); escudo azul/blanco/gris;
-    favicons (16/32/48/180/512/.ico); íconos de app.
-  - Tipografía del logo: Roboto Condensed. El escudo es raster (para gran formato
-    convendría un SVG vectorial a futuro).
-- **Hero:** frontis de la Facultad + degradado azul + red neuronal animada (canvas).
-- **Navbar (objetivo):** transparente sobre el hero, logo blanco, se vuelve sólida
-  azul/navy al hacer scroll (sin franja blanca). *Pendiente — etapa 2.*
+## 6. Estado actual (qué hay en producción)
 
-## 6. Estrategia Git
+- ✅ **Etapa 1 — Hero + grilla de áreas.** (Rehecha: el CSS vive en head-end, no en SCSS.)
+- ✅ **Etapa 2 — Navbar continua azul + logo blanco oficial + favicons.** En producción.
+- 🔄 **Etapa 3 — Ajustes de home (EN CURSO):**
+  - Texto del hero más sobrio, que refleja una comunidad amplia repartida en facultades,
+    sedes y hospitales + red de colaboradores; neurociencia básica y clínica; tradición e
+    innovación al servicio de la salud. (Basado en "Quiénes Somos".)
+  - **Nodos de la red neuronal más visibles** (mayor opacidad/contraste).
+  - **TEMAS eliminado del home** (los íconos de áreas gustaron — reservarlos para reuso).
+  - **Noticias como primer contenido** del home + indicador "Noticias ↓" en el hero.
 
-Ramas:
-- `main` — rama de producción; **solo aquí se despliega**. No se toca hasta aprobar.
-- `Respaldo_Manual_20260603` — copia congelada del estado base. **No tocar.**
-- `Claude_HBK_Attempt_20260603` — **rama de trabajo** del rediseño.
-- `chore/upgrade-hugoblox-*` — ramas automáticas del workflow de actualización del
-  tema (se pueden limpiar a futuro; no estorban).
+## 7. Diagnóstico del sitio completo (pendientes detectados)
 
-Flujo de trabajo acordado (la IA no hace push; entrega parches):
-1. La IA prepara cambios sobre la rama de trabajo y entrega un **parche** (`.patch`).
-2. Aplicar con `git am <archivo>.patch` estando en la rama de trabajo.
-3. Previsualizar con `hugo server` (recomendado, porque la IA no puede compilar Hugo).
-4. `git push` a la rama de trabajo → abrir PR a `main` (build de validación).
-5. Revisar el preview; cuando esté conforme, merge a `main` (recién ahí se publica).
+**Contenido demo del template aún presente:** académico de prueba (`academicos/AP`),
+`projects/` (pandas/pytorch/scikit), `publications/` demo, `courses/hugo-blox/`,
+`slides/example/`, noticias/eventos de prueba, `laboratorios/Lab Prueba`.
 
-## 7. Avances
+**Configuración:** idioma del sitio en inglés (`defaultContentLanguage: en` → debería `es`);
+identidad vacía (`identity.name: " "` → og:title/site_name en blanco); `og:image` apunta a un
+SVG; `README.md` es el del template.
 
-- **2026-06-04 — Etapa 1 (hero + áreas de investigación):** parche
-  `01-rediseno-home-hero-temas.patch`.
-  - `content/_index.md`: nuevos bloques `markdown` `hero-neuro` y `temas-home`
-    (noticias, seminario y redes sin cambios).
-  - `assets/scss/custom.scss`: paleta de marca, estilos de hero y grilla de temas,
-    animación de aparición al scroll, fondo del sitio limpio (reemplaza el degradado
-    rojo/azul previo).
-  - `layouts/_partials/hooks/head-end/custom.html`: fuentes + script de red neuronal;
-    se conserva la inyección de íconos sociales.
-  - `static/uploads/`: `logo-neurociencia-blanco.png`, `escudo-blanco.png`, `frontis.jpg`.
-  - Estado: parche entregado; **pendiente de aplicar/preview/merge**.
+**Arquitectura de información / menú** (a decidir en conjunto): el menú actual es
+Quiénes somos · Académicos · Labs · Temas · Noticias · Eventos · Formación · Contacto.
+Preguntas abiertas: ¿"Labs" → "Laboratorios"? ¿qué pasa con "Temas" (se elimina del menú o se
+reformula)? ¿"Noticias" y "Eventos" separados o juntos? ¿orden? ¿qué subpáginas cuelgan de cada
+sección y con qué título? → esto define títulos de pestañas, breadcrumbs y URLs.
 
-## 8. Roadmap (por etapas)
+**Re-skin pendiente:** las secciones "Últimas Noticias" y "Próximo Seminario" del home aún usan
+el estilo viejo del blox; falta llevarlas a la estética nueva (tarjetas azul→cian, tipografías).
 
-- **Etapa 1 — Hero + áreas de investigación.** *(entregada, por aplicar)*
-- **Etapa 2 — Navbar + re-skin de Noticias y Seminario** a la nueva estética
-  (requiere preview en vivo por tocar internals del tema).
-- **Etapa 3 — Limpieza de contenido demo** del template.
-- **Etapa 4 — Configuración:** idioma `es`, identidad del sitio, SEO (`og:image`),
-  favicons instalados (`static/`), corregir `README`.
-- **Etapa 5 — Poblar contenido real:** académicos, laboratorios, fichas de temas.
+**Páginas internas:** revisar que hereden la identidad visual (encabezados, tipografías,
+espaciados) ahora que la navbar es global.
+
+**Deuda técnica:** `layouts/_partials/header.html` está roto (CSS dentro de HTML) y parece sin
+uso; hay **dos workflows de deploy** (`deploy.yml` y `hugo.yml`) que conviene unificar; ramas
+`chore/upgrade-hugoblox-*` acumuladas; `custom.scss` quedó muerto (se puede vaciar/limpiar).
+
+## 8. Roadmap por etapas (actualizado)
+
+- ✅ **1.** Hero + áreas (rehecha).
+- ✅ **2.** Navbar azul + logo blanco + favicons.
+- 🔄 **3.** Home: hero sobrio, nodos más visibles, quitar Temas, noticias primero.
+- **4. Arquitectura de información / menú:** revisar y fijar títulos, secciones, orden,
+  subpáginas y URLs (incluye decidir el futuro de "Temas" y dónde reusar sus íconos).
+- **5. Re-skin de Noticias y Seminario** del home a la estética nueva.
+- **6. Limpieza de contenido demo** del template.
+- **7. Configuración:** idioma `es`, identidad del sitio, SEO (`og:image`), `README`.
+- **8. Poblar contenido real:** académicos, laboratorios, "Quiénes somos", contacto.
+- **9. Páginas internas:** aplicar identidad visual coherente en todas las secciones.
+- **10. Limpieza técnica:** `header.html`, unificar workflows de deploy, vaciar `custom.scss`,
+  podar ramas viejas.
 
 ## 9. Convenciones técnicas
 
-- El sitio se sirve bajo `/Web/`. Las rutas internas y de assets usan ese prefijo
-  (p. ej. `/Web/uploads/frontis.jpg`, `/Web/temas/<slug>/`). Si cambia el `baseURL`,
-  revisar estas rutas.
-- Patrón de diseño usado: secciones nuevas como **bloques `markdown` con HTML**,
-  estilos en `custom.scss` (scoping por `id` de bloque, p. ej. `#hero-neuro`,
-  `#temas-home`), fuentes y JS global en el hook `head-end`.
-- Imágenes servibles por URL → `static/uploads/`. Imágenes procesadas por el tema →
-  `assets/media/`.
-- Animación de aparición: clase `.rv` en elementos; el script les agrega `.in`.
+- El sitio se sirve bajo `/Web/`; rutas internas y assets usan ese prefijo
+  (`/Web/uploads/...`, `/Web/temas/...`). Si cambia el `baseURL`, revisarlas.
+- Secciones del home: bloques `markdown` con HTML + clases `neuro-` + CSS en el head-end.
+  Full-bleed con técnica 100vw.
+- Imágenes servibles por URL → `static/uploads/`. Procesadas por el tema → `assets/media/`.
+- Aparición al scroll: clase `.neuro-rv` (el script del head-end les agrega `.in`).
+- Logo del navbar: `assets/media/logo.svg` (el tema lo inyecta inline).
 
-## 10. Problemas conocidos / deuda técnica
+## 10. Cómo retomar con una IA
 
-- `layouts/_partials/header.html` tiene **CSS pegado dentro del HTML** (bug); apunta a
-  `/uploads/logo.png`. Revisar/arreglar en la etapa de navbar.
-- Hay **dos workflows de deploy** (`deploy.yml` y `hugo.yml`) que se disparan en `main`
-  con el mismo grupo de concurrencia `pages` → conviene dejar uno solo a futuro.
-- Customizaciones de navbar repartidas entre `header.html`, inyección por JS en
-  `head-end` y reglas `!important` en `custom.scss` → consolidar al rediseñar la navbar.
-- Múltiples ramas `chore/upgrade-hugoblox-*` acumuladas.
+1. Leer este archivo primero.
+2. Ubicar la etapa actual (§6 y §8).
+3. Respetar git: rama nueva desde `main`, parches, preview antes de mergear, no tocar respaldo.
+4. Recordar §3 (Tailwind, CSS en head-end, logos con fondo horneado, no se puede compilar Hugo
+   en el entorno IA → preview local manda).
 
-## 11. Cómo retomar con una IA
+## 11. Registro de cambios
 
-1. Compartir/cargar este archivo y pedir que lo lea antes de actuar.
-2. Indicar en qué etapa estamos (ver *Avances* y *Roadmap*).
-3. Recordar las reglas de seguridad git: trabajar en `Claude_HBK_Attempt_20260603`,
-   no tocar `main` ni el respaldo, entrega por parches, deploy solo al merge.
-4. La IA en este entorno **no puede compilar Hugo** (los módulos del tema se bajan de
-   un proxy de Go bloqueado); por eso el preview local/PR es el validador final.
-
-## 12. Registro de cambios
-
-- **2026-06-04** — Creación de la guía. Definida dirección de diseño "científico
-  moderno", paleta e tipografías de marca. Creadas ramas de respaldo y de trabajo.
-  Entregada Etapa 1 (hero + áreas de investigación) como parche.
+- **2026-06-04 (3)** — Etapa 3 en curso: hero con texto sobrio (identidad de comunidad amplia),
+  nodos más visibles, Temas fuera del home, Noticias como primer contenido + indicador. Plan
+  por etapas actualizado tras revisión completa del sitio.
+- **2026-06-04 (2)** — Etapas 1 y 2 en producción (merge a `main`). Navbar continua azul con
+  logo blanco oficial (transparentado) y favicons. Documentadas lecciones: el tema usa Tailwind
+  (CSS va en head-end), y los PNG "fondo-oscuro" del kit traen el negro horneado.
+- **2026-06-04 (1)** — Creación de la guía. Dirección de diseño "científico moderno", paleta y
+  tipografías. Ramas de respaldo y trabajo. Primer intento de Etapa 1.
