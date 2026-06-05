@@ -6,5 +6,9 @@ degree: Doctor en Medicina, mención en Otología y Neuro-otología, Universidad
 email: hbreinbauer@uchile.cl
 orcid: https://orcid.org/0000-0002-3278-065X
 portafolio: https://portafolio-academico.uchile.cl/perfil/61324-Hayo-Andr%C3%A9s-Breinbauer-Krebs
+temas:
+  - otoneurologia-audicion
+  - neurologia-clinica-traslacional
+  - neurociencia-cognitiva
 image: /uploads/HB-1.jpg
 ---

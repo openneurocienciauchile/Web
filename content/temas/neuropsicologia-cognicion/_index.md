@@ -10,7 +10,6 @@ num_academicos: 0
 weight: 70
 date: 2026-01-01
 ---
-New-Item -ItemType Directory -Force -Path "content\temas\neuropsicologia-cognicion" | Out-Null
 ## Descripción
 
 La neuropsicología conecta la ciencia básica del cerebro con la práctica clínica, buscando comprender cómo las funciones mentales superiores emergen de la actividad cerebral y cómo pueden verse afectadas por daño neurológico, enfermedad o factores del desarrollo. Este tema articula investigación orientada tanto a describir los perfiles cognitivos de distintas condiciones como a diseñar e implementar intervenciones de rehabilitación.

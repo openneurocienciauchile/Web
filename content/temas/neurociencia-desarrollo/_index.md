@@ -10,8 +10,6 @@ num_academicos: 0
 weight: 60
 date: 2026-01-01
 ---
-New-Item -ItemType Directory -Force -Path "content\temas\neurociencia-desarrollo" | Out-Null
-Set-Content -Path "content\temas\neurociencia-desarrollo\index.md" -Value $c -Encoding UTF8
 ## Descripción
 
 El sistema nervioso es uno de los órganos más complejos en términos de desarrollo: miles de tipos celulares deben generarse, migrar, conectarse y refinarse con precisión milimétrica a lo largo de décadas. Este tema reúne investigadores que estudian los mecanismos que guían ese proceso y las consecuencias cuando algo sale mal, con aplicaciones directas en trastornos del neurodesarrollo como el autismo, el TDAH y la discapacidad intelectual.

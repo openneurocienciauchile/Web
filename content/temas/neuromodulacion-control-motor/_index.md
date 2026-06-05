@@ -10,8 +10,6 @@ num_academicos: 0
 weight: 30
 date: 2026-01-01
 ---
-New-Item -ItemType Directory -Force -Path "content\temas\neuromodulacion-control-motor" | Out-Null
-Set-Content -Path "content\temas\neuromodulacion-control-motor\index.md" -Value $c -Encoding UTF8
 ## Descripción
 
 El control motor involucra una red distribuida de estructuras cerebrales —corteza motora, ganglios basales, cerebelo, médula espinal— que trabajan coordinadamente para producir movimiento preciso y adaptativo. Este tema reúne investigadores que estudian tanto los mecanismos fundamentales del control motor como el desarrollo de estrategias de neuromodulación para tratar trastornos como la enfermedad de Parkinson, el temblor esencial, la espasticidad y las lesiones medulares.

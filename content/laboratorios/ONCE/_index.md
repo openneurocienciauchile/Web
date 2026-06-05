@@ -4,7 +4,9 @@ acronimo: LAB ONCE
 summary: Investigamos los trastornos del sistema vestibular y auditivo,
   integrando neurociencia básica con práctica clínica en vértigo, equilibrio y
   audición.
-temas: otoneurologia-audicion, neurologia-clinica-traslacional
+temas:
+  - otoneurologia-audicion
+  - neurologia-clinica-traslacional
 sitio_web: http://www.labonce.cl
 date: 2024-05-01
 draft: false

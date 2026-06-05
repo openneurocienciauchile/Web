@@ -40,8 +40,12 @@
             {{ end }}
           </ul>
           {{ end }}
-          {{ with $page.Params.num_academicos }}
+          {{ $slug := path.Base (strings.TrimSuffix "/" $page.RelPermalink) }}
+          {{ $acad := where (where site.RegularPages "Section" "academicos") "Params.temas" "intersect" (slice $slug) }}
+          {{ with len $acad }}
+          {{ if gt . 0 }}
           <span class="nuro-tema-count">{{ . }} académico{{ if gt . 1 }}s{{ end }}</span>
+          {{ end }}
           {{ end }}
         </div>
       </div>
