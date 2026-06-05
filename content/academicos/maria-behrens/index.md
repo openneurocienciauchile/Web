@@ -6,6 +6,9 @@ temas:
   - neurologia-clinica-traslacional
   - neuropsicologia-cognicion
 draft: false
+orcid: "https://orcid.org/0000-0003-0964-426X"
+portafolio: "https://portafolio-academico.uchile.cl/perfil/6936-Maria-Isabel-Ofelia-Behrens-Pellegrino"
+image: "/uploads/maria-behrens.jpg"
 ---
 
 Neurología cognitiva; demencias y Alzheimer; mecanismos moleculares de la neurodegeneración; relación inversa entre cáncer y Alzheimer; investigación traslacional (ensayo de vacuna TRIMELVax en deterioro cognitivo leve).

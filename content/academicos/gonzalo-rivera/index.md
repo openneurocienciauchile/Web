@@ -6,6 +6,9 @@ temas:
   - neurologia-clinica-traslacional
   - neuromodulacion-control-motor
 draft: false
+orcid: "https://orcid.org/0000-0002-8157-4086"
+portafolio: "https://portafolio-academico.uchile.cl/perfil/44376-Gonzalo-Bernardo-Rivera-Lillo"
+image: "/uploads/gonzalo-rivera.jpg"
 ---
 
 Neurokinesiología y neurorrehabilitación; desórdenes severos de conciencia; traumatismo encéfalo-craneano (enlentecimiento psicomotor); aprendizaje sensoriomotor; EEG. Colaboración con la U. de Cambridge.

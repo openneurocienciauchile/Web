@@ -5,6 +5,8 @@ temas:
   - neurobiologia-molecular-celular
   - envejecimiento-neurodegeneracion
 draft: false
+portafolio: "https://portafolio-academico.uchile.cl/perfil/3590-Maria-Cecilia-Margarita-Hidalgo-Tapia"
+image: "/uploads/maria-hidalgo.jpg"
 ---
 
 Señalización de calcio en neuronas (receptores de rianodina); plasticidad sináptica, memoria y aprendizaje; estrés oxidativo en envejecimiento y Alzheimer; calcio en músculo esquelético y cardíaco.

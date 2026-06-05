@@ -6,6 +6,9 @@ temas:
   - neurobiologia-molecular-celular
   - neurociencia-computacional-ia
 draft: false
+orcid: "https://orcid.org/0000-0002-0466-7561"
+portafolio: "https://portafolio-academico.uchile.cl/perfil/99143-Andrea-Cristina-Paula-Lima-"
+image: "/uploads/andrea-paula.jpg"
 ---
 
 Enfermedad de Alzheimer; plasticidad sináptica y memoria; oligómeros de β-amiloide; señalización de calcio (receptores de rianodina), ROS y disfunción mitocondrial; memoria espacial; diagnóstico diferencial depresión vs. Alzheimer con IA (proyecto ADDAi).

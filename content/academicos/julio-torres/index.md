@@ -6,6 +6,8 @@ temas:
   - neuromodulacion-control-motor
   - neurologia-clinica-traslacional
 draft: false
+orcid: "https://orcid.org/0000-0003-2645-9170"
+portafolio: "https://portafolio-academico.uchile.cl/perfil/26315-Julio-Rodrigo-Torres-Elgueta"
 ---
 
 Neurorrehabilitación y control motor; neurokinesiología (docente del Diploma de Neurociencia Clínica y Neurorrehabilitación).

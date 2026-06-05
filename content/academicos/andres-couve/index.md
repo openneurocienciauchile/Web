@@ -5,6 +5,7 @@ email: "andrecouve@med.uchile.cl"
 temas:
   - neurobiologia-molecular-celular
 draft: false
+portafolio: "https://portafolio-academico.uchile.cl/perfil/16073-Andres-Oscar-Couve-Correa"
 ---
 
 Relación entre estructura y función neuronal; tráfico y función de receptores (p. ej. GABA-B); biología celular de la neurona.

@@ -6,6 +6,9 @@ temas:
   - neurociencia-desarrollo
   - neurobiologia-molecular-celular
 draft: false
+orcid: "https://orcid.org/0000-0002-8847-4969"
+portafolio: "https://portafolio-academico.uchile.cl/perfil/41799-Patricio-Alejandro-Olguin-Aguilera"
+image: "/uploads/patricio-olguin.jpg"
 ---
 
 Genética del desarrollo con Drosophila melanogaster; interacción gen-ambiente en el desarrollo cerebral, la conducta y la enfermedad de Parkinson; nutrición temprana, genes del desarrollo, sueño y cerebro; citoesqueleto y mecanotransducción.

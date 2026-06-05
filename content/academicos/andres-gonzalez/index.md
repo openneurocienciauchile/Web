@@ -4,6 +4,7 @@ role: "Profesor Asistente"
 temas:
   - neurobiologia-molecular-celular
 draft: false
+portafolio: "https://portafolio-academico.uchile.cl/perfil/49507-Andres-Enrique-Gonzalez-Gutierrez"
 ---
 
 Neurobiología celular y molecular; fisiología neuronal.

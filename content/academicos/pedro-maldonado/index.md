@@ -5,6 +5,8 @@ temas:
   - neurociencia-cognitiva
   - neurociencia-computacional-ia
 draft: false
+portafolio: "https://portafolio-academico.uchile.cl/perfil/13379-Pedro-Esteban-Maldonado-Arbogast"
+image: "/uploads/pedro-maldonado.jpg"
 ---
 
 Mecanismos neuronales de la percepción visual; percepción activa (cómo los actos motores modulan la percepción); pupila y estados atencionales; inteligencia artificial inspirada en el cerebro.

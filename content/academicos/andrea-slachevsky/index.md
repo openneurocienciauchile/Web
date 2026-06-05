@@ -6,6 +6,8 @@ temas:
   - neuropsicologia-cognicion
   - neurologia-clinica-traslacional
 draft: false
+orcid: "https://orcid.org/0000-0001-6285-3189"
+portafolio: "https://portafolio-academico.uchile.cl/perfil/16580-Andrea-Maria-Slachevsky-Chonchol"
 ---
 
 Neurología cognitiva y neuropsicología; demencias y enfermedad de Alzheimer; envejecimiento cognitivo; evaluación de funciones ejecutivas; carga y costo de las demencias; políticas públicas en demencia.

@@ -5,6 +5,7 @@ temas:
   - neurociencia-desarrollo
   - neurociencia-cognitiva
 draft: false
+portafolio: "https://portafolio-academico.uchile.cl/perfil/44197-Andrea-Veronica-Helo-Herrera"
 ---
 
 Psicolingüística; desarrollo del vocabulario y aprendizaje de palabras en la infancia; rol del control atencional en el lenguaje; lenguaje y atención visual en niños con Trastorno del Desarrollo del Lenguaje (TEL); eye-tracking; comprensión lectora.

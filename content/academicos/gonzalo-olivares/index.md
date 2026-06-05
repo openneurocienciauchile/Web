@@ -7,6 +7,7 @@ temas:
   - neurociencia-desarrollo
   - envejecimiento-neurodegeneracion
 draft: false
+portafolio: "https://portafolio-academico.uchile.cl/perfil/46884-Gonzalo-Alberto-Olivares-Herane"
 ---
 
 Envejecimiento; procesamiento alternativo de mRNAs en el desarrollo y las enfermedades; genética de comportamientos complejos; Drosophila como modelo; modelos de la enfermedad de Parkinson (medicina de precisión); biología de células madre adultas.

@@ -5,6 +5,9 @@ temas:
   - neurologia-clinica-traslacional
   - neuropsicologia-cognicion
 draft: false
+orcid: "https://orcid.org/0000-0002-9682-5327"
+portafolio: "https://portafolio-academico.uchile.cl/perfil/42066-Pablo-Arturo-Gaspar-Ramos"
+image: "/uploads/pablo-gaspar.jpg"
 ---
 
 Esquizofrenia y psicosis; detección e intervención temprana en alto riesgo de psicosis; biomarcadores (EEG, oculografía, resonancia magnética); cognición social; psiquiatría traslacional.

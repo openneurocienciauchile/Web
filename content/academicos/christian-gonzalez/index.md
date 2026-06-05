@@ -7,6 +7,8 @@ temas:
   - neurociencia-desarrollo
   - envejecimiento-neurodegeneracion
 draft: false
+orcid: "https://orcid.org/0000-0003-0335-1482"
+portafolio: "https://portafolio-academico.uchile.cl/perfil/32791-Christian-Enrique-Gonzalez-Billault"
 ---
 
 Citoesqueleto neuronal; diferenciación y polaridad neuronal; guía axonal y migración neuronal; envejecimiento / gerociencia; biología redox; comunicación neurona–astrocito y senescencia.

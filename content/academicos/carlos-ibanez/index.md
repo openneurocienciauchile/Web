@@ -4,6 +4,7 @@ role: "Profesor Asociado"
 temas:
   - neurologia-clinica-traslacional
 draft: false
+portafolio: "https://portafolio-academico.uchile.cl/perfil/50485-Carlos-Francisco-Ibanez-Pina"
 ---
 
 Adicciones; salud mental; psiquiatría; marcadores y respuesta a tratamiento en trastornos psiquiátricos.

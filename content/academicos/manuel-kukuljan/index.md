@@ -5,6 +5,7 @@ temas:
   - neurobiologia-molecular-celular
   - neurociencia-desarrollo
 draft: false
+portafolio: "https://portafolio-academico.uchile.cl/perfil/22127-Manuel-Arturo-Kukuljan-Padilla"
 ---
 
 Electrofisiología y canales iónicos; función y desarrollo sináptico; bases celulares de la función neuronal.

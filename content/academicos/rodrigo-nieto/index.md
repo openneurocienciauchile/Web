@@ -6,6 +6,8 @@ temas:
   - neurologia-clinica-traslacional
   - neuropsicologia-cognicion
 draft: false
+portafolio: "https://portafolio-academico.uchile.cl/perfil/24681-Rodrigo-Antonio-Nieto-Rojas"
+image: "/uploads/rodrigo-nieto.jpg"
 ---
 
 Psiquiatría y neurociencias; biomarcadores en trastornos neuropsiquiátricos (moleculares, metabolómicos, lipidómicos, epigenéticos, inflamatorios); esquizofrenia (remediación cognitiva, neuroplasticidad).
