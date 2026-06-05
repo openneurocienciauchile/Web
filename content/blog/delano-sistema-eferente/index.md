@@ -1,10 +1,15 @@
 ---
-title: "Cómo el cerebro decide qué escuchar: el sistema auditivo eferente bajo la lupa"
-subtitle: "El laboratorio del Prof. Paul Délano avanza en entender el control córtico-coclear y su vínculo con la atención y la cognición"
+title: "Cómo el cerebro decide qué escuchar: el sistema auditivo eferente bajo
+  la lupa"
+subtitle: El laboratorio del Prof. Paul Délano avanza en entender el control
+  córtico-coclear y su vínculo con la atención y la cognición
 date: 2026-05-28
 draft: false
-summary: "Investigación del Departamento sobre cómo el cerebro modula la audición a través del sistema eferente y su relación con el deterioro cognitivo."
+summary: Investigación del Departamento sobre cómo el cerebro modula la audición
+  a través del sistema eferente y su relación con el deterioro cognitivo.
 image: /uploads/noticia-delano.jpg
+temas:
+  - Tinnitus
 ---
 Escuchar no es un proceso pasivo. Mucho antes de que un sonido llegue a la conciencia, el cerebro ya está ajustando, filtrando y priorizando lo que entra por el oído. Ese control descendente —del cerebro hacia la cóclea— es el foco del trabajo que dirige el **Prof. Paul Délano** en el Departamento de Neurociencia.
 
