@@ -10,7 +10,6 @@ num_academicos: 0
 weight: 50
 date: 2026-01-01
 ---
-New-Item -ItemType Directory -Force -Path "content\temas\envejecimiento-neurodegeneracion" | Out-Null
 ## Descripción
 
 El envejecimiento es el principal factor de riesgo para las enfermedades neurodegenerativas, cuya prevalencia aumenta aceleradamente en Chile y el mundo. Este tema articula investigación orientada a comprender qué distingue el envejecimiento cerebral saludable del patológico, a identificar señales tempranas de neurodegeneración y a desarrollar intervenciones que puedan modificar el curso de estas enfermedades.

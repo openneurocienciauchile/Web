@@ -63,19 +63,46 @@
           </p>
         {{ end }}
 
-        <!-- Áreas -->
-        {{ with .Params.topics }}
+        <!-- Áreas (Temas) — clicables hacia la página del tema -->
+        {{ with .Params.temas }}
           <div class="mt-4">
             <h3 class="text-black text-sm font-semibold mb-2">
               Áreas de investigación
             </h3>
             <div class="flex flex-wrap gap-2">
               {{ range . }}
-                <span class="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">
-                  {{ . }}
-                </span>
+                {{ $tema := site.GetPage (printf "/temas/%s" .) }}
+                {{ if $tema }}
+                  <a href="{{ $tema.RelPermalink }}"
+                     class="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 transition">
+                    {{ $tema.Title }}
+                  </a>
+                {{ else }}
+                  <span class="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">{{ . }}</span>
+                {{ end }}
               {{ end }}
             </div>
+          </div>
+        {{ end }}
+
+        <!-- Centros y afiliación (con links a labs) -->
+        {{ with .Params.afiliacion }}
+          <div class="mt-4">
+            <h3 class="text-black text-sm font-semibold mb-2">
+              Centros y afiliación
+            </h3>
+            <ul class="text-sm text-gray-700 space-y-1.5">
+              {{ range . }}
+                <li>
+                  {{ if .url }}
+                    <a href="{{ .url }}" class="text-blue-600 hover:underline">{{ .texto }}</a>
+                  {{ else }}
+                    {{ .texto }}
+                  {{ end }}
+                  {{ with .rol }}<span class="text-gray-500"> — {{ . }}</span>{{ end }}
+                </li>
+              {{ end }}
+            </ul>
           </div>
         {{ end }}
 
@@ -222,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>
 
       <div class="mt-3">
-        <a href="https://orcid.org/{{ . }}" target="_blank"
+        <a href="{{ . }}" target="_blank" rel="noopener"
            class="text-green-600 text-sm">
           Ver todas en ORCID →
         </a>
@@ -269,18 +296,27 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>
       {{ end }}
 
-      <!-- VIDEO -->
-      {{ with .Params.video }}
+      <!-- AUTOPRESENTACIÓN (YouTube, autoplay muteado + loop) -->
+      {{ with .Params.youtube }}
+      {{ $id := . }}
+      {{ $id = replaceRE `^https?://(www\.)?youtu\.be/` "" $id }}
+      {{ $id = replaceRE `^https?://(www\.)?youtube\.com/(watch\?v=|embed/|shorts/)` "" $id }}
+      {{ $id = replaceRE `[?&].*$` "" $id }}
       <div class="mt-10 border-t pt-6">
 
         <h2 class="text-xl font-semibold mb-4">
-          Entrevista
+          Autopresentación
         </h2>
 
-        <iframe class="w-full h-64 rounded"
-          src="{{ . }}"
-          allowfullscreen>
-        </iframe>
+        <div class="relative w-full overflow-hidden rounded" style="aspect-ratio:16/9;">
+          <iframe class="absolute inset-0 w-full h-full"
+            src="https://www.youtube.com/embed/{{ $id }}?autoplay=1&mute=1&loop=1&playlist={{ $id }}&playsinline=1&rel=0&modestbranding=1"
+            title="Autopresentación de {{ $.Title }}"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
 
       </div>
       {{ end }}

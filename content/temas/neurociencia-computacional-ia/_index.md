@@ -10,8 +10,6 @@ num_academicos: 0
 weight: 20
 date: 2026-01-01
 ---
-New-Item -ItemType Directory -Force -Path "content\temas\neurociencia-computacional-ia" | Out-Null
-Set-Content -Path "content\temas\neurociencia-computacional-ia\index.md" -Value $c -Encoding UTF8
 
 ## Descripción
 

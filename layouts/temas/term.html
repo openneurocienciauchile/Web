@@ -1,0 +1,152 @@
+{{ define "main" }}
+
+{{/*
+  layouts/temas/term.html
+  Página de UN tema (término de la taxonomía `temas`).
+  Lista TODAS las páginas etiquetadas con este tema usando `.Pages` nativo:
+  académicos, laboratorios, noticias y eventos. Es lo que vuelve "viva" la
+  taxonomía: cualquier tema escrito libremente genera esta página solo.
+  Si existe content/temas/<slug>/_index.md, su título/descripción enriquecen
+  el encabezado; si no, se usa el texto del tema tal como se escribió.
+*/}}
+
+{{ $academicos := where .Pages "Section" "academicos" }}
+{{ $labs       := where .Pages "Section" "laboratorios" }}
+{{ $news       := where .Pages "Section" "blog" }}
+{{ $eventos    := where .Pages "Section" "eventos" }}
+
+<div class="container mx-auto px-4 py-12 max-w-4xl">
+
+  <nav class="nuro-breadcrumb" aria-label="Volver">
+    <a href="{{ "/temas/" | relURL }}" class="nuro-back-link">← Todos los temas</a>
+  </nav>
+
+  <article class="nuro-tema-single">
+
+    <header class="nuro-tema-single-header">
+      <h1 class="nuro-tema-single-title">{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="nuro-tema-single-summary">{{ . }}</p>{{ end }}
+      {{ with .Params.tags }}
+      <ul class="nuro-tema-tags" aria-label="Palabras clave">
+        {{ range . }}<li class="nuro-tag">{{ . }}</li>{{ end }}
+      </ul>
+      {{ end }}
+    </header>
+
+    {{ with .Content }}<div class="nuro-tema-content prose">{{ . }}</div>{{ end }}
+
+    {{/* ── Académicos ── */}}
+    {{ if $academicos }}
+    <section class="nuro-tema-related" aria-label="Académicos relacionados">
+      <h2 class="nuro-related-title">Académicos en este tema</h2>
+      <ul class="nuro-related-list">
+        {{ range $academicos }}
+        <li>
+          <a class="nuro-related-link" href="{{ .RelPermalink }}">
+            {{ with .Params.image }}<img class="nuro-related-avatar" src="{{ . | relURL }}" alt="Foto de {{ $.Title }}" loading="lazy" />{{ end }}
+            <span class="nuro-related-info">
+              <strong>{{ .Title }}</strong>
+              {{ with .Params.role }}<small>{{ . }}</small>{{ end }}
+            </span>
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+
+    {{/* ── Laboratorios ── */}}
+    {{ if $labs }}
+    <section class="nuro-tema-related" aria-label="Laboratorios relacionados">
+      <h2 class="nuro-related-title">Laboratorios en este tema</h2>
+      <ul class="nuro-related-list">
+        {{ range $labs }}
+        <li>
+          <a class="nuro-related-link" href="{{ .RelPermalink }}">
+            <span class="nuro-related-info">
+              <strong>{{ .Title }}</strong>
+              {{ with .Params.acronimo }}<small>{{ . }}</small>{{ end }}
+            </span>
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+
+    {{/* ── Noticias ── */}}
+    {{ if $news }}
+    <section class="nuro-tema-related" aria-label="Noticias relacionadas">
+      <h2 class="nuro-related-title">Noticias en este tema</h2>
+      <ul class="nuro-related-list">
+        {{ range $news.ByDate.Reverse }}
+        <li>
+          <a class="nuro-related-link" href="{{ .RelPermalink }}">
+            <span class="nuro-related-info">
+              <strong>{{ .Title }}</strong>
+              {{ with .Date }}<small>{{ .Format "2 Jan 2006" }}</small>{{ end }}
+            </span>
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+
+    {{/* ── Eventos ── */}}
+    {{ if $eventos }}
+    <section class="nuro-tema-related" aria-label="Eventos relacionados">
+      <h2 class="nuro-related-title">Eventos en este tema</h2>
+      <ul class="nuro-related-list">
+        {{ range $eventos }}
+        <li>
+          <a class="nuro-related-link" href="{{ .RelPermalink }}">
+            <span class="nuro-related-info">
+              <strong>{{ .Title }}</strong>
+              {{ with .Date }}<small>{{ .Format "2 Jan 2006" }}</small>{{ end }}
+            </span>
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+
+    {{ if and (not $academicos) (not $labs) (not $news) (not $eventos) }}
+    <p class="nuro-tema-single-summary">Todavía no hay contenidos etiquetados con este tema.</p>
+    {{ end }}
+
+  </article>
+</div>
+
+<style>
+.nuro-breadcrumb { margin-bottom: 2rem; }
+.nuro-back-link { font-size:.75rem; font-weight:500; color:#003478; text-decoration:none; letter-spacing:.02em; text-transform:uppercase; }
+.nuro-back-link:hover { text-decoration: underline; }
+.nuro-tema-single-header { margin-bottom:2.5rem; padding-bottom:1.5rem; border-bottom:1px solid rgba(0,0,0,.08); }
+.nuro-tema-single-title { font-size:2rem; font-weight:500; margin:0 0 1rem; line-height:1.2; }
+.nuro-tema-single-summary { font-size:1.05rem; color:#555; line-height:1.7; margin:0 0 1rem; }
+.nuro-tema-tags { list-style:none; margin:0; padding:0; display:flex; gap:6px; flex-wrap:wrap; }
+.nuro-tag { font-size:.72rem; background:rgba(0,52,120,.06); color:#003478; border:1px solid rgba(0,52,120,.15); padding:2px 8px; border-radius:4px; }
+.nuro-tema-content { max-width:68ch; line-height:1.8; color:#333; }
+.nuro-tema-related { margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(0,0,0,.08); }
+.nuro-related-title { font-size:.8rem; font-weight:500; margin:0 0 1rem; text-transform:uppercase; letter-spacing:.04em; color:#888; }
+.nuro-related-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.75rem; }
+.nuro-related-link { display:flex; align-items:center; gap:.75rem; text-decoration:none; color:inherit; }
+.nuro-related-link:hover strong { color:#003478; }
+.nuro-related-avatar { width:40px; height:40px; border-radius:50%; object-fit:cover; flex-shrink:0; border:1px solid rgba(0,0,0,.1); }
+.nuro-related-info { display:flex; flex-direction:column; }
+.nuro-related-info strong { font-size:.95rem; }
+.nuro-related-info small { font-size:.8rem; color:#777; }
+@media (prefers-color-scheme: dark) {
+  .nuro-back-link { color:#7ba8d8; }
+  .nuro-tema-single-header, .nuro-tema-related { border-color:rgba(255,255,255,.08); }
+  .nuro-tema-single-summary { color:#aaa; }
+  .nuro-tag { background:rgba(123,168,216,.1); border-color:rgba(123,168,216,.2); color:#7ba8d8; }
+  .nuro-tema-content { color:#ccc; }
+  .nuro-related-info small { color:#888; }
+  .nuro-related-link:hover strong { color:#7ba8d8; }
+}
+</style>
+
+{{ end }}
