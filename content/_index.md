@@ -5,86 +5,59 @@ date: 2022-10-24
 type: landing
 
 design:
-  spacing: '0rem'
+  spacing: '6rem'
 
 sections:
 
   # ─────────────────────────────────────────────────────────────
-  # 1. HERO — Frontis + nodos animados (rediseño)
+  # 1. HERO — Banner institucional
   # ─────────────────────────────────────────────────────────────
-  - block: markdown
-    id: hero-neuro
+  - block: hero
     content:
       title: ''
       text: |
-        <div class="hero-neuro-inner">
-          <img class="hero-seal" src="/Web/uploads/escudo-blanco.png" alt="" aria-hidden="true">
-          <canvas id="net" class="hero-canvas"></canvas>
-          <div class="hero-neuro-content">
-            <p class="eyebrow rv">Facultad de Medicina · Universidad de Chile</p>
-            <h1 class="rv">Investigamos el <span class="glow">cerebro</span>, desde la célula hasta la conducta.</h1>
-            <p class="lead rv">Una unidad académica que reúne a investigadores e investigadoras de la Universidad de Chile en torno a la docencia, la formación científica y la investigación en neurociencia con aplicación en salud.</p>
-            <div class="hero-cta rv">
-              <a class="btn-neuro btn-primary" href="/Web/academicos/">Conoce nuestro equipo
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </a>
-              <a class="btn-neuro btn-ghost" href="/Web/temas/">Áreas de investigación</a>
-            </div>
+        <div style="display:inline-block; background:rgba(255,255,255,0.82); backdrop-filter:blur(4px); border-radius:12px; padding:1.2rem 2.5rem; text-align:center;">
+          <h1 style="color:#1a1a2e; font-size:clamp(1.5rem,4vw,2.8rem); font-weight:300; line-height:1.2; margin:0 0 0.4rem; letter-spacing:0.04em;">
+            Departamento de Neurociencia
+          </h1>
+          <p style="color:#555; font-size:1rem; margin:0; font-weight:300;">
+            Universidad de Chile · Facultad de Medicina
+          </p>
+          <div style="display:flex; gap:12px; justify-content:center; margin-top:1.2rem; flex-wrap:wrap;">
+            <a href="/Web/academicos" style="background:#1565C0; color:#fff; padding:9px 22px; border-radius:7px; text-decoration:none; font-weight:500; font-size:0.95rem;">Nuestro equipo</a>
+            <a href="/Web/temas" style="background:transparent; color:#1a1a2e; border:2px solid #1a1a2e; padding:9px 22px; border-radius:7px; text-decoration:none; font-weight:500; font-size:0.95rem;">Temas</a>
           </div>
         </div>
+      cta:
+        label: ''
+        url: ''
     design:
+      background:
+        image:
+          filename: facultad.png
+          filters:
+            brightness: 0.6
+          parallax: false
+          position: center
+          size: cover
+        text_color_light: false
       spacing:
-        padding: ['0', '0', '0', '0']
+        padding: ['60px', '0', '60px', '0']
 
   # ─────────────────────────────────────────────────────────────
-  # 2. ÁREAS DE INVESTIGACIÓN — grilla de temas (rediseño)
-  # ─────────────────────────────────────────────────────────────
-  - block: markdown
-    id: temas-home
-    content:
-      title: ''
-      text: |
-        <div class="temas-wrap">
-          <div class="shead rv">
-            <div>
-              <p class="eyebrow">Líneas de trabajo</p>
-              <h2>Nueve áreas que articulan nuestra ciencia</h2>
-              <p class="shead-sub">Desde la neurobiología molecular hasta la neurociencia cognitiva y clínica, organizadas en áreas temáticas que conectan laboratorios, académicos y formación.</p>
-            </div>
-            <a class="link-more" href="/Web/temas/">Ver todas las áreas
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-          </div>
-          <div class="temas-grid">
-            <a class="tcard rv" href="/Web/temas/neurobiologia-molecular-celular/"><span class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4.2"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)"/></svg></span><span class="th3">Neurobiología molecular y celular</span><span class="tp">Mecanismos moleculares y celulares de la función neuronal.</span></a>
-            <a class="tcard rv" href="/Web/temas/neurociencia-cognitiva/"><span class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></span><span class="th3">Neurociencia cognitiva</span><span class="tp">Bases neurales de la percepción, memoria y atención.</span></a>
-            <a class="tcard rv" href="/Web/temas/neurociencia-computacional-ia/"><span class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></span><span class="th3">Neurociencia computacional e IA</span><span class="tp">Modelos, análisis de datos y aprendizaje automático.</span></a>
-            <a class="tcard rv" href="/Web/temas/neurociencia-desarrollo/"><span class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V11"/><path d="M12 11C12 7.5 9.3 5.5 5.5 5.5c-.2 3.6 2.4 5.7 6.5 5.5Z"/><path d="M12 13.2c0-3 2.4-4.8 5.8-4.8.2 3.1-2.3 5-5.8 4.8Z"/></svg></span><span class="th3">Neurociencia del desarrollo</span><span class="tp">Maduración del sistema nervioso a lo largo de la vida.</span></a>
-            <a class="tcard rv" href="/Web/temas/neurologia-clinica-traslacional/"><span class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M8 14h2l1.2 3 2-6 1 3H17"/></svg></span><span class="th3">Neurología clínica y traslacional</span><span class="tp">Del laboratorio a la práctica clínica y la salud.</span></a>
-            <a class="tcard rv" href="/Web/temas/neuromodulacion-control-motor/"><span class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><span class="th3">Neuromodulación y control motor</span><span class="tp">Circuitos del movimiento y técnicas de modulación.</span></a>
-            <a class="tcard rv" href="/Web/temas/neuropsicologia-cognicion/"><span class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="4.5"/><path d="M5.5 20.5c.6-3.4 3.2-5.5 6.5-5.5s5.9 2.1 6.5 5.5"/></svg></span><span class="th3">Neuropsicología y cognición</span><span class="tp">Relación entre función cerebral y conducta.</span></a>
-            <a class="tcard rv" href="/Web/temas/otoneurologia-audicion/"><span class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5a7.2 7.2 0 0 1 13.5 1.5M6.5 9.5a4.3 4.3 0 0 1 8-1.2M9 12a1.6 1.6 0 0 1 3 .2"/><path d="M6 14a6 6 0 0 0 6 6"/></svg></span><span class="th3">Otoneurología y audición</span><span class="tp">Sistema auditivo y vestibular, del oído a la corteza.</span></a>
-            <a class="tcard rv" href="/Web/temas/envejecimiento-neurodegeneracion/"><span class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12M6 21h12M8 3v3l4 4 4-4V3M8 21v-3l4-4 4 4v3"/></svg></span><span class="th3">Envejecimiento y neurodegeneración</span><span class="tp">Mecanismos del envejecimiento y enfermedades neurodegenerativas.</span></a>
-          </div>
-        </div>
-    design:
-      spacing:
-        padding: ['0', '0', '0', '0']
-
-  # ─────────────────────────────────────────────────────────────
-  # 3. ÚLTIMAS NOTICIAS — blox personalizado (sin cambios)
+  # 2. ÚLTIMAS NOTICIAS — blox personalizado
   # ─────────────────────────────────────────────────────────────
   - block: news-grid
     id: noticias
 
   # ─────────────────────────────────────────────────────────────
-  # 4. PRÓXIMO SEMINARIO — blox personalizado (sin cambios)
+  # 3. PRÓXIMO SEMINARIO — blox personalizado
   # ─────────────────────────────────────────────────────────────
   - block: evento-card
     id: seminario
 
   # ─────────────────────────────────────────────────────────────
-  # 5. REDES SOCIALES — cuadro ancho al final (sin cambios)
+  # 4. REDES SOCIALES — cuadro ancho al final
   # ─────────────────────────────────────────────────────────────
   - block: markdown
     id: redes
