@@ -28,7 +28,7 @@ sections:
               <a class="neuro-btn neuro-btn-primary" href="/Web/academicos/">Conoce nuestro equipo
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </a>
-              <a class="neuro-btn neuro-btn-ghost" href="/Web/temas/">Áreas de investigación</a>
+              <a class="neuro-btn neuro-btn-ghost" href="/Web/temas/">Nuestros temas</a>
             </div>
           </div>
           <a class="neuro-hero-scroll" href="#noticias" aria-label="Ir a Noticias"><span>Noticias</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
@@ -47,13 +47,7 @@ sections:
         padding: ['0', '0', '0', '0']
 
   # ─────────────────────────────────────────────────────────────
-  # 4. PRÓXIMO SEMINARIO — blox personalizado (sin cambios)
-  # ─────────────────────────────────────────────────────────────
-  - block: evento-card
-    id: seminario
-
-  # ─────────────────────────────────────────────────────────────
-  # 5. REDES SOCIALES — cuadro ancho al final (sin cambios)
+  # REDES SOCIALES — cuadro ancho al final (sin cambios)
   # ─────────────────────────────────────────────────────────────
   - block: markdown
     id: redes
