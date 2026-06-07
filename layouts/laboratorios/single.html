@@ -33,8 +33,9 @@
       {{ end }}
       <h1 class="lab-single__title">{{ .Title }}</h1>
 
-      {{/* Temas */}}
+      {{/* Temas (defensivo: solo si viene como lista) */}}
       {{ with .Params.temas }}
+      {{ if reflect.IsSlice . }}
       <div class="lab-single__temas">
         {{ range . }}
           {{ $label := index $temaLabels . }}
@@ -44,6 +45,7 @@
         {{ end }}
       </div>
       {{ end }}
+      {{ end }}
     </header>
 
     <div class="lab-single__layout">
@@ -51,14 +53,20 @@
       {{/* ── Columna principal ─────────────────────────────────────────── */}}
       <div class="lab-single__main">
 
-        {{/* Imagen destacada */}}
+        {{/* Imagen destacada (defensivo: map de HugoBlox o string de Pages CMS) */}}
         {{ with .Params.image }}
-          {{ $imgFile := .filename }}
-          {{ if $imgFile }}
-          <figure class="lab-single__figure">
-            <img src="{{ $imgFile | relURL }}" alt="{{ $.Title }}" loading="lazy">
-            {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
-          </figure>
+          {{ if reflect.IsMap . }}
+            {{ $imgFile := .filename }}
+            {{ if $imgFile }}
+            <figure class="lab-single__figure">
+              <img src="{{ $imgFile | relURL }}" alt="{{ $.Title }}" loading="lazy">
+              {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+            </figure>
+            {{ end }}
+          {{ else if ne . "" }}
+            <figure class="lab-single__figure">
+              <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+            </figure>
           {{ end }}
         {{ end }}
 
@@ -72,8 +80,9 @@
       {{/* ── Barra lateral ────────────────────────────────────────────── */}}
       <aside class="lab-single__sidebar">
 
-        {{/* Directores */}}
+        {{/* Directores (defensivo: solo si viene como lista) */}}
         {{ with .Params.directores }}
+        {{ if reflect.IsSlice . }}
         <div class="lab-meta-block">
           <h3 class="lab-meta-block__title">
             {{ if eq (len .) 1 }}Director{{ else }}Directores{{ end }}
@@ -94,6 +103,7 @@
           </ul>
         </div>
         {{ end }}
+        {{ end }}
 
         {{/* Sitio web */}}
         {{ with .Params.sitio_web }}
@@ -113,8 +123,9 @@
         </div>
         {{ end }}
 
-        {{/* Temas (barra lateral) */}}
+        {{/* Temas (barra lateral) (defensivo: solo si viene como lista) */}}
         {{ with .Params.temas }}
+        {{ if reflect.IsSlice . }}
         <div class="lab-meta-block">
           <h3 class="lab-meta-block__title">Áreas de investigación</h3>
           <div class="lab-meta-block__temas">
@@ -126,6 +137,7 @@
             {{ end }}
           </div>
         </div>
+        {{ end }}
         {{ end }}
 
       </aside>{{/* /.lab-single__sidebar */}}
