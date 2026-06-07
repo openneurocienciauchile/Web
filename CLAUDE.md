@@ -53,10 +53,9 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
 7. **Privacidad — NUNCA publicar:** columnas internas de RR.HH. (*Horas, Modalidad, Observaciones*),
    correos personales, notas internas.
 8. **Commits chicos y claros**, en español. Explica qué cambiaste y por qué.
-9. **YAML en front-matter:** cualquier valor escalar que contenga `: ` (dos puntos + espacio),
-   `#`, comillas u otros caracteres especiales debe ir **entre comillas dobles**. Si no, el parser
-   interpreta el `: ` como un mapa anidado y el build muere con `mapping value is not allowed in
-   this context`. (Pasó con un `summary` de LAB ONCE en esta sesión.)
+9. **YAML en front-matter:** cualquier valor escalar con `: ` (dos puntos + espacio), `#` o
+   comillas debe ir **entre comillas dobles**, o el build muere con `mapping value is not allowed
+   in this context` (pasó con un `summary` de LAB ONCE).
 
 ## Hechos de arquitectura
 - **Navbar = `#site-header`** (id del tema). Por defecto navy `#0A1533` + texto blanco. En el HOME,
@@ -92,19 +91,15 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
 ## Trabajo pendiente (en orden sugerido)
 0. ✅ HECHO. `term.html` y `custom.html` commiteados; `home-etapa3` resincronizada con `main`.
 1. ✅ HECHO (commit `77341fe`). **Foto en la noticia completa**: `layouts/blog/single.html`
-   muestra la portada arriba del artículo, resolviendo `image` como map (HugoBlox `featured.*`)
-   o string (Pages CMS `/uploads/...`).
-2. ✅ HECHO (commits `407d6bf` + `262a83b`). **Laboratorios**: `single.html` y `list.html` ya
-   existían; se arregló imagen (map+string) y se blindó `directores`/`temas` con `reflect.IsSlice`
-   en `single.html`. Se creó **Neurosistemas** y se completó **LAB ONCE** (logo, director, temas,
-   contenido); se borró "Lab Prueba". `.pages.yml` ya expone `image` + `sitio_web` (no se agregó
-   `logo`/`website` aparte: se reusa `image`). **`term.html` ya lista los labs por tema** (no se
-   tocó). Logos con `object-fit:contain`. **Pendiente menor:** JSlab tiene el body copiado de
-   LAB ONCE (reescribir summary/body propios y, si hay, logo).
+   muestra la portada arriba del artículo (resuelve `image` map de HugoBlox o string de Pages CMS).
+2. ✅ HECHO (`407d6bf` + `262a83b`). **Laboratorios**: se arregló imagen (map+string) y se blindó
+   `directores`/`temas` con `reflect.IsSlice` en `single.html`; se creó **Neurosistemas** y se
+   completó **LAB ONCE** (logo, director, temas, contenido); se borró "Lab Prueba". Se reusa
+   `image` (no se agregó `logo`/`website`). `term.html` ya lista los labs por tema. Logos con
+   `object-fit:contain`. **Pendiente menor:** JSlab tiene el body copiado de LAB ONCE.
 3. ✅ HECHO (commit `a3dd245`). **Logos de Labs en el Landing**: blox propio
    `layouts/_partials/hbx/blocks/labs-strip/block.html`, insertado en `content/_index.md` entre
-   Noticias y Redes. Recorre `.Sections` de `/laboratorios` (NO `RegularPages` — los labs son
-   branch bundles), resuelve imagen map/string, fallback de texto si no hay logo.
+   Noticias y Redes. Recorre `.Sections` de `/laboratorios` (no `RegularPages`), imagen map/string.
 4. **Sección institucional/colaboradores en el Landing** (bajo Labs): enlaces a U. de Chile, Facultad
    de Medicina, y colaboradores GERO / CEIA / ANID. Idealmente CMS-safe vía `data/colaboradores.yaml`.
    (Confirmar URLs/logos con Hayo; aclarar a qué "CEIA" se refiere.)
@@ -131,18 +126,13 @@ Riesgo: puede aplanar listas a string y romper el build (por eso la regla 4).
   p.ej. blindar `publicaciones`/`proyectos` contra el aplanado de listas del CMS. El chat
   (Opus) avisará cuando una tarea lo amerite.
 
-## Flujo de trabajo con la app Cowork (IMPORTANTE)
-Hayo trabaja con DOS herramientas sobre este mismo repo:
-- **El chat de Cowork (Claude app, Opus)** = el cerebro. Planifica, investiga en la web y
-  **EDITA LOS ARCHIVOS DEL REPO DIRECTAMENTE** (tiene acceso de lectura/escritura a
-  `E:\Git_Use_WebUchile`). Desde 2026-06-07 trabajamos en "modo edición directa": el chat
-  hace los `Write`/`Edit`, no entrega bloques para copiar.
-- **Claude Code (esta terminal)** = se encarga de **build y git** (validar `hugo --minify`,
-  `git add/commit/push`). **No commitea ni pushea a `main` sin OK explícito de Hayo.**
-- ⚠️ Si Claude Code ve cambios sin trackear o archivos `M`/`??` que "no hizo", **es normal**:
-  los hizo el chat de Cowork por edición directa. No los revierta; valídelos con el build y
-  espere instrucción de commit.
-- El comando estándar para validar lo que tocó el chat:
-  `$env:HUGO_ENVIRONMENT="production"; hugo --minify; git status --short; git diff --stat`
-- ⚠️ El chat NO debe correr `git` desde su entorno (sandbox Linux montado sobre Windows): ve
-  todo el repo como modificado (CRLF/permisos). El git lo hace SIEMPRE Claude Code en Windows.
+## Flujo de trabajo con la app Cowork (MODO DUAL)
+Hayo trabaja con DOS herramientas en paralelo sobre este repo:
+- **El chat de Cowork (Claude app, Opus)** = el cerebro. Planifica, investiga en la web, decide
+  arquitectura y **redacta bloques en español listos para pegar** en Claude Code. Revisa los
+  diffs/salidas que Hayo le pega de vuelta. **NO ejecuta cambios en el repo.**
+- **Claude Code (terminal sobre E:\Git_Use_WebUchile)** = las manos. Edita archivos, corre hugo,
+  hace git. Lo maneja Hayo pegando los bloques del chat. **Nunca push a main sin OK de Hayo.**
+- El chat NO corre git (su sandbox Linux ve todo el repo como modificado por CRLF/permisos).
+- Nota: se probó una vez "edición directa" (el chat editando archivos) y se volvió al modo dual,
+  porque Claude Code se confunde con cambios que no hizo. **Mantener modo dual.**
