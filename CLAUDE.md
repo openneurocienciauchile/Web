@@ -30,10 +30,10 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
 - Receta para entorno limpio en Windows:
   `Remove-Item -Recurse -Force node_modules; npm install`
   y luego `$env:HUGO_ENVIRONMENT="production"; hugo --minify`.
-- PENDIENTE (afecta producción): el CI (`build.yml`) usa
-  `pnpm install --no-frozen-lockfile || npm install`; si pnpm tiene éxito, npm no corre y el
-  build de Hugo en Actions podría fallar por lo mismo. Verificar el último run en GitHub
-  Actions y evaluar cambiar el CI a npm.
+- VERIFICADO (2026-06-07): el CI corre en Ubuntu, donde el wrapper `#!/bin/sh` de pnpm SÍ es
+  ejecutable, así que el bug #14852 NO afecta el build de Actions — es exclusivo de Windows
+  local. El último deploy a `main` quedó verde. No hace falta cambiar el CI a npm; mantener
+  pnpm en Actions está OK. (El bug solo obliga a usar npm para el build LOCAL en Windows.)
 
 ## Reglas de oro (cúmplelas siempre)
 1. **Valida el build antes de commitear.** Corre exactamente lo que corre el CI:
