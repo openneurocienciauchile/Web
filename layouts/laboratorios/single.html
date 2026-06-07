@@ -221,10 +221,14 @@
   margin: 0 0 2rem;
   border-radius: var(--labs-radius);
   overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--labs-border);
 }
 .lab-single__figure img {
   width: 100%;
-  height: auto;
+  max-height: 240px;
+  object-fit: contain;
+  padding: 1.25rem;
   display: block;
 }
 .lab-single__figure figcaption {

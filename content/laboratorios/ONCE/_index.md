@@ -1,26 +1,32 @@
 ---
 title: Laboratorio de Otoneurología Clínica y Neurociencia del Equilibrio
 acronimo: LAB ONCE
-summary: Investigamos los trastornos del sistema vestibular y auditivo,
-  integrando neurociencia básica con práctica clínica en vértigo, equilibrio y
-  audición.
+summary: "Red de investigadores de distintos centros de Chile dedicada a la otoneurología clínica y las neurociencias del equilibrio: vértigo, mareo funcional (PPPD), tinnitus y cognición espacial."
+image: /uploads/lab-once-logo.png
 temas:
   - otoneurologia-audicion
   - neurologia-clinica-traslacional
-sitio_web: http://www.labonce.cl
+  - neurociencia-cognitiva
+directores:
+  - name: Hayo Breinbauer
+    email: ""
+    url: /Web/academicos/hb/hb/
+sitio_web: https://hayobk.wixsite.com/labonce
+fondecyt: ""
 date: 2024-05-01
 draft: false
 ---
 ## Sobre el laboratorio
 
-El **Laboratorio de Otoneurología Clínica y Neurociencia del Equilibrio (LAB ONCE)** es una unidad de investigación traslacional que integra la neurociencia básica con la práctica clínica en el campo de la otoneurología.
+El **Laboratorio de Otoneurología Clínica y Neurociencias del Equilibrio (LAB ONCE)** reúne a una red de investigadores de distintos centros de Chile dedicados al estudio de la otoneurología clínica y las neurociencias del equilibrio.
 
-Nuestro trabajo se centra en los trastornos del sistema vestibular y auditivo, con especial énfasis en:
+Nuestro trabajo integra la neurociencia básica con la práctica clínica, con especial énfasis en:
 
 - Vértigo y trastornos del equilibrio
-- Modulación cortical de respuestas cocleares mediante el sistema auditivo eferente
-- Evaluación clínica y diagnóstica de patologías otoneurológicas
+- Mareo perceptual postural persistente (PPPD) y cognición espacial
+- Tinnitus y modulación cortical del sistema auditivo eferente
+- Rehabilitación vestibular y herramientas diagnósticas (EEG–RNM)
 
 ## Sitio web
 
-Para más información, visita [www.labonce.cl](http://www.labonce.cl).
+Mientras restauramos [www.labonce.cl](https://www.labonce.cl), puedes ver nuestro contenido en [hayobk.wixsite.com/labonce](https://hayobk.wixsite.com/labonce).
