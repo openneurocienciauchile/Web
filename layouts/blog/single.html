@@ -1,0 +1,184 @@
+{{ define "main" }}
+
+{{/* ── Resolver imagen de portada (mismo criterio que news-card.html) ── */}}
+{{ $imgSrc := "" }}
+{{ with .Params.image }}
+  {{ if reflect.IsMap . }}
+    {{/* Formato HugoBlox: busca featured.* en la carpeta del post */}}
+    {{ with $.Resources.GetMatch "featured.*" }}
+      {{ $imgSrc = .RelPermalink }}
+    {{ end }}
+  {{ else }}
+    {{/* Formato Pages CMS: /uploads/foto.jpg → site.BaseURL maneja el subpath /Web/ */}}
+    {{ $imgSrc = printf "%s%s" site.BaseURL (. | strings.TrimPrefix "/") }}
+  {{ end }}
+{{ end }}
+
+{{/* ── Breadcrumb ── */}}
+<nav class="npost-breadcrumb" aria-label="Ruta de navegación">
+  <div class="npost-breadcrumb__inner">
+    <a href="{{ "/" | relURL }}">Inicio</a>
+    <span aria-hidden="true">›</span>
+    <a href="{{ "/blog" | relURL }}">Noticias</a>
+    <span aria-hidden="true">›</span>
+    <span>{{ .Title }}</span>
+  </div>
+</nav>
+
+<article class="npost">
+
+  {{/* ── Imagen de portada ── */}}
+  {{ if $imgSrc }}
+  <div class="npost-hero">
+    <img src="{{ $imgSrc }}" alt="{{ .Title }}" class="npost-hero__img" />
+  </div>
+  {{ end }}
+
+  <div class="npost-body">
+
+    {{/* ── Encabezado ── */}}
+    <header class="npost-header">
+      <p class="npost-date">{{ .Date.Format "2 January 2006" }}</p>
+      <h1 class="npost-title">{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+      <p class="npost-subtitle">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    {{/* ── Temas (defensivo: string o lista; resuelve la term page real) ── */}}
+    {{ with .Params.temas }}
+    {{ $temas := . }}
+    {{ if not (reflect.IsSlice $temas) }}
+      {{ $temas = split (trim (printf "%v" $temas) " ") "\n" }}
+    {{ end }}
+    <div class="npost-temas">
+      {{ range $temas }}
+      {{ $t := trim . " " }}
+      {{ if $t }}
+        {{ $tema := site.GetPage (printf "/temas/%s" $t) }}
+        {{ if $tema }}
+          <a href="{{ $tema.RelPermalink }}" class="npost-tema">{{ $tema.Title }}</a>
+        {{ else }}
+          <span class="npost-tema">{{ $t }}</span>
+        {{ end }}
+      {{ end }}
+      {{ end }}
+    </div>
+    {{ end }}
+
+    {{/* ── Contenido ── */}}
+    <div class="npost-content">
+      {{ .Content }}
+    </div>
+
+    {{/* ── Navegación entre noticias ── */}}
+    <nav class="npost-nav" aria-label="Otras noticias">
+      {{ with .PrevInSection }}
+      <a href="{{ .RelPermalink }}" class="npost-nav__link">← Anterior</a>
+      {{ end }}
+      <a href="{{ "/blog" | relURL }}" class="npost-nav__link npost-nav__link--all">
+        ← Todas las noticias
+      </a>
+      {{ with .NextInSection }}
+      <a href="{{ .RelPermalink }}" class="npost-nav__link">Siguiente →</a>
+      {{ end }}
+    </nav>
+
+  </div>
+</article>
+
+{{/* ══════════════ ESTILOS ══════════════ */}}
+<style>
+.npost-breadcrumb { background: #0A1533; padding: .7rem 1.5rem; }
+.npost-breadcrumb__inner {
+  max-width: 820px; margin: 0 auto;
+  display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+  font-size: .8rem; color: rgba(255,255,255,.7);
+}
+.npost-breadcrumb a { color: rgba(255,255,255,.7); text-decoration: none; }
+.npost-breadcrumb a:hover { color: #fff; }
+.npost-breadcrumb span:last-child { color: #fff; }
+
+.npost { max-width: 820px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+
+/* Imagen de portada */
+.npost-hero {
+  margin: 2rem 0 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f3f4f6;
+  box-shadow: 0 8px 32px rgba(10,18,48,.14);
+}
+.npost-hero__img {
+  width: 100%;
+  max-height: 460px;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+.npost-body { padding-top: 2rem; }
+
+/* Encabezado */
+.npost-header { margin-bottom: 1.5rem; }
+.npost-date {
+  font-size: .78rem; color: #9ca3af;
+  text-transform: uppercase; letter-spacing: .06em;
+  margin: 0 0 .5rem;
+}
+.npost-title {
+  font-size: clamp(1.6rem, 4vw, 2.35rem);
+  font-weight: 700; line-height: 1.2; color: #0A1230;
+  margin: 0 0 .6rem;
+}
+.npost-subtitle {
+  font-size: 1.05rem; line-height: 1.55; color: #4b5563;
+  margin: 0; font-weight: 400;
+}
+
+/* Temas */
+.npost-temas { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.75rem; }
+.npost-tema {
+  background: #e9f7fb; color: #1C4599;
+  padding: .2rem .7rem; border-radius: 999px;
+  font-size: .76rem; font-weight: 500; text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.npost-tema:hover { background: #1C4599; color: #fff; text-decoration: none; }
+
+/* Contenido */
+.npost-content { font-size: 1.02rem; line-height: 1.8; color: #1a1a2e; }
+.npost-content p { margin: 0 0 1.15em; }
+.npost-content h2 { font-size: 1.5rem; font-weight: 700; margin: 2rem 0 .8rem; color: #0A1230; }
+.npost-content h3 { font-size: 1.2rem; font-weight: 700; margin: 1.6rem 0 .6rem; color: #0A1230; }
+.npost-content a { color: #1C4599; text-decoration: underline; }
+.npost-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 1.2rem 0; }
+.npost-content ul, .npost-content ol { margin: 0 0 1.15em 1.4em; }
+.npost-content li { margin: 0 0 .4em; }
+.npost-content blockquote {
+  border-left: 4px solid #16C8E6; margin: 1.3rem 0;
+  padding: .3rem 0 .3rem 1.1rem; color: #4b5563; font-style: italic;
+}
+
+/* Navegación */
+.npost-nav {
+  display: flex; gap: .6rem; flex-wrap: wrap;
+  padding-top: 2rem; margin-top: 2.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+.npost-nav__link {
+  font-size: .82rem; color: #1C4599; text-decoration: none;
+  padding: .35rem .85rem;
+  border: 1.5px solid #1C4599; border-radius: 999px;
+  transition: background .2s, color .2s;
+}
+.npost-nav__link:hover { background: #1C4599; color: #fff; text-decoration: none; }
+.npost-nav__link--all { background: #eef2fb; border-color: transparent; font-weight: 600; }
+
+@media (max-width: 640px) {
+  .npost-hero { margin-top: 1.25rem; }
+  .npost-body { padding-top: 1.5rem; }
+}
+</style>
+
+{{ end }}
