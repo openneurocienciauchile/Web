@@ -47,6 +47,15 @@ sections:
         padding: ['0', '0', '0', '0']
 
   # ─────────────────────────────────────────────────────────────
+  # 4. LABORATORIOS — tira de logos (blox propio labs-strip)
+  # ─────────────────────────────────────────────────────────────
+  - block: labs-strip
+    id: laboratorios
+    design:
+      spacing:
+        padding: ['0', '0', '0', '0']
+
+  # ─────────────────────────────────────────────────────────────
   # REDES SOCIALES — cuadro ancho al final (sin cambios)
   # ─────────────────────────────────────────────────────────────
   - block: markdown

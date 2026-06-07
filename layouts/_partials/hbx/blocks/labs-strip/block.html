@@ -1,0 +1,54 @@
+{{/* Blox personalizado: labs-strip — logos de laboratorios en el landing.
+     Recorre las subsecciones de /laboratorios (branch bundles → .Sections),
+     muestra el logo (.Params.image, tolerando map de HugoBlox o string de
+     Pages CMS) enlazado a la ficha del lab. Fallback de texto si no hay logo. */}}
+
+{{ $labsPage := site.GetPage "/laboratorios" }}
+{{ $labs := slice }}
+{{ with $labsPage }}
+  {{ $labs = where .Sections "Params.draft" false }}
+{{ end }}
+
+{{ if $labs }}
+<section id="laboratorios" style="padding:0.75rem 0 2.5rem;">
+  <div class="container mx-auto px-6">
+
+    <h2 style="font-size:1.45rem; font-weight:700; color:#1a1a2e; margin:0 0 1.25rem;">
+      Laboratorios
+    </h2>
+
+    <div style="display:flex; flex-wrap:wrap; gap:1.25rem; align-items:stretch;">
+      {{ range $labs }}
+        {{/* Resolver imagen: map de HugoBlox (.filename) o string de Pages CMS */}}
+        {{ $imgSrc := "" }}
+        {{ with .Params.image }}
+          {{ if reflect.IsMap . }}
+            {{ with .filename }}{{ $imgSrc = . | relURL }}{{ end }}
+          {{ else if ne . "" }}
+            {{ $imgSrc = . | relURL }}
+          {{ end }}
+        {{ end }}
+        <a href="{{ .RelPermalink }}" title="{{ .Title }}"
+           style="flex:1 1 220px; max-width:320px; display:flex; align-items:center; justify-content:center; min-height:120px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; padding:1.5rem 1.25rem; text-decoration:none; transition:box-shadow .2s, transform .2s;"
+           onmouseover="this.style.boxShadow='0 8px 24px rgba(10,18,48,.10)';this.style.transform='translateY(-3px)';"
+           onmouseout="this.style.boxShadow='none';this.style.transform='none';">
+          {{ if $imgSrc }}
+            <img src="{{ $imgSrc }}" alt="{{ .Title }}" loading="lazy"
+                 style="width:100%; max-height:90px; object-fit:contain; display:block;">
+          {{ else }}
+            <span style="font-size:1.05rem; font-weight:700; color:#0A1533; text-align:center; line-height:1.35;">{{ with .Params.acronimo }}{{ . }}{{ else }}{{ .Title }}{{ end }}</span>
+          {{ end }}
+        </a>
+      {{ end }}
+    </div>
+
+    <div style="margin-top:1.5rem; text-align:right;">
+      <a href="{{ site.BaseURL }}laboratorios/"
+         style="font-size:0.9rem; color:#1565C0; text-decoration:none; font-weight:500;">
+        Ver todos los laboratorios →
+      </a>
+    </div>
+
+  </div>
+</section>
+{{ end }}
