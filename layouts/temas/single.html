@@ -64,7 +64,7 @@
           <a class="nuro-related-link" href="{{ .RelPermalink }}">
             {{ with .Params.image }}
             <img class="nuro-related-avatar"
-                 src="{{ . | relURL }}"
+                 src="{{ . | strings.TrimPrefix "/" | relURL }}"
                  alt="Foto de {{ $.Title }}"
                  loading="lazy" />
             {{ end }}

@@ -23,9 +23,9 @@
         {{ $imgSrc := "" }}
         {{ with .Params.image }}
           {{ if reflect.IsMap . }}
-            {{ with .filename }}{{ $imgSrc = . | relURL }}{{ end }}
+            {{ with .filename }}{{ $imgSrc = . | strings.TrimPrefix "/" | relURL }}{{ end }}
           {{ else if ne . "" }}
-            {{ $imgSrc = . | relURL }}
+            {{ $imgSrc = . | strings.TrimPrefix "/" | relURL }}
           {{ end }}
         {{ end }}
         <a href="{{ .RelPermalink }}" title="{{ .Title }}"

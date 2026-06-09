@@ -59,13 +59,13 @@
             {{ $imgFile := .filename }}
             {{ if $imgFile }}
             <figure class="lab-single__figure">
-              <img src="{{ $imgFile | relURL }}" alt="{{ $.Title }}" loading="lazy">
+              <img src="{{ $imgFile | strings.TrimPrefix "/" | relURL }}" alt="{{ $.Title }}" loading="lazy">
               {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
             </figure>
             {{ end }}
           {{ else if ne . "" }}
             <figure class="lab-single__figure">
-              <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+              <img src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="{{ $.Title }}" loading="lazy">
             </figure>
           {{ end }}
         {{ end }}

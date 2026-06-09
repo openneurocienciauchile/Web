@@ -72,12 +72,12 @@
             {{ if (reflect.IsMap .) }}
               {{ with .filename }}
               <div class="lab-card__image">
-                <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+                <img src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="{{ $.Title }}" loading="lazy">
               </div>
               {{ end }}
             {{ else if (ne . "") }}
               <div class="lab-card__image">
-                <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+                <img src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="{{ $.Title }}" loading="lazy">
               </div>
             {{ end }}
           {{ end }}

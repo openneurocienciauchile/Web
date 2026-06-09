@@ -43,7 +43,7 @@
         {{ range $academicos }}
         <li>
           <a class="nuro-related-link" href="{{ .RelPermalink }}">
-            {{ with .Params.image }}<img class="nuro-related-avatar" src="{{ . | relURL }}" alt="Foto de {{ $.Title }}" loading="lazy" />{{ end }}
+            {{ with .Params.image }}<img class="nuro-related-avatar" src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="Foto de {{ $.Title }}" loading="lazy" />{{ end }}
             <span class="nuro-related-info">
               <strong>{{ .Title }}</strong>
               {{ with .Params.role }}<small>{{ . }}</small>{{ end }}
