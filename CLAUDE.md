@@ -49,7 +49,11 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
    Ya aplicado en `afiliacion`; **falta aplicarlo en `publicaciones` y `proyectos`**.
 5. **Links internos:** usa `relURL`, `.RelPermalink`, `.Parent.RelPermalink` o `site.GetPage`.
    NUNCA hardcodees `/temas/...` (el sitio vive bajo `/Web/`).
-6. **Imágenes:** se guardan como `/uploads/<archivo>` y se referencian con `| relURL` → `/Web/uploads/...`.
+6. **Imágenes:** se guardan como `/uploads/<archivo>`. OJO: `| relURL` sobre un path con
+   slash inicial NO antepone `/Web/` (Hugo trata el slash como raíz del host) → imagen rota.
+   Referenciar SIEMPRE con `strings.TrimPrefix "/" | relURL` (o
+   `printf "%s%s" site.BaseURL (. | strings.TrimPrefix "/")`). Aplicado en news-card,
+   blog/single, labs-strip, laboratorios/single+list, temas/term+single.
 7. **Privacidad — NUNCA publicar:** columnas internas de RR.HH. (*Horas, Modalidad, Observaciones*),
    correos personales, notas internas.
 8. **Commits chicos y claros**, en español. Explica qué cambiaste y por qué.
@@ -125,6 +129,9 @@ Riesgo: puede aplanar listas a string y romper el build (por eso la regla 4).
 - Sube a **Opus** (`/model`) solo para razonamiento delicado o arquitectura en el código,
   p.ej. blindar `publicaciones`/`proyectos` contra el aplanado de listas del CMS. El chat
   (Opus) avisará cuando una tarea lo amerite.
+- **Protocolo de aviso (acordado con Hayo):** al iniciar cada tarea, el chat (Cowork) debe
+  recomendar explícitamente Sonnet vs Opus antes de pasar el bloque. Default Sonnet. La
+  tarea pendiente que requiere Opus es la 5 (blindar `publicaciones`/`proyectos`).
 
 ## Flujo de trabajo con la app Cowork (MODO DUAL)
 Hayo trabaja con DOS herramientas en paralelo sobre este repo:
