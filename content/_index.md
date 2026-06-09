@@ -56,6 +56,15 @@ sections:
         padding: ['0', '0', '0', '0']
 
   # ─────────────────────────────────────────────────────────────
+  # 5. INSTITUCIONES Y COLABORADORES — blox propio (data/colaboradores.yaml)
+  # ─────────────────────────────────────────────────────────────
+  - block: colaboradores
+    id: colaboradores
+    design:
+      spacing:
+        padding: ['0', '0', '0', '0']
+
+  # ─────────────────────────────────────────────────────────────
   # REDES SOCIALES — cuadro ancho al final (sin cambios)
   # ─────────────────────────────────────────────────────────────
   - block: markdown

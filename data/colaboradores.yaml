@@ -1,0 +1,15 @@
+# Instituciones y colaboradores mostrados en el landing (blox "colaboradores").
+# Editable a futuro por Pages CMS. Logos en static/uploads/colaboradores/.
+instituciones:
+  - nombre: "Universidad de Chile"
+    url: "https://www.uchile.cl"
+    logo: "/uploads/colaboradores/uchile.png"
+  - nombre: "Facultad de Medicina, U. de Chile"
+    url: "https://medicina.uchile.cl"
+    logo: "/uploads/colaboradores/medicina-uchile.png"
+  - nombre: "GERO — Centro de Gerociencia, Salud Mental y Metabolismo"
+    url: "https://gerochile.cl"
+    logo: "/uploads/colaboradores/gero.png"
+  - nombre: "ANID"
+    url: "https://anid.cl"
+    logo: "/uploads/colaboradores/anid.png"

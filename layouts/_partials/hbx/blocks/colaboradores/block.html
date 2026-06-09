@@ -1,0 +1,38 @@
+{{/* Blox personalizado: colaboradores — instituciones asociadas en el landing.
+     Lee data/colaboradores.yaml (site.Data.colaboradores.instituciones).
+     Logo en grises que se colorea al pasar el mouse; si falta el logo, muestra
+     el nombre como texto. Defensivo: solo recorre si es lista (regla 4). */}}
+
+{{ $items := slice }}
+{{ with site.Data.colaboradores }}
+  {{ with .instituciones }}
+    {{ if reflect.IsSlice . }}{{ $items = . }}{{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if $items }}
+<section id="colaboradores" style="padding:2.5rem 0 3rem; background:#fff;">
+  <div class="container mx-auto px-6">
+    <h2 style="font-size:1.45rem; font-weight:700; color:#1a1a2e; margin:0 0 1.75rem; text-align:center;">
+      Instituciones y colaboradores
+    </h2>
+    <div style="display:flex; flex-wrap:wrap; gap:2rem 3rem; align-items:center; justify-content:center;">
+      {{ range $items }}
+        {{ $logo := "" }}
+        {{ with .logo }}{{ $logo = . | strings.TrimPrefix "/" | relURL }}{{ end }}
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .nombre }}"
+           style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">
+          {{ if $logo }}
+            <img src="{{ $logo }}" alt="{{ .nombre }}" loading="lazy"
+                 style="max-height:64px; max-width:180px; width:auto; object-fit:contain; filter:grayscale(100%); opacity:.65; transition:filter .25s, opacity .25s;"
+                 onmouseover="this.style.filter='none';this.style.opacity='1';"
+                 onmouseout="this.style.filter='grayscale(100%)';this.style.opacity='.65';">
+          {{ else }}
+            <span style="font-size:1rem; font-weight:600; color:#0A1533;">{{ .nombre }}</span>
+          {{ end }}
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
