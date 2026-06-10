@@ -1,7 +1,7 @@
 # Navigation Links
 
 main:
-  - name: Quiénes somos
+  - name: El Departamento
     url: quienes-somos/
     weight: 10
 
@@ -9,7 +9,7 @@ main:
     url: academicos/
     weight: 20
 
-  - name: Labs
+  - name: Laboratorios
     url: laboratorios/
     weight: 30
 
@@ -17,7 +17,7 @@ main:
     url: temas/
     weight: 40
 
-  - name: Noticias
+  - name: Actualidad
     url: blog/
     weight: 50
 
