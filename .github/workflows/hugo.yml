@@ -1,9 +1,10 @@
 name: Deploy Hugo site to Pages
 
 on:
-  push:
-    branches:
-      - main
+  # push:  # DESACTIVADO (tarea 7): deploy.yml es el unico deployer y corre el paso de
+  #   branches:  # Pagefind. Dos workflows desplegaban a Pages y competian por el grupo
+  #     - main   # 'pages'; si ganaba hugo.yml el sitio quedaba sin indice y el buscador
+  #              # se rompia. Se deja solo workflow_dispatch (manual).
   workflow_dispatch:
 
 permissions:
