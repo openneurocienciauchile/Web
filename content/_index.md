@@ -47,6 +47,15 @@ sections:
         padding: ['0', '0', '0', '0']
 
   # ─────────────────────────────────────────────────────────────
+  # 3b. PRÓXIMO SEMINARIO — destacado + link a Eventos (blox propio)
+  # ─────────────────────────────────────────────────────────────
+  - block: proximo-seminario
+    id: proximo-seminario
+    design:
+      spacing:
+        padding: ['0', '0', '0', '0']
+
+  # ─────────────────────────────────────────────────────────────
   # 4. LABORATORIOS — tira de logos (blox propio labs-strip)
   # ─────────────────────────────────────────────────────────────
   - block: labs-strip

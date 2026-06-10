@@ -1,0 +1,19 @@
+{{/* Blox del landing: destacado "Nuestro próximo seminario" + botón a Eventos.
+     Reutiliza los partials del Bloque 1. */}}
+{{ $d := partial "func/seminario-destacado.html" . }}
+<section id="proximo-seminario" style="padding:0.75rem 0 2.5rem;">
+  <div class="container mx-auto px-6">
+    {{ with $d.page }}
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin:0 0 1.25rem;">
+        <h2 style="font-size:1.45rem; font-weight:700; color:#1a1a2e; margin:0;">Nuestro próximo seminario</h2>
+        <a href="{{ site.BaseURL }}eventos/" style="display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:999px; background:linear-gradient(135deg,#1C4599,#16C8E6); color:#fff; font-weight:600; font-size:0.9rem; text-decoration:none; box-shadow:0 10px 26px -14px rgba(28,69,153,.8);">Otros eventos →</a>
+      </div>
+      {{ partial "destacado-card.html" (dict "page" . "reciente" $d.reciente "variant" "hero") }}
+    {{ else }}
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+        <h2 style="font-size:1.45rem; font-weight:700; color:#1a1a2e; margin:0;">Eventos y seminarios</h2>
+        <a href="{{ site.BaseURL }}eventos/" style="font-size:0.9rem; color:#1565C0; text-decoration:none; font-weight:600;">Ver eventos →</a>
+      </div>
+    {{ end }}
+  </div>
+</section>
