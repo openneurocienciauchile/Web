@@ -1,3 +1,12 @@
+{{/* PageFind bajo /Web/: el tema cae al fallback "/pagefind/pagefind.js" (sin /Web/) -> 404
+     y el buscador no devuelve nada. Fijamos la ruta correcta con relURL (path SIN slash
+     inicial, regla 6) antes de que inicialice el componente de busqueda. */}}
+<script>
+  window.hbb = window.hbb || {};
+  window.hbb.assetPaths = window.hbb.assetPaths || {};
+  window.hbb.assetPaths.pagefind = {{ "pagefind/pagefind.js" | relURL }};
+</script>
+
 {{/* ── Fuentes del rediseño ── */}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
