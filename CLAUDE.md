@@ -46,7 +46,7 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
 4. **Plantillas defensivas.** Cualquier `{{ range }}` sobre un campo editable por el CMS debe tolerar
    que venga como **string** en vez de **lista** (el CMS a veces aplana listas → rompe el build).
    Patrón: usar `reflect.IsSlice` / `reflect.IsMap` y, si es string, `split` por salto de línea.
-   Ya aplicado en `afiliacion`; **falta aplicarlo en `publicaciones` y `proyectos`**.
+   Aplicado en `afiliacion`, `publicaciones` y `proyectos` (academicos/single.html).
 5. **Links internos:** usa `relURL`, `.RelPermalink`, `.Parent.RelPermalink` o `site.GetPage`.
    NUNCA hardcodees `/temas/...` (el sitio vive bajo `/Web/`).
 6. **Imágenes:** se guardan como `/uploads/<archivo>`. OJO: `| relURL` sobre un path con

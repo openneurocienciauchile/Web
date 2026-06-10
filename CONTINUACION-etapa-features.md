@@ -10,7 +10,7 @@ Carpeta de trabajo: `E:\Git_Use_WebUchile` (repo clonado, fuera de OneDrive).
 - [ ] upgrade.yml: fix commiteado en home-etapa3 (006d68a) pero NO en main → el correo de
       fallo semanal del workflow programado seguirá hasta hacer cherry-pick a main (con OK).
 - [ ] GUIA-claude-code-paso-a-paso.md: archivo untracked; decidir si versionar o .gitignore.
-- [ ] Tarea 5 (blindar publicaciones/proyectos en academicos/single.html): pendiente; en OPUS.
+- [x] Tarea 5 (blindar publicaciones/proyectos en academicos/single.html): HECHA en Opus.
 - [ ] Consistencia menú/títulos: el menú dirá "Actualidad" (→/blog/) y "El Departamento"
       (→/quienes-somos/), pero el title de content/blog/_index.md es "Blog" y el de
       quienes-somos es "Quiénes Somos". Evaluar alinear los títulos de página.
@@ -42,8 +42,8 @@ neurosistemas-logo.png. **Publicación a main: PENDIENTE** (ver al final).
 - El chat NO hace git (sandbox ve todo modificado). Git = Claude Code en Windows.
 - YAML: valores con `: `/`#`/comillas → entre comillas dobles (si no, rompe el build).
 - Dependencias locales: npm, NO pnpm (Windows, bug Hugo #14852). En CI (Ubuntu) pnpm OK.
-- El CMS aplana listas → guarda reflect.IsSlice/IsMap en todo range editable. FALTA en
-  publicaciones y proyectos de academicos/single.html.
+- El CMS aplana listas → guarda reflect.IsSlice/IsMap en todo range editable. Aplicado en
+  afiliacion, publicaciones y proyectos de academicos/single.html.
 - Sitio bajo /Web/: usar relURL/.RelPermalink/site.GetPage/site.BaseURL; nunca hardcodear.
 - Labs = branch bundles → recorrer con .Sections, no RegularPages. Campo CMS: image + sitio_web.
 - term.html ya lista labs por tema (basta poner temas: correctos en cada lab).
@@ -56,7 +56,7 @@ neurosistemas-logo.png. **Publicación a main: PENDIENTE** (ver al final).
 - JSlab (menor): body copiado de LAB ONCE; reescribir summary/body propios y, si hay, logo.
 4. Sección institucional/colaboradores en el Landing (U. de Chile, Fac. Medicina, GERO/CEIA/ANID),
    CMS-safe vía data/colaboradores.yaml. Confirmar URLs/logos y qué es "CEIA".
-5. Blindar publicaciones y proyectos en academicos/single.html (regla 4) — tarea de Opus.
+5. ✅ HECHO. Blindados publicaciones y proyectos en academicos/single.html (regla 4).
 6. menus.yaml: "Quiénes somos"→"El Departamento"; "Labs" vs "Laboratorios"; quitar "Temas"; agregar "Actualidad".
 7. PageFind (buscador navbar; hoy header.search:false).
 8. Contacto: formulario vs solo datos.
