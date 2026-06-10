@@ -76,21 +76,17 @@ sections:
         <div style="width:100%; background:#1a1a2e; padding:3rem 2rem; text-align:center; margin:0;">
           <h2 style="color:#fff; font-size:1.5rem; font-weight:700; margin-bottom:1.8rem; letter-spacing:0.03em;">Síguenos</h2>
           <div style="display:flex; flex-wrap:nowrap; gap:14px; justify-content:center; align-items:center; max-width:900px; margin:0 auto;">
-            <a href="https://twitter.com/neurocienciauch" target="_blank" rel="noopener"
+            <a href="https://x.com/NeuroUChile" target="_blank" rel="noopener"
                style="display:inline-flex;align-items:center;justify-content:center;width:160px;padding:12px 0;background:#000;color:#fff;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;text-decoration:none;font-weight:600;font-size:0.95rem;">
               Twitter / X
             </a>
-            <a href="https://www.instagram.com/neurocienciauchile/" target="_blank" rel="noopener"
+            <a href="https://www.instagram.com/neuro_uchile/" target="_blank" rel="noopener"
                style="display:inline-flex;align-items:center;justify-content:center;width:160px;padding:12px 0;background:linear-gradient(45deg,#f09433,#dc2743,#bc1888);color:#fff;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;text-decoration:none;font-weight:600;font-size:0.95rem;">
               Instagram
             </a>
-            <a href="https://www.youtube.com/@neurocienciauchile" target="_blank" rel="noopener"
+            <a href="https://www.youtube.com/@neurocienciauchile6900" target="_blank" rel="noopener"
                style="display:inline-flex;align-items:center;justify-content:center;width:160px;padding:12px 0;background:#CC0000;color:#fff;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;text-decoration:none;font-weight:600;font-size:0.95rem;">
               YouTube
-            </a>
-            <a href="https://www.linkedin.com/company/neurociencia-uchile/" target="_blank" rel="noopener"
-               style="display:inline-flex;align-items:center;justify-content:center;width:160px;padding:12px 0;background:#0A66C2;color:#fff;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;text-decoration:none;font-weight:600;font-size:0.95rem;">
-              LinkedIn
             </a>
           </div>
         </div>
