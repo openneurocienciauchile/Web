@@ -101,6 +101,10 @@ sections:
                 <img class="dep-person__photo" src="/Web/uploads/gonzalo-rivera.jpg" alt="Gonzalo Rivera" loading="lazy">
                 <span class="dep-person__name">Gonzalo Rivera</span>
               </a>
+              <a class="dep-person" href="/Web/academicos/hb/hb/">
+                <img class="dep-person__photo" src="/Web/uploads/HB.jpg" alt="Hayo Breinbauer" loading="lazy">
+                <span class="dep-person__name">Hayo Breinbauer</span>
+              </a>
             </div>
           </div>
         </section>
