@@ -3,6 +3,18 @@
 Carpeta de trabajo: `E:\Git_Use_WebUchile` (repo clonado, fuera de OneDrive).
 Última actualización: 2026-06-07 (tareas 1-3 terminadas).
 
+## Recordatorios vivos (revisar SIEMPRE; el chat los repite al final de cada turno)
+- [ ] Logos colaboradores: subir uchile / medicina-uchile / gero / anid (.png o .svg) a
+      static/uploads/colaboradores/. Mientras falten, la sección muestra los nombres en texto.
+      Fuentes oficiales ya identificadas (Wikimedia, ICBM, anid.cl, gerochile.cl).
+- [ ] upgrade.yml: fix commiteado en home-etapa3 (006d68a) pero NO en main → el correo de
+      fallo semanal del workflow programado seguirá hasta hacer cherry-pick a main (con OK).
+- [ ] GUIA-claude-code-paso-a-paso.md: archivo untracked; decidir si versionar o .gitignore.
+- [ ] Tarea 5 (blindar publicaciones/proyectos en academicos/single.html): pendiente; en OPUS.
+- [ ] Consistencia menú/títulos: el menú dirá "Actualidad" (→/blog/) y "El Departamento"
+      (→/quienes-somos/), pero el title de content/blog/_index.md es "Blog" y el de
+      quienes-somos es "Quiénes Somos". Evaluar alinear los títulos de página.
+
 ## ⚠️ CÓMO TRABAJAMOS — MODO DUAL (dos ventanas)
 1. **Chat de Cowork (Claude app, Opus)** = el cerebro. Planifica, investiga y **entrega bloques
    en español listos para pegar** en Claude Code. Revisa diffs/salidas. NO edita el repo.
