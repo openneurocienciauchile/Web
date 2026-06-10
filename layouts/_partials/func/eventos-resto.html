@@ -1,0 +1,17 @@
+{{- /* Contexto: la página destacada (o false). Devuelve TODOS los eventos excepto el
+       destacado, ordenados: futuros (asc) y luego pasados (desc). */ -}}
+{{- $destacado := . -}}
+{{- $eventos := where site.RegularPages "Section" "eventos" -}}
+{{- $now := now -}}
+{{- $fut := slice -}}{{- $pas := slice -}}
+{{- range $eventos -}}
+  {{- $isDest := false -}}
+  {{- if $destacado -}}{{- if eq .RelPermalink $destacado.RelPermalink -}}{{- $isDest = true -}}{{- end -}}{{- end -}}
+  {{- if not $isDest -}}
+    {{- if .Date.Before $now -}}{{- $pas = $pas | append . -}}{{- else -}}{{- $fut = $fut | append . -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $ordered := slice -}}
+{{- range (sort $fut "Date" "asc") -}}{{- $ordered = $ordered | append . -}}{{- end -}}
+{{- range (sort $pas "Date" "desc") -}}{{- $ordered = $ordered | append . -}}{{- end -}}
+{{- return $ordered -}}

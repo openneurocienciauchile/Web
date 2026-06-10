@@ -1,0 +1,47 @@
+{{/* Contexto: dict "page" <Page> "reciente" <bool> "variant" "hero"|"aside" */}}
+{{ $p := .page }}{{ $variant := .variant | default "hero" }}
+<a class="sem-card sem-card--{{ $variant }}" href="{{ $p.RelPermalink }}">
+  {{ with $p.Params.afiche }}
+  <div class="sem-card__media">
+    <img src="{{ printf "%s%s" site.BaseURL (. | strings.TrimPrefix "/") }}" alt="Afiche del seminario" loading="lazy">
+  </div>
+  {{ end }}
+  <div class="sem-card__body">
+    <span class="sem-card__eyebrow">{{ if .reciente }}Seminario reciente{{ else }}Próximo seminario{{ end }}</span>
+    {{ with $p.Params.speaker }}<h3 class="sem-card__speaker">{{ . }}</h3>{{ end }}
+    {{ with $p.Params.institucion }}<p class="sem-card__inst">{{ . }}</p>{{ end }}
+    {{ with $p.Params.summary }}<p class="sem-card__summary">{{ . }}</p>{{ end }}
+    <div class="sem-card__meta">
+      {{ with $p.Params.fecha_hora }}<span class="sem-card__when">{{ . }}</span>{{ end }}
+      {{ with $p.Params.lugar }}<span class="sem-card__where">{{ . }}</span>{{ end }}
+    </div>
+    <span class="sem-card__cta">Ver detalle →</span>
+  </div>
+</a>
+<style>
+.sem-card{ display:flex; gap:1.5rem; text-decoration:none; color:inherit; border:1px solid rgba(10,18,48,.1);
+  border-radius:14px; overflow:hidden; background:#fff; box-shadow:0 10px 40px -24px rgba(15,28,70,.4);
+  transition:box-shadow .25s,transform .25s; }
+.sem-card:hover{ transform:translateY(-3px); box-shadow:0 18px 50px -22px rgba(15,28,70,.45); }
+.sem-card__media{ flex:0 0 38%; background:#0A1533; }
+.sem-card__media img{ width:100%; height:100%; object-fit:cover; display:block; }
+.sem-card__body{ padding:1.6rem 1.8rem; display:flex; flex-direction:column; gap:.4rem; }
+.sem-card__eyebrow{ align-self:flex-start; font-family:'Roboto Condensed',sans-serif; font-size:.72rem;
+  font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#fff;
+  background:linear-gradient(135deg,#1C4599,#16C8E6); padding:4px 12px; border-radius:999px; }
+.sem-card__speaker{ font-family:'Sora',sans-serif; font-size:1.4rem; font-weight:600; margin:.3rem 0 0; color:#0A1230; }
+.sem-card__inst{ font-size:.92rem; color:#5C6781; margin:0; }
+.sem-card__summary{ font-size:.98rem; color:#0C1530; margin:.4rem 0 0; line-height:1.55; }
+.sem-card__meta{ display:flex; flex-wrap:wrap; gap:.3rem 1.2rem; margin-top:.6rem; font-size:.86rem; color:#5C6781; }
+.sem-card__when::before{ content:"Cuándo: "; font-weight:600; color:#1C4599; }
+.sem-card__where::before{ content:"Dónde: "; font-weight:600; color:#1C4599; }
+.sem-card__cta{ margin-top:1rem; align-self:flex-start; font-family:'Sora',sans-serif; font-weight:600;
+  font-size:.92rem; color:#1C4599; }
+.sem-card:hover .sem-card__cta{ text-decoration:underline; }
+.sem-card--aside{ flex-direction:column; gap:0; }
+.sem-card--aside .sem-card__media{ flex:none; aspect-ratio:16/10; }
+.sem-card--aside .sem-card__body{ padding:1.1rem 1.2rem; }
+.sem-card--aside .sem-card__speaker{ font-size:1.1rem; }
+.sem-card--aside .sem-card__summary{ font-size:.88rem; }
+@media (max-width:680px){ .sem-card{ flex-direction:column; } .sem-card__media{ aspect-ratio:16/9; } }
+</style>

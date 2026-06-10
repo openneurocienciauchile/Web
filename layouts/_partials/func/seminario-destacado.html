@@ -1,0 +1,17 @@
+{{- /* Devuelve dict {page, reciente}. page = próximo seminario futuro; si no hay,
+       el seminario pasado más reciente (reciente=true); si no hay seminarios, page=false.
+       Los eventos sin 'tipo' cuentan como seminario (igual que el default del CMS). */ -}}
+{{- $eventos := where site.RegularPages "Section" "eventos" -}}
+{{- $now := now -}}
+{{- $sems := slice -}}
+{{- range $eventos -}}
+  {{- if eq (.Params.tipo | default "seminario") "seminario" -}}{{- $sems = $sems | append . -}}{{- end -}}
+{{- end -}}
+{{- $fut := slice -}}{{- $pas := slice -}}
+{{- range $sems -}}
+  {{- if .Date.Before $now -}}{{- $pas = $pas | append . -}}{{- else -}}{{- $fut = $fut | append . -}}{{- end -}}
+{{- end -}}
+{{- $page := false -}}{{- $reciente := false -}}
+{{- if $fut -}}{{- $page = index (sort $fut "Date" "asc") 0 -}}
+{{- else if $pas -}}{{- $page = index (sort $pas "Date" "desc") 0 -}}{{- $reciente = true -}}{{- end -}}
+{{- return dict "page" $page "reciente" $reciente -}}
