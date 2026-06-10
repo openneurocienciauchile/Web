@@ -49,6 +49,8 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
    Aplicado en `afiliacion`, `publicaciones` y `proyectos` (academicos/single.html).
 5. **Links internos:** usa `relURL`, `.RelPermalink`, `.Parent.RelPermalink` o `site.GetPage`.
    NUNCA hardcodees `/temas/...` (el sitio vive bajo `/Web/`).
+   OJO: con relURL el path va SIN slash inicial (igual que regla 6): "/temas/" | relURL
+   pierde el /Web/ y da 404. Usar "temas/" | relURL o .RelPermalink/site.GetPage.
 6. **Imágenes:** se guardan como `/uploads/<archivo>`. OJO: `| relURL` sobre un path con
    slash inicial NO antepone `/Web/` (Hugo trata el slash como raíz del host) → imagen rota.
    Referenciar SIEMPRE con `strings.TrimPrefix "/" | relURL` (o
