@@ -157,6 +157,20 @@
   #site-header .nav-link:hover{ color:var(--neuro-cyan) !important; }
   /* En el HOME: barra transparente sobre el hero (continua con el azul) */
   html.neuro-home #site-header{ position:absolute; top:0; left:0; right:0; z-index:30; background:transparent !important; }
+
+  /* ── Menú móvil (#nav-menu): fondo sólido solo bajo lg, para que las
+     opciones se lean. En desktop el menú va inline y no se toca. ── */
+  @media (max-width:1023px){
+    #site-header #nav-menu{
+      background:#0A1533;
+      margin-top:6px;
+      padding:6px 18px 16px;
+      border-top:1px solid rgba(255,255,255,.14);
+      box-shadow:0 18px 30px -16px rgba(0,0,0,.55);
+      position:relative; z-index:2;
+    }
+    #site-header #nav-menu .nav-link{ display:block; padding:.55rem .25rem; }
+  }
 </style>
 
 {{/* ── Hero: red neuronal animada + aparición al scroll ── */}}
