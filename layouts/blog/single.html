@@ -17,9 +17,9 @@
 {{/* ── Breadcrumb ── */}}
 <nav class="npost-breadcrumb" aria-label="Ruta de navegación">
   <div class="npost-breadcrumb__inner">
-    <a href="{{ "/" | relURL }}">Inicio</a>
+    <a href="{{ site.Home.RelPermalink }}">Inicio</a>
     <span aria-hidden="true">›</span>
-    <a href="{{ "/blog" | relURL }}">Noticias</a>
+    <a href="{{ "blog/" | relURL }}">Noticias</a>
     <span aria-hidden="true">›</span>
     <span>{{ .Title }}</span>
   </div>
@@ -76,7 +76,7 @@
       {{ with .PrevInSection }}
       <a href="{{ .RelPermalink }}" class="npost-nav__link">← Anterior</a>
       {{ end }}
-      <a href="{{ "/blog" | relURL }}" class="npost-nav__link npost-nav__link--all">
+      <a href="{{ "blog/" | relURL }}" class="npost-nav__link npost-nav__link--all">
         ← Todas las noticias
       </a>
       {{ with .NextInSection }}

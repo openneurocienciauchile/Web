@@ -23,7 +23,7 @@
 
     {{/* ── Breadcrumb ──────────────────────────────────────────────────── */}}
     <nav class="lab-single__breadcrumb" aria-label="Navegación">
-      <a href="{{ "/laboratorios" | relURL }}">← Laboratorios</a>
+      <a href="{{ "laboratorios/" | relURL }}">← Laboratorios</a>
     </nav>
 
     {{/* ── Cabecera ─────────────────────────────────────────────────────── */}}
@@ -41,7 +41,7 @@
           {{ $label := index $temaLabels . }}
           {{ if not $label }}{{ $label = . }}{{ end }}
           <a class="tema-tag tema-tag--{{ . }}"
-             href="{{ "/temas/" | relURL }}{{ . }}">{{ $label }}</a>
+             href="{{ "temas/" | relURL }}{{ . }}">{{ $label }}</a>
         {{ end }}
       </div>
       {{ end }}
@@ -133,7 +133,7 @@
               {{ $label := index $temaLabels . }}
               {{ if not $label }}{{ $label = . }}{{ end }}
               <a class="tema-tag tema-tag--{{ . }}"
-                 href="{{ "/temas/" | relURL }}{{ . }}">{{ $label }}</a>
+                 href="{{ "temas/" | relURL }}{{ . }}">{{ $label }}</a>
             {{ end }}
           </div>
         </div>

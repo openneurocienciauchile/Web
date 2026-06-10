@@ -3,9 +3,9 @@
 {{/* ── Breadcrumb ── */}}
 <nav class="evs-breadcrumb" aria-label="Ruta de navegación">
   <div class="evs-breadcrumb__inner">
-    <a href="{{ "/" | relURL }}">Inicio</a>
+    <a href="{{ site.Home.RelPermalink }}">Inicio</a>
     <span aria-hidden="true">›</span>
-    <a href="{{ "/eventos" | relURL }}">Eventos</a>
+    <a href="{{ "eventos/" | relURL }}">Eventos</a>
     <span aria-hidden="true">›</span>
     <span>{{ .Params.speaker | default .Title }}</span>
   </div>
@@ -124,7 +124,7 @@
       {{ with .PrevInSection }}
       <a href="{{ .Permalink }}" class="evs-nav__link">← Anterior</a>
       {{ end }}
-      <a href="{{ "/eventos" | relURL }}" class="evs-nav__link evs-nav__link--all">
+      <a href="{{ "eventos/" | relURL }}" class="evs-nav__link evs-nav__link--all">
         ← Todos los eventos
       </a>
       {{ with .NextInSection }}
