@@ -14,32 +14,52 @@ sections:
       title: ''
       subtitle: ''
       text: |
-        <div style="display:flex; width:100vw; position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; min-height:600px; overflow:hidden;">
-
-          <!-- AJUSTE DE ENCUADRE: cambia los valores de object-position en la línea de abajo.
-               Formato: object-position: X% Y%
-               X → 0%=izquierda  50%=centro  100%=derecha
-               Y → 0%=arriba     50%=centro  100%=abajo
-               Ejemplos: "50% 20%" muestra parte alta | "50% 80%" muestra parte baja -->
-          <div style="flex:0 0 45%; overflow:hidden;">
-            <img src="/Web/uploads/departamento.jpg" alt="Departamento de Neurociencia" style="width:100%; height:100%; object-fit:cover; object-position:50% 50%; display:block;">
+        <section class="dep-hero">
+          <div class="dep-hero-inner">
+            <div class="dep-hero-text">
+              <p class="dep-eyebrow">Facultad de Medicina · Universidad de Chile</p>
+              <h1 class="dep-h1">El Departamento de Neurociencia</h1>
+              <p class="dep-lead">Una nueva unidad académica que reúne a investigadores de toda la Facultad para comprender el cerebro y llevar ese conocimiento a la salud de las personas.</p>
+            </div>
+            <figure class="dep-hero-photo">
+              <img src="/Web/uploads/equipo-departamento.jpg" alt="Equipo del Departamento de Neurociencia" loading="lazy">
+            </figure>
           </div>
-
-          <div style="flex:1; background:#ffffff; padding:3.5rem 4rem; display:flex; flex-direction:column; justify-content:center; overflow-y:auto;">
-            <h2 style="color:#1a1a2e; font-size:1.8rem; font-weight:800; margin-bottom:0.3rem;">El Departamento</h2>
-            <p style="color:#777; font-size:1rem; margin-bottom:1.5rem;">Facultad de Medicina · Universidad de Chile</p>
-            <p style="color:#333; line-height:1.8; margin-bottom:1rem;">El Departamento de Neurociencia de la Facultad de Medicina de la Universidad de Chile es una nueva unidad académica que reúne a académicos adscritos a diferentes departamentos y unidades de esta Facultad. Los objetivos del Departamento de Neurociencia son desarrollar la docencia en el área de la neurociencia en los ámbitos del pre y postgrado, la formación de académicos e investigadores y su próxima constitución como un referente en investigación con aplicación en salud.</p>
-            <p style="color:#333; line-height:1.8; margin-bottom:1rem;">El Departamento aspira también a instaurarse como un interlocutor válido para el Estado al momento de discutir políticas públicas de salud y bienestar en esta área de estudio, brindando una mejor respuesta a las necesidades crecientes del país en esta materia.</p>
-            <p style="color:#1a1a2e; font-weight:700; margin-top:0.5rem; margin-bottom:0.8rem;">El Departamento de Neurociencia considera como sus principales misiones:</p>
-            <ul style="color:#333; line-height:1.8; padding-left:1.5rem; margin:0;">
-              <li style="margin-bottom:0.5rem;">La generación de conocimiento relevante y pertinente en los ámbitos básicos y aplicados a la salud en neurociencia.</li>
-              <li style="margin-bottom:0.5rem;">La formación científica y profesional en el área de neurociencia de los estudiantes de las carreras profesionales de la Facultad de Medicina.</li>
-              <li style="margin-bottom:0.5rem;">La formación científica y clínica en el área de neurociencia de los estudiantes de programas de grados académicos, de los programas de Magíster y Doctorado y en los ámbitos pertinentes a colaborar en la formación de especialistas.</li>
-              <li style="margin-bottom:0.5rem;">La formación y el desarrollo permanente de los docentes, investigadores y funcionarios del Departamento para contribuir a su perfeccionamiento y a la mejora continua de la gestión institucional.</li>
-              <li style="margin-bottom:0.5rem;">La contribución a la comprensión, esclarecimiento y resolución de los problemas de interés general que se plantean en el ámbito de la neurociencia en nuestro país, contribuyendo al desarrollo de un sistema nacional de salud basado en el conocimiento, la formación y la educación en neurociencia de la comunidad a través de actividades de extensión.</li>
-            </ul>
+        </section>
+        <div class="dep-body">
+          <div class="dep-intro">
+            <p>El Departamento de Neurociencia de la Facultad de Medicina de la Universidad de Chile es una nueva unidad académica que reúne a académicos adscritos a diferentes departamentos y unidades de esta Facultad. Sus objetivos son desarrollar la docencia en neurociencia en pre y postgrado, la formación de académicos e investigadores, y su próxima constitución como un referente en investigación con aplicación en salud.</p>
+            <p>El Departamento aspira también a instaurarse como un interlocutor válido para el Estado al momento de discutir políticas públicas de salud y bienestar en esta área, brindando una mejor respuesta a las necesidades crecientes del país.</p>
           </div>
-
+          <h2 class="dep-section-title">Nuestras misiones</h2>
+          <p class="dep-section-sub">Los compromisos que orientan nuestro quehacer.</p>
+          <div class="dep-misiones">
+            <article class="dep-mision">
+              <div class="dep-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1h6c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3Z"/></svg></div>
+              <h3>Generar conocimiento</h3>
+              <p>Producir conocimiento relevante y pertinente en los ámbitos básicos y aplicados a la salud en neurociencia.</p>
+            </article>
+            <article class="dep-mision">
+              <div class="dep-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></div>
+              <h3>Formación de pregrado</h3>
+              <p>Formar científica y profesionalmente en neurociencia a los estudiantes de las carreras de la Facultad de Medicina.</p>
+            </article>
+            <article class="dep-mision">
+              <div class="dep-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6l-5 8.5A2 2 0 0 0 6.7 21h10.6a2 2 0 0 0 1.7-3.5L14 9V3"/><path d="M7 15h10"/></svg></div>
+              <h3>Posgrado y especialistas</h3>
+              <p>Formar en investigación y clínica a estudiantes de Magíster y Doctorado, y colaborar en la formación de especialistas.</p>
+            </article>
+            <article class="dep-mision">
+              <div class="dep-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <h3>Desarrollo de nuestra comunidad</h3>
+              <p>Impulsar el perfeccionamiento permanente de docentes, investigadores y funcionarios, y la mejora continua de la gestión.</p>
+            </article>
+            <article class="dep-mision">
+              <div class="dep-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg></div>
+              <h3>Vínculo con el país</h3>
+              <p>Contribuir a resolver problemas de interés general y a un sistema nacional de salud basado en conocimiento, formación y extensión.</p>
+            </article>
+          </div>
         </div>
     design:
       columns: '1'
