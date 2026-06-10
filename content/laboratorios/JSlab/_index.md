@@ -17,13 +17,10 @@ draft: false
 
 ## Sobre el laboratorio
 
-El **Laboratorio de Otoneurología Clínica y Neurociencia del Equilibrio (LAB ONCE)** es una unidad de investigación traslacional que integra la neurociencia básica con la práctica clínica en el campo de la otoneurología.
+El **Laboratorio de Neurobiología Celular y Molecular**, dirigido por la Dra. Jimena Sierralta, estudia el **metabolismo cerebral** y su rol en la función del sistema nervioso.
 
-Nuestro trabajo se centra en los trastornos del sistema vestibular y auditivo, con especial énfasis en:
-- Vértigo y trastornos del equilibrio
-- Modulación cortical de respuestas cocleares mediante el sistema auditivo eferente
-- Evaluación clínica y diagnóstica de patologías otoneurológicas
+Nuestro trabajo combina aproximaciones de biología celular y molecular con ensayos conductuales. Entre nuestras líneas de investigación:
 
-## Sitio web
-
-Para más información, visita [www.labonce.cl](http://www.labonce.cl).
+- Metabolismo energético del cerebro
+- Conducta en condiciones de nutrición alterada
+- Inhibición de la expresión de genes específicos de manera célula-específica, para estudiar su función
