@@ -18,7 +18,7 @@
   "neurologia-clinica-traslacional"  "Neurología Clínica y Traslacional"
 }}
 
-<article class="lab-single">
+<article class="lab-single" data-pagefind-body>
   <div class="lab-single__container">
 
     {{/* ── Breadcrumb ──────────────────────────────────────────────────── */}}
@@ -31,7 +31,7 @@
       {{ with .Params.acronimo }}
         <span class="lab-single__acronimo">{{ . }}</span>
       {{ end }}
-      <h1 class="lab-single__title">{{ .Title }}</h1>
+      <h1 class="lab-single__title" data-pagefind-meta="title">{{ .Title }}</h1>
 
       {{/* Temas (defensivo: solo si viene como lista) */}}
       {{ with .Params.temas }}

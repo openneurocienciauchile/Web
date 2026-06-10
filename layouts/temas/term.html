@@ -21,10 +21,10 @@
     <a href="{{ "/temas/" | relURL }}" class="nuro-back-link">← Todos los temas</a>
   </nav>
 
-  <article class="nuro-tema-single">
+  <article class="nuro-tema-single" data-pagefind-body>
 
     <header class="nuro-tema-single-header">
-      <h1 class="nuro-tema-single-title">{{ .Title }}</h1>
+      <h1 class="nuro-tema-single-title" data-pagefind-meta="title">{{ .Title }}</h1>
       {{ with .Params.summary }}<p class="nuro-tema-single-summary">{{ . }}</p>{{ end }}
       {{ with .Params.tags }}
       <ul class="nuro-tema-tags" aria-label="Palabras clave">
