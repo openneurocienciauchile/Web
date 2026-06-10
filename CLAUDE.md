@@ -15,8 +15,10 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
 ## Ramas y despliegue (IMPORTANTE)
 - `main` = **producción**. Cada push a `main` dispara el deploy y publica en vivo.
 - `home-etapa3` = **rama de trabajo**. Trabaja SIEMPRE aquí.
-- **Nunca hagas push a `main` sin autorización explícita de Hayo.** Merge a `main` solo cuando el
-  build esté verde y Hayo lo apruebe.
+- **Política de push (actualizada 2026-06-09):** por defecto CADA tarea termina con merge a `main`
+  y push para actualizar el sitio en vivo, SIEMPRE que el build local quede verde
+  (`HUGO_ENVIRONMENT=production hugo --minify` sin ERROR). Hayo pre-autoriza este flujo; puede vetar
+  un push puntual diciéndolo. Si el build queda rojo, NO se hace push.
 - El repo está dentro de OneDrive → a veces bloquea archivos en operaciones git; si una operación
   falla por archivo bloqueado, reintenta.
 
@@ -141,7 +143,8 @@ Hayo trabaja con DOS herramientas en paralelo sobre este repo:
   arquitectura y **redacta bloques en español listos para pegar** en Claude Code. Revisa los
   diffs/salidas que Hayo le pega de vuelta. **NO ejecuta cambios en el repo.**
 - **Claude Code (terminal sobre E:\Git_Use_WebUchile)** = las manos. Edita archivos, corre hugo,
-  hace git. Lo maneja Hayo pegando los bloques del chat. **Nunca push a main sin OK de Hayo.**
+  hace git. Lo maneja Hayo pegando los bloques del chat. **Push a main por defecto al cerrar cada
+  tarea con build verde** (ver Política de push; Hayo puede vetar un push puntual).
 - El chat NO corre git (su sandbox Linux ve todo el repo como modificado por CRLF/permisos).
 - Nota: se probó una vez "edición directa" (el chat editando archivos) y se volvió al modo dual,
   porque Claude Code se confunde con cambios que no hizo. **Mantener modo dual.**

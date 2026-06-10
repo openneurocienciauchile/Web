@@ -36,7 +36,8 @@ Hecho en esta etapa (todo en main):
 1. **Chat de Cowork (Claude app)** = el cerebro. Planifica, investiga y entrega BLOQUES en español
    listos para pegar en Claude Code. Revisa diffs/salidas. NO edita el repo.
 2. **Claude Code (terminal sobre E:\Git_Use_WebUchile)** = las manos. Edita, build, git. Lo maneja
-   Hayo pegando los bloques. **Nunca push a main sin OK de Hayo.**
+   Hayo pegando los bloques. **Push a main por defecto al cerrar cada tarea con build verde**
+   (Hayo lo pre-autorizó 2026-06-09; puede vetar un push puntual).
 Cada ronda: el chat da un bloque → Hayo lo corre → pega el diff/salida → el chat revisa.
 Excepción útil: archivos binarios (logos) los deja Hayo en disco; el chat no puede escribirlos.
 Modelo: el chat recomienda Sonnet vs Opus al iniciar cada tarea (default Sonnet).
@@ -75,7 +76,8 @@ Hola. Sitio del Depto. de Neurociencia U. de Chile (repo Hugo en E:\Git_Use_WebU
 main = producción / home-etapa3 = trabajo). Lee primero CONTINUACION-etapa-features.md y CLAUDE.md.
 Trabajamos en MODO DUAL: tú planificas/investigas y me entregas BLOQUES en español listos para
 pegar en Claude Code; NO editas el repo. Yo ejecuto en Claude Code (edits, build, git) y te pego
-el diff/salida. NUNCA push a main sin mi OK. Al iniciar cada tarea, recomiéndame Sonnet vs Opus.
+el diff/salida. Push a main por defecto al cerrar cada tarea con build verde (puedo vetar un push
+puntual). Al iniciar cada tarea, recomiéndame Sonnet vs Opus.
 La etapa de features quedó CERRADA y desplegada. Confírmame que leíste ambos archivos, resúmeme
 en 3 líneas el estado, y propón próximos pasos (ej.: actualizar Hugo Blox para limpiar las
 deprecations del tema, poblar/depurar contenido, o nuevas features).

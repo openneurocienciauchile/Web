@@ -142,7 +142,9 @@
 
   /* ───────── NAVBAR continua con el azul del hero ───────── */
   :root, #site-header { --color-header-fg:#ffffff; }
-  #site-header{ background:#0A1533; border:0 !important; box-shadow:none !important; transition:background .3s ease; }
+  #site-header{ border:0 !important; box-shadow:none !important; transition:background .3s ease; }
+  /* Internas (sin hero): navy sólido siempre; !important le gana al header transparente del tema */
+  html:not(.neuro-home) #site-header{ background:#0A1533 !important; }
   /* logo en blanco (la marca oficial, tratada para fondo oscuro) */
   #site-header .navbar-brand svg,
   #site-header .navbar-brand img{ height:78px !important; width:auto !important; max-height:78px; }
@@ -150,7 +152,7 @@
   #site-header .nav-link, #site-header .navbar-brand, #site-header label, #site-header button{ color:#fff !important; }
   #site-header .nav-link:hover{ color:var(--neuro-cyan) !important; }
   /* En el HOME: barra transparente sobre el hero (continua con el azul) */
-  html.neuro-home #site-header{ position:absolute; top:0; left:0; right:0; z-index:30; background:transparent; }
+  html.neuro-home #site-header{ position:absolute; top:0; left:0; right:0; z-index:30; background:transparent !important; }
 </style>
 
 {{/* ── Hero: red neuronal animada + aparición al scroll ── */}}
