@@ -76,6 +76,19 @@ sections:
             </div>
           </div>
         </section>
+        <section class="dep-secretaria-band">
+          <div class="dep-secretaria">
+            <img class="dep-secretaria__photo" src="/Web/uploads/paula-bersezio.jpg" alt="Paula Bersezio" loading="lazy">
+            <div>
+              <p class="dep-secretaria__label">Secretaria Directiva del Departamento</p>
+              <h2 class="dep-secretaria__name">Paula Bersezio</h2>
+              <a class="dep-secretaria__link" href="mailto:paula.bersezio@uchile.cl">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                paula.bersezio@uchile.cl
+              </a>
+            </div>
+          </div>
+        </section>
         <section class="dep-consejo">
           <div class="dep-consejo-inner">
             <h2 class="dep-section-title">Consejo de Departamento</h2>
