@@ -9,29 +9,53 @@
       Académicos
     </h1>
 
+    {{/* Orden ALFABÉTICO POR APELLIDO PATERNO.
+         Clave: campo opcional `apellido` del front-matter; si no existe, se deriva
+         como la PENÚLTIMA palabra del título (apellido paterno en nombres chilenos
+         con dos apellidos). Se concatena el nombre completo para desempatar (p. ej.
+         dos "González"), se baja a minúsculas y se quitan tildes/ñ para una
+         colación correcta en español. */}}
+    {{ $items := slice }}
+    {{ range .RegularPages }}
+      {{ $ap := .Params.apellido }}
+      {{ if not $ap }}
+        {{ $parts := split (trim .Title " ") " " }}
+        {{ $n := len $parts }}
+        {{ if ge $n 2 }}
+          {{ $ap = index $parts (sub $n 2) }}
+        {{ else }}
+          {{ $ap = .Title }}
+        {{ end }}
+      {{ end }}
+      {{ $key := lower (printf "%s %s" $ap .Title) }}
+      {{ $key = $key | replaceRE "[áàä]" "a" | replaceRE "[éèë]" "e" | replaceRE "[íìï]" "i" | replaceRE "[óòö]" "o" | replaceRE "[úùü]" "u" | replaceRE "ñ" "n" }}
+      {{ $items = $items | append (dict "p" . "key" $key) }}
+    {{ end }}
+    {{ $items = sort $items "key" "asc" }}
+
     <!-- Grid -->
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
-      {{ range .RegularPages }}
-
-        <a href="{{ .RelPermalink }}" class="group">
+      {{ range $items }}
+        {{ $p := .p }}
+        <a href="{{ $p.RelPermalink }}" class="group">
 
           <div class="bg-white/80 border border-gray-200 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
 
             <!-- Imagen -->
-            {{ with .Params.image }}
-  <img src="{{ printf "%s%s" site.BaseURL . }}" 
-       class="w-full h-64 object-cover rounded mb-4">
-{{ end }}
+            {{ with $p.Params.image }}
+              <img src="{{ printf "%s%s" site.BaseURL (. | strings.TrimPrefix "/") }}"
+                   class="w-full h-64 object-cover rounded mb-4">
+            {{ end }}
 
             <!-- Nombre -->
             <div class="p-4 text-center">
               <h2 class="text-lg font-semibold">
-                {{ .Title }}
+                {{ $p.Title }}
               </h2>
 
               <!-- Cargo -->
-              {{ with .Params.role }}
+              {{ with $p.Params.role }}
                 <p class="text-sm text-gray-500">
                   {{ . }}
                 </p>
@@ -41,7 +65,6 @@
           </div>
 
         </a>
-
       {{ end }}
 
     </div>
