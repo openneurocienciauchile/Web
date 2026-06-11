@@ -12,20 +12,22 @@ temas:
   - neurociencia-cognitiva
   - Tinnitus
 image: /uploads/HB.jpg
-afiliacion: |-
+afiliacion: "Laboratorio Neurosistemas
+
   Clínica Alemana de Santiago
-  Laboratorio Neurosistemas 
+
+  \ "
 youtube: https://youtu.be/4OS9BVe9sjY
 ---
-Investigo en la frontera entre la neurociencia del sistema vestibular y la clínica del equilibrio. Mi línea principal es el **mareo postural-perceptual persistente (MPPP)**, un trastorno crónico en el que estudio cómo el cerebro integra —y a veces malinterpreta— las señales vestibulares, visuales y propioceptivas que sostienen nuestro sentido de estabilidad.
+Investigo el sistema vestibular y la neurociencia que define el equilibrio. Mi linea más reciente de investigación es el **mareo postural-perceptual persistente (MPPP)**, un trastorno crónico en el que estudio cómo el cerebro integra —y a veces malinterpreta— las señales vestibulares, visuales y propioceptivas que sostienen nuestro sentido de estabilidad.
 
-Para abordarlo combino tareas de **navegación espacial** en entornos virtuales (adaptaciones para humanos del tipo *Morris water maze*), registro y procesamiento de **EEG** (con MNE-Python) y la evaluación otoneurológica de pacientes con vértigo y tinnitus. El objetivo es comprender los mecanismos corticales del equilibrio y trasladar esos hallazgos a mejores herramientas de diagnóstico y rehabilitación.
+Para abordarlo combino tareas de **navegación espacial** en entornos virtuales (adaptaciones para humanos del tipo *Morris water maze*), registro y procesamiento de **EEG** y la evaluación otoneurológica de pacientes con vértigo y tinnitus. El objetivo es comprender los mecanismos corticales del equilibrio y trasladar esos hallazgos a mejores herramientas de diagnóstico y rehabilitación.
 
 ## Líneas de investigación
 
 - Otoneurología y sistema vestibular
 - Mareo postural-perceptual persistente (MPPP)
 - Navegación y cognición espacial
-- Vértigo y tinnitus
-- EEG y procesamiento de señales
+- Vértigo 
+- Tinnitus
 
