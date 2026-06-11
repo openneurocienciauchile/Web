@@ -86,12 +86,31 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
   `publication_type: publication_types`, `temas: temas`.
 - Build tira **warnings de deprecación** de Hugo (cascade._target, languageCode, .Site.Data,
   .Site.LanguageCode) — no son fatales; limpiar en algún momento.
+- **Lab individual:** es una sección (`_index.md`) → Hugo NO usa `single.html`. `laboratorios/list.html`
+  ramifica con `{{ if .Parent.IsHome }}` (portada=grilla) `{{ else }}` (lab=`partial "lab-single.html"`).
+  Enfoque CMS-safe (sin depender del front-matter).
+- **"Próximo seminario":** lógica en `_partials/func/seminario-destacado.html` (próximo futuro; si no,
+  el pasado más reciente) y `func/eventos-resto.html`. Render con `_partials/destacado-card.html`
+  (variant `hero`/`aside`). Reutilizado en eventos, landing (blox `proximo-seminario`) y Actualidad.
+- **Navbar:** internas navy SÓLIDO con `!important` (gana al header transparente del tema); canvas de
+  neuronas inyectado solo en internas; menú móvil `#nav-menu` con fondo navy bajo `lg`.
+- **`type: landing` + bloque markdown** (HOME, quienes-somos): el HTML queda en contenedor angosto →
+  full-bleed con `left:50%;margin-left:-50vw;width:100vw`. El tema pinta `h1` oscuros → títulos sobre
+  navy necesitan `color:#fff !important`.
 
 ## Archivos clave
-- CSS/navbar/hero/JS: `layouts/_partials/hooks/head-end/custom.html`
+- CSS/navbar/hero/JS + CSS de "El Departamento" (`.dep-*`): `layouts/_partials/hooks/head-end/custom.html`
 - Nube de temas: `layouts/temas/list.html` · Página de tema: `layouts/temas/term.html`
   (legado sin uso: `layouts/temas/single.html`)
 - Ficha académico: `layouts/academicos/single.html` (tiene guardas defensivas en `afiliacion`)
+- Labs: `layouts/laboratorios/list.html` (ramifica portada vs detalle con `.Parent.IsHome`) +
+  `layouts/_partials/lab-single.html` (vista de detalle del lab). YA NO existe `laboratorios/single.html`.
+- Eventos/Actualidad: `layouts/eventos/list.html`, `layouts/blog/list.html` + partials
+  `layouts/_partials/func/seminario-destacado.html`, `layouts/_partials/func/eventos-resto.html`,
+  `layouts/_partials/destacado-card.html`. Blox del landing: `_partials/hbx/blocks/proximo-seminario/block.html`.
+- "El Departamento": `content/quienes-somos/_index.md` (todo el HTML va en su bloque markdown; el
+  partial `_partials/blocks/quienes-somos.html` está vacío).
+- "Formación": `layouts/formacion/list.html` (CSS propio `form-` adentro).
 - Config CMS: `.pages.yml` · Config Hugo: `config/_default/hugo.yaml`
 - Workflows: `.github/workflows/deploy.yml` + `build.yml` (build = `hugo --minify`)
 - Imágenes: `static/uploads/`
@@ -122,6 +141,13 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
 - 2 fichas sin tema (Manzur #20, Martínez #21 — con Camino B se puede crear el tag, ej. "Neuroeducación").
 - 4 perfiles parciales por completar. Categorías RR.HH. a confirmar (Morales, Helo, Salech, Rivera, Olguín).
 - Género de Manzur (#20) asumido masculino — confirmar.
+- **Fotos faltantes (hoy con iniciales en el Consejo):** José Luis Valdés (`jose-valdes`) y Paola
+  Morales (`eugenia-morales`) no tienen `image` en su ficha. Cargar por CMS y reemplazar el placeholder
+  en `content/quienes-somos/_index.md`.
+- **Eventos de prueba** en `content/eventos/` (`evento de prueba/`, `prueba/`): basura que alimenta el
+  destacado "próximo seminario" EN VIVO. Limpiar o cargar seminario real por CMS.
+- **JSlab:** sin logo ni sitio web; body es borrador (confirmar con Jimena Sierralta).
+- Chip del Magíster dice "Postgrado" (= su `tag`); cambiar el tag a "Magíster" en CMS si se prefiere.
 
 ## Pages CMS (para Hayo/Francisca)
 `app.pagescms.org` → login GitHub → repo `Web`. Commitea directo a la rama elegida (sin preview):
