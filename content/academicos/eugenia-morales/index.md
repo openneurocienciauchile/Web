@@ -1,15 +1,14 @@
 ---
-title: "Eugenia Paola Morales Retamales"
-role: "Profesora Titular"
-email: "pmorales@med.uchile.cl"
+title: Eugenia Paola Morales Retamales
+role: Profesora Titular
+email: pmorales@med.uchile.cl
+orcid: https://orcid.org/0000-0001-8914-2977
+portafolio: https://portafolio-academico.uchile.cl/perfil/29669-Eugenia-Paola-Morales-Retamales
 temas:
   - neurociencia-desarrollo
   - neurobiologia-molecular-celular
-draft: false
-orcid: "https://orcid.org/0000-0001-8914-2977"
-portafolio: "https://portafolio-academico.uchile.cl/perfil/29669-Eugenia-Paola-Morales-Retamales"
+image: /uploads/Paola Morales.jpeg
 ---
-
 Neurofarmacología y neuroquímica; neuroprotección y neuroplasticidad; fisiopatología de la asfixia perinatal; secretomas de células madre mesenquimales (vía intranasal) para daño cerebral neonatal; neurogénesis postnatal.
 
 ## Formación
