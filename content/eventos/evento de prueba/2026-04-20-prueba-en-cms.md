@@ -9,6 +9,7 @@ lugar: Sala de Seminarios, Edificio BNI
 zoom_link: zoom
 zoom_id: " 812 3456 7890"
 summary: asd
-tags: memoria
+temas:
+  - Tinnitus
 ---
 a
