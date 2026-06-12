@@ -1,6 +1,7 @@
 ---
 title: prueba en CMS
 date: 2026-04-20
+tipo: seminario
 afiche: /uploads/Captura-de-pantalla-2025-06-13-110426-1.png
 speaker: pf
 institucion: u
@@ -10,6 +11,6 @@ zoom_link: zoom
 zoom_id: " 812 3456 7890"
 summary: asd
 temas:
-  - Tinnitus
+  - tinnitus
 ---
 a
