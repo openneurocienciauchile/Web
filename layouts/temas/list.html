@@ -1,81 +1,175 @@
 {{ define "main" }}
 
-<div class="container mx-auto px-4 py-12 max-w-5xl">
+<div class="container mx-auto px-4 py-12 max-w-4xl">
 
-  {{/* Encabezado */}}
-  <header class="nuro-temas-header">
-    <h1 class="nuro-temas-title">{{ .Title | default "Temas de investigación" }}</h1>
-    {{ with .Params.subtitle }}<p class="nuro-temas-subtitle">{{ . }}</p>{{ end }}
-    {{ with .Content }}<div class="nuro-temas-intro">{{ . }}</div>{{ end }}
+  <header style="margin-bottom:2rem; padding-bottom:1.25rem; border-bottom:1px solid rgba(0,0,0,.1);">
+    <h1 style="font-size:2rem; font-weight:600; margin:0 0 .5rem;">
+      {{ .Title | default "Temas de investigación" }}
+    </h1>
+    {{ with .Params.subtitle }}
+      <p style="font-size:1.05rem; color:#555; margin:0;">{{ . }}</p>
+    {{ end }}
+    {{ with .Content }}
+      <div style="margin-top:.75rem; font-size:.95rem; color:#666;">{{ . }}</div>
+    {{ end }}
   </header>
 
-  {{/* ── Nube de temas (TAXONOMÍA VIVA). Cualquier tema usado en cualquier ── */}}
-  {{/* ── ficha/noticia/lab aparece solo aquí. Tamaño = nº de páginas.      ── */}}
   {{ $terms := site.Taxonomies.temas.ByCount }}
+
   {{ if $terms }}
-  <nav class="nuro-cloud" aria-label="Temas de investigación">
+  <div id="nuro-accordion" style="display:flex; flex-direction:column; gap:.75rem;">
+
     {{ range $i, $t := $terms }}
-      {{ $size := printf "%.2f" (add 1.20 (mul (float $t.Count) 0.16)) }}
-      {{ $cls := index (slice "nuro-cloud-a" "nuro-cloud-b" "nuro-cloud-c") (mod $i 3) }}
-      {{ $delay := printf "%.2f" (mul (float $i) 0.35) }}
-      {{ $dur := printf "%.2f" (add 6.5 (mul (float (mod $i 3)) 1.2)) }}
-      {{ $vo := mul (sub (int (mod $i 5)) 2) 14 }}
+      {{ $slug  := $t.Term }}
       {{ $title := $t.Term }}
-      {{ $url := "" }}
-      {{ with $t.Page }}{{ $title = .Title }}{{ $url = .RelPermalink }}{{ end }}
-      <a class="nuro-cloud-item" href="{{ $url }}"
-         title="{{ $t.Count }} página{{ if ne $t.Count 1 }}s{{ end }}"
-         style="animation-delay:{{ $delay }}s; animation-duration:{{ $dur }}s; margin-top:{{ $vo }}px;">
-        <span class="nuro-cloud-word {{ $cls }}" style="font-size:{{ $size }}rem;">{{ $title }}</span>
-      </a>
+      {{ $url   := "" }}
+      {{ with $t.Page }}
+        {{ $title = .Title }}
+        {{ $url   = .RelPermalink }}
+      {{ end }}
+
+      {{/* Académicos de este tema */}}
+      {{ $academicos := where site.RegularPages "Params.temas" "intersect" (slice $slug) }}
+      {{ $academicos  = where $academicos "Section" "academicos" }}
+      {{ $nAcad      := len $academicos }}
+
+      {{/* Labs de este tema */}}
+      {{ $labs  := where site.Pages "Params.temas" "intersect" (slice $slug) }}
+      {{ $labs   = where $labs "Section" "laboratorios" }}
+      {{ $nLabs := len $labs }}
+
+      <div class="nuro-acc-item" style="border:1px solid rgba(0,0,0,.12); border-radius:10px; overflow:hidden;">
+
+        <!-- Cabecera clickeable -->
+        <button
+          onclick="nuroToggle('tema-{{ $i }}')"
+          style="width:100%; display:flex; align-items:center; justify-content:space-between;
+                 padding:.9rem 1.25rem; background:#f8f9fb; border:none; cursor:pointer;
+                 text-align:left; gap:1rem;"
+          aria-expanded="false"
+          aria-controls="tema-{{ $i }}">
+
+          <span style="font-size:1.05rem; font-weight:600; color:#0a1230;">{{ $title }}</span>
+
+          <span style="display:flex; align-items:center; gap:.75rem; flex-shrink:0;">
+            {{ if gt $nAcad 0 }}
+              <span style="background:#e8edf7; color:#003478; font-size:.75rem;
+                           font-weight:600; padding:2px 10px; border-radius:20px;">
+                {{ $nAcad }} académico{{ if ne $nAcad 1 }}s{{ end }}
+              </span>
+            {{ end }}
+            {{ if gt $nLabs 0 }}
+              <span style="background:#e6f7f0; color:#0a6640; font-size:.75rem;
+                           font-weight:600; padding:2px 10px; border-radius:20px;">
+                {{ $nLabs }} lab{{ if ne $nLabs 1 }}s{{ end }}
+              </span>
+            {{ end }}
+            <svg id="icon-tema-{{ $i }}" xmlns="http://www.w3.org/2000/svg"
+                 width="18" height="18" viewBox="0 0 24 24" fill="none"
+                 stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                 style="transition:transform .25s ease; flex-shrink:0;">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </span>
+        </button>
+
+        <!-- Panel expandible -->
+        <div id="tema-{{ $i }}"
+             style="display:none; padding:1.25rem 1.5rem; background:#fff; border-top:1px solid rgba(0,0,0,.07);">
+
+          {{ if $academicos }}
+            <p style="font-size:.72rem; text-transform:uppercase; letter-spacing:.05em;
+                      color:#999; margin:0 0 .9rem; font-weight:500;">Académicos</p>
+            <div style="display:flex; flex-wrap:wrap; gap:.75rem; margin-bottom:1rem;">
+              {{ range $academicos }}
+                <a href="{{ .RelPermalink }}"
+                   style="display:flex; align-items:center; gap:.6rem; text-decoration:none;
+                          color:inherit; background:#f4f6fb; border:1px solid rgba(0,0,0,.08);
+                          border-radius:8px; padding:.5rem .85rem .5rem .5rem;
+                          transition:box-shadow .15s ease;"
+                   onmouseover="this.style.boxShadow='0 2px 10px rgba(0,52,120,.12)'"
+                   onmouseout="this.style.boxShadow='none'">
+
+                  {{ if .Params.image }}
+                    <img src="{{ printf "%s%s" site.BaseURL (.Params.image | strings.TrimPrefix "/") }}"
+                         style="width:36px; height:36px; border-radius:50%; object-fit:cover;
+                                border:1px solid rgba(0,0,0,.1); flex-shrink:0;">
+                  {{ else }}
+                    <div style="width:36px; height:36px; border-radius:50%; background:#dde3ef;
+                                display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
+                           width="22" height="22" fill="#8a95b0">
+                        <circle cx="50" cy="35" r="22"/>
+                        <path d="M10 85 Q10 60 50 60 Q90 60 90 85 Z"/>
+                      </svg>
+                    </div>
+                  {{ end }}
+
+                  <span style="display:flex; flex-direction:column; line-height:1.3;">
+                    <strong style="font-size:.88rem; color:#0a1230;">{{ .Title }}</strong>
+                    {{ with .Params.role }}
+                      <small style="font-size:.75rem; color:#777;">{{ . }}</small>
+                    {{ end }}
+                  </span>
+
+                </a>
+              {{ end }}
+            </div>
+          {{ end }}
+
+          {{ if $labs }}
+            <p style="font-size:.72rem; text-transform:uppercase; letter-spacing:.05em;
+                      color:#999; margin:.5rem 0 .9rem; font-weight:500;">Laboratorios</p>
+            <div style="display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:1rem;">
+              {{ range $labs }}
+                <a href="{{ .RelPermalink }}"
+                   style="font-size:.85rem; text-decoration:none; color:#0a6640;
+                          background:#e6f7f0; border:1px solid rgba(10,102,64,.15);
+                          border-radius:6px; padding:4px 12px;">
+                  {{ .Title }}
+                </a>
+              {{ end }}
+            </div>
+          {{ end }}
+
+          {{ if $url }}
+            <div style="margin-top:.75rem; padding-top:.75rem; border-top:1px solid rgba(0,0,0,.06);">
+              <a href="{{ $url }}"
+                 style="font-size:.8rem; font-weight:600; color:#003478; text-decoration:none;
+                        text-transform:uppercase; letter-spacing:.04em;">
+                Ver página del tema →
+              </a>
+            </div>
+          {{ end }}
+
+        </div>
+
+      </div>
     {{ end }}
-  </nav>
-  <p class="nuro-cloud-hint">El tamaño refleja cuántas páginas usan cada tema. Los temas se crean solos al etiquetar académicos, laboratorios, noticias o eventos.</p>
+
+  </div>
+
+  <p style="text-align:center; color:#aaa; font-size:.8rem; margin-top:2rem;">
+    Los temas se generan automáticamente al etiquetar académicos, laboratorios, noticias o eventos.
+  </p>
+
   {{ else }}
-  <p class="nuro-cloud-hint">Aún no hay temas asignados. Etiqueta académicos o noticias y aparecerán aquí automáticamente.</p>
+    <p style="color:#888;">Aún no hay temas asignados. Etiqueta académicos o noticias y aparecerán aquí automáticamente.</p>
   {{ end }}
 
 </div>
 
-<style>
-/* ── Encabezado ── */
-.nuro-temas-header{ margin-bottom:1.5rem; padding-bottom:1.25rem; border-bottom:1px solid rgba(0,0,0,.1); }
-.nuro-temas-title{ font-family:'Sora',sans-serif; font-size:2rem; font-weight:600; margin:0 0 .5rem; line-height:1.2; }
-.nuro-temas-subtitle{ font-size:1.05rem; color:#555; margin:0; line-height:1.6; }
-.nuro-temas-intro{ margin-top:.75rem; font-size:.95rem; color:#666; line-height:1.7; }
+<script>
+function nuroToggle(id) {
+  const panel = document.getElementById(id);
+  const icon  = document.getElementById("icon-" + id);
+  const btn   = panel.previousElementSibling;
+  const open  = panel.style.display === "none" || panel.style.display === "";
 
-/* ── Nube ── */
-.nuro-cloud{
-  position:relative; overflow:hidden; border-radius:20px;
-  background:radial-gradient(900px 520px at 76% 12%, #15275E 0%, #0A1230 58%, #080E22 100%);
-  padding:3.5rem 2rem; min-height:58vh;
-  display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
-  gap:.3rem 1.7rem;
+  panel.style.display = open ? "block" : "none";
+  btn.setAttribute("aria-expanded", open ? "true" : "false");
+  if (icon) icon.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
 }
-.nuro-cloud::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background:radial-gradient(560px 300px at 18% 82%, rgba(22,200,230,.12), transparent 60%);
-}
-.nuro-cloud-item{
-  position:relative; z-index:1; text-decoration:none; line-height:1;
-  animation:nuro-float 7s ease-in-out infinite; will-change:transform;
-}
-.nuro-cloud-word{
-  display:inline-block; font-family:'Sora',sans-serif; font-weight:600; letter-spacing:-.01em;
-  transition:transform .2s ease, color .2s ease, text-shadow .2s ease;
-}
-.nuro-cloud-a{ color:#FFFFFF; }
-.nuro-cloud-b{ color:#16C8E6; }
-.nuro-cloud-c{ color:#8FB6FF; }
-.nuro-cloud-item:hover .nuro-cloud-word{ transform:scale(1.12); color:#fff; text-shadow:0 6px 26px rgba(22,200,230,.55); }
-.nuro-cloud-hint{ text-align:center; color:#8a93a8; font-size:.82rem; margin:1rem 0 0; }
-
-@keyframes nuro-float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
-
-@media (prefers-reduced-motion: reduce){ .nuro-cloud-item{ animation:none !important; } }
-@media (max-width:600px){
-  .nuro-cloud{ padding:2.5rem 1rem; gap:.2rem 1.1rem; min-height:50vh; }
-}
-</style>
+</script>
 
 {{ end }}
