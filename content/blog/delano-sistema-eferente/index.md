@@ -9,7 +9,7 @@ summary: Investigación del Departamento sobre cómo el cerebro modula la audici
   a través del sistema eferente y su relación con el deterioro cognitivo.
 image: /uploads/noticia-delano.jpg
 temas:
-  - Tinnitus
+  - tinnitus
 ---
 Escuchar no es un proceso pasivo. Mucho antes de que un sonido llegue a la conciencia, el cerebro ya está ajustando, filtrando y priorizando lo que entra por el oído. Ese control descendente —del cerebro hacia la cóclea— es el foco del trabajo que dirige el **Prof. Paul Délano** en el Departamento de Neurociencia.
 
