@@ -81,6 +81,6 @@ El estudio midió cambios en el rendimiento cognitivo a dos años, por lo que el
 
 
 
-*Links de Interés: *  
+*Links de Interés:*  
 [https://uchile.cl/noticias/242418/estudio-liderado-por-neurologa-u-de-chile-mejora-la-cognicion-en-mayores](https://uchile.cl/noticias/242418/estudio-liderado-por-neurologa-u-de-chile-mejora-la-cognicion-en-mayores)  
 [https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)01278-X/fulltext](https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)01278-X/fulltext)
