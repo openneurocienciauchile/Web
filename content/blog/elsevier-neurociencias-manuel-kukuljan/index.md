@@ -25,7 +25,8 @@ Según describe la propia editorial, el libro aborda la fisiología del sistema 
 **Disponibilidad**
 
 La obra ya se encuentra disponible en versión electrónica a través de la plataforma VitalSource, en español, y puede adquirirse directamente en el sitio de Elsevier. La versión impresa llegará próximamente a Chile, y estará disponible para la comunidad universitaria en la biblioteca de la Universidad de Chile.  
-  
+
 ---
 
-*Links de interés:*  
+*Links de interés:*    
+[https://tienda.elsevier.com/books/neurociencia/kukuljan/978-84-1382-913-5](https://tienda.elsevier.com/books/neurociencia/kukuljan/978-84-1382-913-5)
