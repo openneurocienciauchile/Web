@@ -28,5 +28,6 @@ La obra ya se encuentra disponible en versión electrónica a través de la plat
 
 ---
 
-*Links de interés:*    
-[https://tienda.elsevier.com/books/neurociencia/kukuljan/978-84-1382-913-5](https://tienda.elsevier.com/books/neurociencia/kukuljan/978-84-1382-913-5)
+*Links de interés:*  
+[https://tienda.elsevier.com/books/neurociencia/kukuljan/978-84-1382-913-5](https://tienda.elsevier.com/books/neurociencia/kukuljan/978-84-1382-913-5)  
+[https://medicina.uchile.cl/noticias/242697/nuevo-libro-para-estudiantes-neurociencia-fisiologia-del-sistema-nervioso](https://medicina.uchile.cl/noticias/242697/nuevo-libro-para-estudiantes-neurociencia-fisiologia-del-sistema-nervioso)
