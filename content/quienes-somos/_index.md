@@ -22,7 +22,7 @@ sections:
               <p class="dep-lead">Una unidad académica que reúne a investigadores de toda la Facultad para comprender el cerebro y llevar ese conocimiento a la salud de las personas.</p>
             </div>
             <figure class="dep-hero-photo">
-              <img src="/Web/uploads/equipo-departamento.jpg" alt="Equipo del Departamento de Neurociencia" loading="lazy">
+              <img src="/uploads/equipo-departamento.jpg" alt="Equipo del Departamento de Neurociencia" loading="lazy">
             </figure>
           </div>
         </section>
@@ -70,7 +70,7 @@ sections:
               <p class="dep-jefe__label">Jefe de Departamento</p>
               <h2 class="dep-jefe__name">José Luis Valdés</h2>
               <p class="dep-jefe__role">Profesor Asociado, Facultad de Medicina, Universidad de Chile</p>
-              <a class="dep-jefe__link" href="/Web/academicos/jose-valdes/">Ver perfil académico
+              <a class="dep-jefe__link" href="/academicos/jose-valdes/">Ver perfil académico
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </a>
             </div>
@@ -78,7 +78,7 @@ sections:
         </section>
         <section class="dep-secretaria-band">
           <div class="dep-secretaria">
-            <img class="dep-secretaria__photo" src="/Web/uploads/paula-bersezio.jpg" alt="Paula Bersezio" loading="lazy">
+            <img class="dep-secretaria__photo" src="/uploads/paula-bersezio.jpg" alt="Paula Bersezio" loading="lazy">
             <div>
               <p class="dep-secretaria__label">Secretaria Directiva del Departamento</p>
               <h2 class="dep-secretaria__name">Paula Bersezio</h2>
@@ -94,28 +94,28 @@ sections:
             <h2 class="dep-section-title">Consejo de Departamento</h2>
             <p class="dep-section-sub">Académicas y académicos que integran el consejo y acompañan la conducción del Departamento.</p>
             <div class="dep-consejo-grid">
-              <a class="dep-person" href="/Web/academicos/js/js/">
-                <img class="dep-person__photo" src="/Web/uploads/JS-1.jpg" alt="Jimena Sierralta" loading="lazy">
+              <a class="dep-person" href="/academicos/js/js/">
+                <img class="dep-person__photo" src="/uploads/JS-1.jpg" alt="Jimena Sierralta" loading="lazy">
                 <span class="dep-person__name">Jimena Sierralta</span>
               </a>
-              <a class="dep-person" href="/Web/academicos/eugenia-morales/">
+              <a class="dep-person" href="/academicos/eugenia-morales/">
                 <div class="dep-person__avatar">PM</div>
                 <span class="dep-person__name">Paola Morales</span>
               </a>
-              <a class="dep-person" href="/Web/academicos/romulo-fuentes/">
-                <img class="dep-person__photo" src="/Web/uploads/romulo-fuentes.jpg" alt="Rómulo Fuentes" loading="lazy">
+              <a class="dep-person" href="/academicos/romulo-fuentes/">
+                <img class="dep-person__photo" src="/uploads/romulo-fuentes.jpg" alt="Rómulo Fuentes" loading="lazy">
                 <span class="dep-person__name">Rómulo Fuentes</span>
               </a>
-              <a class="dep-person" href="/Web/academicos/patricio-olguin/">
-                <img class="dep-person__photo" src="/Web/uploads/patricio-olguin.jpg" alt="Patricio Olguín" loading="lazy">
+              <a class="dep-person" href="/academicos/patricio-olguin/">
+                <img class="dep-person__photo" src="/uploads/patricio-olguin.jpg" alt="Patricio Olguín" loading="lazy">
                 <span class="dep-person__name">Patricio Olguín</span>
               </a>
-              <a class="dep-person" href="/Web/academicos/gonzalo-rivera/">
-                <img class="dep-person__photo" src="/Web/uploads/gonzalo-rivera.jpg" alt="Gonzalo Rivera" loading="lazy">
+              <a class="dep-person" href="/academicos/gonzalo-rivera/">
+                <img class="dep-person__photo" src="/uploads/gonzalo-rivera.jpg" alt="Gonzalo Rivera" loading="lazy">
                 <span class="dep-person__name">Gonzalo Rivera</span>
               </a>
-              <a class="dep-person" href="/Web/academicos/hb/hb/">
-                <img class="dep-person__photo" src="/Web/uploads/HB.jpg" alt="Hayo Breinbauer" loading="lazy">
+              <a class="dep-person" href="/academicos/hb/hb/">
+                <img class="dep-person__photo" src="/uploads/HB.jpg" alt="Hayo Breinbauer" loading="lazy">
                 <span class="dep-person__name">Hayo Breinbauer</span>
               </a>
             </div>

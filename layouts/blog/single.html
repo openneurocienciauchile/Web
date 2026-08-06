@@ -9,7 +9,7 @@
       {{ $imgSrc = .RelPermalink }}
     {{ end }}
   {{ else }}
-    {{/* Formato Pages CMS: /uploads/foto.jpg → site.BaseURL maneja el subpath /Web/ */}}
+    {{/* Formato Pages CMS: /uploads/foto.jpg → site.BaseURL antepone el dominio */}}
     {{ $imgSrc = printf "%s%s" site.BaseURL (. | strings.TrimPrefix "/") }}
   {{ end }}
 {{ end }}

@@ -18,17 +18,17 @@ sections:
       title: ''
       text: |
         <div class="neuro-hero">
-          <img class="neuro-hero-seal" src="/Web/uploads/escudo-blanco.png" alt="" aria-hidden="true">
+          <img class="neuro-hero-seal" src="/uploads/escudo-blanco.png" alt="" aria-hidden="true">
           <canvas id="neuro-net" class="neuro-hero-canvas"></canvas>
           <div class="neuro-hero-inner">
             <p class="neuro-eyebrow neuro-rv">Facultad de Medicina · Universidad de Chile</p>
             <h1 class="neuro-h1 neuro-rv"><span class="neuro-h1-main">Comprender el <span class="neuro-glow">cerebro</span>:</span><span class="neuro-h1-sub">de la molécula a la conducta, de la sinapsis a la sociedad — y de la ciencia a la salud.</span></h1>
             <p class="neuro-lead neuro-rv">Tradición que investiga, ciencia que se renueva: una red amplia de investigación en neurociencia, del laboratorio a la clínica.</p>
             <div class="neuro-cta neuro-rv">
-              <a class="neuro-btn neuro-btn-primary" href="/Web/academicos/">Conoce nuestro equipo
+              <a class="neuro-btn neuro-btn-primary" href="/academicos/">Conoce nuestro equipo
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </a>
-              <a class="neuro-btn neuro-btn-ghost" href="/Web/temas/">Nuestros temas</a>
+              <a class="neuro-btn neuro-btn-ghost" href="/temas/">Nuestros temas</a>
             </div>
           </div>
           <a class="neuro-hero-scroll" href="#noticias" aria-label="Ir a Noticias"><span>Noticias</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>

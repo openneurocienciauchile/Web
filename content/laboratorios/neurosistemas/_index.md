@@ -9,13 +9,13 @@ temas:
 directores:
   - name: Pedro E. Maldonado
     email: ""
-    url: /Web/academicos/pedro-maldonado/
+    url: /academicos/pedro-maldonado/
   - name: Christ Devia
     email: ""
-    url: /Web/academicos/christ-devia/
+    url: /academicos/christ-devia/
   - name: María de los Ángeles Juricic
     email: ""
-    url: /Web/academicos/maria-juricic/
+    url: /academicos/maria-juricic/
   - name: José Ignacio Egaña
     email: ""
     url: ""

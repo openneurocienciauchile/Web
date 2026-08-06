@@ -10,7 +10,7 @@ temas:
 directores:
   - name: Hayo Breinbauer
     email: ""
-    url: /Web/academicos/hb/hb/
+    url: /academicos/hb/hb/
 sitio_web: https://hayobk.wixsite.com/labonce
 fondecyt: ""
 date: 2024-05-01

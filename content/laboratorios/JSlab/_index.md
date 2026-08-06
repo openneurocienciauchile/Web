@@ -7,7 +7,7 @@ temas:
 directores:
   - name: "Jimena Sierralta"
     email: ""
-    url: "/Web/academicos/js/js/"
+    url: "/academicos/js/js/"
 sitio_web: ""
 fondecyt: ""
 image: ""

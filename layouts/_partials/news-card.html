@@ -7,7 +7,7 @@
       {{ $imgSrc = .RelPermalink }}
     {{ end }}
   {{ else }}
-    {{/* Formato Pages CMS: /uploads/foto.jpg → relURL maneja el subpath /Web/ */}}
+    {{/* Formato Pages CMS: /uploads/foto.jpg → sin slash inicial para que relURL lo resuelva */}}
     {{ $imgSrc = . | strings.TrimPrefix "/" }}
   {{ end }}
 {{ end }}

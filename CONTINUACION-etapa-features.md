@@ -5,7 +5,7 @@ Carpeta de trabajo: `E:\Git_Use_WebUchile` (repo clonado, fuera de OneDrive).
 
 ## Estado: etapa UI/UX CERRADA ✅
 Rama `home-etapa3` sincronizada con `main`; todo publicado y desplegado.
-En vivo: https://openneurocienciauchile.github.io/Web/
+En vivo: https://deptoneuro.med.uchile.cl/ (dominio oficial, en la raíz — migrado el 2026-08-06).
 
 Hecho en la etapa UI/UX (2026-06-10, todo en main):
 - Navbar: navy SÓLIDO en páginas internas con `!important` (le gana al header transparente-al-tope
@@ -74,7 +74,8 @@ Modelo: el chat recomienda Sonnet vs Opus al iniciar cada tarea (default Sonnet)
 
 ## Contexto
 Sitio del Depto. de Neurociencia (Fac. Medicina, U. de Chile). Hugo 0.162.1 extended + Hugo Blox
-+ Tailwind v4, GitHub Pages bajo `/Web/`. Repo: github.com/openneurocienciauchile/Web.
++ Tailwind v4, GitHub Pages en el dominio oficial `deptoneuro.med.uchile.cl` (raíz).
+Repo: github.com/openneurocienciauchile/Web.
 Ramas: `main` = producción (deploy automático) · `home-etapa3` = trabajo.
 
 ## Gotchas críticos
@@ -83,10 +84,12 @@ Ramas: `main` = producción (deploy automático) · `home-etapa3` = trabajo.
 - Dependencias locales: npm, NO pnpm (Windows, bug Hugo #14852). En CI (Ubuntu) pnpm OK.
 - CMS aplana listas → guarda `reflect.IsSlice`/`IsMap` en todo range editable. Aplicado en
   afiliacion, publicaciones y proyectos (academicos/single.html).
-- **relURL sin slash inicial**: `"/x" | relURL` pierde el `/Web/` (imagen rota / link 404).
-  Imágenes: `strings.TrimPrefix "/" | relURL`. Links: `"ruta/" | relURL` o `.RelPermalink`.
+- **Dominio en la raíz** (desde 2026-08-06): ya no hay subpath `/Web/`. `baseURL` en
+  `config/_default/hugo.yaml` + `static/CNAME`. En plantillas se sigue usando `relURL` con el
+  path SIN slash inicial (imágenes: `strings.TrimPrefix "/" | relURL`; links: `"ruta/" | relURL`
+  o `.RelPermalink`) — es la convención correcta y sobrevive a un cambio de `baseURL`.
   (Reglas 5 y 6 de CLAUDE.md.)
-- **PageFind**: requiere (a) `window.hbb.assetPaths.pagefind` con ruta `/Web/` (en custom.html), y
+- **PageFind**: requiere (a) `window.hbb.assetPaths.pagefind` fijado con `relURL` (en custom.html), y
   (b) `data-pagefind-body` en las plantillas custom de contenido — si alguna página lo usa,
   PageFind EXCLUYE toda página que no lo tenga. El índice se genera en `deploy.yml`
   (`pnpm run pagefind`); NO se prueba con `hugo server` (probar: `pnpm run pagefind` + servir public/).

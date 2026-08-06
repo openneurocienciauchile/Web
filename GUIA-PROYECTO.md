@@ -21,7 +21,8 @@ acentos azul→cian, logo oficial blanco. La navbar es continua con el azul del 
 
 - **Hugo + Hugo Blox** (Hugo Blox Kit 0.11.0; **Tailwind CSS v4**). Módulos de Go.
 - **Repo:** github.com/openneurocienciauchile/Web (público).
-- **En vivo:** https://openneurocienciauchile.github.io/Web/ (GitHub Pages, bajo `/Web/`).
+- **En vivo:** https://deptoneuro.med.uchile.cl/ (GitHub Pages con dominio oficial, en la raíz).
+  Migrado el 2026-08-06 desde `openneurocienciauchile.github.io/Web/`, que ahora redirige solo.
 - **Deploy:** GitHub Actions, **solo al hacer push/merge a `main`**. Otras ramas no publican;
   un PR a `main` solo corre el build de validación.
 - **Build local:** requiere Node + `npm install` (instala el CLI de Tailwind) y luego
@@ -115,8 +116,10 @@ uso; hay **dos workflows de deploy** (`deploy.yml` y `hugo.yml`) que conviene un
 
 ## 9. Convenciones técnicas
 
-- El sitio se sirve bajo `/Web/`; rutas internas y assets usan ese prefijo
-  (`/Web/uploads/...`, `/Web/temas/...`). Si cambia el `baseURL`, revisarlas.
+- El sitio se sirve en la **raíz** de `deptoneuro.med.uchile.cl` (ya no bajo `/Web/`): rutas
+  internas y assets van sin prefijo (`/uploads/...`, `/temas/...`). El dominio vive en
+  `static/CNAME` + `baseURL` de `config/_default/hugo.yaml`; en plantillas, `relURL` sigue
+  siendo la forma correcta de enlazar (inmune a un futuro cambio de `baseURL`).
 - Secciones del home: bloques `markdown` con HTML + clases `neuro-` + CSS en el head-end.
   Full-bleed con técnica 100vw.
 - Imágenes servibles por URL → `static/uploads/`. Procesadas por el tema → `assets/media/`.

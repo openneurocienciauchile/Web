@@ -9,7 +9,10 @@ Co-editora de contenido: **Francisca Pérez** (psicóloga).
 ## Qué es este repo
 Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hecho con
 **Hugo v0.162.1 extended + tema Hugo Blox + Tailwind v4**, desplegado en **GitHub Pages**.
-- En vivo: `https://openneurocienciauchile.github.io/Web/` (servido bajo el path **`/Web/`**).
+- En vivo: `https://deptoneuro.med.uchile.cl/` — **dominio oficial, servido en la RAÍZ**.
+  (Migrado el 2026-08-06 desde `openneurocienciauchile.github.io/Web/`; el dominio está
+  configurado en Settings → Pages y versionado en `static/CNAME`. La URL antigua de github.io
+  redirige sola al dominio propio.)
 - Repo: `github.com/openneurocienciauchile/Web`.
 
 ## Ramas y despliegue (IMPORTANTE)
@@ -50,14 +53,15 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
    Patrón: usar `reflect.IsSlice` / `reflect.IsMap` y, si es string, `split` por salto de línea.
    Aplicado en `afiliacion`, `publicaciones` y `proyectos` (academicos/single.html).
 5. **Links internos:** usa `relURL`, `.RelPermalink`, `.Parent.RelPermalink` o `site.GetPage`.
-   NUNCA hardcodees `/temas/...` (el sitio vive bajo `/Web/`).
-   OJO: con relURL el path va SIN slash inicial (igual que regla 6): "/temas/" | relURL
-   pierde el /Web/ y da 404. Usar "temas/" | relURL o .RelPermalink/site.GetPage.
-6. **Imágenes:** se guardan como `/uploads/<archivo>`. OJO: `| relURL` sobre un path con
-   slash inicial NO antepone `/Web/` (Hugo trata el slash como raíz del host) → imagen rota.
-   Referenciar SIEMPRE con `strings.TrimPrefix "/" | relURL` (o
-   `printf "%s%s" site.BaseURL (. | strings.TrimPrefix "/")`). Aplicado en news-card,
-   blog/single, labs-strip, laboratorios/single+list, temas/term+single.
+   Desde 2026-08-06 el sitio se sirve en la RAÍZ del dominio (ya no bajo `/Web/`), así que un
+   path absoluto no se rompe — pero `relURL` sigue siendo la forma correcta de enlazar: deja el
+   sitio inmune a un futuro cambio de `baseURL` y es lo que usan todas las plantillas.
+   Convención: path SIN slash inicial (`"temas/" | relURL`) o `.RelPermalink`/`site.GetPage`.
+6. **Imágenes:** se guardan como `/uploads/<archivo>`. Referenciar en plantillas con
+   `strings.TrimPrefix "/" | relURL` (o `printf "%s%s" site.BaseURL (. | strings.TrimPrefix "/")`),
+   que es lo aplicado en news-card, blog/single, labs-strip, laboratorios/single+list,
+   temas/term+single. En HTML crudo dentro de `.md` (home, quiénes-somos, labs) no hay `relURL`
+   disponible: ahí van rutas absolutas `/uploads/...`, correctas al servir en raíz.
 7. **Privacidad — NUNCA publicar:** columnas internas de RR.HH. (*Horas, Modalidad, Observaciones*),
    correos personales, notas internas.
 8. **Commits chicos y claros**, en español. Explica qué cambiaste y por qué.
