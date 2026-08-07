@@ -10,6 +10,7 @@ temas:
   - neurologia-clinica-traslacional
   - neurociencia-cognitiva
   - "Adicciones"
+image: "/uploads/carlos-ibanez.jpg"
 afiliacion:
   - texto: "Departamento de Neurociencia"
   - texto: "Departamento de psiquiatría y salud mental norte"

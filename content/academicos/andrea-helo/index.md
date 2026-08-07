@@ -12,6 +12,7 @@ temas:
   - "EEG"
   - "Eye tracking"
   - "Desarrollo del lenguaje"
+image: "/uploads/andrea-helo.jpg"
 afiliacion:
   - texto: "Departamento de Neurociencia"
   - texto: "Departamento de Fonoaudiología"
