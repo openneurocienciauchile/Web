@@ -1,18 +1,19 @@
 ---
 title: "Carlos Francisco Ibáñez Piña"
+display_name: "Carlos Ibáñez"
 role: "Profesor Asociado"
+degree: "Doctor en Ciencias Biomédicas, U. de Chile, 2015"
+email: "cibanez@hcuch.cl"
+orcid: "https://orcid.org/0000-0002-0974-5848"
+portafolio: "https://portafolio-academico.uchile.cl/perfil/50485-Carlos-Francisco-Ibanez-Pina"
 temas:
   - neurologia-clinica-traslacional
-draft: false
-portafolio: "https://portafolio-academico.uchile.cl/perfil/50485-Carlos-Francisco-Ibanez-Pina"
+  - neurociencia-cognitiva
+  - "Adicciones"
+afiliacion:
+  - texto: "Departamento de Neurociencia"
+  - texto: "Departamento de psiquiatría y salud mental norte"
+  - texto: "Centro para la prevención del consumo de sustancias y el tratamiento de las adicciones (CESA)"
 ---
 
-Adicciones; salud mental; psiquiatría; marcadores y respuesta a tratamiento en trastornos psiquiátricos.
-
-## Formación
-
-Médico cirujano, U. de Concepción; especialista en Psiquiatría Adultos, U. de Chile. Magíster en Ciencias Médicas y Biológicas mención Neurociencias y Doctorado en Ciencias Médicas, U. de Chile.
-
-## Afiliación
-
-Director del Depto. de Psiquiatría y Salud Mental (Norte). Jefe de la Unidad de Adicciones, Clínica Psiquiátrica Universitaria. Depto. de Neurociencia.
+Trabajo en trastornos adictivos desde la neurociencia hasta la salud pública, pasando por prevenciones y tratamiento de adicciones químicas y conductuales

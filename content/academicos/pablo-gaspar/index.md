@@ -1,12 +1,16 @@
 ---
 title: "Pablo Arturo Gaspar Ramos"
+display_name: "Pablo A. Gaspar"
 role: "Profesor Asociado"
+degree: "Doctor en Medicina, P. Universidad Católica de Chile"
+email: "pagaspar@uchile.cl"
+orcid: "https://orcid.org/0000-0002-9682-5327"
+portafolio: "https://portafolio-academico.uchile.cl/perfil/42066-Pablo-Arturo-Gaspar-Ramos"
 temas:
   - neurologia-clinica-traslacional
   - neuropsicologia-cognicion
-draft: false
-orcid: "https://orcid.org/0000-0002-9682-5327"
-portafolio: "https://portafolio-academico.uchile.cl/perfil/42066-Pablo-Arturo-Gaspar-Ramos"
+  - neurociencia-cognitiva
+  - neurociencia-computacional-ia
 image: "/uploads/pablo-gaspar.jpg"
 ---
 

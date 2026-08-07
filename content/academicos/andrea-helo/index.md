@@ -1,19 +1,24 @@
 ---
 title: "Andrea Verónica Helo Herrera"
+display_name: "Andrea Helo"
 role: "Profesora Asociada"
-temas:
-  - neurociencia-desarrollo
-  - neurociencia-cognitiva
-draft: false
+degree: "Doctora en Neurociencias Cognitivas"
+email: "ahelo@uchile.cl"
+orcid: "https://orcid.org/0000-0002-0912-7476"
 portafolio: "https://portafolio-academico.uchile.cl/perfil/44197-Andrea-Veronica-Helo-Herrera"
+temas:
+  - neurociencia-cognitiva
+  - neurociencia-desarrollo
+  - "EEG"
+  - "Eye tracking"
+  - "Desarrollo del lenguaje"
+afiliacion:
+  - texto: "Departamento de Neurociencia"
+  - texto: "Departamento de Fonoaudiología"
+  - texto: "Centro de Investigación Avanzada en Educación (CIAE)"
+proyectos:
+  - "FONDECYT Regular 1241884 | IR | 2024-2028 | Born too soon: Investigating the Interaction between Environmental and Individual Factors for Early Lexical Acquisition in Preterm Infants"
+  - "FONDECYT Regular 1241884 | Co-invest. | 2024-2027 | Decodificación y comprensión lectora en escolares con TDL de 4° básico"
 ---
 
-Psicolingüística; desarrollo del vocabulario y aprendizaje de palabras en la infancia; rol del control atencional en el lenguaje; lenguaje y atención visual en niños con Trastorno del Desarrollo del Lenguaje (TEL); eye-tracking; comprensión lectora.
-
-## Formación
-
-Fonoaudióloga, U. de Chile (2002). Doctorado en el área de psicología/psicolingüística .
-
-## Afiliación
-
-Deptos. de Fonoaudiología y de Neurociencia. Centro de Investigación Avanzada en Educación (CIAE) / Instituto de Estudios Avanzados en Educación.
+Investigo el desarrollo cognitivo y lingüístico en poblaciones típicas y atípicas, con énfasis en el procesamiento del lenguaje, la adquisición de vocabulario y los factores individuales y ambientales que influyen en su desarrollo. Utilizo principalmente técnicas de seguimiento ocular y EEG, con especial interés en niños nacidos prematuramente y con TDL.

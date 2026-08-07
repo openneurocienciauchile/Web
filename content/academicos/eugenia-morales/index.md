@@ -1,20 +1,45 @@
 ---
-title: Eugenia Paola Morales Retamales
-role: Profesora Titular
-email: pmorales@med.uchile.cl
-orcid: https://orcid.org/0000-0001-8914-2977
-portafolio: https://portafolio-academico.uchile.cl/perfil/29669-Eugenia-Paola-Morales-Retamales
+title: "Eugenia Paola Morales Retamales"
+display_name: "Paola Morales R"
+role: "Profesora Titular"
+degree: "Doctora en Ciencias Biomédicas, U. de Chile, 2005"
+email: "pmorales@uchile.cl"
+orcid: "https://orcid.org/0000-0001-8914-2977"
+portafolio: "https://portafolio-academico.uchile.cl/perfil/29669-Eugenia-Paola-Morales-Retamales"
 temas:
-  - neurociencia-desarrollo
   - neurobiologia-molecular-celular
-image: /uploads/Paola Morales-1.jpeg
+  - neurociencia-desarrollo
+  - envejecimiento-neurodegeneracion
+  - "Neurofarmacología"
+  - "Adicciones"
+image: "/uploads/Paola Morales-1.jpeg"
+afiliacion:
+  - texto: "Laboratorio Neurofarmacología"
+  - texto: "Departamento de Neurociencias"
+  - texto: "Núcleo Transdisciplinario Farmacologia & Inmunología, ICBM"
+  - texto: "Centro Especializado para la prevención del consumo de Sustancias y el tratamiento de las Adicciones (CESA)"
+bio: |
+  La Dra. Paola Morales Retamales es Profesora Titular de la Universidad de Chile, adscrita al Departamento de Neurociencia, al Núcleo Interdisciplinario de Farmacología e Inmunología (ICBM) y al Centro Especializado para la Prevención del Consumo de Sustancias y el Tratamiento de las Adicciones (CESA). Bióloga, Magíster en Ciencias Biológicas con mención en Neurobiología y Ciencias de la conducta,  y Doctora en Ciencias Biomédicas por la Universidad de Chile,  su trayectoria académica de excelencia cuenta con un postdoctorado en la University of Prince Edward Island (Canadá) y destacadas pasantías e invitaciones científicas en prestigiosas instituciones internacionales, como el Karolinska Institutet (Suecia), donde profundizó en cultivos dopaminérgicos y neuroquímica, el Central Institute of Mental Health de Mannheim y el European Neuroscience Institute en Göttingen (Alemania), así como en la Universidad de Cagliari (Italia). Como investigadora principal de proyectos FONDECYT y co-inventora de patentes biotecnológicas, lidera estudios sobre neuroinflamación, estrés oxidativo, disfunción mitocondrial y neurogénesis postnatal en modelos de asfixia perinatal y adicciones (alcohol, opioides y nicotina), proponiendo bioterapias traslacionales con secretomas y exosomas de células madre mesenquimales, moduladores antioxidantes y fármacos de rescate bioenergético para mitigar secuelas neurológicas de largo plazo. Su labor investigativa se refleja en más de 80 publicaciones indexadas internacionalmente (ISI/WoS), un índice H de 32 y cerca de 3000 citaciones acumuladas a nivel global. Su liderazgo y reconocimiento nacional e internacional se consolidan a través de su rol como conferencista en congresos mundiales (FENS, ESBRA, IBRO, Neurotoxicity Society), revisora de proyectos y revistas de alto impacto, y científica consultora de organismos públicos como el SENDA. Además, su compromiso académico se refleja en la formación de capital humano, habiendo supervisado y dirigido más de medio centenar de tesis de pregrado, magíster, doctorado y proyectos postdoctorales.
+publicaciones:
+  - "Wille-Bille A, Peñalver Abed P, Ravasi C, Fornero L, Fabio MC, Morales P, Landskron G, Ezquer F, Pautassi RM. Early ethanol exposure during gestation and lactation disrupts gut integrity and enhances ethanol intake in C57BL/6 mice offspring. Alcohol. 2026 May 28;135:1-10. doi: 10.1016/j.alcohol.2026.05.004. Epub ahead of print. PMID: 42214645."
+  - "Díaz-Urbina E, Almarza C, Davidson H, Cortés A, Lobos P, Karahanian E, Inzunza J, Ezquer F, Morales P, Urra FA, Herrera-Marschitz M. Long-term region-specific mitochondrial respiration impairment after perinatal asphyxia is prevented by the NAD⁺ donor nicotinamide riboside: A real-time organotypic metabolic profiling approach. Pharmacol Res. 2026 Apr 13;227:108190. doi: 10.1016/j.phrs.2026.108190. Epub ahead of print. PMID: 41985771."
+  - "Contador D, Berríos-Cárcamo P, Gallardo J, Rodrigo A Acuña A , De Gregorio, Urbina F , Aguirre-Muñoz F , González-Madrid A , Núñez S , Diaz E, Morales P, Herrera-Marchitz M, Luarte A, Alarcón-Zapata P, Valenzuela-Martínez I, Ezquer M, Klein A, Ezquer F. Methadone induced lysosomal phospholipidosis underlies astrocyte dysfunction in the developing brain: evidence from in vitro and in vivo models. Submitted to Journal of Advanced Research (IF 13.0)"
+  - "Díaz-Ubilla M, Figueroa-Valdés AI, Tobar HE, Quintanilla ME, Díaz E, Morales P, Berríos-Cárcamo P, Santapau D, Gallardo J, of Gregorio C, Ugalde J, Rojas C, Gonzalez-Madrid A, Ezquer M, Israel Y, Alcayaga-Miranda F, Ezquer F. Gut Microbiota-Derived Extracellular Vesicles Influence Alcohol Intake Preferences in Rats. J Extracell Vesicles. 2025 Mar;14(3):e70059. doi: 10.1002/jev2.70059. PMID: 40098337; PMCID: PMC11913890."
+  - "Zamorano-Cataldo M, Vega-Vásquez I, García-Navarrete C, Toledo J, Bustamante D, Ezquer F, Urra FA, Farfán-Troncoso N, Herrera-Marschitz M, Morales P. Mitochondrial dynamics and sex-specific responses in the developing rat hippocampus: Effect of perinatal asphyxia and mesenchymal stem cell Secretome treatment. Biochim Biophys Acta Mol Cell Res. 2024 Dec;1871(8):119851. doi: 10.1016/j.bbamcr.2024.119851. Epub 2024 Sep 25. PMID: 39332539."
+  - "6: Quintanilla ME, Morales P, Santapau D, Gallardo J, Rebolledo R, Riveras G, Acuña T, Herrera-Marschitz M, Israel Y, Ezquer F. Morphine self-administration is inhibited by the antioxidant N-acetylcysteine and the anti-inflammatory ibudilast; an effect enhanced by their co-administration. PLoS One. 2024 Oct 29;19(10):e0312828. doi: 10.1371/journal.pone.0312828. PMID: 39471200; PMCID: PMC11521314."
+  - "Tapia-Bustos A, Lespay-Rebolledo C, Vío V, Pérez-Lobos R, Casanova-Ortiz E, Ezquer F, Herrera-Marschitz M, Morales P. Neonatal Mesenchymal Stem Cell Treatment Improves Myelination Impaired by Global Perinatal Asphyxia in Rats. Int J Mol Sci. 2021 Mar 23;22(6):3275. doi: 10.3390/ijms22063275. PMID: 33806988; PMCID: PMC8004671."
+  - "González LF, Acuña E, Arellano G, Morales P, Sotomayor P, Oyarzun-Ampuero F, Naves R. Intranasal delivery of interferon-β-loaded nanoparticles induces control of neuroinflammation in a preclinical model of multiple sclerosis: A promising simple, effective, non-invasive, and low-cost therapy. J Control Release. 2021 Mar 10;331:443-459. doi: 10.1016/j.jconrel.2020.11.019. Epub 2020 Nov 18. PMID: 33220325."
+  - "Farfán N, Carril J, Redel M, Zamorano M, Araya M, Monzón E, Alvarado R, Contreras N, Tapia-Bustos A, Quintanilla ME, Ezquer F, Valdés JL, Israel Y, Herrera-Marschitz M, Morales P. I{ntranasal Administration of Mesenchymal Stem Cell Secretome Reduces Hippocampal Oxidative Stress, Neuroinflammation and Cell Death, Improving the Behavioral Outcome Following Perinatal Asphyxia. Int J Mol Sci. 2020 Oct 21;21(20):7800. doi: 10.3390/ijms21207800. PMID: 33096871; PMCID: PMC7589575."
+  - "Morales P, Bustamante D, Espina-Marchant P, Neira-Peña T, Gutiérrez-Hernández MA, Allende-Castro C, Rojas-Mancilla E. Pathophysiology of perinatal asphyxia: can we predict and improve individual outcomes? EPMA J. 2011 Jun;2(2):211-30.doi: 10.1007/s13167-011-0100-3. Epub 2011 Jul 26. PubMed PMID: 23199150; PubMed Central PMCID: PMC3405380."
+proyectos:
+  - "RNIT 2025-2026 # code RC0125Red-CESA: Transdisciplinary Network on Addictions and Public Health. PI: P. Morales"
+  - "Fondecyt 1262622  (2026-2029)Targeting “Tricarboxylic Acid Cycle Disruption and Mitochondrial Redox Imbalance induced by Perinatal Asphyxia: Dimethyl Fumarate as a novel Neuroprotective Strategy”  PI. Paola Morales R, ICBM Center for Pharmacology and Immunology: https://uchile.cl/m237068. https://uchile.cl/m238553"
+  - "Health Research and Innovation Fund (FIIS-2023) (2023-2024) Effect of deep brain stimulation of the substantia nigra pars compacta on neuroinflammation and oxidative stress in a murine model of Parkinson’s disease CI  Morales P."
+  - "Fondecyt 1240162 (2024-2028),Mesenchymal stem cell-derived secretome: A multitarget intervention to reduce long-term disabilities induced by in utero opioid exposure. Co-I Morales P,"
+  - "Fondecyt 1231443 Co-PI (2023-2027) Pharmacologically induced NAD+ replacement reverses mitochondrial dysfunction and rescue from the long term metabolic deficits induced by perinatal asphyxia (PA) in brain tissue: nucleotide salvage pathway and sentinel proteins as therapeutic targets. Co-I Morales P,"
+  - "FONDECYT 1200287 (2020-2024) Opioid addiction and associated cognitive damage: Inhibition by intranasal mesenchymal stem cell secretome administration. Co-I Morales P, Israel Y, Quintanilla ME, Herrera-Marschitz M. Co-I"
+  - "FONDECYT 3210771 (2021-2024) Mesenchymal stem cells-secretome to the rescue of mitochondrial integrity in perinatal asphyxia via NRF2 PI Nancy farfán Postdoctoral Project, Sponsor Investigator"
+  - "FONDECYT 1190562 (2019-2022).  Mesenchymal stem cells-secretome provides protection in neonatal hypoxia- reoxygenation. Mechanisms and translational studies PI: P. Morales,"
 ---
-Neurofarmacología y neuroquímica; neuroprotección y neuroplasticidad; fisiopatología de la asfixia perinatal; secretomas de células madre mesenquimales (vía intranasal) para daño cerebral neonatal; neurogénesis postnatal.
 
-## Formación
-
-Licenciada en Ciencias, Magíster y Doctora en Ciencias Biomédicas, U. de Chile.
-
-## Afiliación
-
-Depto. de Neurociencia e ICBM (Programa de Farmacología Molecular y Clínica).
+Investigo la neuroinflamación, el estrés oxidativo y alteraciones bioenergéticas que vulneran al cerebro al nacer (por asfixia perinatal) y en adicciones durante la juventud o adultez. Analizo cómo estos insultos dañan la plasticidad y sobrevida de las células neurales y gliales. Mi meta es desarrollar y validar bioterapias de vanguardia, como secretomas de células madre y moléculas antioxidantes, para reparar el daño, mitigar secuelas a largo plazo y restaurar la función cerebral.
