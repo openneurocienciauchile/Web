@@ -26,14 +26,20 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
   falla por archivo bloqueado, reintenta.
 - **Auth de git en macOS (resuelto 2026-08-10):** el remoto exige la cuenta
   `openneurocienciauchile`, pero la cuenta activa de `gh` suele ser `HayoBK` (se usa en los otros
-  dos repos). Antes, el helper del repo era `osxkeychain` sin la credencial de la cuenta del
-  depto, así que `git push` moría con
+  dos repos). El `osxkeychain` no tenía guardada la credencial de la cuenta del depto, así que
+  `git push` moría con
   `fatal: could not read Password for 'https://openneurocienciauchile@github.com': Device not configured`
   — y el sitio "no se actualizaba" porque el push nunca ocurría, aunque el build estuviera verde.
-  Este repo tiene ahora, **solo en su config local**, `credential.helper = !gh auth git-credential`,
-  así que el push funciona sin `gh auth switch`. `LabONCE` y la web personal siguen con
-  `osxkeychain`, intactos. Si el error reaparece:
-  `gh auth switch --user openneurocienciauchile`, push, y `gh auth switch --user HayoBK` al final.
+  **Solución aplicada:** se guardó el token de esa cuenta en el keychain, de modo que el push
+  funciona con `osxkeychain` y **sin depender de cuál sea la cuenta activa de `gh`**:
+  ```bash
+  T=$(gh auth token --user openneurocienciauchile)
+  printf "protocol=https\nhost=github.com\nusername=openneurocienciauchile\npassword=%s\n\n" "$T" \
+    | git credential-osxkeychain store
+  ```
+  OJO: `credential.helper = !gh auth git-credential` **no** sirve acá — resuelve el token de la
+  cuenta ACTIVA de `gh`, así que falla igual apenas se vuelve a `HayoBK` (probado y descartado).
+  Si el token se revoca o expira, volver a correr esas dos líneas.
 - **Verifica que el push ocurrió de verdad**, no solo el commit: `git log --oneline origin/main..main`
   debe quedar vacío. Un run verde en Actions puede ser de un commit ANTERIOR — mira su hash y fecha
   antes de darlo por publicado.
