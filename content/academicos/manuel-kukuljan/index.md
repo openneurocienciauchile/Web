@@ -4,6 +4,7 @@ role: "Profesor Titular"
 temas:
   - neurobiologia-molecular-celular
   - neurociencia-desarrollo
+image: "/uploads/manuel-kukuljan.jpg"
 draft: false
 portafolio: "https://portafolio-academico.uchile.cl/perfil/22127-Manuel-Arturo-Kukuljan-Padilla"
 ---
@@ -16,4 +17,4 @@ Médico cirujano, U. de Valparaíso. Doctor en Ciencias Biomédicas (1994), U. d
 
 ## Afiliación
 
-Depto. de Neurociencia e ICBM. Miembro fundador del BNI. DECANO de la Facultad de Medicina, U. de Chile.
+Depto. de Neurociencia e ICBM. Miembro fundador del BNI. Ex-Decano de la Facultad de Medicina, U. de Chile.
