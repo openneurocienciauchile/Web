@@ -158,6 +158,15 @@
   /* En el HOME: barra transparente sobre el hero (continua con el azul) */
   html.neuro-home #site-header{ position:absolute; top:0; left:0; right:0; z-index:30; background:transparent !important; }
 
+  /* ── Franja blanca bajo el navbar (CONVENCIÓN) ──
+     El tema envuelve el contenido en <div class="page-body my-10">. Ese margen
+     superior de 2.5rem deja una franja BLANCA entre el navbar y cualquier
+     elemento que abra la página a sangre y con fondo oscuro (p.ej. las barras
+     de breadcrumb de noticias y eventos).
+     Para evitarlo: agrega la clase `neuro-bleed-top` al PRIMER elemento de la
+     plantilla cuando vaya a sangre. No hace falta tocar este archivo de nuevo. */
+  .page-body:has(> .neuro-bleed-top){ margin-top:0; }
+
   /* ── Menú móvil (#nav-menu): fondo sólido solo bajo lg, para que las
      opciones se lean. En desktop el menú va inline y no se toca. ── */
   @media (max-width:1023px){

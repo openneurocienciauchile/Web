@@ -98,6 +98,14 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
   `.Pages` por sección). Cualquier tag escrito libremente en `temas:` (en fichas, noticias, labs,
   eventos) crea su term page solo y entra a la nube. Las 9 carpetas `content/temas/<slug>/_index.md`
   son descripciones curadas de esos términos; los demás tags son libres.
+- **`page-body my-10` y la franja blanca (CONVENCIÓN, 2026-08-10):** el tema envuelve TODO el
+  contenido en `<div class="page-body my-10">`. Ese margen superior de 2.5rem se ve como una
+  **franja blanca** entre el navbar y cualquier elemento que abra la página **a sangre y con fondo
+  oscuro** — pasó con las barras de breadcrumb de noticias (`.npost-breadcrumb`) y eventos
+  (`.evs-breadcrumb`). **Regla: al primer elemento de la plantilla, si va a sangre, agrégale la
+  clase `neuro-bleed-top`.** La regla `.page-body:has(> .neuro-bleed-top){ margin-top:0 }` vive en
+  `custom.html` y se encarga sola; no hay que tocar ese archivo de nuevo. En páginas que empiezan
+  con fondo claro NO se pone la clase: ahí el margen sí se quiere.
 - **Ficha de académico:** `content/academicos/<slug>/index.md` (excepciones: `HB/HB.md`, `JS/JS.md`).
   Campos: `title, role, degree, email, orcid, portafolio, temas` (lista), `image`,
   `afiliacion` (lista de `{texto,url,rol}`), `youtube`, `bio, publicaciones, proyectos, body`.
