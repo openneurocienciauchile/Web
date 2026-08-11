@@ -4,7 +4,7 @@ title: El Departamento de Neurociencia acercó el cerebro a niñas y niños en e
 subtitle: El Departamento llevó el cerebro a la Casa Central con un taller
   interactivo para niñas y niños.
 date: 2026-08-11
-draft: true
+draft: false
 image: /uploads/WhatsApp Image 2026-08-11 at 10.30.06 AM (1)-1.jpeg
 ---
 El sábado 8 de agosto, la Casa Central de la Universidad de Chile abrió sus puertas a niñas, niños y sus familias con la jornada **"Día de las Infancias en Casa Central: Encuentro de ciencias, artes y conocimientos"**, organizada por la Vicerrectoría de Extensión y Comunicaciones. Entre la variada oferta de talleres guiados por académicos, investigadoras y estudiantes de la universidad, el **Departamento de Neurociencia de la Facultad de Medicina** tuvo un rol protagónico dentro del circuito de ciencias con el taller **"Conociendo tu cerebro"**.
