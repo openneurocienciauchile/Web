@@ -29,9 +29,10 @@ El taller fue posible gracias al trabajo conjunto entre el Departamento de Neuro
 
 Para el Departamento de Neurociencia, participar en instancias como esta reafirma su compromiso con la divulgación científica y con acercar el conocimiento sobre el sistema nervioso a públicos de todas las edades, fuera de las aulas universitarias y en diálogo directo con la comunidad. El taller "Conociendo tu cerebro" se suma así a los esfuerzos del Departamento por posicionar la neurociencia como un campo cercano, tangible y abierto a la curiosidad infantil.
 
-*Todas las actividades del Día de las Infancias fueron gratuitas y abiertas a público general.*  
----
+*Todas las actividades del Día de las Infancias fueron gratuitas y abiertas a público general.*
 
 *Links de interés:* 
-- https://uchile.cl/noticias/243309/u-de-chile-celebra-el-dia-de-las-infancias-con-una-jornada-de-talleres-
-- https://uchile.cl/noticias/242987/la-u-de-chile-abrira-casa-central-con-actividades-gratuitas-para-infancias
+
+- [https://uchile.cl/noticias/243309/u-de-chile-celebra-el-dia-de-las-infancias-con-una-jornada-de-talleres-](https://uchile.cl/noticias/243309/u-de-chile-celebra-el-dia-de-las-infancias-con-una-jornada-de-talleres-)
+- [https://uchile.cl/noticias/242987/la-u-de-chile-abrira-casa-central-con-actividades-gratuitas-para-infancias](https://uchile.cl/noticias/242987/la-u-de-chile-abrira-casa-central-con-actividades-gratuitas-para-infancias)
+
