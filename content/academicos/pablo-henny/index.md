@@ -5,6 +5,7 @@ temas:
   - neuromodulacion-control-motor
   - neurobiologia-molecular-celular
 draft: false
+orcid: "https://orcid.org/0000-0001-8470-8222"
 ---
 
 Neuroanatomía y neurofisiología de neuronas dopaminérgicas mesencefálicas (sustancia negra, área tegmental ventral); relación estructura-función a nivel de neuronas únicas; control motor y motivación; Parkinson; segmento inicial del axón.

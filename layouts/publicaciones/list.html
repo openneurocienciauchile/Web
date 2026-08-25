@@ -1,0 +1,145 @@
+{{/*
+  layouts/publicaciones/list.html
+  Listado agregado de publicaciones del Departamento.
+  Fusiona dos fuentes:
+    1. data/publicaciones_orcid.json -- escrito a diario por
+       scripts/orcid_sync.py (GitHub Action orcid.yml).
+    2. El campo `publicaciones` curado a mano por Pages CMS en cada ficha
+       de content/academicos/<slug>/index.md.
+  Agrupa por ano (a mano: `group` no opera sobre listas de data/, solo
+  sobre colecciones de paginas -- ver GUIA-REPLICAR-SITIO-ACADEMICO.md
+  seccion 11). Los anos de origen JSON llegan como float64 y los de
+  origen YAML/front-matter como int: todo se castea con `int` antes de
+  agrupar o comparar, para no terminar con dos bloques del mismo ano.
+*/}}
+{{ define "main" }}
+
+<div class="container mx-auto px-6 py-12" data-pagefind-body>
+
+  <h1 class="text-3xl font-bold mb-4">{{ .Title }}</h1>
+  {{- with .Content }}<div class="prose max-w-none mb-8">{{ . }}</div>{{ end }}
+
+  {{/* ---- Fusionar ORCID (automatica) + curada por CMS en cada ficha ---- */}}
+  {{ $todas := slice }}
+  {{ $actualizado := "" }}
+  {{ with hugo.Data.publicaciones_orcid }}
+    {{ with .actualizado }}{{ $actualizado = . }}{{ end }}
+    {{ with .publicaciones }}{{ $todas = $todas | append . }}{{ end }}
+  {{ end }}
+
+  {{ $academicos := where site.RegularPages "Section" "academicos" }}
+  {{ range $academicos }}
+    {{ $pubs := .Params.publicaciones }}
+    {{ if reflect.IsSlice $pubs }}
+      {{ range $pubs }}
+        {{ if reflect.IsMap . }}
+          {{ $todas = $todas | append (dict
+            "titulo" (.titulo | default "")
+            "autores" ""
+            "revista" (.revista | default "")
+            "doi" ""
+            "url" (.link | default "")
+            "anio" (.año | default 0)
+            "tipo" ""
+            "miembros" slice
+            "fuente" "curada") }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{/* Descarta entradas sin ano detectable: no se pueden agrupar */}}
+  {{ $conAnio := slice }}
+  {{ range $todas }}{{ if ne (int .anio) 0 }}{{ $conAnio = $conAnio | append . }}{{ end }}{{ end }}
+  {{ $todas = $conAnio }}
+
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-2">
+    <input type="search" id="pub-buscar" placeholder="Buscar por autor, titulo, revista o DOI..."
+           class="w-full sm:w-96 border border-gray-300 rounded px-3 py-2 text-sm"
+           aria-label="Buscar publicaciones">
+    <span class="text-sm text-gray-500" id="pub-contador">{{ len $todas }} de {{ len $todas }}</span>
+  </div>
+  {{- with $actualizado }}
+  <p class="text-xs text-gray-400 mb-8">Publicaciones desde ORCID actualizadas el {{ . }}.</p>
+  {{- else }}
+  <p class="text-xs text-gray-400 mb-8">La sincronizacion con ORCID aun no se ha ejecutado.</p>
+  {{- end }}
+
+  {{ $anios := slice }}
+  {{ range $todas }}{{ $anios = $anios | append (int .anio) }}{{ end }}
+  {{ $anios = sort (uniq $anios) "value" "desc" }}
+
+  {{ range $anio := $anios }}
+    {{ $delAnio := slice }}
+    {{ range $todas }}{{ if eq (int .anio) $anio }}{{ $delAnio = $delAnio | append . }}{{ end }}{{ end }}
+    <div class="pub-anio mb-8" data-anio="{{ $anio }}">
+      <div class="flex items-baseline gap-3 border-b-2 border-blue-100 pb-1 mb-3">
+        <h2 class="text-xl font-bold text-blue-900">{{ $anio }}</h2>
+        <span class="text-sm text-gray-500">{{ len $delAnio }} {{ cond (eq (len $delAnio) 1) "publicacion" "publicaciones" }}</span>
+      </div>
+      <ul class="pub-lista">
+        {{ range $delAnio }}{{ partial "publicacion.html" . }}{{ end }}
+      </ul>
+    </div>
+  {{ end }}
+
+  <p class="text-sm text-gray-500 hidden" id="pub-vacio">Sin resultados para esa busqueda.</p>
+
+</div>
+
+<script>
+(function(){
+  var caja = document.getElementById("pub-buscar");
+  if(!caja) return;
+  var bloques = Array.prototype.slice.call(document.querySelectorAll(".pub-anio"));
+  var contador = document.getElementById("pub-contador");
+  var vacio = document.getElementById("pub-vacio");
+
+  // Colapsar automaticamente los anos con muchas publicaciones, para no
+  // pintar cientos de items de una vez. Se muestran todas al buscar.
+  var LIMITE = 25;
+  bloques.forEach(function(bloque){
+    var items = Array.prototype.slice.call(bloque.querySelectorAll(".pub-lista > li"));
+    if(items.length > LIMITE){
+      items.slice(LIMITE).forEach(function(li){ li.dataset.colapsado = "1"; li.hidden = true; });
+      var boton = document.createElement("button");
+      boton.type = "button";
+      boton.className = "text-sm text-blue-600 hover:underline mt-2";
+      var restantes = items.length - LIMITE;
+      boton.textContent = "Mostrar " + restantes + " mas de " + bloque.dataset.anio;
+      boton.addEventListener("click", function(){
+        items.slice(LIMITE).forEach(function(li){ li.dataset.colapsado = "0"; li.hidden = false; });
+        boton.remove();
+      });
+      bloque.appendChild(boton);
+    }
+  });
+
+  var items = Array.prototype.slice.call(document.querySelectorAll(".pub-anio li"));
+  var total = items.length;
+  function normalizar(s){ return (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+  var indice = items.map(function(el){ return normalizar(el.textContent); });
+
+  function filtrar(){
+    var q = normalizar(caja.value).trim();
+    var visibles = 0;
+    items.forEach(function(el, i){
+      var coincide = !q || indice[i].indexOf(q) !== -1;
+      if(q){
+        el.hidden = !coincide;                       // buscando: ignora el limite por ano
+      } else {
+        el.hidden = el.dataset.colapsado === "1";     // sin busqueda: respeta el limite
+      }
+      if(!el.hidden) visibles++;
+    });
+    bloques.forEach(function(bloque){
+      var algo = bloque.querySelector("li:not([hidden])");
+      bloque.hidden = !algo;
+    });
+    if(contador) contador.textContent = visibles + " de " + total;
+    if(vacio) vacio.hidden = visibles !== 0;
+  }
+  caja.addEventListener("input", filtrar);
+})();
+</script>
+{{ end }}

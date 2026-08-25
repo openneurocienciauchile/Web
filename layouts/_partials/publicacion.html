@@ -1,0 +1,26 @@
+{{- /*
+  layouts/_partials/publicacion.html
+  Renderiza una publicacion del listado agregado de Publicaciones del
+  Departamento y de la seccion "Desde ORCID" de cada ficha de academico.
+  Recibe una entrada de data/publicaciones_orcid.json (fuente "orcid") o
+  una publicacion curada a mano por CMS ya normalizada a la misma forma
+  (fuente "curada"): mismo layout, dos origenes.
+  Campos esperados: titulo, autores (HTML seguro, puede venir vacio),
+  revista, doi, url, anio, miembros, fuente.
+*/ -}}
+{{- $p := . -}}
+<li class="py-3 border-b border-gray-100 last:border-0">
+  <h3 class="font-semibold text-gray-900 leading-snug">
+    {{- if $p.url }}<a href="{{ $p.url }}" target="_blank" rel="noopener" class="hover:text-blue-600">{{ $p.titulo }}</a>{{ else }}{{ $p.titulo }}{{ end -}}
+  </h3>
+  {{- with $p.autores }}
+  <p class="text-sm text-gray-700 mt-1">{{ . | safeHTML }}</p>
+  {{- end }}
+  <p class="text-sm text-gray-500 mt-1">
+    {{- with $p.revista }}<span>{{ . }}</span>{{ end }}
+    {{- with $p.doi }}
+      <a class="text-blue-600 hover:underline ml-2" href="https://doi.org/{{ . }}" target="_blank" rel="noopener">doi:{{ . }}</a>
+    {{- end }}
+    {{- if and (not $p.doi) $p.url }}<a class="text-blue-600 hover:underline ml-2" href="{{ $p.url }}" target="_blank" rel="noopener">enlace</a>{{ end }}
+  </p>
+</li>

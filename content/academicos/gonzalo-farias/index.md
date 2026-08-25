@@ -7,6 +7,7 @@ temas:
 draft: false
 portafolio: "https://portafolio-academico.uchile.cl/perfil/46476-Gonzalo-Andr%C3%A9s-Far%C3%ADas-Gontupil"
 image: "/uploads/gonzalo-farias.jpg"
+orcid: "https://orcid.org/0000-0002-7979-8398"
 ---
 
 Enfermedades neurodegenerativas (Alzheimer, Parkinson); biomarcadores bioquímicos, de neuroimagen y neuropsicológicos; neuroinflamación; nuevas terapias; diagnóstico temprano de demencias.

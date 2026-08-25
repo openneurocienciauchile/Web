@@ -17,6 +17,10 @@ main:
     url: temas/
     weight: 40
 
+  - name: Publicaciones
+    url: publicaciones/
+    weight: 45
+
   - name: Actualidad
     url: blog/
     weight: 50

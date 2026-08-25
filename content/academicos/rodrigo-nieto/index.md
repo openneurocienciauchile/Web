@@ -2,6 +2,7 @@
 title: "Rodrigo Antonio Nieto Rojas"
 role: "Profesor Asistente"
 email: "rnieto@uchile.cl"
+orcid: "https://orcid.org/0000-0002-4598-8951"
 temas:
   - neurologia-clinica-traslacional
   - neuropsicologia-cognicion

@@ -6,6 +6,7 @@ temas:
   - neurociencia-computacional-ia
 draft: false
 portafolio: "https://portafolio-academico.uchile.cl/perfil/62914-Christ-Alejandra-Devia-Manriquez"
+orcid: "https://orcid.org/0000-0002-2416-0864"
 ---
 
 Neurociencia cognitiva y de sistemas; percepción activa (relación entre actividad neuronal y movimientos oculares); EEG, pupilometría y atención visual; estados de reposo (resting-state); memoria de trabajo; sincronía neuronal; modelos de redes complejas de estados cerebrales.
