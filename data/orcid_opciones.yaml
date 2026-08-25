@@ -1,0 +1,34 @@
+# ============================================================
+# OPCIONES DEL SINCRONIZADOR ORCID -> PUBLICACIONES DEL DEPARTAMENTO
+#
+# El ORCID de cada academico/a NO vive aqui: vive en el campo `orcid` del
+# front-matter de content/academicos/<slug>/index.md (el mismo campo que
+# edita Pages CMS). Este archivo solo trae las opciones generales del
+# robot -- asi no hay dos lugares donde se pueda desincronizar el ORCID de
+# alguien.
+#
+# scripts/orcid_sync.py lee content/academicos/*/index.md una vez al dia
+# (GitHub Action .github/workflows/orcid.yml), consulta la API publica de
+# ORCID para quienes tengan `orcid` no vacio, y escribe
+# data/publicaciones_orcid.json.
+# ============================================================
+
+# Ano de corte. En 0 = sin corte: trae todo el registro publico de ORCID
+# de cada academico/a.
+anio_minimo: 0
+
+# Enriquecer cada publicacion con Crossref (autores completos, revista,
+# volumen, paginas).
+usar_crossref: true
+
+# Correo de contacto para el "polite pool" de Crossref y el User-Agent.
+correo_contacto: "webmaster@deptoneuro.med.uchile.cl"
+
+# Tipos de obra ORCID que se aceptan.
+tipos_aceptados:
+  - "journal-article"
+  - "book"
+  - "book-chapter"
+  - "conference-paper"
+  - "preprint"
+  - "review"
