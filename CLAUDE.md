@@ -60,9 +60,12 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
   pnpm en Actions está OK. (El bug solo obliga a usar npm para el build LOCAL en Windows.)
 
 ## Reglas de oro (cúmplelas siempre)
-1. **Valida el build antes de commitear.** Corre exactamente lo que corre el CI:
-   `HUGO_ENVIRONMENT=production hugo --minify` (en PowerShell: `$env:HUGO_ENVIRONMENT="production"; hugo --minify`).
+1. **Valida el build antes de commitear.** Corre `HUGO_ENVIRONMENT=production hugo --minify`
+   (en PowerShell: `$env:HUGO_ENVIRONMENT="production"; hugo --minify`).
    Si hay `ERROR`, arrégialo y vuelve a correr hasta que quede verde. No commitees en rojo.
+   **OJO (descubierto 2026-08-25): el build local NO usa la misma versión de Hugo que el CI.**
+   Ver "Versión de Hugo: local 0.162.1 vs CI 0.154.5" más abajo. Un build local verde NO
+   garantiza que el CI pase si usaste API de Hugo posterior a 0.154.5.
 2. **CMS-safe.** Todo lo que un editor deba poder cambiar va por **Pages CMS** (config en `.pages.yml`),
    no hardcodeado en plantillas.
 3. **CSS propio en un solo archivo:** `layouts/_partials/hooks/head-end/custom.html`, con clases
@@ -89,6 +92,37 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
    in this context` (pasó con un `summary` de LAB ONCE).
 
 ## Hechos de arquitectura
+- **Versión de Hugo: local 0.162.1 vs CI 0.154.5 (IMPORTANTE, 2026-08-25).** `hugoblox.yaml`
+  declara `build.hugo_version: '0.162.1'`, pero `.github/workflows/build.yml` la lee con
+  `yq '.hugo_version'` **a nivel raíz** — clave que no existe, porque está anidada bajo
+  `build:`. Al no encontrarla cae siempre a su `DEFAULT_VERSION="0.154.5"`, así que **el CI
+  nunca ha compilado con 0.162.1**. Se descubrió cuando un deploy murió con
+  `can't evaluate field Data in type interface {}` por usar `hugo.Data` (que no existe en
+  0.154.5) mientras el build local pasaba sin chistar.
+  **Regla práctica: escribe plantillas compatibles con 0.154.5.** En particular usa
+  `site.Data`, nunca `hugo.Data`. Para validar de verdad contra la versión del CI, baja ese
+  binario y compila con él:
+  ```bash
+  curl -sL -o h.pkg https://github.com/gohugoio/hugo/releases/download/v0.154.5/hugo_extended_0.154.5_darwin-universal.pkg
+  pkgutil --expand-full h.pkg hpkg     # el binario queda en hpkg/Payload/hugo
+  HUGO_ENVIRONMENT=production ./hpkg/Payload/hugo --minify
+  ```
+  Alinear ambas versiones (arreglando el `yq` a `.build.hugo_version`) es una tarea aparte y
+  con riesgo propio: subiría producción de 0.154.5 a 0.162.1 de golpe. Decisión de Hayo.
+- **Publicaciones vía ORCID (2026-08-25).** `scripts/orcid_sync.py` lee el ORCID iD del
+  front-matter de cada ficha, consulta la API pública de ORCID, deduplica, enriquece con
+  Crossref y escribe `data/publicaciones_orcid.json`. Si ORCID o Crossref fallan, conserva el
+  JSON anterior y sale en 0: nunca rompe el build. Corre solo con el cron de
+  `.github/workflows/orcid.yml` (08:25 UTC diario) que **commitea directo a `main`** — por eso
+  `main` puede avanzar sola en ese archivo y conviene hacer `git pull` antes de tocarlo.
+  El iD de cada persona vive SOLO en su ficha (una fuente de verdad); `data/orcid_opciones.yaml`
+  guarda únicamente año mínimo, uso de Crossref y tipos aceptados.
+  Consumen ese JSON `layouts/publicaciones/list.html` (el agregado del Departamento) y el
+  bloque "Desde ORCID" de `layouts/academicos/single.html`, que emparejan por el nombre de la
+  ficha contra el campo `miembros` de cada publicación. Corolario: **si cambias el `title` de
+  una ficha, sus publicaciones desaparecen hasta la próxima corrida del cron.**
+  Deps de Python locales: hay un venv en `~/.venvs/orcid` (Homebrew Python bloquea `pip install`
+  global por PEP 668). Tests sin red: `~/.venvs/orcid/bin/python scripts/test_orcid_sync.py`.
 - **Navbar = `#site-header`** (id del tema). Por defecto navy `#0A1533` + texto blanco. En el HOME,
   `html.neuro-home #site-header` lo hace transparente sobre el hero (un JS en `custom.html` agrega la
   clase `neuro-home` cuando existe `.neuro-hero`). En páginas internas se fuerza navy con
@@ -169,6 +203,12 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
 9. Limpiar deprecations de Hugo.
 
 ## FLAGS de contenido a verificar con Hayo
+- **ORCID iD faltantes (2 de 34):** Marco Contreras y Nicole Rogers. La API pública de ORCID
+  solo devuelve homónimos de otras áreas (ver `INFORME-ORCID.md`); lo más simple es pedirles su
+  iD y cargarlo por Pages CMS. Sin iD, no aparecen en `/publicaciones/`.
+- **Perfiles ORCID vacíos (iD correcto, 0 obras publicadas):** Couve, Catherine Pérez, Pablo
+  Henny y Manuel Kukuljan. Su ficha muestra "Aún no hay publicaciones sincronizadas"; se
+  arregla solo cuando ellos suban sus trabajos a ORCID, no hay nada que tocar en el sitio.
 - 2 fichas sin tema (Manzur #20, Martínez #21 — con Camino B se puede crear el tag, ej. "Neuroeducación").
 - 4 perfiles parciales por completar. Categorías RR.HH. a confirmar (Morales, Helo, Salech, Rivera, Olguín).
 - Género de Manzur (#20) asumido masculino — confirmar.
