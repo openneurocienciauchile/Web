@@ -22,7 +22,7 @@
   {{/* ---- Fusionar ORCID (automatica) + curada por CMS en cada ficha ---- */}}
   {{ $todas := slice }}
   {{ $actualizado := "" }}
-  {{ with hugo.Data.publicaciones_orcid }}
+  {{ with site.Data.publicaciones_orcid }}
     {{ with .actualizado }}{{ $actualizado = . }}{{ end }}
     {{ with .publicaciones }}{{ $todas = $todas | append . }}{{ end }}
   {{ end }}

@@ -223,7 +223,7 @@
       {{ if $matches }}
         {{ $oid := index $matches 0 }}
         {{ $mias := slice }}
-        {{ with hugo.Data.publicaciones_orcid }}
+        {{ with site.Data.publicaciones_orcid }}
           {{ range .publicaciones }}
             {{ if in (.miembros | default slice) $miTitulo }}
               {{ $mias = $mias | append . }}
