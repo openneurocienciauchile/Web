@@ -216,77 +216,38 @@
       <hr class="my-4">
     {{ end }}
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-
-  const orcid = "{{ .Params.orcid }}".split("/").pop();
-  if (!orcid) return;
-
-  fetch(`https://pub.orcid.org/v3.0/${orcid}/works`, {
-    headers: { "Accept": "application/json" }
-  })
-  .then(res => res.json())
-  .then(data => {
-
-    const container = document.getElementById("orcid-list");
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    let works = data.group || [];
-
-    // 🔽 Extraer info útil
-    let parsed = works.map(work => {
-      const summary = work["work-summary"][0];
-
-      return {
-        title: summary.title?.title?.value || "Sin título",
-        year: parseInt(summary["publication-date"]?.year?.value) || 0
-      };
-    });
-
-    // 🔽 ORDENAR por año (más reciente primero)
-    parsed.sort((a, b) => b.year - a.year);
-
-    // 🔽 TOMAR SOLO 5
-    parsed.slice(0, 5).forEach(pub => {
-
-      const div = document.createElement("div");
-      div.className = "mb-2";
-
-      div.innerHTML = `
-        <p>${pub.title} ${pub.year ? "(" + pub.year + ")" : ""}</p>
-      `;
-
-      container.appendChild(div);
-    });
-
-    if (parsed.length === 0) {
-      container.innerHTML = "No hay publicaciones disponibles.";
-    }
-
-  })
-  .catch(err => {
-    console.error(err);
-  });
-
-});
-</script>
-
-    <!-- 🔹 PUBLICACIONES ORCID -->
+    {{/* PUBLICACIONES DESDE ORCID (generadas en el build, ver scripts/orcid_sync.py) */}}
+    {{ $miTitulo := .Title }}
     {{ with .Params.orcid }}
-      <h3 class="font-semibold mb-3">Desde ORCID</h3>
+      {{ $matches := findRE `\d{4}-\d{4}-\d{4}-\d{3}[\dX]` . }}
+      {{ if $matches }}
+        {{ $oid := index $matches 0 }}
+        {{ $mias := slice }}
+        {{ with hugo.Data.publicaciones_orcid }}
+          {{ range .publicaciones }}
+            {{ if in (.miembros | default slice) $miTitulo }}
+              {{ $mias = $mias | append . }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
 
-      <div id="orcid-list" class="text-sm text-gray-600">
-        Cargando publicaciones...
-      </div>
+        <h3 class="font-semibold mb-3">Desde ORCID</h3>
 
-      <div class="mt-3">
-        <a href="{{ . }}" target="_blank" rel="noopener"
-           class="text-green-600 text-sm">
-          Ver todas en ORCID →
-        </a>
-      </div>
+        {{ if $mias }}
+          <ul class="text-sm text-gray-700">
+            {{ range sort $mias "anio" "desc" }}{{ partial "publicacion.html" . }}{{ end }}
+          </ul>
+        {{ else }}
+          <p class="text-sm text-gray-500">Aún no hay publicaciones sincronizadas desde ORCID para este perfil.</p>
+        {{ end }}
+
+        <div class="mt-3">
+          <a href="https://orcid.org/{{ $oid }}" target="_blank" rel="noopener"
+             class="text-green-600 text-sm">
+            Ver todas en ORCID →
+          </a>
+        </div>
+      {{ end }}
     {{ end }}
 
   </div>

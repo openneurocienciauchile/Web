@@ -7,6 +7,7 @@ temas:
 draft: false
 portafolio: "https://portafolio-academico.uchile.cl/perfil/3590-Maria-Cecilia-Margarita-Hidalgo-Tapia"
 image: "/uploads/maria-hidalgo.jpg"
+orcid: "https://orcid.org/0000-0003-1256-9651"
 ---
 
 Señalización de calcio en neuronas (receptores de rianodina); plasticidad sináptica, memoria y aprendizaje; estrés oxidativo en envejecimiento y Alzheimer; calcio en músculo esquelético y cardíaco.

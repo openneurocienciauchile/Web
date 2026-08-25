@@ -7,6 +7,7 @@ temas:
 image: "/uploads/manuel-kukuljan.jpg"
 draft: false
 portafolio: "https://portafolio-academico.uchile.cl/perfil/22127-Manuel-Arturo-Kukuljan-Padilla"
+orcid: "https://orcid.org/0000-0001-9927-6696"
 ---
 
 Electrofisiología y canales iónicos; función y desarrollo sináptico; bases celulares de la función neuronal.

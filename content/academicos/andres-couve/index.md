@@ -2,6 +2,7 @@
 title: "Andrés Oscar Couve Correa"
 role: "Profesor Titular"
 email: "andrecouve@med.uchile.cl"
+orcid: "https://orcid.org/0009-0009-2520-3895"
 temas:
   - neurobiologia-molecular-celular
 draft: false
