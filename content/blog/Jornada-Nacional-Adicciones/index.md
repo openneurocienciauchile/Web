@@ -1,5 +1,8 @@
 ---
 title: La Facultad de Medicina realiza la Primera Jornada Nacional de Adicciones
+subtitle: Se abordó la investigación en adicciones desde la neurociencia, la
+  salud pública y las políticas de prevención, con la entrega del premio "Dr.
+  Jorge Mardones Restat" al Dr. Yedy Israel.
 date: 2026-08-28
 draft: false
 image: /uploads/Jornada L3.png
