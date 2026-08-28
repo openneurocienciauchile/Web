@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-27",
+  "actualizado": "2026-08-28",
   "fuentes": [
     {
       "nombre": "Hayo Andrés Breinbauer Krebs",
@@ -154,7 +154,7 @@
     {
       "nombre": "Rodrigo Antonio Nieto Rojas",
       "orcid": "0000-0002-4598-8951",
-      "trabajos": 7
+      "trabajos": 8
     },
     {
       "nombre": "Rómulo Antonio Fuentes Flores",
@@ -265,7 +265,8 @@
       "tipo": "journal-article",
       "miembros": [
         "Andrea María Slachevsky Chonchol",
-        "Gonzalo Andrés Farías Gontupil"
+        "Gonzalo Andrés Farías Gontupil",
+        "Rodrigo Antonio Nieto Rojas"
       ],
       "fuente": "orcid"
     },
