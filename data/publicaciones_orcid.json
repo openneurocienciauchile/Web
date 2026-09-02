@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-09-01",
+  "actualizado": "2026-09-02",
   "fuentes": [
     {
       "nombre": "Hayo Andrés Breinbauer Krebs",
@@ -154,7 +154,7 @@
     {
       "nombre": "Rodrigo Antonio Nieto Rojas",
       "orcid": "0000-0002-4598-8951",
-      "trabajos": 8
+      "trabajos": 9
     },
     {
       "nombre": "Rómulo Antonio Fuentes Flores",
@@ -187,6 +187,19 @@
       "tipo": "preprint",
       "miembros": [
         "Pablo Arturo Gaspar Ramos"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2026,
+      "titulo": "Additive Effects of Cognitive Remediation and Physical Exercise in Patients with Schizophrenia: Cognitive Improvements",
+      "autores": "Berrezueta, D., Espinoza, J. P., Arroyo, R., Cartes, B., Venegas, K. &amp; <b>Nieto, R. R.</b>",
+      "revista": "Brain Sciences, 16, 933",
+      "doi": "10.3390/brainsci16090933",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Rodrigo Antonio Nieto Rojas"
       ],
       "fuente": "orcid"
     },
