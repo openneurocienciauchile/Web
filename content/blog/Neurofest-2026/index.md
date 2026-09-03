@@ -6,7 +6,7 @@ summary: El 4 y 5 de septiembre se realiza una nueva versión de NeuroFest, el
   principal festival de divulgación de neurociencia del país, con la
   participación de cinco laboratorios del Departamento de Neurociencia a través
   de stands interactivos abiertos a toda la comunidad.
-image: /uploads/772869166_17941625868271041_5074785941671178961_n.jpg
+image: /uploads/Alexia Nunez-4.jpg
 ---
 Este 4 y 5 de septiembre se realiza una nueva versión de **NeuroFest**, el principal festival de divulgación de neurociencia del país, que este año se desarrolla en la explanada de la Universidad de Santiago (USACH), en Estación Central. El sábado, la jornada estará abierta y con entrada liberada para toda la comunidad, con talleres, charlas, experiencias inmersivas y demostraciones científicas organizadas en torno a cinco ejes: sentir, aprender, pensar, sanar y transformar.
 
