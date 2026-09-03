@@ -31,5 +31,5 @@ Para el Departamento de Neurociencia, esta participación es una oportunidad par
 ## *Links de interés:*
 
 - [https://neurofest.cl/2026](https://neurofest.cl/2026)
-- ++[https://uchile.cl/noticias/244264/alexia-nunez-la-ciudadania-accede-a-conocimiento-de-vanguardia](https://uchile.cl/noticias/244264/alexia-nunez-la-ciudadania-accede-a-conocimiento-de-vanguardia)++
+- [https://uchile.cl/noticias/244264/alexia-nunez-la-ciudadania-accede-a-conocimiento-de-vanguardia](https://uchile.cl/noticias/244264/alexia-nunez-la-ciudadania-accede-a-conocimiento-de-vanguardia)
 
