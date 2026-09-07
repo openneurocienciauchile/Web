@@ -324,7 +324,8 @@ class Brevo:
             "replyTo": (cfg.get("responder_a") or rem["correo"]),
             "htmlContent": html_,
             "recipients": {"listIds": [int(cfg["lista_id"])]},
-            "tag": ETIQUETA,
+            # Sin "tag": Brevo lo rechaza en el plan gratuito con
+            # 405 "not allowed to avail tag option" (pasó el 2026-09-07).
             "inlineImageActivation": False,
         }
         r = self._pedir("POST", "/emailCampaigns", json=cuerpo)
@@ -366,7 +367,7 @@ class Brevo:
 
 
 # ---------------------------------------------------------------- comprobaciones
-def url_viva(url: str, intentos: int = 6, pausa: int = 20) -> bool:
+def url_viva(url: str, intentos: int = 10, pausa: int = 30) -> bool:
     """Espera a que la URL responda 200 (el CDN de Pages tarda un poco)."""
     for i in range(intentos):
         try:
