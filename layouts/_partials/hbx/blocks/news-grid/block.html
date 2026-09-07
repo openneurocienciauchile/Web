@@ -1,4 +1,4 @@
-{{/* Blox personalizado: news-grid */}}
+{{/* Blox personalizado: news-grid — seis noticias (dos filas de tres) + franja del boletín */}}
 
 {{ $posts := where site.RegularPages "Section" "blog" }}
 
@@ -9,18 +9,29 @@
       Últimas Noticias
     </h2>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1.25rem;">
-      {{ range first 3 $posts }}
+    {{/* Rejilla fija de 3 columnas (no auto-fill) para que seis noticias queden
+         siempre en dos filas de tres; en pantallas chicas baja a 2 y a 1. */}}
+    <div class="neuro-news6">
+      {{ range first 6 $posts }}
         {{ partial "news-card.html" . }}
       {{ end }}
     </div>
 
     <div style="margin-top:2rem; text-align:right;">
-      <a href="{{ site.BaseURL }}blog/"
+      <a href="{{ "blog/" | relURL }}"
          style="font-size:0.9rem; color:#1565C0; text-decoration:none; font-weight:500;">
         Ver todas las noticias →
       </a>
     </div>
 
+    {{/* Suscripción al boletín: solo se dibuja si data/boletin.yaml trae la URL del formulario */}}
+    {{ partial "boletin.html" (dict "variante" "franja") }}
+
   </div>
 </section>
+
+<style>
+  .neuro-news6{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.25rem; }
+  @media (max-width:1023px){ .neuro-news6{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (max-width:639px){ .neuro-news6{ grid-template-columns:1fr; } }
+</style>

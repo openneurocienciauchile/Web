@@ -235,6 +235,40 @@
   .dep-person__name{ font-size:.95rem; font-weight:600; color:var(--neuro-text); line-height:1.3; }
   @media (max-width:860px){ .dep-hero-inner{ grid-template-columns:1fr; gap:28px; } .dep-hero{ padding:60px 0 48px; } .dep-consejo-grid{ grid-template-columns:repeat(3,1fr); } }
   @media (max-width:520px){ .dep-consejo-grid{ grid-template-columns:repeat(2,1fr); } }
+
+  /* ───────── BOLETÍN — suscripción (partial boletin.html) ───────── */
+  .neuro-boletin{
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem 2.5rem;
+    background:var(--neuro-mist); border:1px solid var(--neuro-line); border-radius:14px;
+    padding:1.4rem 1.6rem; margin:2rem 0 0; font-family:'IBM Plex Sans',sans-serif;
+  }
+  .neuro-boletin__texto{ flex:1 1 300px; }
+  .neuro-boletin__eyebrow{ font-size:.72rem; margin:0 0 .25rem; }
+  .neuro-boletin__lead{ margin:0; font-family:'Sora',sans-serif; font-weight:600; font-size:1.08rem; color:var(--neuro-text); }
+  .neuro-boletin-form{ flex:1 1 380px; max-width:520px; }
+  .neuro-boletin-form__fila{ display:flex; flex-wrap:wrap; gap:.6rem; }
+  .neuro-boletin-form__input{
+    flex:1 1 220px; min-width:0; padding:.7rem .95rem; border-radius:10px;
+    border:1px solid var(--neuro-line); background:#fff; font-family:'IBM Plex Sans',sans-serif;
+    font-size:.95rem; color:var(--neuro-text); transition:border-color .2s, box-shadow .2s;
+  }
+  .neuro-boletin-form__input:focus{ outline:none; border-color:var(--neuro-cyan); box-shadow:0 0 0 3px rgba(22,200,230,.25); }
+  .neuro-boletin-form__input::placeholder{ color:var(--neuro-muted); }
+  .neuro-boletin-form__btn{
+    flex:0 0 auto; padding:.7rem 1.3rem; border-radius:10px; border:0; cursor:pointer;
+    background:linear-gradient(135deg,var(--neuro-blue),var(--neuro-cyan)); color:#fff;
+    font-family:'Sora',sans-serif; font-weight:500; font-size:.95rem;
+    box-shadow:0 10px 24px -12px rgba(28,69,153,.8); transition:transform .22s, box-shadow .22s;
+  }
+  .neuro-boletin-form__btn:hover{ transform:translateY(-2px); box-shadow:0 16px 32px -12px rgba(22,200,230,.7); }
+  .neuro-boletin-form__btn[disabled]{ opacity:.6; cursor:progress; transform:none; }
+  .neuro-boletin-form__msg{ margin:.55rem 0 0; font-size:.85rem; color:var(--neuro-muted); }
+  .neuro-boletin-form__msg:empty{ display:none; }
+  .neuro-boletin-form__msg.es-ok{ color:#1B7F5A; }
+  .neuro-boletin-form__msg.es-err{ color:#B3261E; }
+  .neuro-boletin--compacto{ flex-direction:column; align-items:stretch; gap:.8rem; padding:1.1rem 1.2rem; }
+  .neuro-boletin--compacto .neuro-boletin-form{ max-width:none; }
+  .neuro-boletin--compacto .neuro-boletin__lead{ font-size:1rem; }
 </style>
 
 {{/* ── Hero: red neuronal animada + aparición al scroll ── */}}
@@ -342,5 +376,47 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   if (document.readyState !== 'loading') initNavNet();
   else document.addEventListener('DOMContentLoaded', initNavNet);
+})();
+</script>
+
+{{/* ── Boletín (Brevo): envío en segundo plano + mensaje en línea.
+     Mejora progresiva: sin JS el form postea normal y abre la página de Brevo. ── */}}
+<script>
+(function(){
+  function init(){
+    var forms = document.querySelectorAll('form[data-neuro-boletin]');
+    if(!forms.length) return;
+    forms.forEach(function(form){
+      var msg = form.querySelector('[data-neuro-msg]');
+      var btn = form.querySelector('button[type="submit"]');
+      var hp  = form.querySelector('input[name="email_address_check"]');
+      var email = form.querySelector('input[name="EMAIL"]');
+      form.addEventListener('submit', function(e){
+        if(hp && hp.value){ e.preventDefault(); return; }       // honeypot lleno = bot
+        if(!email || !email.checkValidity()){ return; }          // error nativo del navegador
+        e.preventDefault();
+        var data = new URLSearchParams();
+        Array.prototype.forEach.call(form.elements, function(el){
+          if(el.name && el.type !== 'submit') data.append(el.name, el.value || '');
+        });
+        if(btn){ btn.disabled = true; }
+        if(msg){ msg.className = 'neuro-boletin-form__msg'; msg.textContent = 'Enviando…'; }
+        fetch(form.action, {
+          method: 'POST', mode: 'no-cors',
+          headers: {'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+          body: data.toString()
+        }).then(function(){
+          if(msg){ msg.textContent = form.getAttribute('data-ok'); msg.className = 'neuro-boletin-form__msg es-ok'; }
+          form.reset();
+        }).catch(function(){
+          if(msg){ msg.textContent = form.getAttribute('data-err'); msg.className = 'neuro-boletin-form__msg es-err'; }
+        }).then(function(){
+          if(btn){ btn.disabled = false; }
+        });
+      });
+    });
+  }
+  if (document.readyState !== 'loading') init();
+  else document.addEventListener('DOMContentLoaded', init);
 })();
 </script>

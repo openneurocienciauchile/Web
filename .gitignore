@@ -71,3 +71,7 @@ npm-debug.log*
 # Python (scripts de sincronizacion ORCID)
 __pycache__/
 *.pyc
+
+# Boletín (regenerable / privado)
+boletin-vista-previa.html
+scripts/contactos*.csv

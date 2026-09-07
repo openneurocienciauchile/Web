@@ -1,0 +1,58 @@
+# ============================================================
+# BOLETÍN DE NOTICIAS — configuración
+#
+# Cada vez que se publica una noticia nueva en content/blog/, el
+# workflow .github/workflows/boletin.yml (que corre después de cada
+# despliegue) ejecuta scripts/boletin.py: arma un correo con el título,
+# la fecha, el resumen, la imagen de portada y el enlace, y lo manda a
+# la lista de suscriptores como campaña de Brevo.
+#
+# La lista de correos NO vive en este repositorio (es público): vive en
+# Brevo. Este archivo solo dice qué lista usar y cómo se firma el correo.
+# La clave de la API tampoco va aquí: es el secreto BREVO_API_KEY del repo
+# (Settings → Secrets and variables → Actions).
+#
+# Cómo evitar que una noticia salga por correo: ponerle `boletin: false`
+# en su front-matter (en Pages CMS, desmarcar "Avisar por boletín").
+#
+# OJO: las plantillas leen este archivo con `site.Data.boletin` (el CI compila
+# con Hugo 0.154.5, donde `hugo.Data` no existe).
+# ============================================================
+
+# Interruptor general. En false, el script no manda nada (ni siquiera con
+# la clave configurada) pero igual muestra qué habría enviado.
+activo: true
+
+# Remitente. El correo tiene que estar verificado como remitente en Brevo
+# (Senders & IP → Senders), si no, la API rechaza la campaña.
+remitente:
+  nombre: "Departamento de Neurociencia"
+  correo: "hbreinbauer@uchile.cl"
+# Adónde llegan las respuestas al boletín (si está vacío, al remitente).
+responder_a: ""
+
+# ID numérico de la lista de Brevo con los suscriptores (Contacts → Lists:
+# el número que aparece junto al nombre de la lista, o en su URL).
+lista_id: 3
+
+# Solo se avisa automáticamente de noticias con fecha igual o posterior a
+# esta. Sirve para no mandar por correo lo que ya estaba publicado cuando
+# se activó el boletín. Una noticia anterior se puede mandar a mano con
+#   python scripts/boletin.py enviar --slug <archivo-sin-.md>
+enviar_desde: "2026-09-04"
+
+# Textos del correo
+prefijo_asunto: "Neurociencia UChile · "
+saludo: "Hay una noticia nueva en el sitio del Departamento de Neurociencia."
+despedida: "Recibes este correo porque te suscribiste al boletín de noticias del Departamento de Neurociencia de la Facultad de Medicina, Universidad de Chile."
+
+# --- Formulario de suscripción (franja del Home y pie de página) ---
+# URL de acción del formulario de Brevo (Contacts → Forms → tu formulario →
+# Share → "Quick share" / código HTML: el atributo action="..." del <form>).
+# Si está vacío, el sitio no muestra ningún formulario de suscripción.
+formulario:
+  accion: "https://13716d26.sibforms.com/serve/MUIFANuPjteuLBIR1kmwv_4IfKKT7U_-dUHoeBaQLqNCYjbxEUlnv8qUhexz7oRUu_QFkFP9eycD5cEG2XN51KZrsLngkimlRi23HiFy068kAWMkNNHqc9MBE5-JejpQjwJdl4hMCHDEExEXsROo78h3_KAUlk_xBKqzQmSQcfNFnliPe_vIfEGN5LBHp9nph_vZSofk5Eo3lUzs-g=="
+  texto_franja: "Recibe las noticias del Departamento en tu correo."
+  texto_pie: "Avisos de noticias nuevas: investigación, premios, seminarios."
+  mensaje_ok: "¡Gracias! Revisa tu correo para confirmar la suscripción."
+  mensaje_error: "Revisa el correo e inténtalo de nuevo."

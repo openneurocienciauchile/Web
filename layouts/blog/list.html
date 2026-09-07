@@ -15,6 +15,8 @@
             <p class="act-empty">No hay noticias publicadas aún.</p>
           {{ end }}
         </div>
+        {{/* Suscripción al boletín: solo se dibuja si data/boletin.yaml trae la URL del formulario */}}
+        {{ partial "boletin.html" (dict "variante" "franja") }}
       </div>
 
       <aside class="act-aside">

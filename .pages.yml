@@ -20,7 +20,10 @@ content:
       - { name: subtitle, label: "Subtítulo",             type: string,  description: "Frase breve que aparece bajo el título en la tarjeta" }
       - { name: date,     label: "Fecha",                 type: date }
       - { name: draft,    label: "Borrador",              type: boolean, default: false }
-      - { name: summary,  label: "Resumen (SEO/preview)", type: text,    description: "Solo para buscadores. No aparece en la tarjeta." }
+      # Al publicar la noticia en main, el workflow boletin.yml la manda por correo
+      # a los suscriptores. Desmarcar para que esta noticia no salga.
+      - { name: boletin,  label: "Avisar por boletín (correo a suscriptores)", type: boolean, default: true, description: "Se envía una sola vez, cuando la noticia queda publicada en el sitio." }
+      - { name: summary,  label: "Resumen (SEO/preview)", type: text,    description: "Para buscadores y para el texto del correo del boletín. No aparece en la tarjeta." }
       - { name: image,    label: "Imagen de portada",     type: image }
       - name: temas
         label: "Temas"
@@ -198,6 +201,35 @@ content:
     fields:
       - { name: title, label: Título,    type: string }
       - { name: body,  label: Contenido, type: rich-text }
+
+  # ── Boletín por correo ────────────────────────────────────────────────────
+  - name: boletin
+    label: Boletín — remitente, lista y textos
+    type: file
+    path: data/boletin.yaml
+    fields:
+      - { name: activo,         label: "Boletín activo", type: boolean }
+      - name: remitente
+        label: "Remitente (debe estar verificado en Brevo)"
+        type: object
+        fields:
+          - { name: nombre, label: "Nombre", type: string }
+          - { name: correo, label: "Correo", type: string }
+      - { name: responder_a,    label: "Responder a (vacío = remitente)", type: string }
+      - { name: lista_id,       label: "ID de la lista en Brevo", type: number }
+      - { name: enviar_desde,   label: "Avisar solo noticias desde (AAAA-MM-DD)", type: string }
+      - { name: prefijo_asunto, label: "Prefijo del asunto", type: string }
+      - { name: saludo,         label: "Frase de apertura del correo", type: text }
+      - { name: despedida,      label: "Texto legal del pie del correo", type: text }
+      - name: formulario
+        label: "Formulario de suscripción del sitio"
+        type: object
+        fields:
+          - { name: accion,        label: "URL de acción del formulario de Brevo (vacío = no se muestra)", type: string }
+          - { name: texto_franja,  label: "Texto de la franja", type: string }
+          - { name: texto_pie,     label: "Texto de la versión compacta", type: string }
+          - { name: mensaje_ok,    label: "Mensaje al suscribirse", type: string }
+          - { name: mensaje_error, label: "Mensaje de error", type: string }
 
   # ── Contacto ──────────────────────────────────────────────────────────────
   - name: contacto

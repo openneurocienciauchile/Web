@@ -123,6 +123,21 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
   una ficha, sus publicaciones desaparecen hasta la próxima corrida del cron.**
   Deps de Python locales: hay un venv en `~/.venvs/orcid` (Homebrew Python bloquea `pip install`
   global por PEP 668). Tests sin red: `~/.venvs/orcid/bin/python scripts/test_orcid_sync.py`.
+- **Boletín por correo (2026-09-04).** Cada noticia nueva de `content/blog/` se avisa a los
+  suscriptores por correo. Guía completa en **`GUIA-BOLETIN.md`**. Resumen: `scripts/boletin.py`
+  arma el correo desde el front-matter (`title`, `subtitle`, `date`, `summary`, `image`) y lo
+  manda como campaña de Brevo a la lista de `data/boletin.yaml`; corre en
+  `.github/workflows/boletin.yml` con `workflow_run` **tras el deploy exitoso** (para que el
+  enlace exista). Idempotente sin estado en el repo: cada envío deja en Brevo una campaña
+  `noticia:<carpeta>` y si existe no se repite. Salta borradores, `boletin: false` y lo anterior
+  a `enviar_desde`; verifica que la URL responda 200; máximo 3 por corrida. La lista vive en
+  Brevo, nunca en el repo; la clave es el secreto `BREVO_API_KEY`. Formulario de suscripción:
+  `_partials/boletin.html` (franja en el blox `news-grid` del Home y en `blog/list.html`), CSS y
+  JS en `custom.html` con prefijo `neuro-boletin`; lee `site.Data.boletin` (regla 0.154.5) y no
+  dibuja nada si `formulario.accion` está vacío. **El nombre de la carpeta de la noticia es la
+  llave del envío: no renombrar noticias ya avisadas.**
+- **Home muestra 6 noticias** (blox `news-grid`, rejilla fija de 3 columnas `.neuro-news6`,
+  dos filas de tres; 2 columnas bajo 1024 px, 1 bajo 640 px).
 - **Navbar = `#site-header`** (id del tema). Por defecto navy `#0A1533` + texto blanco. En el HOME,
   `html.neuro-home #site-header` lo hace transparente sobre el hero (un JS en `custom.html` agrega la
   clase `neuro-home` cuando existe `.neuro-hero`). En páginas internas se fuerza navy con
@@ -176,6 +191,8 @@ Sitio del Departamento de Neurociencia (Facultad de Medicina, U. de Chile), hech
 - "El Departamento": `content/quienes-somos/_index.md` (todo el HTML va en su bloque markdown; el
   partial `_partials/blocks/quienes-somos.html` está vacío).
 - "Formación": `layouts/formacion/list.html` (CSS propio `form-` adentro).
+- Boletín: `scripts/boletin.py`, `data/boletin.yaml`, `.github/workflows/boletin.yml`,
+  `layouts/_partials/boletin.html` · Guía: `GUIA-BOLETIN.md`
 - Config CMS: `.pages.yml` · Config Hugo: `config/_default/hugo.yaml`
 - Workflows: `.github/workflows/deploy.yml` + `build.yml` (build = `hugo --minify`)
 - Imágenes: `static/uploads/`

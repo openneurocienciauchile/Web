@@ -1,0 +1,61 @@
+name: Boletín — avisar noticias nuevas por correo
+
+# Corre DESPUÉS de cada despliegue exitoso (workflow_run), no en el push:
+# así, cuando el correo llega, el enlace a la noticia ya está en línea.
+# También se puede lanzar a mano desde Actions → Run workflow, para mandar
+# una noticia puntual (slug) o reenviar una.
+on:
+  workflow_run:
+    workflows: ["Deploy website to GitHub Pages"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Noticia puntual: nombre del archivo en content/blog (carpeta) (vacío = automático)"
+        required: false
+        default: ""
+      reenviar:
+        description: "Reenviar aunque ya exista la campaña"
+        type: boolean
+        default: false
+      simular:
+        description: "Solo mostrar qué se mandaría, sin mandar"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: boletin
+  cancel-in-progress: false
+
+jobs:
+  avisar:
+    # Con workflow_run, solo si el despliegue terminó bien y fue en main.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Instalar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install requests PyYAML
+
+      - name: Avisar por correo
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+        run: |
+          ARGS=""
+          if [[ -n "${{ inputs.slug }}" ]]; then ARGS="$ARGS --slug ${{ inputs.slug }}"; fi
+          if [[ "${{ inputs.reenviar }}" == "true" ]]; then ARGS="$ARGS --reenviar"; fi
+          if [[ "${{ inputs.simular }}" == "true" ]]; then ARGS="$ARGS --simular"; fi
+          python scripts/boletin.py enviar $ARGS

@@ -1,0 +1,38 @@
+{{- /*
+  Formulario de suscripción al boletín (Brevo).
+  Uso: {{ partial "boletin.html" (dict "variante" "franja") }}   → franja bajo las noticias
+       {{ partial "boletin.html" (dict "variante" "compacto") }} → bloque angosto (aside)
+
+  - La URL de acción sale de data/boletin.yaml → formulario.accion. Si está
+    vacía, el partial NO renderiza nada (CMS-safe).
+  - Se lee con site.Data (el CI compila con Hugo 0.154.5: hugo.Data no existe).
+  - Es un <form> nativo: sin JS postea a Brevo en una pestaña nueva.
+    custom.html lo mejora con envío en segundo plano y mensaje en línea.
+  - El honeypot (email_address_check) se oculta con estilos EN LÍNEA para no
+    depender del CSS: si aparece relleno, es un bot.
+  - CSS: clases neuro-boletin* en layouts/_partials/hooks/head-end/custom.html.
+*/ -}}
+{{- with site.Data.boletin }}{{ $f := .formulario }}{{ with $f }}{{ with .accion }}
+{{- $variante := "franja" }}
+{{- with $.variante }}{{ $variante = . }}{{ end }}
+{{- $ok := $f.mensaje_ok | default "¡Gracias! Revisa tu correo para confirmar la suscripción." }}
+{{- $err := $f.mensaje_error | default "Revisa el correo e inténtalo de nuevo." }}
+{{- $hp := "position:absolute!important;left:-9999px!important;top:auto;width:1px;height:1px;overflow:hidden;opacity:0" }}
+<aside class="neuro-boletin neuro-boletin--{{ $variante }}" aria-label="Suscripción al boletín">
+  <div class="neuro-boletin__texto">
+    <p class="neuro-eyebrow neuro-eyebrow-blue neuro-boletin__eyebrow">Boletín</p>
+    <p class="neuro-boletin__lead">{{ if eq $variante "compacto" }}{{ $f.texto_pie | default "Avisos de noticias nuevas en tu correo." }}{{ else }}{{ $f.texto_franja | default "Recibe las noticias del Departamento en tu correo." }}{{ end }}</p>
+  </div>
+  <form class="neuro-boletin-form" data-neuro-boletin method="POST" action="{{ . }}" target="_blank" rel="noopener"
+        data-ok="{{ $ok }}" data-err="{{ $err }}">
+    <div class="neuro-boletin-form__fila">
+      <input class="neuro-boletin-form__input" type="email" name="EMAIL" required autocomplete="email" aria-label="Correo electrónico" placeholder="tu@correo.cl">
+      <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="{{ $hp | safeCSS }}">
+      <input type="hidden" name="locale" value="es">
+      <input type="hidden" name="html_type" value="simple">
+      <button class="neuro-boletin-form__btn" type="submit">Suscribirme</button>
+    </div>
+    <p class="neuro-boletin-form__msg" data-neuro-msg role="status" aria-live="polite"></p>
+  </form>
+</aside>
+{{- end }}{{ end }}{{ end }}
