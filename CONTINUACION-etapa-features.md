@@ -43,17 +43,20 @@ Hecho en la etapa UI/UX (2026-06-10, todo en main):
 - POLÍTICA DE PUSH: a partir de hoy cada tarea cierra con push a `main` si el build queda verde
   (Hayo pre-autorizó; puede vetar un push puntual). Documentado en CLAUDE.md.
 
-## Boletín por correo (2026-09-04) — montado, falta activarlo en Brevo
+## Boletín por correo (2026-09-04) — ACTIVO ✅
 Cada noticia nueva se avisa por correo a los suscriptores (campaña de Brevo con título,
-resumen, imagen y enlace); el Home pasó de 3 a **6 noticias**; hay franja de suscripción en
-Home y Actualidad (invisible hasta que se pegue la URL del formulario). Cómo funciona y cómo
-se activa: **`GUIA-BOLETIN.md`**. Mientras no se active, el sitio se ve igual y el workflow
-corre en simulación sin mandar nada: no hay nada roto.
-- [ ] Brevo: verificar remitente, crear lista (→ `lista_id`), clave de API (→ secreto
-      `BREVO_API_KEY`), formulario doble opt-in (→ `formulario.accion`). Guía §2.
-- [ ] Completar correos que faltan en `scripts/contactos_iniciales.csv` (Paula Berzesio y
-      15 académicos sin correo en su ficha) e importar la lista. Guía §3.
-- [ ] Mandar un `prueba --correo` y revisar cómo llega. Guía §4.
+resumen, imagen y enlace); el Home muestra **6 noticias**; hay franja de suscripción en Home y
+Actualidad. Cómo funciona: **`GUIA-BOLETIN.md`**; cómo se configuró Brevo:
+**`GUIA-BREVO-PASO-A-PASO.md`**.
+- Brevo (cuenta compartida con LAB ONCE): remitente `hbreinbauer@uchile.cl` verificado, lista
+  **ID 3** "Neurociencia UChile — Noticias" con 35 contactos iniciales (Paula Berzesio + académicos),
+  formulario con doble opt-in (su `action` está en `data/boletin.yaml`), secreto `BREVO_API_KEY`
+  en el repo. Correo de prueba enviado y recibido OK el 2026-09-04.
+- `enviar_desde: 2026-09-04`: las noticias anteriores (incl. NeuroFest 2026) no se mandan solas;
+  para mandar una a mano: Actions → "Boletín — avisar noticias nuevas por correo" → Run workflow
+  con `slug`.
+- [ ] Verificar tras el primer post real que el workflow "Boletín" queda verde y el correo llega.
+- [ ] Si se renueva la clave de API, actualizar el secreto `BREVO_API_KEY` en GitHub.
 
 ## Recordatorios vivos (revisar SIEMPRE; el chat los repite al final de cada turno)
 - [ ] Deprecations del TEMA (`.Site.Data`, `.Site.AllPages`, `.Site.LanguageCode`,
