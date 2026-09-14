@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-09-13",
+  "actualizado": "2026-09-14",
   "fuentes": [
     {
       "nombre": "Hayo Andrés Breinbauer Krebs",
@@ -44,7 +44,7 @@
     {
       "nombre": "Carolina Andrea Delgado Derio",
       "orcid": "0000-0001-5551-0065",
-      "trabajos": 85
+      "trabajos": 86
     },
     {
       "nombre": "Catherine María Pérez Valenzuela",
@@ -436,6 +436,19 @@
       "tipo": "journal-article",
       "miembros": [
         "Eugenia Paola Morales Retamales"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2026,
+      "titulo": "Neuropsychiatric symptoms and gait/balance are predictors of functional trajectories in dementias",
+      "autores": "Rahmann, R. G., Piñones, M. F., Navarrete, P. A., <b>Fuentes, J. R.</b>, Sarria, T. A. &amp; <b>Derio, C. D.</b>",
+      "revista": "Dementia &amp; Neuropsychologia, 20",
+      "doi": "10.1590/1980-5764-dn-2025-0455",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Carolina Andrea Delgado Derio"
       ],
       "fuente": "orcid"
     },
