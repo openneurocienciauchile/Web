@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-09-29",
+  "actualizado": "2026-09-30",
   "fuentes": [
     {
       "nombre": "Hayo Andrés Breinbauer Krebs",
@@ -114,7 +114,7 @@
     {
       "nombre": "María Isabel Ofelia Behrens Pellegrino",
       "orcid": "0000-0003-0964-426X",
-      "trabajos": 95
+      "trabajos": 96
     },
     {
       "nombre": "María Cecilia Margarita Hidalgo Tapia",
@@ -528,6 +528,19 @@
       "tipo": "journal-article",
       "miembros": [
         "Carolina Andrea Delgado Derio"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2026,
+      "titulo": "Speech clocks decode dementia phenotypes, social exposome, and biological aging",
+      "autores": "",
+      "revista": "Science Advances",
+      "doi": "10.1126/sciadv.aef9864",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "María Isabel Ofelia Behrens Pellegrino"
       ],
       "fuente": "orcid"
     },
