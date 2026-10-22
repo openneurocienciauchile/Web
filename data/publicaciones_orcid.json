@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-21",
+  "actualizado": "2026-10-22",
   "fuentes": [
     {
       "nombre": "Hayo Andrés Breinbauer Krebs",
@@ -154,7 +154,7 @@
     {
       "nombre": "Rodrigo Antonio Nieto Rojas",
       "orcid": "0000-0002-4598-8951",
-      "trabajos": 9
+      "trabajos": 10
     },
     {
       "nombre": "Rómulo Antonio Fuentes Flores",
@@ -332,6 +332,19 @@
       "tipo": "journal-article",
       "miembros": [
         "Andrea Cristina Paula Lima"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2026,
+      "titulo": "Integrative Cognitive Remediation (ICR) for patients with chronic schizophrenia: impact on neurocognitive symptoms and social functioning",
+      "autores": "Orellana, C., Cifuentes, J. I., Tello, D., Ramírez, C., <b>Olivares, D.</b>, Domínguez, C., Nejaz, V., De la Barra, F. &amp; <b>Nieto, R. R.</b>",
+      "revista": "Psychiatry Research Communications, 100294",
+      "doi": "10.1016/j.psycom.2026.100294",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Rodrigo Antonio Nieto Rojas"
       ],
       "fuente": "orcid"
     },
