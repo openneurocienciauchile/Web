@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-03",
+  "actualizado": "2026-11-04",
   "fuentes": [
     {
       "nombre": "Hayo Andrés Breinbauer Krebs",
@@ -9,7 +9,7 @@
     {
       "nombre": "Jimena Alejandra Sierralta Jara",
       "orcid": "0000-0002-0257-146X",
-      "trabajos": 52
+      "trabajos": 53
     },
     {
       "nombre": "Andrea Verónica Helo Herrera",
@@ -34,7 +34,7 @@
     {
       "nombre": "Andrés Enrique González Gutiérrez",
       "orcid": "0000-0002-9441-2211",
-      "trabajos": 10
+      "trabajos": 11
     },
     {
       "nombre": "Carlos Francisco Ibáñez Piña",
@@ -501,6 +501,20 @@
       "tipo": "journal-article",
       "miembros": [
         "Christian Enrique González Billault"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2026,
+      "titulo": "Presynaptic PMCA interacts with Dlg, regulating in vivo synaptic calcium in Drosophila larval NMJ",
+      "autores": "Kōhler, A., Lopez, E., Quiroz, E., Kobler, O., Gonzalez-Gutierrrez, A. E., Thomas, U. &amp; <b>Sierralta, J. A.</b>",
+      "revista": "",
+      "doi": "10.64898/2026.10.28.762485",
+      "url": "",
+      "tipo": "preprint",
+      "miembros": [
+        "Jimena Alejandra Sierralta Jara",
+        "Andrés Enrique González Gutiérrez"
       ],
       "fuente": "orcid"
     },
