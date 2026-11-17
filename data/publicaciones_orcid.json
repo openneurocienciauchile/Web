@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-16",
+  "actualizado": "2026-11-17",
   "fuentes": [
     {
       "nombre": "Hayo Andrés Breinbauer Krebs",
@@ -139,7 +139,7 @@
     {
       "nombre": "Patricio Alejandro Olguín Aguilera",
       "orcid": "0000-0002-8847-4969",
-      "trabajos": 43
+      "trabajos": 44
     },
     {
       "nombre": "Paul Hinckley Délano Reyes",
@@ -358,6 +358,19 @@
       "tipo": "book-chapter",
       "miembros": [
         "Carlos Francisco Ibáñez Piña"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2026,
+      "titulo": "Limited replication and ancestral diversity in gene-pesticide exposure interaction studies of Parkinson's disease: a systematic review",
+      "autores": "",
+      "revista": "Zenodo",
+      "doi": "10.5281/zenodo.24290362",
+      "url": "",
+      "tipo": "preprint",
+      "miembros": [
+        "Patricio Alejandro Olguín Aguilera"
       ],
       "fuente": "orcid"
     },
