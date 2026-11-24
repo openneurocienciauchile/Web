@@ -4,7 +4,7 @@ title: "Una década llevando la neurociencia a las salas de clases: Mentes
 subtitle: El programa, liderado por académicos del Departamento de Neurociencia,
   ha capacitado a más de 2.000 docentes y llegado a más de 100.000 estudiantes
 date: 2026-11-23
-draft: true
+draft: false
 boletin: true
 summary: Mentes Transformadoras celebró su décimo aniversario con una ceremonia
   en el Campus Norte. Liderado por académicos del Departamento de Neurociencia,
