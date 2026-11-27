@@ -34,6 +34,6 @@ La actividad será moderada por la **Dra. Isabel Cornejo-Plaza**, de la Universi
 - **Fecha y hora:** jueves 3 de diciembre, de 18:00 a 19:30 horas.
 - **Lugar:** Sala Matilde Brandau, Av. Santa María 076, Providencia.
 - **Organiza:** Departamento de Ciencias del Derecho, Facultad de Derecho de la Universidad de Chile. Académico responsable: Ricardo Camargo.
-- **Más información:** [ximena.donoso@derecho.uchile.cl](mailto:ximena.donoso@derecho.uchile.cl)
-*Fuente: afiche de la Facultad de Derecho de la Universidad de Chile.
+- **Más información:** [ximena.donoso@derecho.uchile.cl](mailto:ximena.donoso@derecho.uchile.cl)  
+*Fuente: afiche de la Facultad de Derecho de la Universidad de Chile.*
 
